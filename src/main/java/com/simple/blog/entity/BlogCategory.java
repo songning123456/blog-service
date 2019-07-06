@@ -14,6 +14,7 @@ public class BlogCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "categoryName", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '目录名'")
     private String categoryName;
 
     @Column(name = "blogId", columnDefinition = "BIGINT NOT NULL COMMENT '博客Id'")
