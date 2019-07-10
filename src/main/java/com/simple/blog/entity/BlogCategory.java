@@ -5,6 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author sn
+ * 博客目录表
+ */
 @Data
 @Entity
 @Table(name = "BlogCategory")
