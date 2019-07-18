@@ -1,5 +1,8 @@
 package com.simple.blog.entity;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +15,8 @@ import java.util.Date;
  * @author sn
  * 博客信息表
  */
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -24,7 +29,7 @@ public class Blog {
     @Column(name = "title", columnDefinition = "VARCHAR(255) COMMENT '标题'")
     private String title;
 
-    @Column(name = "blogInfo", columnDefinition = "VARCHAR(255) COMMENT '博客信息'")
+    @Column(name = "blogInfo", columnDefinition = "VARCHAR(255) COMMENT '摘要'")
     private String blogInfo;
 
     @Column(name = "readTimes", columnDefinition = "INT COMMENT '阅读次数'")

@@ -18,10 +18,11 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    @Override
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
+        String title = commonVO.getCondition().getTitle();
         String content = commonVO.getCondition().getContent();
-        Blog blog = new Blog();
-        blog.setContent(content);
+        Blog blog = Blog.builder().title(title).content(content).build();
         blogRepository.save(blog);
         return new CommonDTO<>();
     }

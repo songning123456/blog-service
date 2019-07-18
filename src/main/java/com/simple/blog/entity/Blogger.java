@@ -1,5 +1,8 @@
 package com.simple.blog.entity;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +12,8 @@ import java.util.Date;
  * @author sn
  * 博主信息表
  */
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @Entity
 @Table(name = "Blogger")
