@@ -13,7 +13,7 @@ public class BlogVO {
 
     private String title;
 
-    private String blogInfo;
+    private String summary;
 
     private Integer readTimes;
 

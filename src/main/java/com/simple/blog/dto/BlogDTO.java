@@ -13,7 +13,7 @@ public class BlogDTO {
 
     private String title;
 
-    private String blogInfo;
+    private String summary;
 
     private Integer readTimes;
 

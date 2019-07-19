@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `blog`;
 CREATE TABLE `blog` (
   `id` bigint(20) NOT NULL auto_increment,
-  `blog_info` varchar(255) default NULL COMMENT '博客信息',
+  `summary` varchar(255) default NULL COMMENT '摘要',
   `content` text COMMENT '内容',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `kinds` varchar(255) default NULL COMMENT '种类',

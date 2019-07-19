@@ -29,8 +29,8 @@ public class Blog {
     @Column(name = "title", columnDefinition = "VARCHAR(255) COMMENT '标题'")
     private String title;
 
-    @Column(name = "blogInfo", columnDefinition = "VARCHAR(255) COMMENT '摘要'")
-    private String blogInfo;
+    @Column(name = "summary", columnDefinition = "VARCHAR(255) COMMENT '摘要'")
+    private String summary;
 
     @Column(name = "readTimes", columnDefinition = "INT COMMENT '阅读次数'")
     private Integer readTimes;
