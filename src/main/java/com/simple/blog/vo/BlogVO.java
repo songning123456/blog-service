@@ -21,6 +21,8 @@ public class BlogVO {
 
     private String content;
 
+    private String author;
+
     private Date createTime;
 
     private Date updateTime;

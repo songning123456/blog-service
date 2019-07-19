@@ -41,6 +41,9 @@ public class Blog {
     @Column(name = "kinds", columnDefinition = "VARCHAR(255)  NOT NULL COMMENT '种类'")
     private String kinds;
 
+    @Column(name = "author", columnDefinition = "VARCHAR(255)  NOT NULL COMMENT '作者'")
+    private String author;
+
     @Column(name = "content", columnDefinition = "TEXT  NOT NULL COMMENT '内容'")
     private String content;
 

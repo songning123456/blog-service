@@ -33,7 +33,8 @@ public class BlogServiceImpl implements BlogService {
         String summary = commonVO.getCondition().getSummary();
         String kinds = commonVO.getCondition().getKinds();
         Integer readTimes = commonVO.getCondition().getReadTimes();
-        Blog blog = Blog.builder().title(title).kinds(kinds).summary(summary).content(content).readTimes(readTimes).build();
+        String author = commonVO.getCondition().getAuthor();
+        Blog blog = Blog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).readTimes(readTimes).build();
         blogRepository.save(blog);
         return new CommonDTO<>();
     }

@@ -3,12 +3,14 @@ package com.simple.blog.dto;
 import lombok.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * @author sn
  */
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class BlogDTO {
     private String id;
@@ -23,15 +25,9 @@ public class BlogDTO {
 
     private String content;
 
-    private Date createTime;
+    private String author;
 
-    private Date updateTime;
+    private java.sql.Timestamp createTime;
 
-    public BlogDTO(String id, String summary, String kinds, Integer readTimes, String title) {
-        this.id = id;
-        this.summary = summary;
-        this.kinds = kinds;
-        this.readTimes = readTimes;
-        this.title = title;
-    }
+    private java.sql.Timestamp updateTime;
 }
