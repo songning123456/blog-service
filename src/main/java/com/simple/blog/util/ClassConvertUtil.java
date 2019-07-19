@@ -1,7 +1,11 @@
 package com.simple.blog.util;
 
+import org.springframework.util.StringUtils;
+
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,5 +98,32 @@ public class ClassConvertUtil {
             }
         }
         return target;
+    }
+
+    /**
+     * @param src
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    public static <T> void castEntity(List<Object[]> src, List<T> target, Class<T> clazz) throws Exception {
+        if (src.isEmpty()) {
+            throw new Exception("数组列表转换实体类不能为空!");
+        }
+        if (!target.isEmpty()) {
+            target.clear();
+        }
+        Object[] co = src.get(0);
+        Class[] c2 = new Class[co.length];
+
+        //确定构造方法
+        for (int i = 0; i < co.length; i++) {
+            c2[i] = co[i].getClass();
+        }
+        for (Object[] o : src) {
+            Constructor<T> constructor = clazz.getConstructor(c2);
+            target.add(constructor.newInstance(o));
+        }
     }
 }

@@ -30,4 +30,11 @@ public class BlogController {
         CommonDTO<BlogDTO> commonDTO = blogService.saveArticle(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/queryAbstract")
+    @ControllerAspectAnnotation(description = "查询摘要等信息")
+    public CommonDTO<BlogDTO> queryAbstract(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = blogService.getAbstract(commonVO);
+        return commonDTO;
+    }
 }

@@ -16,4 +16,12 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO);
+
+    /**
+     * 查询摘要等信息
+     *
+     * @param commonVO
+     * @return
+     */
+    CommonDTO<BlogDTO> getAbstract(CommonVO<BlogVO> commonVO);
 }

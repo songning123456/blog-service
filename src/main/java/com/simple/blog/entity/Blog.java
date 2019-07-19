@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,24 +22,26 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "Blog")
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "jpa-uuid")
+    @Column(length = 32)
+    private String id;
 
-    @Column(name = "title", columnDefinition = "VARCHAR(255) COMMENT '标题'")
+    @Column(name = "title", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '标题'")
     private String title;
 
-    @Column(name = "summary", columnDefinition = "VARCHAR(255) COMMENT '摘要'")
+    @Column(name = "summary", columnDefinition = "VARCHAR(255)  NOT NULL COMMENT '摘要'")
     private String summary;
 
-    @Column(name = "readTimes", columnDefinition = "INT COMMENT '阅读次数'")
+    @Column(name = "readTimes", columnDefinition = "INT NOT NULL default 0 COMMENT '阅读次数'")
     private Integer readTimes;
 
-    @Column(name = "kinds", columnDefinition = "VARCHAR(255) COMMENT '种类'")
+    @Column(name = "kinds", columnDefinition = "VARCHAR(255)  NOT NULL COMMENT '种类'")
     private String kinds;
 
-    @Column(name = "content", columnDefinition = "TEXT COMMENT '内容'")
+    @Column(name = "content", columnDefinition = "TEXT  NOT NULL COMMENT '内容'")
     private String content;
 
     @CreatedDate
@@ -48,4 +51,8 @@ public class Blog {
     @LastModifiedDate
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
     private Date updateTime;
+
+    public Blog() {
+
+    }
 }

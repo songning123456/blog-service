@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,11 +18,13 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "Blogger")
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class Blogger {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "jpa-uuid")
+    @Column(length = 32)
+    private String id;
 
     @Column(name = "userName", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '用户名'")
     private String userName;

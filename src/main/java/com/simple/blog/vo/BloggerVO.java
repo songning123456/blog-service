@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 public class BloggerVO {
-    private Long id;
+    private String id;
 
     private String userName;
 
