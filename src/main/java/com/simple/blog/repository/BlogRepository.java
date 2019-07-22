@@ -21,6 +21,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @return
      */
     @Query(value = "select id, title,summary, read_times, kinds, content, author, create_time, update_time " +
-            "from blog where kinds like CONCAT('%', :kinds, '%')", nativeQuery = true)
+            "from blog where kinds like CONCAT('%', :kinds, '%')",
+            countQuery = "select count(*) from blog where kinds like CONCAT('%', :kinds, '%')", nativeQuery = true)
     Page<Object[]> findAbstract(@Param("kinds") String kinds, Pageable pageable);
 }
