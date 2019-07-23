@@ -123,4 +123,22 @@ public class ClassConvertUtil {
             target.add(constructor.newInstance(o));
         }
     }
+
+    /**
+     * @param src
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    public static <T> T caseEntity(Object src, Class<T> clazz) throws Exception {
+        Object[] co = (Object[]) src;
+        Class[] c2 = new Class[co.length];
+        for (int i = 0; i < co.length; i++) {
+            c2[i] = co[i].getClass();
+        }
+        Constructor<T> constructor = clazz.getConstructor(c2);
+        T result = constructor.newInstance(co);
+        return result;
+    }
 }
