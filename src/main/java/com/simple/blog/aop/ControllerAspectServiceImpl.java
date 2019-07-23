@@ -1,9 +1,8 @@
-package com.simple.blog.service.impl;
+package com.simple.blog.aop;
 
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.service.ControllerAspectService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,20 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
+ * controller try...catch...拦截
+ *
  * @author sn
  */
 @Service
 @Aspect
 @Slf4j
-public class ControllerAspectServiceImpl implements ControllerAspectService {
-    @Override
+public class ControllerAspectServiceImpl {
+
     @Pointcut("@annotation(com.simple.blog.annotation.ControllerAspectAnnotation)")
     public void controllerAspect() {
 
     }
 
-
-    @Override
     @Before("controllerAspect()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -51,7 +50,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
         log.info("Request Args: {}", joinPoint.getArgs());
     }
 
-    @Override
     @Around("controllerAspect()")
     public <T> CommonDTO<T> doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         CommonDTO<T> commonDTO = null;
@@ -67,8 +65,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
         return commonDTO;
     }
 
-
-    @Override
     @After("controllerAspect()")
     public void doAfter() throws Throwable {
         log.info("=====End=====");

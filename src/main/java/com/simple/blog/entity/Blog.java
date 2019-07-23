@@ -1,9 +1,6 @@
 package com.simple.blog.entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,6 +14,7 @@ import java.util.Date;
  * 博客信息表
  */
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @EntityListeners(AuditingEntityListener.class)
@@ -49,13 +47,9 @@ public class Blog {
 
     @CreatedDate
     @Column(name = "createTime", columnDefinition = "DATETIME NOT NULL COMMENT '创建时间'")
-    private Date createTime;
+    private java.sql.Timestamp createTime;
 
     @LastModifiedDate
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
-    private Date updateTime;
-
-    public Blog() {
-
-    }
+    private java.sql.Timestamp updateTime;
 }

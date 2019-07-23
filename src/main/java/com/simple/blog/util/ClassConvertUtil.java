@@ -104,7 +104,7 @@ public class ClassConvertUtil {
      * @return
      * @throws Exception
      */
-    public static <T> void castEntity(List<Object[]> src, List<T> target, Class<T> clazz) throws Exception {
+    public static <T> void castEntityList(List<Object[]> src, List<T> target, Class<T> clazz) throws Exception {
         if (src.isEmpty()) {
             throw new Exception("数组列表转换实体类不能为空!");
         }

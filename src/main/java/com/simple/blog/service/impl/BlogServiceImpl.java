@@ -6,6 +6,7 @@ import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author sn
@@ -52,12 +53,28 @@ public class BlogServiceImpl implements BlogService {
         Long total = blogPage.getTotalElements();
         List<BlogDTO> target = new ArrayList<>();
         try {
-            ClassConvertUtil.castEntity(src, target, BlogDTO.class);
+            ClassConvertUtil.castEntityList(src, target, BlogDTO.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
         commonDTO.setData(target);
         commonDTO.setTotal(total);
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<BlogDTO> getContent(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        String id = commonVO.getCondition().getId();
+        Map<String, Object> blog = blogRepository.findByIdNative(id);
+        BlogDTO blogDTO = null;
+        try {
+            blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, blog);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        commonDTO.setData(Collections.singletonList(blogDTO));
+        commonDTO.setTotal(1L);
         return commonDTO;
     }
 }
