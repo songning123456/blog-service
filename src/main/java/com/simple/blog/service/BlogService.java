@@ -32,4 +32,12 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> getContent(CommonVO<BlogVO> commonVO);
+
+    /**
+     * 盗窃文章
+     *
+     * @param commonVO
+     */
+    void theftContent(CommonVO<BlogVO> commonVO) throws Exception;
+
 }

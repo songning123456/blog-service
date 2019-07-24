@@ -22,4 +22,9 @@ public class BlogVO {
     private String content;
 
     private String author;
+
+    /**
+     * 博客文章的url
+     */
+    private String url;
 }

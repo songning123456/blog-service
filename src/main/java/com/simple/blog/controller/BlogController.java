@@ -45,4 +45,11 @@ public class BlogController {
         CommonDTO<BlogDTO> commonDTO = blogService.getContent(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/theftArticle")
+    @ControllerAspectAnnotation(description = "盗窃文章")
+    public <T> CommonDTO<T> theftArticle(@RequestBody CommonVO<BlogVO> commonVO) throws Exception {
+        blogService.theftContent(commonVO);
+        return new CommonDTO<>();
+    }
 }
