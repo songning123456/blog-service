@@ -109,7 +109,7 @@ public class BlogServiceImpl implements BlogService {
             }
         } else if ("https://tech.meituan.com/".equals(url)) {
             // 爬虫美团
-            for (int i = 2; i < 19; i++) {
+            for (int i = 2; i < 8; i++) {
                 Document document = Jsoup.connect(url + "/page/" + i + ".html").get();
                 List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
                 for (int j = 0; j < articleUrls.size(); j++) {

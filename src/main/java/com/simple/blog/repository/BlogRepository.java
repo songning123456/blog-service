@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,4 +37,12 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      */
     @Query(value = "select author, content, update_time as updateTime from blog where id= :id", nativeQuery = true)
     Map<String, Object> findByIdNative(@Param("id") String id);
+
+    /**
+     * 主要用于测试输出内容到文件和Map<String ,Object>
+     *
+     * @return
+     */
+    @Query(value = "select author, title from blog", nativeQuery = true)
+    List<Map<String, Object>> getAllAuthorAndTitle();
 }
