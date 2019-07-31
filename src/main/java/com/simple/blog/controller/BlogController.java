@@ -4,6 +4,7 @@ import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelGroupDTO;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
