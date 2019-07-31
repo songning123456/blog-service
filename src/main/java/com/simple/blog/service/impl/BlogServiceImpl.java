@@ -18,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,6 +70,8 @@ public class BlogServiceImpl implements BlogService {
         CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         String id = commonVO.getCondition().getId();
         Map<String, Object> blog = blogRepository.findByIdNative(id);
+        Integer readTimes = (Integer) blog.get("readTimes");
+        blogRepository.updateReadTimes(id, ++readTimes);
         BlogDTO blogDTO = null;
         try {
             blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, blog);

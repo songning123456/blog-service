@@ -2,7 +2,9 @@ package com.simple.blog;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.entity.Blog;
+import com.simple.blog.entity.LabelGroup;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.util.NameConvertUtil;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,9 @@ public class BlogApplicationTests {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @Autowired
+    private LabelGroupRepository labelGroupRepository;
 
     @Test
     public void contextLoads() {
@@ -64,6 +70,17 @@ public class BlogApplicationTests {
         FileUtil.appendDataToFile(target, fileName);
         long fileLength = FileUtil.getFileSize(new File(fileName));
         System.out.println(fileLength);
+    }
+
+    @Test
+    public void insertLabelData() {
+        List<String> list = new ArrayList<>(Arrays.asList("关注", "前端", "后端", "数据库", "热门"));
+        List<LabelGroup> labelGroups = new ArrayList<>();
+        list.forEach(item -> {
+            LabelGroup labelGroup = LabelGroup.builder().labelGroupName(item).build();
+            labelGroups.add(labelGroup);
+        });
+        labelGroupRepository.saveAll(labelGroups);
     }
 
 }
