@@ -40,4 +40,11 @@ public interface BlogService {
      */
     void theftContent(CommonVO<BlogVO> commonVO) throws Exception;
 
+    /**
+     * 查询热门文章
+     *
+     * @param commonVO
+     * @return
+     */
+    CommonDTO<BlogDTO> getHotArticle(CommonVO<BlogVO> commonVO);
 }

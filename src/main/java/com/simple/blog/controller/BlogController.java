@@ -53,4 +53,11 @@ public class BlogController {
         blogService.theftContent(commonVO);
         return new CommonDTO<>();
     }
+
+    @PostMapping("/queryHotArticle")
+    @ControllerAspectAnnotation(description = "查询热门文章")
+    public CommonDTO<BlogDTO> queryHotArticle(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = blogService.getHotArticle(commonVO);
+        return commonDTO;
+    }
 }

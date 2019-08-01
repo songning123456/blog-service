@@ -26,8 +26,8 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      * @return
      */
     @Query(value = "select id, title,summary, read_times, kinds, author, create_time, update_time " +
-            "from blog where kinds like CONCAT('%', :kinds, '%') order by update_time desc",
-            countQuery = "select count(*) from blog where kinds like CONCAT('%', :kinds, '%')", nativeQuery = true)
+            "from blog where kinds = :kinds order by update_time desc",
+            countQuery = "select count(*) from blog where kinds = :kinds", nativeQuery = true)
     Page<Object[]> findAbstract(@Param("kinds") String kinds, Pageable pageable);
 
 
@@ -39,6 +39,9 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      */
     @Query(value = "select author, title, content, update_time as updateTime, read_times as readTimes from blog where id= :id", nativeQuery = true)
     Map<String, Object> findByIdNative(@Param("id") String id);
+
+    @Query(value = "select id, author, kinds, title, read_times as readTimes, update_time as updateTime from blog where kinds = :kinds order by readTimes desc, update_time desc limit 5", nativeQuery = true)
+    List<Map<String, Object>> findHotArticle(@Param("kinds") String kinds);
 
     @Transactional
     @Modifying

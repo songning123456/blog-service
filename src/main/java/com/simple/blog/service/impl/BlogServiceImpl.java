@@ -142,4 +142,22 @@ public class BlogServiceImpl implements BlogService {
             throw new Exception("爬虫文章失败，请输入正确url！");
         }
     }
+
+    @Override
+    public CommonDTO<BlogDTO> getHotArticle(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        String kinds = commonVO.getCondition().getKinds();
+        List<Map<String, Object>> list = blogRepository.findHotArticle(kinds);
+        List<BlogDTO> blogDTOS = new ArrayList<>();
+        list.forEach(item -> {
+            try {
+                BlogDTO blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, item);
+                blogDTOS.add(blogDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        commonDTO.setData(blogDTOS);
+        return commonDTO;
+    }
 }
