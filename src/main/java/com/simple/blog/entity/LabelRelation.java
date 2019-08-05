@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 /**
  * @Author songning
- * @create 2019/7/31 7:57
+ * @create 2019/8/5 10:57
  */
 @Builder
 @NoArgsConstructor
@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "LabelGroup")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class LabelGroup {
+public class LabelRelation {
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
@@ -26,6 +26,6 @@ public class LabelGroup {
     @Column(name = "labelGroupName", columnDefinition = "VARCHAR(255)  NOT NULL UNIQUE COMMENT '标签分组名'")
     private String labelGroupName;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(255) COMMENT '标签分组描述'")
-    private String description;
+    @Column(name = "labelName", columnDefinition = "VARCHAR(255)  NOT NULL UNIQUE COMMENT '标签名'")
+    private String labelName;
 }

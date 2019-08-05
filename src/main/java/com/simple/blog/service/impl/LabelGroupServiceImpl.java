@@ -8,6 +8,8 @@ import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.service.LabelGroupService;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelGroupVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,15 @@ public class LabelGroupServiceImpl implements LabelGroupService {
             }
         }
         commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
         return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<LabelGroupDTO> saveLabelGroup(CommonVO<LabelGroupVO> commonVO) {
+        LabelGroup labelGroup = new LabelGroup();
+        ClassConvertUtil.populate(commonVO.getCondition(), labelGroup);
+        labelGroupRepository.save(labelGroup);
+        return new CommonDTO<>();
     }
 }
