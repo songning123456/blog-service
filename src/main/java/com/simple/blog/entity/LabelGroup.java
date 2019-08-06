@@ -23,9 +23,9 @@ public class LabelGroup {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "labelGroupName", columnDefinition = "VARCHAR(255)  NOT NULL UNIQUE COMMENT '标签分组名'")
+    @Column(name = "labelGroupName", columnDefinition = "VARCHAR(50)  NOT NULL UNIQUE COMMENT '标签分组名'")
     private String labelGroupName;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(255) COMMENT '标签分组描述'")
+    @Column(name = "description", columnDefinition = "VARCHAR(50) NOT NULL UNIQUE COMMENT '标签分组描述'")
     private String description;
 }

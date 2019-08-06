@@ -3,16 +3,19 @@ package com.simple.blog.controller;
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LabelGroupDTO;
-import com.simple.blog.entity.LabelGroup;
-import com.simple.blog.service.LabelGroupService;
+import com.simple.blog.dto.LabelRelationDTO;
+import com.simple.blog.service.LabelService;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LabelGroupVO;
+import com.simple.blog.vo.LabelRelationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Author songning
@@ -23,19 +26,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/label")
 public class LabelController {
     @Autowired
-    private LabelGroupService labelGroupService;
+    private LabelService labelService;
 
     @PostMapping("/queryLabelCache")
     @ControllerAspectAnnotation(description = "查询标签缓存")
     public CommonDTO<LabelGroupDTO> queryLabelCache() {
-        CommonDTO<LabelGroupDTO> commonDTO = labelGroupService.getLabelCache();
+        CommonDTO<LabelGroupDTO> commonDTO = labelService.getLabelCache();
         return commonDTO;
     }
 
     @PostMapping("/insertLabelGroup")
     @ControllerAspectAnnotation(description = "插入标签分组名")
-    public CommonDTO<LabelGroupDTO> insertLabelGroup(@RequestBody CommonVO<LabelGroupVO> commonVO) {
-        CommonDTO<LabelGroupDTO> commonDTO = labelGroupService.saveLabelGroup(commonVO);
+    public CommonDTO<LabelGroupDTO> insertLabelGroup(@RequestBody CommonVO<List<LabelGroupVO>> commonVO) {
+        CommonDTO<LabelGroupDTO> commonDTO = labelService.saveLabelGroup(commonVO);
+        return commonDTO;
+    }
+
+    @PostMapping("/insertLabelRelation")
+    @ControllerAspectAnnotation(description = "插入标签关系")
+    public CommonDTO<LabelRelationDTO> insertLabelRelation(@RequestBody CommonVO<List<LabelRelationVO>> commonVO) {
+        CommonDTO<LabelRelationDTO> commonDTO = labelService.saveLabelRelation(commonVO);
         return commonDTO;
     }
 }

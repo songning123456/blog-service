@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @Entity
-@Table(name = "LabelGroup")
+@Table(name = "LabelRelation")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class LabelRelation {
 
@@ -23,9 +23,9 @@ public class LabelRelation {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "labelGroupName", columnDefinition = "VARCHAR(255)  NOT NULL UNIQUE COMMENT '标签分组名'")
+    @Column(name = "labelGroupName", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '标签分组名'")
     private String labelGroupName;
 
-    @Column(name = "labelName", columnDefinition = "VARCHAR(255)  NOT NULL UNIQUE COMMENT '标签名'")
+    @Column(name = "labelName", columnDefinition = "VARCHAR(50)  NOT NULL UNIQUE COMMENT '标签名'")
     private String labelName;
 }

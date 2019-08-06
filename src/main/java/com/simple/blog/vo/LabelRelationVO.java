@@ -4,11 +4,11 @@ import lombok.Data;
 
 /**
  * @Author songning
- * @create 2019/7/31 17:59
+ * @create 2019/8/6 8:22
  */
 @Data
-public class LabelGroupVO {
+public class LabelRelationVO {
     private String labelGroupName;
 
-    private String description;
+    private String labelName;
 }
