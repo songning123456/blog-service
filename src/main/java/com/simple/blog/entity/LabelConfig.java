@@ -25,4 +25,7 @@ public class LabelConfig {
 
     @Column(name = "labelName", columnDefinition = "VARCHAR(50)  NOT NULL COMMENT '标签名'")
     private String labelName;
+
+    @Column(name = "blogId", columnDefinition = "VARCHAR(32)  NOT NULL COMMENT '博客id'")
+    private String blogId;
 }
