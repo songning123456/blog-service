@@ -65,4 +65,11 @@ public class LabelController {
         }
         return map;
     }
+
+    @PostMapping("/queryAllLabelName")
+    @ControllerAspectAnnotation(description = "获取所有的labelName")
+    public CommonDTO<LabelRelationDTO> queryAllLabelName() {
+        CommonDTO<LabelRelationDTO> commonDTO = labelService.getAllLabelName();
+        return commonDTO;
+    }
 }

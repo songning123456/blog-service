@@ -32,6 +32,7 @@ public class LabelServiceImpl implements LabelService {
     private LabelRelationRepository labelRelationRepository;
     @Autowired
     private RedisService redisService;
+    private final Object object = new Object();
 
     @Override
     public CommonDTO<LabelGroupDTO> getLabelCache() {
@@ -113,5 +114,26 @@ public class LabelServiceImpl implements LabelService {
         });
         result.put("data", data);
         return result;
+    }
+
+    @Override
+    public CommonDTO<LabelRelationDTO> getAllLabelName() {
+        CommonDTO<LabelRelationDTO> commonDTO = new CommonDTO<>();
+        List<LabelRelationDTO> list = new ArrayList<>();
+        Map<String, Object> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
+        if (relationMap.isEmpty()) {
+            synchronized (object) {
+                List<LabelRelation> labelRelations = labelRelationRepository.findAll();
+                labelRelations.forEach(item -> redisService.setValue(item.getLabelGroupName() + "-" + item.getLabelName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION));
+                relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
+            }
+        }
+        relationMap.keySet().forEach(item -> {
+            String labelName = StringUtil.splitString(item, ":", 2).split("-")[1];
+            list.add(LabelRelationDTO.builder().labelName(labelName).build());
+        });
+        commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
+        return commonDTO;
     }
 }

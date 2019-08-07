@@ -124,15 +124,15 @@ public class BlogServiceImpl implements BlogService {
                     author = author.substring(3);
                     String kinds;
                     if (0 == j % 5) {
-                        kinds = "前端";
+                        kinds = "设计模式";
                     } else if (1 == j % 5) {
-                        kinds = "后端";
+                        kinds = "代码规范";
                     } else if (2 == j % 5) {
                         kinds = "数据库";
                     } else if (3 == j % 5) {
-                        kinds = "热门";
+                        kinds = "机器学习";
                     } else {
-                        kinds = "关注";
+                        kinds = "Java";
                     }
                     Blog blog = Blog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).build();
                     blogRepository.save(blog);

@@ -42,4 +42,11 @@ public interface LabelService {
      * @return
      */
     Map<String, Object> getGroupCache();
+
+    /**
+     * 获取所有的labelName
+     *
+     * @return
+     */
+    CommonDTO<LabelRelationDTO> getAllLabelName();
 }
