@@ -24,6 +24,8 @@ public interface RedisService {
      */
     Map<String, Object> getValues(String... folder);
 
+    Object getValue(String... name);
+
     /**
      * 设置指定问价夹下的值
      *

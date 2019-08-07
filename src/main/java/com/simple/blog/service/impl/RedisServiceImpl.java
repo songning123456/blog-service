@@ -43,6 +43,13 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public Object getValue(String... name) {
+        String key = StringUtil.getString(name);
+        Object value = redisTemplate.opsForValue().get(key);
+        return value;
+    }
+
+    @Override
     public void setValue(String key, Object value, String... name) {
         String folder = StringUtil.getString(name);
         redisTemplate.opsForValue().set(folder + key, value);

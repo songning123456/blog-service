@@ -8,6 +8,7 @@ import com.simple.blog.vo.LabelGroupVO;
 import com.simple.blog.vo.LabelRelationVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author songning
@@ -30,9 +31,15 @@ public interface LabelService {
     CommonDTO<LabelGroupDTO> saveLabelGroup(CommonVO<List<LabelGroupVO>> commonVO);
 
     /**
-     *
      * @param commonVO
      * @return
      */
     CommonDTO<LabelRelationDTO> saveLabelRelation(CommonVO<List<LabelRelationVO>> commonVO);
+
+    /**
+     * 获取分组缓存
+     *
+     * @return
+     */
+    Map<String, Object> getGroupCache();
 }

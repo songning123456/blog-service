@@ -1,6 +1,7 @@
 package com.simple.blog.controller;
 
 import com.simple.blog.annotation.ControllerAspectAnnotation;
+import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LabelGroupDTO;
 import com.simple.blog.dto.LabelRelationDTO;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author songning
@@ -47,5 +50,19 @@ public class LabelController {
     public CommonDTO<LabelRelationDTO> insertLabelRelation(@RequestBody CommonVO<List<LabelRelationVO>> commonVO) {
         CommonDTO<LabelRelationDTO> commonDTO = labelService.saveLabelRelation(commonVO);
         return commonDTO;
+    }
+
+    @PostMapping("/queryGroupCache")
+    public Map<String, Object> queryGroupCache() {
+        Map<String, Object> map = new HashMap<>(10);
+        try {
+            map = labelService.getGroupCache();
+            map.put("status", HttpStatus.HTTP_OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("message", e.getMessage());
+            map.put("status", HttpStatus.HTTP_INTERNAL_ERROR);
+        }
+        return map;
     }
 }
