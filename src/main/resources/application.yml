@@ -19,6 +19,9 @@ spring:
       ddl-auto: update
     database: mysql
     show-sql: true
+  elasticsearch:
+    jest:
+      uris: http://localhost:9200
   flyway:
     enabled: false
     locations: classpath:db/migration
