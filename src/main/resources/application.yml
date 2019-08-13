@@ -22,7 +22,7 @@ spring:
   data:
     elasticsearch:
       cluster-nodes: localhost:9300
-      cluster-name: my-application
+      cluster-name: es-5.2-test
   elasticsearch:
     jest:
       uris: http://localhost:9200
