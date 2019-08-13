@@ -1,6 +1,7 @@
 package com.simple.blog.service;
 
 import com.simple.blog.dto.BlogDTO;
+import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
@@ -47,4 +48,11 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> getHotArticle(CommonVO<BlogVO> commonVO);
+
+    /**
+     * 删除所有文章
+     *
+     * @return
+     */
+    CommonDTO<BlogDTO> deleteAllArticle();
 }

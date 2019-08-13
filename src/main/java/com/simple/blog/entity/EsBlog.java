@@ -1,7 +1,10 @@
 package com.simple.blog.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -16,6 +19,9 @@ import java.util.Date;
  * @create 2019/8/9 8:59
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(indexName = "simple_blog", type = "es_blog")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class EsBlog {
@@ -24,6 +30,8 @@ public class EsBlog {
     private String id;
 
     private String title;
+
+    private String summary;
 
     private Integer readTimes;
 

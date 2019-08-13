@@ -60,4 +60,11 @@ public class BlogController {
         CommonDTO<BlogDTO> commonDTO = blogService.getHotArticle(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/deleteArticleAll")
+    @ControllerAspectAnnotation(description = "删除所有文章")
+    public CommonDTO<BlogDTO> deleteArticleAll() {
+        CommonDTO<BlogDTO> commonDTO = blogService.deleteAllArticle();
+        return commonDTO;
+    }
 }

@@ -1,9 +1,12 @@
 package com.simple.blog.service.impl;
 
 import com.simple.blog.dto.BlogDTO;
+import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
+import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DateUtil;
@@ -29,6 +32,8 @@ import java.util.stream.Collectors;
 public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private EsBlogRepository esBlogRepository;
 
     @Override
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
@@ -38,8 +43,8 @@ public class BlogServiceImpl implements BlogService {
         String kinds = commonVO.getCondition().getKinds();
         Integer readTimes = commonVO.getCondition().getReadTimes();
         String author = commonVO.getCondition().getAuthor();
-        Blog blog = Blog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).readTimes(readTimes).build();
-        blogRepository.save(blog);
+        EsBlog blog = EsBlog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).readTimes(readTimes).build();
+        esBlogRepository.save(blog);
         return new CommonDTO<>();
     }
 
@@ -110,7 +115,7 @@ public class BlogServiceImpl implements BlogService {
             }
         } else if ("https://tech.meituan.com/".equals(url)) {
             // 爬虫美团
-            for (int i = 2; i < 8; i++) {
+            for (int i = 2; i < 3; i++) {
                 Document document = Jsoup.connect(url + "/page/" + i + ".html").get();
                 List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
                 for (int j = 0; j < articleUrls.size(); j++) {
@@ -134,8 +139,8 @@ public class BlogServiceImpl implements BlogService {
                     } else {
                         kinds = "iOS";
                     }
-                    Blog blog = Blog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).build();
-                    blogRepository.save(blog);
+                    EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
+                    esBlogRepository.save(esBlog);
                 }
             }
         } else {
@@ -159,5 +164,11 @@ public class BlogServiceImpl implements BlogService {
         });
         commonDTO.setData(blogDTOS);
         return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<BlogDTO> deleteAllArticle() {
+        esBlogRepository.deleteAll();
+        return new CommonDTO<>();
     }
 }
