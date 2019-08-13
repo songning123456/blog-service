@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 @Service
 @Aspect
 @Slf4j
-public class ControllerAspectServiceImpl {
+public class ControllerAspectAop {
 
     @Pointcut("@annotation(com.simple.blog.annotation.ControllerAspectAnnotation)")
     public void controllerAspect() {

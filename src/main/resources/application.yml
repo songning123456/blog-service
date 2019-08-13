@@ -19,6 +19,10 @@ spring:
       ddl-auto: update
     database: mysql
     show-sql: true
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      cluster-name: my-application
   elasticsearch:
     jest:
       uris: http://localhost:9200
