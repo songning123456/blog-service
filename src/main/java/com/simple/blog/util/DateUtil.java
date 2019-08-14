@@ -1,6 +1,8 @@
 package com.simple.blog.util;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,44 +11,90 @@ import java.util.Date;
  * @create 2019/7/24 13:31
  */
 public class DateUtil {
-    public static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
     public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
-     * 格式化日期
+     * java.util.Date => String
      *
-     * @param date
-     * @return "yyyy-MM-dd HH:mm:ss"的字符串
+     * @param date      要格式的java.util.Date对象
+     * @param strFormat 输出的String字符串格式的限定（如："yyyy-MM-dd HH:mm:ss"）
+     * @return 表示日期的字符串
      */
-    public static String dateFormat(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+    public static String dateToStr(Date date, String strFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strFormat);
+        String str = simpleDateFormat.format(date);
+        return str;
     }
 
     /**
-     * 字符串转日期
+     * String => java.util.Date
      *
-     * @param dateString
-     * @param dateFormat
-     * @return
+     * @param str        表示日期的字符串
+     * @param dateFormat 传入字符串的日期表示格式（如："yyyy-MM-dd HH:mm:ss"）
+     * @return java.util.Date类型日期对象（如果转换失败则返回null）
      */
-    public static Date toDate(String dateString, String dateFormat) {
+    public static Date strToDate(String str, String dateFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         Date date = null;
         try {
-            date = new SimpleDateFormat(dateFormat).parse(dateString);
+            date = simpleDateFormat.parse(str);
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
         }
         return date;
     }
 
     /**
-     * yyyy-MM-dd HH:mm:ss 转成 TimeStamp
+     * java.sql.Timestamp => String
      *
-     * @param dateString
+     * @param timestamp 要格式的java.sql.Timestamp对象
+     * @param strFormat 输出的String字符串格式的限定（如："yyyy-MM-dd HH:mm:ss"）
+     * @return 表示日期的字符串
+     */
+    public static String dateToStr(java.sql.Timestamp timestamp, String strFormat) {
+        DateFormat dateFormat = new SimpleDateFormat(strFormat);
+        String str = dateFormat.format(timestamp);
+        return str;
+    }
+
+    /**
+     * String =>java.sql.Timestamp
+     *
+     * @param strDate    表示日期的字符串
+     * @param dateFormat 传入字符串的日期表示格式（如："yyyy-MM-dd HH:mm:ss"）
+     * @return java.sql.Timestamp类型日期对象（如果转换失败则返回null）
+     */
+    public static java.sql.Timestamp strToSqlDate(String strDate, String dateFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+        return sqlDate;
+    }
+
+    /**
+     * java.util.Date => java.sql.Timestamp
+     *
+     * @param date 要转化的java.util.Date对象
+     * @return 转化后的java.sql.Timestamp对象
+     */
+    public static java.sql.Timestamp dateToTime(Date date) {
+        String strDate = dateToStr(date, "yyyy-MM-dd HH:mm:ss SSS");
+        return strToSqlDate(strDate, "yyyy-MM-dd HH:mm:ss SSS");
+    }
+
+    /**
+     * java.sql.Timestamp => java.util.Date
+     * 二者是父子关系，可以直接赋值，自动转换
+     *
+     * @param timestamp
      * @return
      */
-    public static Timestamp toTimeStamp(String dateString) {
-        Timestamp timestamp = Timestamp.valueOf(dateString);
+    public static Date timeToDate(java.sql.Timestamp timestamp) {
         return timestamp;
     }
 }

@@ -1,13 +1,16 @@
 package com.simple.blog.service.impl;
 
+import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.entity.EsBlog;
+import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.service.BlogService;
+import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
@@ -20,8 +23,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,6 +40,18 @@ public class BlogServiceImpl implements BlogService {
     private BlogRepository blogRepository;
     @Autowired
     private EsBlogRepository esBlogRepository;
+    @Autowired
+    private RedisService redisService;
+
+    private CrudRepository getDataSource() {
+        SystemConfig systemConfig = (SystemConfig) redisService.getValue(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG, "dataSource");
+        String value = systemConfig.getConfigValue();
+        if ("mysql".equals(value)) {
+            return blogRepository;
+        } else {
+            return esBlogRepository;
+        }
+    }
 
     @Override
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
@@ -43,8 +61,8 @@ public class BlogServiceImpl implements BlogService {
         String kinds = commonVO.getCondition().getKinds();
         Integer readTimes = commonVO.getCondition().getReadTimes();
         String author = commonVO.getCondition().getAuthor();
-        EsBlog blog = EsBlog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).readTimes(readTimes).build();
-        esBlogRepository.save(blog);
+        EsBlog blog = EsBlog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).updateTime(new Date()).readTimes(readTimes).build();
+        getDataSource().save(blog);
         return new CommonDTO<>();
     }
 
@@ -108,9 +126,9 @@ public class BlogServiceImpl implements BlogService {
                     tagStr.append(",");
                 });
                 String kinds = tagStr.substring(0, tagStr.length() - 1) + ",前端，后端，数据库，热门，关注";
-                java.sql.Timestamp time = DateUtil.toTimeStamp(doc.getElementsByClass("b-time").html());
+                Date time = DateUtil.strToDate(doc.getElementsByClass("b-time").html(), "yyyy-MM-dd HH:mm:ss");
                 String summary = Jsoup.parse(Jsoup.connect("https://yq.aliyun.com/articles/708486?type=2").get().getElementsByClass("markdown-body").get(0).getElementsByTag("p").get(0).html()).text();
-                Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(readTimes).kinds(kinds).author(author).createTime(time).updateTime(time).build();
+                Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(readTimes).kinds(kinds).author(author).updateTime(time).build();
                 blogRepository.save(blog);
             }
         } else if ("https://tech.meituan.com/".equals(url)) {

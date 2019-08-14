@@ -3,8 +3,10 @@ package com.simple.blog;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.entity.LabelGroup;
+import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.LabelGroupRepository;
+import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.util.NameConvertUtil;
@@ -31,6 +33,9 @@ public class BlogApplicationTests {
 
     @Autowired
     private LabelGroupRepository labelGroupRepository;
+
+    @Autowired
+    private SystemConfigRepository systemConfigRepository;
 
     @Test
     public void contextLoads() {
@@ -81,6 +86,12 @@ public class BlogApplicationTests {
             labelGroups.add(labelGroup);
         });
         labelGroupRepository.saveAll(labelGroups);
+    }
+
+    @Test
+    public void insertSystemConfig() {
+        SystemConfig systemConfig = SystemConfig.builder().configKey("dataSource").configValue("elasticSearch").valueDescription("动态切换数据源").build();
+        systemConfigRepository.save(systemConfig);
     }
 
 }
