@@ -25,22 +25,19 @@ public class BlogDTO {
 
     private String author;
 
-    private Date createTime;
-
     private Date updateTime;
 
-    public BlogDTO(String id, String title, String summary, Integer readTimes, String kinds, String author, Date createTime, Date updateTime) {
+    public BlogDTO(String id, String title, String summary, Integer readTimes, String kinds, String author, java.sql.Timestamp updateTime) {
         this.id = id;
         this.title = title;
         this.summary = summary;
         this.readTimes = readTimes;
         this.kinds = kinds;
         this.author = author;
-        this.createTime = createTime;
         this.updateTime = updateTime;
     }
 
-    public BlogDTO(String author, String content, Date updateTime) {
+    public BlogDTO(String author, String content, java.sql.Timestamp updateTime) {
         this.author = author;
         this.content = content;
         this.updateTime = updateTime;

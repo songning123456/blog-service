@@ -25,7 +25,7 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      * @param pageable
      * @return
      */
-    @Query(value = "select id, title,summary, read_times, kinds, author, create_time, update_time " +
+    @Query(value = "select id, title,summary, read_times, kinds, author, update_time " +
             "from blog where kinds = :kinds order by update_time desc",
             countQuery = "select count(*) from blog where kinds = :kinds", nativeQuery = true)
     Page<Object[]> findAbstract(@Param("kinds") String kinds, Pageable pageable);

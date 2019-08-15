@@ -1,16 +1,10 @@
 package com.simple.blog.service.impl;
 
-import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.BlogDTO;
-import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
-import com.simple.blog.entity.EsBlog;
-import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.BlogRepository;
-import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.service.BlogService;
-import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
@@ -23,11 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,20 +29,6 @@ import java.util.stream.Collectors;
 public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
-    @Autowired
-    private EsBlogRepository esBlogRepository;
-    @Autowired
-    private RedisService redisService;
-
-    private CrudRepository getDataSource() {
-        SystemConfig systemConfig = (SystemConfig) redisService.getValue(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG, "dataSource");
-        String value = systemConfig.getConfigValue();
-        if ("mysql".equals(value)) {
-            return blogRepository;
-        } else {
-            return esBlogRepository;
-        }
-    }
 
     @Override
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
@@ -61,8 +38,8 @@ public class BlogServiceImpl implements BlogService {
         String kinds = commonVO.getCondition().getKinds();
         Integer readTimes = commonVO.getCondition().getReadTimes();
         String author = commonVO.getCondition().getAuthor();
-        EsBlog blog = EsBlog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).updateTime(new Date()).readTimes(readTimes).build();
-        getDataSource().save(blog);
+        Blog blog = Blog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).updateTime(new Date()).readTimes(readTimes).build();
+        blogRepository.save(blog);
         return new CommonDTO<>();
     }
 
@@ -157,8 +134,8 @@ public class BlogServiceImpl implements BlogService {
                     } else {
                         kinds = "iOS";
                     }
-                    EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
-                    esBlogRepository.save(esBlog);
+                    Blog esBlog = Blog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
+                    blogRepository.save(esBlog);
                 }
             }
         } else {
@@ -186,7 +163,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public CommonDTO<BlogDTO> deleteAllArticle() {
-        esBlogRepository.deleteAll();
+        blogRepository.deleteAll();
         return new CommonDTO<>();
     }
 }
