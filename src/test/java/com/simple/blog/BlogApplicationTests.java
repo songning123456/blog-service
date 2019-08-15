@@ -1,15 +1,11 @@
 package com.simple.blog;
 
-import com.simple.blog.dto.BlogDTO;
-import com.simple.blog.entity.Blog;
-import com.simple.blog.entity.LabelGroup;
-import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.util.FileUtil;
-import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.util.NameConvertUtil;
+import com.simple.blog.util.RegularUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -78,20 +74,32 @@ public class BlogApplicationTests {
     }
 
     @Test
-    public void insertLabelData() {
-        List<String> list = new ArrayList<>(Arrays.asList("关注", "前端", "后端", "数据库", "热门"));
-        List<LabelGroup> labelGroups = new ArrayList<>();
-        list.forEach(item -> {
-            LabelGroup labelGroup = LabelGroup.builder().labelGroupName(item).build();
-            labelGroups.add(labelGroup);
+    public void readExcel() throws Exception {
+        File srcFile = new File("D:\\haiyan-data\\vehicle-brand\\vehicle.xls");
+        File targetFile = new File("D:\\haiyan-data\\vehicle-brand\\vehicle.txt");
+        List<String> total = new ArrayList<>();
+        List<List> excelList = FileUtil.readExcel(srcFile);
+        List<String> src = new ArrayList<>();
+        excelList.forEach(row -> {
+            row.forEach(item -> {
+                if (RegularUtil.isInteger(item.toString())) {
+                    src.add(item.toString());
+                }
+            });
         });
-        labelGroupRepository.saveAll(labelGroups);
-    }
-
-    @Test
-    public void insertSystemConfig() {
-        SystemConfig systemConfig = SystemConfig.builder().configKey("dataSource").configValue("elasticSearch").valueDescription("动态切换数据源").build();
-        systemConfigRepository.save(systemConfig);
+        List<String> target = FileUtil.readTxt(targetFile);
+        List<String> tar = new ArrayList<>();
+        target.forEach(item -> {
+            String[] temp = item.split(",");
+            String val = temp[0].substring(13);
+            tar.add(val);
+        });
+        src.forEach(item -> {
+            if (!tar.contains(item)) {
+                total.add(item);
+            }
+        });
+        System.out.println(total);
     }
 
 }

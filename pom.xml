@@ -73,6 +73,22 @@
             <groupId>io.searchbox</groupId>
             <artifactId>jest</artifactId>
         </dependency>
+        <!--引入poi，解析workbook视图 https://www.cnblogs.com/liyafei/p/8146136.html-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.10</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -82,7 +98,7 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
     </repositories>
-    
+
     <build>
         <plugins>
             <plugin>
