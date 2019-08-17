@@ -1,7 +1,6 @@
 package com.simple.blog.service;
 
 import com.simple.blog.dto.BlogDTO;
-import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
@@ -33,13 +32,6 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> getContent(CommonVO<BlogVO> commonVO);
-
-    /**
-     * 盗窃文章
-     *
-     * @param commonVO
-     */
-    void theftContent(CommonVO<BlogVO> commonVO) throws Exception;
 
     /**
      * 查询热门文章

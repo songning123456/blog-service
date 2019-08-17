@@ -1,12 +1,17 @@
 package com.simple.blog;
 
+import com.simple.blog.entity.Blog;
+import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.NameConvertUtil;
 import com.simple.blog.util.RegularUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +20,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -26,6 +33,9 @@ public class BlogApplicationTests {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @Autowired
+    private EsBlogRepository esBlogRepository;
 
     @Autowired
     private LabelGroupRepository labelGroupRepository;
@@ -100,6 +110,45 @@ public class BlogApplicationTests {
             }
         });
         System.out.println(total);
+    }
+
+    /**
+     * 盗窃文章
+     *
+     * @throws Exception
+     */
+    @Test
+    public void theftArticle() throws Exception {
+        String url = "https://tech.meituan.com/";
+        // 爬虫美团
+        for (int i = 3; i < 4; i++) {
+            Document document = Jsoup.connect(url + "/page/" + i + ".html").get();
+            List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
+            for (int j = 0; j < articleUrls.size(); j++) {
+                Document doc = Jsoup.connect(articleUrls.get(i)).get();
+                String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
+                String read = doc.getElementsByClass("m-post-count").get(0).getElementsByTag("span").get(0).childNode(1).toString();
+                String time = read.substring(0, read.length() - 1);
+                Integer readTimes = Integer.parseInt(time);
+                String content = doc.getElementsByClass("post-content").html();
+                String author = doc.getElementsByClass("m-post-nick").get(0).childNode(0).toString();
+                author = author.substring(3);
+                String kinds;
+                if (0 == j % 5) {
+                    kinds = "HTML";
+                } else if (1 == j % 5) {
+                    kinds = "Git";
+                } else if (2 == j % 5) {
+                    kinds = "机器学习";
+                } else if (3 == j % 5) {
+                    kinds = "MySQL";
+                } else {
+                    kinds = "iOS";
+                }
+                EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
+                esBlogRepository.save(esBlog);
+            }
+        }
     }
 
 }

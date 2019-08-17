@@ -6,12 +6,9 @@ import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.util.ClassConvertUtil;
-import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author sn
@@ -81,66 +77,6 @@ public class BlogServiceImpl implements BlogService {
         commonDTO.setData(Collections.singletonList(blogDTO));
         commonDTO.setTotal(1L);
         return commonDTO;
-    }
-
-    @Override
-    public void theftContent(CommonVO<BlogVO> commonVO) throws Exception {
-        String url = commonVO.getCondition().getUrl();
-        // 爬虫阿里云
-        if ("https://yq.aliyun.com".equals(url)) {
-            Document document = Jsoup.connect(url + "/articles").get();
-            List<String> articleUrls = document.getElementsByClass("item-box").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
-            for (int i = 0; i < articleUrls.size(); i++) {
-                Document doc = Jsoup.connect(url + articleUrls.get(i) + "?type=2").get();
-                String title = doc.getElementsByClass("blog-title").html();
-                String content = doc.getElementsByClass("markdown-body").html();
-                Integer readTimes = Integer.parseInt(doc.getElementsByClass("b-watch").html().substring(2));
-                String author = doc.getElementsByClass("b-author").html();
-                List<String> tags = doc.getElementsByClass("label-item").stream().map(o -> o.getElementsByTag("span").html()).collect(Collectors.toList());
-                StringBuilder tagStr = new StringBuilder();
-                tags.forEach(o -> {
-                    tagStr.append(o);
-                    tagStr.append(",");
-                });
-                String kinds = tagStr.substring(0, tagStr.length() - 1) + ",前端，后端，数据库，热门，关注";
-                Date time = DateUtil.strToDate(doc.getElementsByClass("b-time").html(), "yyyy-MM-dd HH:mm:ss");
-                String summary = Jsoup.parse(Jsoup.connect("https://yq.aliyun.com/articles/708486?type=2").get().getElementsByClass("markdown-body").get(0).getElementsByTag("p").get(0).html()).text();
-                Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(readTimes).kinds(kinds).author(author).updateTime(time).build();
-                blogRepository.save(blog);
-            }
-        } else if ("https://tech.meituan.com/".equals(url)) {
-            // 爬虫美团
-            for (int i = 2; i < 3; i++) {
-                Document document = Jsoup.connect(url + "/page/" + i + ".html").get();
-                List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
-                for (int j = 0; j < articleUrls.size(); j++) {
-                    Document doc = Jsoup.connect(articleUrls.get(i)).get();
-                    String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
-                    String read = doc.getElementsByClass("m-post-count").get(0).getElementsByTag("span").get(0).childNode(1).toString();
-                    String time = read.substring(0, read.length() - 1);
-                    Integer readTimes = Integer.parseInt(time);
-                    String content = doc.getElementsByClass("post-content").html();
-                    String author = doc.getElementsByClass("m-post-nick").get(0).childNode(0).toString();
-                    author = author.substring(3);
-                    String kinds;
-                    if (0 == j % 5) {
-                        kinds = "HTML";
-                    } else if (1 == j % 5) {
-                        kinds = "Git";
-                    } else if (2 == j % 5) {
-                        kinds = "机器学习";
-                    } else if (3 == j % 5) {
-                        kinds = "MySQL";
-                    } else {
-                        kinds = "iOS";
-                    }
-                    Blog esBlog = Blog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
-                    blogRepository.save(esBlog);
-                }
-            }
-        } else {
-            throw new Exception("爬虫文章失败，请输入正确url！");
-        }
     }
 
     @Override
