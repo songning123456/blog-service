@@ -19,10 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -120,8 +117,9 @@ public class BlogApplicationTests {
     @Test
     public void theftArticle() throws Exception {
         String url = "https://tech.meituan.com/";
+        List<String> labels = Arrays.asList("WebSocket", "Vuex", "Chrome", "jQuery", "正则表达式", "HTTP", "MySQL", "ECMAScript 6", "Git", "HTML", "设计模式", "代码规范", "图片资源", "Linux", "机器学习", "Android", "iOS", "Java", "JavaScript");
         // 爬虫美团
-        for (int i = 3; i < 4; i++) {
+        for (int i = 4; i < 8; i++) {
             Document document = Jsoup.connect(url + "/page/" + i + ".html").get();
             List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
             for (int j = 0; j < articleUrls.size(); j++) {
@@ -133,18 +131,7 @@ public class BlogApplicationTests {
                 String content = doc.getElementsByClass("post-content").html();
                 String author = doc.getElementsByClass("m-post-nick").get(0).childNode(0).toString();
                 author = author.substring(3);
-                String kinds;
-                if (0 == j % 5) {
-                    kinds = "HTML";
-                } else if (1 == j % 5) {
-                    kinds = "Git";
-                } else if (2 == j % 5) {
-                    kinds = "机器学习";
-                } else if (3 == j % 5) {
-                    kinds = "MySQL";
-                } else {
-                    kinds = "iOS";
-                }
+                String kinds = labels.get(j % labels.size());
                 EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(title + Math.random()).readTimes(readTimes).kinds(kinds).author(author).updateTime(new Date()).build();
                 esBlogRepository.save(esBlog);
             }

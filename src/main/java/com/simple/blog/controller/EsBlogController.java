@@ -3,6 +3,7 @@ package com.simple.blog.controller;
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.EsBlogDTO;
+import com.simple.blog.entity.EsBlog;
 import com.simple.blog.service.EsBlogService;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.EsBlogVO;
@@ -53,5 +54,11 @@ public class EsBlogController {
         return commonDTO;
     }
 
+    @PostMapping("/searchArticle")
+    @ControllerAspectAnnotation(description = "高亮搜索文章")
+    public CommonDTO<EsBlogDTO> queryHighlightArticle(@RequestBody CommonVO<EsBlogVO> commonVO) {
+        CommonDTO<EsBlogDTO> commonDTO = esBlogService.getHighlightArticle(commonVO);
+        return commonDTO;
+    }
 
 }

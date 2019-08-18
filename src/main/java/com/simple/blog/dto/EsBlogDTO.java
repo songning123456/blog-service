@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author sn
@@ -29,4 +30,6 @@ public class EsBlogDTO {
     private String author;
 
     private Date updateTime;
+
+    private List<String> searchResult;
 }

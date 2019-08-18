@@ -43,6 +43,13 @@ public interface EsBlogService {
     CommonDTO<EsBlogDTO> getHotArticle(CommonVO<EsBlogVO> commonVO);
 
     /**
+     * 高亮搜索文章内容
+     * @param commonVO
+     * @return
+     */
+    CommonDTO<EsBlogDTO> getHighlightArticle(CommonVO<EsBlogVO> commonVO);
+
+    /**
      * 删除所有文章
      *
      * @return

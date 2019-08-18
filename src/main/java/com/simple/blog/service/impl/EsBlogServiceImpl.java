@@ -1,6 +1,9 @@
 package com.simple.blog.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.util.ClassUtil;
+import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.EsBlogDTO;
 import com.simple.blog.entity.EsBlog;
@@ -9,6 +12,14 @@ import com.simple.blog.service.EsBlogService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.EsBlogVO;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Search;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +27,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.Highlighter;
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author songning
@@ -26,6 +40,8 @@ import java.util.*;
 public class EsBlogServiceImpl implements EsBlogService {
     @Autowired
     private EsBlogRepository esBlogRepository;
+    @Autowired
+    private JestClient jestClient;
 
     @Override
     public CommonDTO<EsBlogDTO> saveArticle(CommonVO<EsBlogVO> commonVO) {
@@ -46,13 +62,32 @@ public class EsBlogServiceImpl implements EsBlogService {
         Integer recordStartNo = commonVO.getRecordStartNo();
         Integer pageRecordNum = commonVO.getPageRecordNum();
         String kinds = commonVO.getCondition().getKinds();
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
-        Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
-        Page<EsBlog> blogPage = esBlogRepository.findAll(pageable);
-        List<EsBlogDTO> esBlogDTOList = new ArrayList<>();
-        ClassConvertUtil.populateList(blogPage.getContent(), esBlogDTOList, EsBlogDTO.class);
+        String[] includes = {"id", "title", "updateTime", "summary", "author", "kinds"};
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.fetchSource(includes, new String[]{});
+        searchSourceBuilder.query(QueryBuilders.matchQuery("kinds", kinds));
+        searchSourceBuilder.sort("updateTime", SortOrder.DESC);
+        searchSourceBuilder.from(recordStartNo);
+        searchSourceBuilder.size(pageRecordNum);
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        JestResult jestResult = null;
+        try {
+            jestResult = jestClient.execute(search);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            EsBlogDTO item = new EsBlogDTO();
+            JSONObject hitObject = JSON.parseObject(hit.toString());
+            item.setId(hitObject.getString("_id"));
+            item.setTitle(hitObject.getJSONObject("_source").getString("title"));
+            item.setSummary(hitObject.getJSONObject("_source").getString("summary"));
+            item.setUpdateTime(hitObject.getJSONObject("_source").getDate("updateTime"));
+            item.setAuthor(hitObject.getJSONObject("_source").getString("author"));
+            return item;
+        }).collect(Collectors.toList());
         commonDTO.setData(esBlogDTOList);
-        commonDTO.setTotal(blogPage.getTotalElements());
+        commonDTO.setTotal((long) esBlogDTOList.size());
         return commonDTO;
     }
 
@@ -77,11 +112,63 @@ public class EsBlogServiceImpl implements EsBlogService {
         String kinds = commonVO.getCondition().getKinds();
         Integer recordStartNo = commonVO.getRecordStartNo();
         Integer pageRecordNum = commonVO.getPageRecordNum();
-        Sort sort = new Sort(Sort.Direction.DESC, "readTimes");
-        Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
-        List<EsBlog> esBlogList = esBlogRepository.findByKinds(kinds, pageable);
-        List<EsBlogDTO> esBlogDTOList = new ArrayList<>();
-        ClassConvertUtil.populateList(esBlogList, esBlogDTOList, EsBlogDTO.class);
+        String[] includes = {"id", "title", "updateTime", "author", "kinds"};
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.fetchSource(includes, new String[]{});
+        searchSourceBuilder.query(QueryBuilders.matchQuery("kinds", kinds));
+        searchSourceBuilder.sort("readTimes", SortOrder.DESC);
+        searchSourceBuilder.size(pageRecordNum);
+        searchSourceBuilder.from(recordStartNo);
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        JestResult jestResult = null;
+        try {
+            jestResult = jestClient.execute(search);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            EsBlogDTO item = new EsBlogDTO();
+            JSONObject hitObject = JSON.parseObject(hit.toString());
+            item.setId(hitObject.getString("_id"));
+            item.setTitle(hitObject.getJSONObject("_source").getString("title"));
+            item.setAuthor(hitObject.getJSONObject("_source").getString("author"));
+            item.setUpdateTime(hitObject.getJSONObject("_source").getDate("updateTime"));
+            item.setKinds(hitObject.getJSONObject("_source").getString("kinds"));
+            return item;
+        }).collect(Collectors.toList());
+        commonDTO.setData(esBlogDTOList);
+        commonDTO.setTotal((long) esBlogDTOList.size());
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<EsBlogDTO> getHighlightArticle(CommonVO<EsBlogVO> commonVO) {
+        CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
+        String[] includes = {"id", "title"};
+        String content = commonVO.getCondition().getContent();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.fetchSource(includes, new String[]{});
+        searchSourceBuilder.query(QueryBuilders.matchQuery("content", content));
+        searchSourceBuilder.sort("updateTime", SortOrder.DESC);
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("content");
+        highlightBuilder.preTags("<span style='color: #ffa500;font-weight: bold;font-size: 16px !important;'>").postTags("</span>");
+        searchSourceBuilder.highlighter(highlightBuilder);
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        JestResult jestResult = null;
+        try {
+            jestResult = jestClient.execute(search);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            EsBlogDTO item = new EsBlogDTO();
+            JSONObject hitObject = JSON.parseObject(hit.toString());
+            item.setId(hitObject.getString("_id"));
+            item.setTitle(hitObject.getJSONObject("_source").getString("title"));
+            item.setSearchResult(hitObject.getJSONObject("highlight").getJSONArray("content").toJavaList(String.class));
+            return item;
+        }).collect(Collectors.toList());
         commonDTO.setData(esBlogDTOList);
         commonDTO.setTotal((long) esBlogDTOList.size());
         return commonDTO;
