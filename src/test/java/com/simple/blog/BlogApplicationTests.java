@@ -10,6 +10,11 @@ import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.NameConvertUtil;
 import com.simple.blog.util.RegularUtil;
 import lombok.extern.slf4j.Slf4j;
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
@@ -80,6 +85,11 @@ public class BlogApplicationTests {
         System.out.println(fileLength);
     }
 
+    /**
+     * 从excel 中获取数据
+     *
+     * @throws Exception
+     */
     @Test
     public void readExcel() throws Exception {
         File srcFile = new File("D:\\haiyan-data\\vehicle-brand\\vehicle.xls");
@@ -136,6 +146,24 @@ public class BlogApplicationTests {
                 esBlogRepository.save(esBlog);
             }
         }
+    }
+
+    /**
+     * 汉语拼音转换
+     *
+     * @throws Exception
+     */
+    @Test
+    public void hypyConvert() throws Exception {
+        HanyuPinyinOutputFormat hypy = new HanyuPinyinOutputFormat();
+        // 输出的拼音的大小写
+        hypy.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+        //  通过数字标注声调
+        hypy.setToneType(HanyuPinyinToneType.WITH_TONE_NUMBER);
+        // 处理u ü
+        hypy.setVCharType(HanyuPinyinVCharType.WITH_V);
+        String result = PinyinHelper.toHanyuPinyinStringArray("张新华".charAt(2), hypy)[0];
+        log.info(result);
     }
 
 }
