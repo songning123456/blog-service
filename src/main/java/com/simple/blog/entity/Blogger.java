@@ -50,10 +50,10 @@ public class Blogger {
     @Column(name = "introduction", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '介绍'")
     private String introduction;
 
-    @Column(name = "createTime", columnDefinition = "DATETIME NOT NULL COMMENT '创建时间'")
-    private Date createTime;
-
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
     private Date updateTime;
+
+    @Column(name = "headPortrait", columnDefinition = "VARCHAR(64) COMMENT '头像'")
+    private String headPortrait;
 
 }

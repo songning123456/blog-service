@@ -3,7 +3,6 @@ package com.simple.blog.controller;
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.EsBlogDTO;
-import com.simple.blog.entity.EsBlog;
 import com.simple.blog.service.EsBlogService;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.EsBlogVO;
