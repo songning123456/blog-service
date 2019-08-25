@@ -1,6 +1,5 @@
 package com.simple.blog.util;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +10,6 @@ import java.util.Date;
  * @create 2019/7/24 13:31
  */
 public class DateUtil {
-    public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * java.util.Date => String
