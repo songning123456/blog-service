@@ -32,7 +32,7 @@ public class BloggerController {
         return new CommonDTO<>();
     }
 
-    @PostMapping("/get")
+    @PostMapping("/getBlogger")
     @ControllerAspectAnnotation(description = "获取登陆信息")
     public CommonDTO<BloggerDTO> getBloggerInfo(@RequestBody CommonVO<BloggerVO> commonVO) {
         CommonDTO<BloggerDTO> commonDTO = bloggerService.getBlogger(commonVO);

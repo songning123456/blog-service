@@ -28,7 +28,7 @@ public class BloggerDTO {
 
     private String introduction;
 
-    private Date createTime;
-
     private Date updateTime;
+
+    private String headPortrait;
 }
