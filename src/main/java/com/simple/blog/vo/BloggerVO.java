@@ -16,7 +16,7 @@ public class BloggerVO {
 
     private String password;
 
-    private Integer gender;
+    private String gender;
 
     private Integer age;
 
@@ -28,7 +28,5 @@ public class BloggerVO {
 
     private String introduction;
 
-    private Date createTime;
-
-    private Date updateTime;
+    private String headPortrait;
 }

@@ -50,11 +50,12 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     public CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
         String infoOwner = commonVO.getCondition().getInfoOwner();
-        Map<String, Object> dataExt = new HashMap<>(10);
         List<String> types = personalInformationRepository.findInfoTypeByInfoOwnerNative(infoOwner);
+        List<PersonalInformationDTO> result = new ArrayList<>();
         types.forEach(type -> {
+            PersonalInformationDTO personalInformationDTO = new PersonalInformationDTO();
             List<Map<String, Object>> personalInformations = personalInformationRepository.findByInfoOwnerAndInfoTypeNative(infoOwner, type);
-            List<Map<String, Object>> result = new ArrayList<>();
+            List<Map<String, Object>> single = new ArrayList<>();
             personalInformations.forEach(item -> {
                 Map<String, Object> map = new HashMap<>(10);
                 Timestamp startTime = (Timestamp) item.get("startTime");
@@ -63,11 +64,14 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
                 map.put("endTime", DateUtil.dateToStr(endTime, CommonConstant.YEAR_DATETIME_PATTERN));
                 map.put("mechanism", item.get("mechanism"));
                 map.put("position", item.get("position"));
-                result.add(map);
+                map.put("introduction", item.get("introduction"));
+                single.add(map);
             });
-            dataExt.put(type, result);
+            personalInformationDTO.setType(type);
+            personalInformationDTO.setInfo(single);
+            result.add(personalInformationDTO);
         });
-        commonDTO.setDataExt(dataExt);
+        commonDTO.setData(result);
         commonDTO.setTotal((long) types.size());
         return commonDTO;
     }

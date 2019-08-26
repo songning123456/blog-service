@@ -1,9 +1,6 @@
 package com.simple.blog.entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +11,8 @@ import java.util.Date;
  * 博主信息表
  */
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "Blogger")
@@ -32,8 +30,8 @@ public class Blogger {
     @Column(name = "password", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '密码'")
     private String password;
 
-    @Column(name = "gender", columnDefinition = "INT NOT NULL COMMENT '性别'")
-    private Integer gender;
+    @Column(name = "gender", columnDefinition = "VARCHAR(4) NOT NULL COMMENT '性别'")
+    private String gender;
 
     @Column(name = "age", columnDefinition = "INT NOT NULL COMMENT '年龄'")
     private Integer age;
@@ -53,7 +51,6 @@ public class Blogger {
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
     private Date updateTime;
 
-    @Column(name = "headPortrait", columnDefinition = "VARCHAR(64) COMMENT '头像'")
+    @Column(name = "headPortrait", columnDefinition = "VARCHAR(255) COMMENT '头像'")
     private String headPortrait;
-
 }

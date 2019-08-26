@@ -16,7 +16,7 @@ public class BloggerDTO {
 
     private String password;
 
-    private Integer gender;
+    private String gender;
 
     private Integer age;
 

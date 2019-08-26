@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by songning on 2019/8/25 2:46 PM
@@ -18,19 +19,7 @@ import java.util.Date;
 @Data
 @Builder
 public class PersonalInformationDTO {
-    private String id;
+    private String type;
 
-    private String infoOwner;
-
-    private String infoType;
-
-    private String mechanism;
-
-    private String position;
-
-    private String introduction;
-
-    private String startTime;
-
-    private String endTime;
+    private List info;
 }
