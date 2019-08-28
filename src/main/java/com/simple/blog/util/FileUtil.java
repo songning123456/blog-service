@@ -122,6 +122,13 @@ public class FileUtil {
         return null;
     }
 
+    /**
+     * 读取txt文本内容
+     *
+     * @param file
+     * @return
+     * @throws Exception
+     */
     public static List readTxt(File file) throws Exception {
         List<String> result = new ArrayList<>();
         if (file.isFile() && file.exists()) {
@@ -130,6 +137,33 @@ public class FileUtil {
             String lineTxt = null;
             while ((lineTxt = bufferedReader.readLine()) != null) {
                 result.add(lineTxt);
+            }
+            bufferedReader.close();
+        } else {
+            log.info("文件不存在!");
+        }
+        return result;
+    }
+
+    /**
+     * 根据条件读取
+     *
+     * @param file
+     * @param condition
+     * @return
+     * @throws Exception
+     */
+    public static List<String> readTxtByCondition(File file, String condition) throws Exception {
+        List<String> result = new ArrayList<>();
+        if (file.isFile() && file.exists()) {
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), "utf-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String lineTxt = null;
+            while ((lineTxt = bufferedReader.readLine()) != null) {
+                if (lineTxt.contains(condition)) {
+                    String[] temps = lineTxt.split("\"");
+                    result.add(temps[3]);
+                }
             }
             bufferedReader.close();
         } else {

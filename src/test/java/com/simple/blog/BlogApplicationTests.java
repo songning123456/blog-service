@@ -166,4 +166,30 @@ public class BlogApplicationTests {
         log.info(result);
     }
 
+    /**
+     * 测试相同查询条件文档是否完全一致(根据motorVehicleID查询)
+     */
+    @Test
+    public void testFileEqual() throws Exception {
+        File srcFile = new File("D:\\haiyan-data\\scollID\\src.txt");
+        File targetFile = new File("D:\\haiyan-data\\scollID\\target.txt");
+        List<String> srcResult = FileUtil.readTxtByCondition(srcFile, "MotorVehicleID");
+        List<String> targetResult = FileUtil.readTxtByCondition(targetFile, "MotorVehicleID");
+        List<String> record = new ArrayList<>();
+        boolean compare = true;
+        for (int i = 0; i < 60; i++) {
+            if (!srcResult.get(i).equals(targetResult.get(i))) {
+                compare = false;
+                break;
+            }
+        }
+        log.info("查询结果是否排序一致: {}", compare);
+        srcResult.forEach(src -> {
+            if (!targetResult.contains(src)) {
+                record.add(src);
+            }
+        });
+        log.info("两次查询比较结果: {}", record);
+    }
+
 }
