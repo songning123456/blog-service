@@ -3,6 +3,7 @@ package com.simple.blog.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -94,5 +95,18 @@ public class DateUtil {
      */
     public static Date timeToDate(java.sql.Timestamp timestamp) {
         return timestamp;
+    }
+
+    /**
+     * 获取当前时间的前几个小时
+     *
+     * @param hour
+     * @return
+     */
+    public static Date getBeforeByCurrentTime(int hour) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - hour);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return calendar.getTime();
     }
 }
