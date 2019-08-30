@@ -59,7 +59,7 @@ public class ScheduleTask {
             Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
             final String[] summary = new String[1];
             doc.getElementsByClass("post-content").get(0).getElementsByClass("content").get(0).getElementsByTag("p").forEach(item -> {
-                if (!StringUtils.isEmpty(item.html())) {
+                if (!StringUtils.isEmpty(item.html()) && StringUtils.isEmpty(summary[0])) {
                     summary[0] = item.html();
                 }
             });
@@ -81,7 +81,7 @@ public class ScheduleTask {
             String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
             final String[] summary = new String[1];
             doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").forEach(item -> {
-                if (!StringUtils.isEmpty(item.html())) {
+                if (!StringUtils.isEmpty(item.html()) && StringUtils.isEmpty(summary[0])) {
                     summary[0] = item.html();
                 }
             });
