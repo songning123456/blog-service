@@ -9,7 +9,7 @@ import lombok.Data;
 public class PersonalInformationVO {
     private String id;
 
-    private String infoOwner;
+    private String author;
 
     private String infoType;
 

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author sn
@@ -14,9 +15,9 @@ import java.util.List;
 public interface BloggerRepository extends JpaRepository<Blogger, String> {
 
     /**
-     * @param userName
+     * @param author
      * @return
      */
-    @Query(value = "select * from blogger where user_name = ?1", nativeQuery = true)
-    List<Blogger> findByUserNameNative(String userName);
+    @Query(value = "select author, real_name as realName, age, email, gender, head_portrait as headPortrait, introduction,profession,telephone from blogger where author = ?1", nativeQuery = true)
+    List<Map<String, Object>> findByAuthorNative(String author);
 }

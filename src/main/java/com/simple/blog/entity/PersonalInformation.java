@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by songning on 2019/8/25 2:03 PM
+ * @author songning on 2019/8/25 2:03 PM
  */
 @Builder
 @NoArgsConstructor
@@ -24,10 +24,10 @@ public class PersonalInformation {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "infoOwner", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '信息所属人'")
-    private String infoOwner;
+    @Column(name = "author", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '作者'")
+    private String author;
 
-    @Column(name="infoType", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '信息类型'")
+    @Column(name = "infoType", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '信息类型'")
     private String infoType;
 
     @Column(name = "mechanism", columnDefinition = "VARCHAR(100) NOT NULL COMMENT '机构类型'")

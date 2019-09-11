@@ -31,7 +31,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     public <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO) {
         List<PersonalInformationVO> list = commonVO.getCondition();
         list.forEach(item -> {
-            String infoOwner = item.getInfoOwner();
+            String author = item.getAuthor();
             String infoType = item.getInfoType();
             String mechanism = item.getMechanism();
             String position = item.getPosition();
@@ -40,7 +40,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
             String endTime = item.getEndTime();
             Timestamp startTimeStamp = DateUtil.strToSqlDate(startTime, CommonConstant.YEAR_DATETIME_PATTERN);
             Timestamp endTimeStamp = DateUtil.strToSqlDate(endTime, CommonConstant.YEAR_DATETIME_PATTERN);
-            PersonalInformation personalInformation = PersonalInformation.builder().infoOwner(infoOwner).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
+            PersonalInformation personalInformation = PersonalInformation.builder().author(author).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
             personalInformationRepository.save(personalInformation);
         });
         return new CommonDTO<>();
@@ -49,12 +49,12 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     @Override
     public CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
-        String infoOwner = commonVO.getCondition().getInfoOwner();
-        List<String> types = personalInformationRepository.findInfoTypeByInfoOwnerNative(infoOwner);
+        String author = commonVO.getCondition().getAuthor();
+        List<String> types = personalInformationRepository.findInfoTypeByInfoOwnerNative(author);
         List<PersonalInformationDTO> result = new ArrayList<>();
         types.forEach(type -> {
             PersonalInformationDTO personalInformationDTO = new PersonalInformationDTO();
-            List<Map<String, Object>> personalInformations = personalInformationRepository.findByInfoOwnerAndInfoTypeNative(infoOwner, type);
+            List<Map<String, Object>> personalInformations = personalInformationRepository.findByAuthorAndInfoTypeNative(author, type);
             List<Map<String, Object>> single = new ArrayList<>();
             personalInformations.forEach(item -> {
                 Map<String, Object> map = new HashMap<>(10);

@@ -1,14 +1,10 @@
 package com.simple.blog.dto;
 
-import com.simple.blog.constant.CommonConstant;
-import com.simple.blog.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -2,7 +2,7 @@
 {
     "condition": [
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "教育经历",
             "mechanism": "南京工程学院",
             "position": "学生",
@@ -11,7 +11,7 @@
             "endTime": "2018-07-01"
         },
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "教育经历",
             "mechanism": "龙岗中学",
             "position": "学生",
@@ -20,7 +20,7 @@
             "endTime": "2011-09-01"
         },
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "教育经历",
             "mechanism": "大纵湖初级中学",
             "position": "学生",
@@ -29,7 +29,7 @@
             "endTime": "2008-09-01"
         },
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "工作经历",
             "mechanism": "keda",
             "position": "职工",
@@ -38,7 +38,7 @@
             "endTime": "2019-08-25"
         },
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "工作经历",
             "mechanism": "未知1",
             "position": "职工",
@@ -47,7 +47,7 @@
             "endTime": "2019-08-25"
         },
         {
-            "infoOwner": "songning",
+            "author": "songning",
             "infoType": "工作经历",
             "mechanism": "未知2",
             "position": "职工",
@@ -61,8 +61,8 @@
 // 插入登陆信息(测试文档)
 {
     "condition": {
-        "userName": "夷山 龙龙 张乐",
-        "password": "123456",
+        "author": "songning",
+        "realName": "宁宁",
         "gender": "男",
         "age": 35,
         "profession": "程序员",

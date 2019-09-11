@@ -16,18 +16,18 @@ public interface PersonalInformationRepository extends JpaRepository<PersonalInf
 
     /**
      * @param
-     * @param infoOwner
+     * @param author
      * @return
      */
-    List<PersonalInformation> findByInfoOwnerAndInfoType(String infoOwner, String infoType);
+    List<PersonalInformation> findByAuthorAndInfoType(String author, String infoType);
 
     /**
-     * @param infoOwner
+     * @param author
      * @return
      */
-    @Query(value = "select distinct(info_type) from personal_information where info_owner = ?1", nativeQuery = true)
-    List<String> findInfoTypeByInfoOwnerNative(String infoOwner);
+    @Query(value = "select distinct(info_type) from personal_information where author = ?1", nativeQuery = true)
+    List<String> findInfoTypeByInfoOwnerNative(String author);
 
-    @Query(value = "select mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where info_owner = ?1 and info_type=?2", nativeQuery = true)
-    List<Map<String, Object>> findByInfoOwnerAndInfoTypeNative(String infoOwner, String infoType);
+    @Query(value = "select author, mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where author = ?1 and info_type=?2", nativeQuery = true)
+    List<Map<String, Object>> findByAuthorAndInfoTypeNative(String author, String infoType);
 }

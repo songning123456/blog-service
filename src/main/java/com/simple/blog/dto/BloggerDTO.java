@@ -12,9 +12,9 @@ import java.util.Date;
 public class BloggerDTO {
     private String id;
 
-    private String userName;
+    private String author;
 
-    private String password;
+    private String realName;
 
     private String gender;
 
