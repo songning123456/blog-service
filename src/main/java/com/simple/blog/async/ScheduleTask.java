@@ -36,7 +36,7 @@ public class ScheduleTask {
      *
      * @throws Exception
      */
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "0 */1 * * * *")
     public void theftArticle() throws Exception {
         this.theftMeituan();
         this.theftBoke();
