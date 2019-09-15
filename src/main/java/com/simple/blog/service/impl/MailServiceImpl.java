@@ -34,11 +34,11 @@ public class MailServiceImpl implements MailService {
     private void sendMimeMail(CommonVO<MailVO> commonVO) throws MessagingException {
         MailVO mailVO = commonVO.getCondition();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(javaMailSender.createMimeMessage());
-        mailVO.setFrom(getMailSendFrom());
-        mimeMessageHelper.setFrom(mailVO.getFrom());
-        mimeMessageHelper.setTo(mailVO.getTo().split(","));
+        mailVO.setSender(getMailSendFrom());
+        mimeMessageHelper.setFrom(mailVO.getSender());
+        mimeMessageHelper.setTo(mailVO.getRecipient().split(","));
         mimeMessageHelper.setSubject(mailVO.getSubject());
-        mimeMessageHelper.setText(mailVO.getText());
+        mimeMessageHelper.setText(mailVO.getContent());
         // 抄送
         if (!StringUtils.isEmpty(mailVO.getCc())) {
             mimeMessageHelper.setCc(mailVO.getCc().split(","));
@@ -64,13 +64,13 @@ public class MailServiceImpl implements MailService {
     }
 
     private void checkMail(MailVO mailVO) throws Exception {
-        if (StringUtils.isEmpty(mailVO.getTo())) {
+        if (StringUtils.isEmpty(mailVO.getRecipient())) {
             throw new Exception("邮件收信人不能为空");
         }
         if (StringUtils.isEmpty(mailVO.getSubject())) {
             throw new Exception("邮件主题不能为空");
         }
-        if (StringUtils.isEmpty(mailVO.getText())) {
+        if (StringUtils.isEmpty(mailVO.getContent())) {
             throw new Exception("邮件内容不能为空");
         }
     }

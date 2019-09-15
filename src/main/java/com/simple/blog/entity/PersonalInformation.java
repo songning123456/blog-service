@@ -33,6 +33,9 @@ public class PersonalInformation {
     @Column(name = "mechanism", columnDefinition = "VARCHAR(100) NOT NULL COMMENT '机构类型'")
     private String mechanism;
 
+    @Column(name = "photo", columnDefinition = "TEXT COMMENT '照片'")
+    private String photo;
+
     @Column(name = "position", columnDefinition = "VARCHAR(100) NOT NULL COMMENT '在职职位'")
     private String position;
 

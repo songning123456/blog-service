@@ -13,12 +13,12 @@ public class MailDTO {
     /**
      * 邮件发送人
      */
-    private String from;
+    private String sender;
 
     /**
      * 邮件接收人（多个邮箱则用逗号","隔开）
      */
-    private String to;
+    private String recipient;
 
     /**
      * 邮件主题
@@ -28,7 +28,7 @@ public class MailDTO {
     /**
      * 邮件内容
      */
-    private String text;
+    private String content;
 
     /**
      * 发送时间
