@@ -32,11 +32,11 @@ public class JwtUtil {
                 //将认证后的authentication写入token，验证时，直接验证它
                 .claim("authentication",authentication)
                 //设置主题
-                .setSubject("主题")
+                .setSubject("simpleBlogSecurity")
                 //过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 24 * 1000))
                 //加密方式及秘钥
-                .signWith(SignatureAlgorithm.HS512, "blogJwt")
+                .signWith(SignatureAlgorithm.HS512, "blogJWT")
                 .compact();
 
         return token;
@@ -47,7 +47,7 @@ public class JwtUtil {
         System.out.println(authentication1);
         // 解析token.
         Claims claims = Jwts.parser()
-                .setSigningKey("MyJWTtest")
+                .setSigningKey("blogJWT")
                 .parseClaimsJws(token)
                 .getBody();
         // 获取过期时间
