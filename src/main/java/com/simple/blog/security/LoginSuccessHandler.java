@@ -39,6 +39,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         httpServletResponse.setContentType("application/json;charset=UTF-8");
         Map<String, Object> tokenInfo = new HashMap<>(2);
         tokenInfo.put("Authorization", token);
+        // 同 CommonDTO 中的status
+        tokenInfo.put("status", 200);
         //将token信息写入
         httpServletResponse.getWriter().write(objectMapper.writeValueAsString(tokenInfo));
     }

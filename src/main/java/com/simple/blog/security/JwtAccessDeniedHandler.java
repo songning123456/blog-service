@@ -25,7 +25,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
         Map<String, Object> message = new HashMap<>(2);
-        message.put("msg", "当前角色无权访问");
+        message.put("message", "当前角色无权访问");
         //将token信息写入
         response.getWriter().write(objectMapper.writeValueAsString(message));
     }

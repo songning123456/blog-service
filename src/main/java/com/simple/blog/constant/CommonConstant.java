@@ -18,7 +18,7 @@ public class CommonConstant {
      * elasticsearch 索引名
      */
     public static final String INDEX_NAME = "simple_blog";
-    public static final String TYEP_NAME = "es_blog";
+    public static final String TYPE_NAME = "es_blog";
 
     /**
      * 时间转换格式
@@ -26,6 +26,9 @@ public class CommonConstant {
     public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public static final String YEAR_DATETIME_PATTERN = "yyyy-MM-dd";
 
+    /**
+     * jwt 角色种类
+     */
     public static final String LOGIN_ADMIN = "ADMIN";
     public static final String LOGIN_USER = "USER";
 }

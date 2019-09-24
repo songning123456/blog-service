@@ -1,6 +1,5 @@
 package com.simple.blog.security;
 
-import com.alibaba.fastjson.JSONObject;
 import com.simple.blog.util.MapConvertEntityUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -46,7 +45,6 @@ public class JwtUtil {
 
     public static void tokenParser(String token) {
         Authentication authentication1 = hashMap.get("authentication");
-        System.out.println(authentication1);
         // 解析token.
         Claims claims = Jwts.parser()
                 .setSigningKey("blogJWT")

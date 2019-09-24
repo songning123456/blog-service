@@ -2,7 +2,6 @@ package com.simple.blog.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.ClassUtil;
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.EsBlogDTO;
@@ -15,19 +14,13 @@ import com.simple.blog.vo.EsBlogVO;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Search;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.Highlighter;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,7 +62,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         searchSourceBuilder.sort("updateTime", SortOrder.DESC);
         searchSourceBuilder.from(recordStartNo);
         searchSourceBuilder.size(pageRecordNum);
-        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYPE_NAME).build();
         JestResult jestResult = null;
         try {
             jestResult = jestClient.execute(search);
@@ -119,7 +112,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         searchSourceBuilder.sort("readTimes", SortOrder.DESC);
         searchSourceBuilder.size(pageRecordNum);
         searchSourceBuilder.from(recordStartNo);
-        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYPE_NAME).build();
         JestResult jestResult = null;
         try {
             jestResult = jestClient.execute(search);
@@ -154,7 +147,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         highlightBuilder.field("content");
         highlightBuilder.preTags("<span style='color: #ffa500;font-weight: bold;font-size: 16px !important;'>").postTags("</span>");
         searchSourceBuilder.highlighter(highlightBuilder);
-        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYEP_NAME).build();
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(CommonConstant.INDEX_NAME).addType(CommonConstant.TYPE_NAME).build();
         JestResult jestResult = null;
         try {
             jestResult = jestClient.execute(search);
