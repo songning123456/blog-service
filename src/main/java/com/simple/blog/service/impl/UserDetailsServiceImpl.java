@@ -1,7 +1,8 @@
 package com.simple.blog.service.impl;
 
-import com.simple.blog.entity.Admin;
-import com.simple.blog.entity.Users;
+import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author songning
@@ -21,24 +23,26 @@ import java.util.List;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    @Autowired
+    private UsersRepository usersRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        if ("users".equals(username)) {
-            Users users = new Users();
-            users.setUsername("users");
-            users.setPassword("123456");
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_USERS");
-            grantedAuthorities.add(grantedAuthority);
-            return new User(users.getUsername(), new BCryptPasswordEncoder().encode(users.getPassword()), grantedAuthorities);
-        }
-        if ("admin".equals(username)) {
-            Admin admin = new Admin();
-            admin.setUsername("admin");
-            admin.setPassword("123456");
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
-            grantedAuthorities.add(grantedAuthority);
-            return new User(admin.getUsername(), new BCryptPasswordEncoder().encode(admin.getPassword()), grantedAuthorities);
+        String user = usersRepository.findUsernameByNameNative(username);
+        if (username.equals(user)) {
+            Map<String, Object> map = usersRepository.findPasswordAndRoleByNameNative(username);
+            String password = (String) map.get("password");
+            String role = (String) map.get("role");
+            if (CommonConstant.LOGIN_USER.equals(role)) {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
+                grantedAuthorities.add(grantedAuthority);
+                return new User(username, new BCryptPasswordEncoder().encode(password), grantedAuthorities);
+            } else if (CommonConstant.LOGIN_ADMIN.equals(role)) {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
+                grantedAuthorities.add(grantedAuthority);
+                return new User(username, new BCryptPasswordEncoder().encode(password), grantedAuthorities);
+            }
         }
         return null;
     }

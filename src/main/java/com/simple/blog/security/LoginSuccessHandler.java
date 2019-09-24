@@ -28,11 +28,12 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
-        logger.info("登录成功！");
+        log.info("登录成功！");
 
         //登录成功后设置JWT
         String token = JwtUtil.generateToken(authentication);
         httpServletResponse.addHeader("Authorization", token);
+        httpServletResponse.setStatus(200);
         //要做的工作就是将Authentication以json的形式返回给前端。 需要工具类ObjectMapper，Spring已自动注入。
         //设置返回类型
         httpServletResponse.setContentType("application/json;charset=UTF-8");

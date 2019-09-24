@@ -6,14 +6,20 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 
 /**
- * @author songning on 2019/9/21 5:12 PM
+ * @Author:
+ * @Date:
+ * @Version 1.0
+ * @Describe: {@link org.springframework.security.core.Authentication}及其实现类的大部分属性没有提供setter方法，
+ *  所以在通过json转换回Authentication时，没有setter方法的属性就赋值为空，此类是json转换回Authentication的中间类。
  */
-public class JwtAuthentication implements Authentication {
+public  class JwtAuthentication implements Authentication {
+
     private Collection<SimpleGrantedAuthority> authorities;
     private Object details;
     private boolean authenticated;
     private Object principal;
     private Object credentials;
+
 
 
     @Override

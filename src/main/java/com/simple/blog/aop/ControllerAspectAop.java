@@ -8,6 +8,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -56,7 +57,9 @@ public class ControllerAspectAop {
         try {
             Object object = proceedingJoinPoint.proceed();
             commonDTO = (CommonDTO<T>) object;
-            commonDTO.setStatus(HttpStatus.HTTP_OK);
+            if (StringUtils.isEmpty(commonDTO.getStatus())) {
+                commonDTO.setStatus(HttpStatus.HTTP_OK);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             commonDTO.setStatus(HttpStatus.HTTP_INTERNAL_ERROR);

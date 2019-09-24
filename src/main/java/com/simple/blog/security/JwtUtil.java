@@ -1,6 +1,7 @@
 package com.simple.blog.security;
 
 import com.alibaba.fastjson.JSONObject;
+import com.simple.blog.util.MapConvertEntityUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,23 +15,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author  on 2019/9/21 5:07 PM
+ * @author on 2019/9/21 5:07 PM
  */
 @Slf4j
 public class JwtUtil {
-    private static Map<String,Authentication> hashMap = new HashMap<>();
+    private static Map<String, Authentication> hashMap = new HashMap<>();
 
     /**
      * 生成JWT token
+     *
      * @param authentication
      * @return
      */
-    public static String generateToken(Authentication authentication){
-        hashMap.put("authentication",authentication);
+    public static String generateToken(Authentication authentication) {
+        hashMap.put("authentication", authentication);
         String token = Jwts.builder()
                 //设置token的信息
                 //将认证后的authentication写入token，验证时，直接验证它
-                .claim("authentication",authentication)
+                .claim("authentication", authentication)
                 //设置主题
                 .setSubject("simpleBlogSecurity")
                 //过期时间
@@ -42,7 +44,7 @@ public class JwtUtil {
         return token;
     }
 
-    public static void tokenParser(String token){
+    public static void tokenParser(String token) {
         Authentication authentication1 = hashMap.get("authentication");
         System.out.println(authentication1);
         // 解析token.
@@ -52,7 +54,7 @@ public class JwtUtil {
                 .getBody();
         // 获取过期时间
         Date claimsExpiration = claims.getExpiration();
-        log.info("过期时间"+claimsExpiration);
+        log.info("过期时间" + claimsExpiration);
         //判断是否过期
         Date now = new Date();
         if (now.getTime() > claimsExpiration.getTime()) {
@@ -63,7 +65,12 @@ public class JwtUtil {
         // 放入到SecurityContextHolder，表示认证通过
         Object tokenInfo = claims.get("authentication");
         //通过com.alibaba.fastjson将其在转换
-        JwtAuthentication tokenAuthentication = JSONObject.parseObject(JSONObject.toJSONString(tokenInfo), JwtAuthentication.class);
+        JwtAuthentication tokenAuthentication = null;
+        try {
+            tokenAuthentication = (JwtAuthentication) MapConvertEntityUtil.mapToEntity(JwtAuthentication.class, (Map) tokenInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SecurityContextHolder.getContext().setAuthentication(tokenAuthentication);
     }
 }
