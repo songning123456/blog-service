@@ -33,8 +33,8 @@ public class LoginController {
     public <T> CommonDTO<T> loginInfo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         CommonDTO<T> commonDTO = new CommonDTO<>();
         commonDTO.setMessage("请先登录");
-        commonDTO.setStatus(HttpStatus.HTTP_NOT_AUTHORITATIVE);
-        httpServletResponse.setStatus(203);
+        commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+        httpServletResponse.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
         return commonDTO;
     }
 

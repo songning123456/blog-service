@@ -1,6 +1,8 @@
 package com.simple.blog.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.constant.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -26,6 +28,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json;charset=UTF-8");
         Map<String, Object> message = new HashMap<>(2);
         message.put("message", "当前角色无权访问");
+        response.setStatus(HttpStatus.HTTP_FORBIDDEN);
         //将token信息写入
         response.getWriter().write(objectMapper.writeValueAsString(message));
     }
