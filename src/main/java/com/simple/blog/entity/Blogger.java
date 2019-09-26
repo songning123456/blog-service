@@ -53,4 +53,7 @@ public class Blogger {
 
     @Column(name = "headPortrait", columnDefinition = "VARCHAR(255) COMMENT '头像'")
     private String headPortrait;
+
+    @Column(name = "username", columnDefinition = "VARCHAR(60) NOT NULL UNIQUE COMMENT '用户名'")
+    private String username;
 }

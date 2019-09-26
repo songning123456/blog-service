@@ -1,7 +1,5 @@
 package com.simple.blog.service.impl;
 
-import com.fasterxml.jackson.databind.util.ClassUtil;
-import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blogger;
@@ -40,8 +38,8 @@ public class BloggerServiceImpl implements BloggerService {
     @Override
     public CommonDTO<BloggerDTO> getBlogger(CommonVO<BloggerVO> commonVO) {
         CommonDTO<BloggerDTO> commonDTO = new CommonDTO<>();
-        String author = commonVO.getCondition().getAuthor();
-        List<Map<String, Object>> list = bloggerRepository.findByAuthorNative(author);
+        String username = commonVO.getCondition().getUsername();
+        List<Map<String, Object>> list = bloggerRepository.findByUsernameNative(username);
         BloggerDTO bloggerDTO = new BloggerDTO();
         try {
             bloggerDTO = (BloggerDTO) MapConvertEntityUtil.mapToEntity(BloggerDTO.class, list.get(0));

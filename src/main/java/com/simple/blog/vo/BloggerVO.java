@@ -29,4 +29,6 @@ public class BloggerVO {
     private String introduction;
 
     private String headPortrait;
+
+    private String username;
 }

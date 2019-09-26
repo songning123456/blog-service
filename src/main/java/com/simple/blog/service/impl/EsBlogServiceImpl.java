@@ -9,6 +9,7 @@ import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.service.EsBlogService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.DateUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.EsBlogVO;
 import io.searchbox.client.JestClient;
@@ -137,7 +138,7 @@ public class EsBlogServiceImpl implements EsBlogService {
     @Override
     public CommonDTO<EsBlogDTO> getHighlightArticle(CommonVO<EsBlogVO> commonVO) {
         CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
-        String[] includes = {"id", "title"};
+        String[] includes = {"id", "title", "updateTime", "author"};
         String content = commonVO.getCondition().getContent();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.fetchSource(includes, new String[]{});
@@ -160,6 +161,8 @@ public class EsBlogServiceImpl implements EsBlogService {
             item.setId(hitObject.getString("_id"));
             item.setTitle(hitObject.getJSONObject("_source").getString("title"));
             item.setSearchResult(hitObject.getJSONObject("highlight").getJSONArray("content").toJavaList(String.class));
+            item.setAuthor(hitObject.getJSONObject("_source").getString("author"));
+            item.setUpdateTime(DateUtil.strToSqlDate(hitObject.getJSONObject("_source").getString("updateTime"), "yyyy-MM-dd HH:mm:ss"));
             return item;
         }).collect(Collectors.toList());
         commonDTO.setData(esBlogDTOList);
