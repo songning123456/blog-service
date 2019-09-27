@@ -42,9 +42,10 @@ public interface BlogService {
     CommonDTO<BlogDTO> getHotArticle(CommonVO<BlogVO> commonVO);
 
     /**
-     * 删除所有文章
+     * 高亮搜索文章内容
      *
+     * @param commonVO
      * @return
      */
-    CommonDTO<BlogDTO> deleteAllArticle();
+    CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO);
 }

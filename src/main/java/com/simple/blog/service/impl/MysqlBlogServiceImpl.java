@@ -22,7 +22,8 @@ import java.util.*;
  * @author sn
  */
 @Service
-public class BlogServiceImpl implements BlogService {
+public class MysqlBlogServiceImpl implements BlogService {
+
     @Autowired
     private BlogRepository blogRepository;
 
@@ -98,8 +99,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public CommonDTO<BlogDTO> deleteAllArticle() {
-        blogRepository.deleteAll();
+    public CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO) {
         return new CommonDTO<>();
     }
 }

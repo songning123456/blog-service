@@ -31,4 +31,10 @@ public class CommonConstant {
      */
     public static final String LOGIN_ADMIN = "ADMIN";
     public static final String LOGIN_USER = "USER";
+
+    /**
+     * 数据源
+     */
+    public static final String DATABASE_ES = "ES";
+    public static final String DATABASE_MYSQL = "MYSQL";
 }

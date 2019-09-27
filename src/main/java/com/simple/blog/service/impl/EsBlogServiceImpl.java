@@ -3,15 +3,15 @@ package com.simple.blog.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.dto.EsBlogDTO;
 import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.EsBlogRepository;
-import com.simple.blog.service.EsBlogService;
+import com.simple.blog.service.BlogService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DateUtil;
+import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
-import com.simple.blog.vo.EsBlogVO;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Search;
@@ -31,14 +31,14 @@ import java.util.stream.Collectors;
  * @create 2019/8/15 8:16
  */
 @Service
-public class EsBlogServiceImpl implements EsBlogService {
+public class EsBlogServiceImpl implements BlogService {
     @Autowired
     private EsBlogRepository esBlogRepository;
     @Autowired
     private JestClient jestClient;
 
     @Override
-    public CommonDTO<EsBlogDTO> saveArticle(CommonVO<EsBlogVO> commonVO) {
+    public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
         String title = commonVO.getCondition().getTitle();
         String content = commonVO.getCondition().getContent();
         String summary = commonVO.getCondition().getSummary();
@@ -51,8 +51,8 @@ public class EsBlogServiceImpl implements EsBlogService {
     }
 
     @Override
-    public CommonDTO<EsBlogDTO> getAbstract(CommonVO<EsBlogVO> commonVO) {
-        CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<BlogDTO> getAbstract(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         Integer recordStartNo = commonVO.getRecordStartNo();
         Integer pageRecordNum = commonVO.getPageRecordNum();
         String kinds = commonVO.getCondition().getKinds();
@@ -70,8 +70,8 @@ public class EsBlogServiceImpl implements EsBlogService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
-            EsBlogDTO item = new EsBlogDTO();
+        List<BlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            BlogDTO item = new BlogDTO();
             JSONObject hitObject = JSON.parseObject(hit.toString());
             item.setId(hitObject.getString("_id"));
             item.setTitle(hitObject.getJSONObject("_source").getString("title"));
@@ -86,14 +86,14 @@ public class EsBlogServiceImpl implements EsBlogService {
     }
 
     @Override
-    public CommonDTO<EsBlogDTO> getContent(CommonVO<EsBlogVO> commonVO) {
-        CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<BlogDTO> getContent(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         String id = commonVO.getCondition().getId();
         Optional<EsBlog> blog = esBlogRepository.findById(id);
         Integer readTimes = blog.get().getReadTimes();
         blog.get().setReadTimes(++readTimes);
         esBlogRepository.save(blog.get());
-        EsBlogDTO esBlogDTO = new EsBlogDTO();
+        BlogDTO esBlogDTO = new BlogDTO();
         ClassConvertUtil.populate(blog.get(), esBlogDTO);
         commonDTO.setData(Collections.singletonList(esBlogDTO));
         commonDTO.setTotal(1L);
@@ -101,8 +101,8 @@ public class EsBlogServiceImpl implements EsBlogService {
     }
 
     @Override
-    public CommonDTO<EsBlogDTO> getHotArticle(CommonVO<EsBlogVO> commonVO) {
-        CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<BlogDTO> getHotArticle(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         String kinds = commonVO.getCondition().getKinds();
         Integer recordStartNo = commonVO.getRecordStartNo();
         Integer pageRecordNum = commonVO.getPageRecordNum();
@@ -120,8 +120,8 @@ public class EsBlogServiceImpl implements EsBlogService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
-            EsBlogDTO item = new EsBlogDTO();
+        List<BlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            BlogDTO item = new BlogDTO();
             JSONObject hitObject = JSON.parseObject(hit.toString());
             item.setId(hitObject.getString("_id"));
             item.setTitle(hitObject.getJSONObject("_source").getString("title"));
@@ -136,8 +136,8 @@ public class EsBlogServiceImpl implements EsBlogService {
     }
 
     @Override
-    public CommonDTO<EsBlogDTO> getHighlightArticle(CommonVO<EsBlogVO> commonVO) {
-        CommonDTO<EsBlogDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         String[] includes = {"id", "title", "updateTime", "author"};
         String content = commonVO.getCondition().getContent();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -155,8 +155,8 @@ public class EsBlogServiceImpl implements EsBlogService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<EsBlogDTO> esBlogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
-            EsBlogDTO item = new EsBlogDTO();
+        List<BlogDTO> blogDTOList = JSON.parseObject(JSON.toJSONString(jestResult.getValue("hits"))).getJSONArray("hits").stream().map(hit -> {
+            BlogDTO item = new BlogDTO();
             JSONObject hitObject = JSON.parseObject(hit.toString());
             item.setId(hitObject.getString("_id"));
             item.setTitle(hitObject.getJSONObject("_source").getString("title"));
@@ -165,8 +165,8 @@ public class EsBlogServiceImpl implements EsBlogService {
             item.setUpdateTime(DateUtil.strToSqlDate(hitObject.getJSONObject("_source").getString("updateTime"), "yyyy-MM-dd HH:mm:ss"));
             return item;
         }).collect(Collectors.toList());
-        commonDTO.setData(esBlogDTOList);
-        commonDTO.setTotal((long) esBlogDTOList.size());
+        commonDTO.setData(blogDTOList);
+        commonDTO.setTotal((long) blogDTOList.size());
         return commonDTO;
     }
 }

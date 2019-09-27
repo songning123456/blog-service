@@ -3,7 +3,7 @@ package com.simple.blog.controller;
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.service.BlogService;
+import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
 import lombok.extern.slf4j.Slf4j;
@@ -22,40 +22,40 @@ import org.springframework.web.bind.annotation.RestController;
 public class BlogController {
 
     @Autowired
-    private BlogService blogService;
+    private DataBaseUtil dataBaseUtil;
 
     @PostMapping("/insertArticle")
     @ControllerAspectAnnotation(description = "新增文章")
     public CommonDTO<BlogDTO> insertArticle(@RequestBody CommonVO<BlogVO> commonVO) {
-        CommonDTO<BlogDTO> commonDTO = blogService.saveArticle(commonVO);
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().saveArticle(commonVO);
         return commonDTO;
     }
 
     @PostMapping("/queryAbstract")
     @ControllerAspectAnnotation(description = "查询摘要等信息")
     public CommonDTO<BlogDTO> queryAbstract(@RequestBody CommonVO<BlogVO> commonVO) {
-        CommonDTO<BlogDTO> commonDTO = blogService.getAbstract(commonVO);
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getAbstract(commonVO);
         return commonDTO;
     }
 
     @PostMapping("/queryContent")
     @ControllerAspectAnnotation(description = "查询文章内容")
     public CommonDTO<BlogDTO> queryContent(@RequestBody CommonVO<BlogVO> commonVO) {
-        CommonDTO<BlogDTO> commonDTO = blogService.getContent(commonVO);
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getContent(commonVO);
         return commonDTO;
     }
 
     @PostMapping("/queryHotArticle")
     @ControllerAspectAnnotation(description = "查询热门文章")
     public CommonDTO<BlogDTO> queryHotArticle(@RequestBody CommonVO<BlogVO> commonVO) {
-        CommonDTO<BlogDTO> commonDTO = blogService.getHotArticle(commonVO);
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getHotArticle(commonVO);
         return commonDTO;
     }
 
-    @PostMapping("/deleteArticleAll")
-    @ControllerAspectAnnotation(description = "删除所有文章")
-    public CommonDTO<BlogDTO> deleteArticleAll() {
-        CommonDTO<BlogDTO> commonDTO = blogService.deleteAllArticle();
+    @PostMapping("/searchArticle")
+    @ControllerAspectAnnotation(description = "高亮搜索文章")
+    public CommonDTO<BlogDTO> queryHighlightArticle(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getHighlightArticle(commonVO);
         return commonDTO;
     }
 }
