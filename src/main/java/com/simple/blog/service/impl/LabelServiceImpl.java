@@ -11,6 +11,7 @@ import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.JsonUtil;
 import com.simple.blog.util.StringUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LabelGroupVO;
@@ -38,14 +39,14 @@ public class LabelServiceImpl implements LabelService {
     public CommonDTO<LabelGroupDTO> getLabelCache() {
         CommonDTO<LabelGroupDTO> commonDTO = new CommonDTO<>();
         List<LabelGroupDTO> list = new ArrayList<>();
-        Map<String, Object> map = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
+        Map<String, String> map = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
         if (map.isEmpty()) {
             List<LabelGroup> labelGroups = labelGroupRepository.findAll();
-            labelGroups.forEach(item -> redisService.setValue(item.getLabelGroupName(), item, CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP));
+            labelGroups.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP + item.getLabelGroupName(), JsonUtil.convertObject2String(item)));
             ClassConvertUtil.populateList(labelGroups, list, LabelGroupDTO.class);
         } else {
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                LabelGroup labelGroup = (LabelGroup) entry.getValue();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                LabelGroup labelGroup = JsonUtil.convertString2Object(entry.getValue(), LabelGroup.class);
                 LabelGroupDTO labelGroupDTO = LabelGroupDTO.builder().id(labelGroup.getId()).labelGroupName(labelGroup.getLabelGroupName()).description(labelGroup.getDescription()).build();
                 list.add(labelGroupDTO);
             }
@@ -77,19 +78,19 @@ public class LabelServiceImpl implements LabelService {
     public Map<String, Object> getGroupCache() {
         Map<String, Object> result = new HashMap<>(10);
         List<Map<String, Object>> data = new ArrayList<>();
-        Map<String, Object> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
-        Map<String, Object> groupMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
+        Map<String, String> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
+        Map<String, String> groupMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
         if (relationMap.isEmpty()) {
             synchronized (this) {
                 List<LabelRelation> list = labelRelationRepository.findAll();
-                list.forEach(item -> redisService.setValue(item.getLabelGroupName() + "-" + item.getLabelName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION));
+                list.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + item.getLabelGroupName() + "-" + item.getLabelName(), JsonUtil.convertObject2String(item)));
                 relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
             }
         }
         if (groupMap.isEmpty()) {
             synchronized (this) {
                 List<LabelGroup> list = labelGroupRepository.findAll();
-                list.forEach(item -> redisService.setValue(item.getLabelGroupName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP));
+                list.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP + item.getLabelGroupName(), JsonUtil.convertObject2String(item)));
                 groupMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
             }
         }
@@ -98,7 +99,7 @@ public class LabelServiceImpl implements LabelService {
         groupNameSet.forEach(groupName -> {
             List options = new ArrayList();
             Map<String, Object> groups = new HashMap<>(10);
-            LabelGroup labelGroup = (LabelGroup) redisService.getValue(groupName);
+            LabelGroup labelGroup = JsonUtil.convertString2Object(redisService.getValue(groupName), LabelGroup.class);
             groups.put("label", labelGroup.getDescription());
             relationSet.forEach(relation -> {
                 String[] relations = StringUtil.splitString(relation, ":", 2).split("-");
@@ -120,11 +121,11 @@ public class LabelServiceImpl implements LabelService {
     public CommonDTO<LabelRelationDTO> getAllLabelName() {
         CommonDTO<LabelRelationDTO> commonDTO = new CommonDTO<>();
         List<LabelRelationDTO> list = new ArrayList<>();
-        Map<String, Object> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
+        Map<String, String> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
         if (relationMap.isEmpty()) {
             synchronized (object) {
                 List<LabelRelation> labelRelations = labelRelationRepository.findAll();
-                labelRelations.forEach(item -> redisService.setValue(item.getLabelGroupName() + "-" + item.getLabelName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION));
+                labelRelations.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + item.getLabelGroupName() + "-" + item.getLabelName(), JsonUtil.convertObject2String(item)));
                 relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
             }
         }

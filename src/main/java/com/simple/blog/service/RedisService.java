@@ -8,29 +8,12 @@ import java.util.Map;
  */
 public interface RedisService {
 
-    /**
-     * 删除指定文件夹下的所有缓存数据
-     *
-     * @param folder
-     */
-    void deleteValues(String... folder);
+    void deleteValues(String... name);
 
+    Map<String, String> getValues(String... name);
 
-    /**
-     * 根据指定文件夹获取所有缓存数据
-     *
-     * @param folder
-     * @return
-     */
-    Map<String, Object> getValues(String... folder);
+    String getValue(String key);
 
-    Object getValue(String... name);
-
-    /**
-     * 设置指定问价夹下的值
-     *
-     * @param folder
-     */
-    void setValue(String key, Object value, String... folder);
+    void setValue(String key, String value);
 
 }

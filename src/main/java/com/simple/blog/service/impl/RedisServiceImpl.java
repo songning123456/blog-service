@@ -4,6 +4,7 @@ import com.simple.blog.service.RedisService;
 import com.simple.blog.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,40 +19,36 @@ import java.util.Set;
 public class RedisServiceImpl implements RedisService {
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public void deleteValues(String... name) {
-        String folder = StringUtil.getString(name);
-        Set<String> keys = redisTemplate.keys(folder + "*");
-        redisTemplate.delete(keys);
+        Set<String> keys = stringRedisTemplate.keys(StringUtil.getString(name) + "*");
+        stringRedisTemplate.delete(keys);
     }
 
     @Override
-    public Map<String, Object> getValues(String... name) {
-        Map<String, Object> map = new HashMap<>(10);
-        String folder = StringUtil.getString(name);
-        Set<String> keys = redisTemplate.keys(folder + "*");
-        for (String key : keys) {
+    public Map<String, String> getValues(String... name) {
+        Map<String, String> map = new HashMap<>(16);
+        Set<String> sets = stringRedisTemplate.keys(StringUtil.getString(name) + "*");
+        for (String set : sets) {
+            String key = set;
             if (key.indexOf("~keys") > 0) {
                 continue;
             }
-            Object value = redisTemplate.opsForValue().get(key);
+            String value = this.getValue(key);
             map.put(key, value);
         }
         return map;
     }
 
     @Override
-    public Object getValue(String... name) {
-        String key = StringUtil.getString(name);
-        Object value = redisTemplate.opsForValue().get(key);
-        return value;
+    public String getValue(String key) {
+        return stringRedisTemplate.opsForValue().get(key);
     }
 
     @Override
-    public void setValue(String key, Object value, String... name) {
-        String folder = StringUtil.getString(name);
-        redisTemplate.opsForValue().set(folder + key, value);
+    public void setValue(String key, String value) {
+        stringRedisTemplate.opsForValue().set(key, value);
     }
 }

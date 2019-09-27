@@ -8,6 +8,7 @@ import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.RedisService;
+import com.simple.blog.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -49,26 +50,26 @@ public class RedisApplicationRunner implements ApplicationRunner {
             systemConfigList = systemConfigRepository.findAll();
         }
         // 获取redis数据
-        Map<String, Object> groupMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
-        Map<String, Object> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
-        Map<String, Object> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
+        Map<String, String> groupMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
+        Map<String, String> relationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
+        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
         if (groupMap.isEmpty()) {
-            labelGroupList.forEach(item -> redisService.setValue(item.getLabelGroupName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP));
+            labelGroupList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP + item.getLabelGroupName(), JsonUtil.convertObject2String(item)));
         } else {
             redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_GROUP);
-            labelGroupList.forEach(item -> redisService.setValue(item.getLabelGroupName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP));
+            labelGroupList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_GROUP + item.getLabelGroupName(), JsonUtil.convertObject2String(item)));
         }
         if (relationMap.isEmpty()) {
-            labelRelationList.forEach(item -> redisService.setValue(item.getLabelGroupName() + "-" + item.getLabelName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION));
+            labelRelationList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + item.getLabelGroupName() + "-" + item.getLabelName(), JsonUtil.convertObject2String(item)));
         } else {
             redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION);
-            labelRelationList.forEach(item -> redisService.setValue(item.getLabelGroupName() + "-" + item.getLabelName(), item, CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION));
+            labelRelationList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + item.getLabelGroupName() + "-" + item.getLabelName(), JsonUtil.convertObject2String(item)));
         }
         if (systemConfigMap.isEmpty()) {
-            systemConfigList.forEach(item -> redisService.setValue(item.getConfigKey(), item, CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG));
+            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getConfigKey(), JsonUtil.convertObject2String(item)));
         } else {
             redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
-            systemConfigList.forEach(item -> redisService.setValue(item.getConfigKey(), item, CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG));
+            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getConfigKey(), JsonUtil.convertObject2String(item)));
         }
         log.info("^^^^^缓存redis成功^^^^^");
     }
