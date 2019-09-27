@@ -24,6 +24,8 @@ import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -225,4 +227,45 @@ public class BlogApplicationTests {
         esBlogRepository.deleteAll();
     }
 
+    @Test
+    public void matchPattern() {
+        String testString = "java怎么mysql利用正则表达式从mysql给定的字符串中mysql取出匹配规则字符串";
+       /* Pattern pattern = Pattern.compile("mysql");
+        Matcher matcher = pattern.matcher(testString);
+        while (matcher.find()) {
+            int start1 = matcher.start();
+            int end1 = matcher.end();
+            String value = matcher.group();
+            System.out.println(start1 + "---" + end1 + "---" + value);
+        }*/
+        this.matchPattern(testString, "mysql");
+    }
+
+    private List<String> matchPattern(String content, String regex) {
+        List<String> result = new ArrayList<>();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        int len = content.length();
+        while (matcher.find()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            int start = matcher.start();
+            int end = matcher.end();
+            int startBefore, endAfter;
+            if (start > 8) {
+                startBefore = start - 8;
+            } else {
+                startBefore = 0;
+            }
+            if (end + 8 < len) {
+                endAfter = end + 8;
+            } else {
+                endAfter = len;
+            }
+            String text1 = content.substring(startBefore, start);
+            String text2 = "<span style='color: #ffa500;font-weight: bold;font-size: 16px !important;'>" + matcher.group() + "</span>";
+            String text3 = content.substring(end + 1, endAfter);
+            result.add(stringBuilder.append("...").append(text1).append(text2).append(text3).append("...").toString());
+        }
+        return result;
+    }
 }

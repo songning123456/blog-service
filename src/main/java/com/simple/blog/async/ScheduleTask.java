@@ -1,7 +1,10 @@
 package com.simple.blog.async;
 
+import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.entity.Blog;
 import com.simple.blog.entity.EsBlog;
-import com.simple.blog.repository.EsBlogRepository;
+import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.RandomUtil;
 import org.jsoup.Jsoup;
@@ -29,14 +32,14 @@ import java.util.stream.Collectors;
 public class ScheduleTask {
 
     @Autowired
-    private EsBlogRepository esBlogRepository;
+    private DataBaseUtil dataBaseUtil;
 
     /**
      * 每天10，12，16点触发该事件
      *
      * @throws Exception
      */
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "0/30 * *  * * ?")
     public void theftArticle() throws Exception {
         this.theftMeituan();
         this.theftBoke();
@@ -63,8 +66,14 @@ public class ScheduleTask {
                     summary[0] = item.html();
                 }
             });
-            EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            esBlogRepository.save(esBlog);
+            Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+            if (CommonConstant.DATABASE_ES.equals(dataBaseUtil.getDataBaseName())) {
+                EsBlog esBlog = new EsBlog();
+                ClassConvertUtil.populate(blog, esBlog);
+                dataBaseUtil.getDataBase().saveArticle(esBlog);
+            } else {
+                dataBaseUtil.getDataBase().saveArticle(blog);
+            }
         }
     }
 
@@ -88,8 +97,14 @@ public class ScheduleTask {
             String content = doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").html();
             String author = "songning";
             Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
-            EsBlog esBlog = EsBlog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            esBlogRepository.save(esBlog);
+            Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+            if (CommonConstant.DATABASE_ES.equals(dataBaseUtil.getDataBaseName())) {
+                EsBlog esBlog = new EsBlog();
+                ClassConvertUtil.populate(blog, esBlog);
+                dataBaseUtil.getDataBase().saveArticle(esBlog);
+            } else {
+                dataBaseUtil.getDataBase().saveArticle(blog);
+            }
         }
     }
 }

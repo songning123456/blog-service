@@ -48,4 +48,11 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO);
+
+    /**
+     * 爬虫文章
+     *
+     * @param blog
+     */
+    <T> void saveArticle(T blog);
 }

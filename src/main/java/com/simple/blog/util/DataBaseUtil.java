@@ -33,4 +33,8 @@ public class DataBaseUtil {
             return esBlogService;
         }
     }
+
+    public String getDataBaseName() {
+        return systemConfigRepository.findConfigValueByConfigKeyNative("dataBase");
+    }
 }

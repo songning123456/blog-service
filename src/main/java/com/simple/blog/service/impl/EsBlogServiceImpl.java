@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.entity.Blog;
 import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.service.BlogService;
@@ -168,5 +169,10 @@ public class EsBlogServiceImpl implements BlogService {
         commonDTO.setData(blogDTOList);
         commonDTO.setTotal((long) blogDTOList.size());
         return commonDTO;
+    }
+
+    @Override
+    public <T> void saveArticle(T blog) {
+        esBlogRepository.save((EsBlog) blog);
     }
 }

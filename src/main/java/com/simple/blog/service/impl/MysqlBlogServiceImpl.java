@@ -3,9 +3,9 @@ package com.simple.blog.service.impl;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
+import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.service.BlogService;
-import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
@@ -17,6 +17,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author sn
@@ -48,14 +50,17 @@ public class MysqlBlogServiceImpl implements BlogService {
         String kinds = commonVO.getCondition().getKinds();
         Sort sort = new Sort(Sort.Direction.DESC, "update_time");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
-        Page<Object[]> blogPage = blogRepository.findAbstract(kinds, pageable);
-        List<Object[]> src = blogPage.getContent();
+        Page<Map<String, Object>> blogPage = blogRepository.findAbstract(kinds, pageable);
+        List<Map<String, Object>> src = blogPage.getContent();
         Long total = blogPage.getTotalElements();
         List<BlogDTO> target = new ArrayList<>();
-        try {
-            ClassConvertUtil.castEntityList(src, target, BlogDTO.class);
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Map<String, Object> map : src) {
+            try {
+                BlogDTO blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, map);
+                target.add(blogDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         commonDTO.setData(target);
         commonDTO.setTotal(total);
@@ -100,6 +105,55 @@ public class MysqlBlogServiceImpl implements BlogService {
 
     @Override
     public CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO) {
-        return new CommonDTO<>();
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        String content = commonVO.getCondition().getContent();
+        List<Map<String, Object>> list = blogRepository.findByLikeContentNative(content);
+        List<BlogDTO> blogDTOS = new ArrayList<>();
+        list.forEach(item -> {
+            String id = (String) item.get("id");
+            String title = (String) item.get("title");
+            String author = (String) item.get("author");
+            Date updateTime = (Date) item.get("updateTime");
+            String txt = (String) item.get("content");
+            List<String> searchResult = this.matchPattern(txt, content);
+            BlogDTO blogDTO = BlogDTO.builder().id(id).title(title).author(author).updateTime(updateTime).content(txt).searchResult(searchResult).build();
+            blogDTOS.add(blogDTO);
+        });
+        commonDTO.setData(blogDTOS);
+        commonDTO.setTotal((long) blogDTOS.size());
+        return commonDTO;
+    }
+
+    @Override
+    public <T> void saveArticle(T blog) {
+        blogRepository.save((Blog) blog);
+    }
+
+    private List<String> matchPattern(String content, String regex) {
+        List<String> result = new ArrayList<>();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        int len = content.length();
+        while (matcher.find()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            int start = matcher.start();
+            int end = matcher.end();
+            int startBefore, endAfter;
+            if (start > 8) {
+                startBefore = start - 8;
+            } else {
+                startBefore = 0;
+            }
+            if (end + 8 < len) {
+                endAfter = end + 8;
+            } else {
+                endAfter = len;
+            }
+            String text1 = content.substring(startBefore, start);
+            String text2 = "<span style='color: #ffa500;font-weight: bold;font-size: 16px;'>" + matcher.group() + "</span>";
+            String text3 = content.substring(end + 1, endAfter);
+            result.add(stringBuilder.append("...").append(text1).append(text2).append(text3).append("...").toString());
+        }
+        return result;
     }
 }

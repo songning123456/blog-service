@@ -25,10 +25,10 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      * @param pageable
      * @return
      */
-    @Query(value = "select id, title,summary, read_times, kinds, author, update_time " +
+    @Query(value = "select id, title,summary, read_times as readTimes, kinds, author, update_time as updateTime " +
             "from blog where kinds = :kinds order by update_time desc",
             countQuery = "select count(*) from blog where kinds = :kinds", nativeQuery = true)
-    Page<Object[]> findAbstract(@Param("kinds") String kinds, Pageable pageable);
+    Page<Map<String, Object>> findAbstract(@Param("kinds") String kinds, Pageable pageable);
 
 
     /**
@@ -55,4 +55,7 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
      */
     @Query(value = "select author, title from blog order by update_time desc", nativeQuery = true)
     List<Map<String, Object>> getAllAuthorAndTitle();
+
+    @Query(value = "select id, title, author, update_time as updateTime, content from blog where content like %?1%", nativeQuery = true)
+    List<Map<String, Object>> findByLikeContentNative(String content);
 }

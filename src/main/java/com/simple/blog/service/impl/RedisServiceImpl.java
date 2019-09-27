@@ -3,7 +3,6 @@ package com.simple.blog.service.impl;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
