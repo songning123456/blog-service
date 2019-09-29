@@ -1,13 +1,21 @@
 package com.simple.blog.service.impl;
 
+import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.feign.ElasticSearchFeignClient;
+import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.StatisticService;
+import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author songning
@@ -18,11 +26,53 @@ import org.springframework.stereotype.Service;
 public class StatisticServiceImpl implements StatisticService {
 
     @Autowired
+    private BlogRepository blogRepository;
+    @Autowired
     private ElasticSearchFeignClient elasticSearchFeignClient;
+    @Autowired
+    private SystemConfigRepository systemConfigRepository;
 
     @Override
     public CommonDTO<StatisticDTO> getStatisticResult(CommonVO<StatisticVO> commonVO) {
-        CommonDTO<StatisticDTO> commonDTO = elasticSearchFeignClient.esStatistic(commonVO);
+        CommonDTO<StatisticDTO> commonDTO = new CommonDTO<>();
+        String dataBase = systemConfigRepository.findConfigValueByConfigKeyNative("dataBase");
+        if (CommonConstant.DATABASE_ES.equals(dataBase)) {
+            // es 服务
+            commonDTO = elasticSearchFeignClient.esStatistic(commonVO);
+            return commonDTO;
+        } else {
+            // 本地mysql
+            commonDTO = this.statisticResult(commonVO);
+            return commonDTO;
+        }
+
+    }
+
+    private CommonDTO<StatisticDTO> statisticResult(CommonVO<StatisticVO> commonVO) {
+        CommonDTO<StatisticDTO> commonDTO = new CommonDTO<>();
+        String type = commonVO.getCondition().getType();
+        String startTime = commonVO.getCondition().getStartTime();
+        String endTime = commonVO.getCondition().getEndTime();
+        List<Map<String, Object>> list = null;
+        if ("kinds".equals(type)) {
+            list = blogRepository.statisticKinds(startTime, endTime);
+        } else if ("author".equals(type)) {
+            list = blogRepository.statisticAuthor(startTime, endTime);
+        }
+        List<StatisticDTO> statisticDTOList = new ArrayList<>();
+        list.forEach(item -> {
+            StatisticDTO statisticDTO = new StatisticDTO();
+            try {
+                statisticDTO.setXAxis((String) item.get("xAxis"));
+                statisticDTO.setYAxis(String.valueOf(item.get("yAxis")));
+                statisticDTOList.add(statisticDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        commonDTO.setData(statisticDTOList);
+        commonDTO.setTotal((long) statisticDTOList.size());
         return commonDTO;
     }
+
 }
