@@ -20,13 +20,6 @@ spring:
       ddl-auto: update
     database: mysql
     show-sql: true
-  data:
-    elasticsearch:
-      cluster-nodes: localhost:9300
-      cluster-name: es-5.2-test
-  elasticsearch:
-    jest:
-      uris: http://localhost:9200
   flyway:
     enabled: false
     locations: classpath:db/migration
@@ -38,3 +31,6 @@ spring:
 #配置端口号
 server:
   port: 8072
+
+blog:
+  es.url: http://localhost:8074/

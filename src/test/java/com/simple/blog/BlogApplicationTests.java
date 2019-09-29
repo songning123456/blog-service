@@ -1,9 +1,6 @@
 package com.simple.blog;
 
-import com.simple.blog.entity.Blog;
-import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.BlogRepository;
-import com.simple.blog.repository.EsBlogRepository;
 import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.util.*;

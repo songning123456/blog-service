@@ -2,7 +2,8 @@ package com.simple.blog.async;
 
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.entity.Blog;
-import com.simple.blog.entity.EsBlog;
+import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.BloggerRepository;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.DateUtil;
@@ -32,14 +33,14 @@ import java.util.stream.Collectors;
 public class ScheduleTask {
 
     @Autowired
-    private DataBaseUtil dataBaseUtil;
+    private BlogRepository blogRepository;
 
     /**
      * 每天10，12，16点触发该事件
      *
      * @throws Exception
      */
-    @Scheduled(cron = "0/30 * *  * * ?")
+    @Scheduled(cron = "0 0 1 * * *")
     public void theftArticle() throws Exception {
         this.theftMeituan();
         this.theftBoke();
@@ -67,13 +68,7 @@ public class ScheduleTask {
                 }
             });
             Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            if (CommonConstant.DATABASE_ES.equals(dataBaseUtil.getDataBaseName())) {
-                EsBlog esBlog = new EsBlog();
-                ClassConvertUtil.populate(blog, esBlog);
-                dataBaseUtil.getDataBase().saveArticle(esBlog);
-            } else {
-                dataBaseUtil.getDataBase().saveArticle(blog);
-            }
+            blogRepository.save(blog);
         }
     }
 
@@ -98,13 +93,7 @@ public class ScheduleTask {
             String author = "songning";
             Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
             Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            if (CommonConstant.DATABASE_ES.equals(dataBaseUtil.getDataBaseName())) {
-                EsBlog esBlog = new EsBlog();
-                ClassConvertUtil.populate(blog, esBlog);
-                dataBaseUtil.getDataBase().saveArticle(esBlog);
-            } else {
-                dataBaseUtil.getDataBase().saveArticle(blog);
-            }
+            blogRepository.save(blog);
         }
     }
 }

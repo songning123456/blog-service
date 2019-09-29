@@ -3,7 +3,6 @@ package com.simple.blog.service.impl;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
-import com.simple.blog.entity.EsBlog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.util.MapConvertEntityUtil;
@@ -122,11 +121,6 @@ public class MysqlBlogServiceImpl implements BlogService {
         commonDTO.setData(blogDTOS);
         commonDTO.setTotal((long) blogDTOS.size());
         return commonDTO;
-    }
-
-    @Override
-    public <T> void saveArticle(T blog) {
-        blogRepository.save((Blog) blog);
     }
 
     private List<String> matchPattern(String content, String regex) {
