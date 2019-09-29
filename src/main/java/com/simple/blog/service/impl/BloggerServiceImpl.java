@@ -11,6 +11,7 @@ import com.simple.blog.vo.BloggerVO;
 import com.simple.blog.vo.CommonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -38,8 +39,16 @@ public class BloggerServiceImpl implements BloggerService {
     @Override
     public CommonDTO<BloggerDTO> getBlogger(CommonVO<BloggerVO> commonVO) {
         CommonDTO<BloggerDTO> commonDTO = new CommonDTO<>();
+        String author = commonVO.getCondition().getAuthor();
         String username = commonVO.getCondition().getUsername();
-        List<Map<String, Object>> list = bloggerRepository.findByUsernameNative(username);
+        List<Map<String, Object>> list;
+        if (!StringUtils.isEmpty(author)) {
+            // 其他用户 根据 作者 来查询 作者信息
+            list = bloggerRepository.findByAuthorNative(author);
+        } else {
+            // 登陆时根据用户名 查询 个人信息
+            list = bloggerRepository.findByUsernameNative(username);
+        }
         BloggerDTO bloggerDTO = new BloggerDTO();
         try {
             bloggerDTO = (BloggerDTO) MapConvertEntityUtil.mapToEntity(BloggerDTO.class, list.get(0));
