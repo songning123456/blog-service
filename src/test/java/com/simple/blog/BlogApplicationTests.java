@@ -1,6 +1,11 @@
 package com.simple.blog;
 
+import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.entity.Blogger;
+import com.simple.blog.entity.PersonalInformation;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.BloggerRepository;
 import com.simple.blog.repository.LabelGroupRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.util.*;
@@ -20,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +39,8 @@ public class BlogApplicationTests {
 
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private BloggerRepository bloggerRepository;
 
     @Autowired
     private LabelGroupRepository labelGroupRepository;
@@ -198,5 +206,34 @@ public class BlogApplicationTests {
             result.add(stringBuilder.append("...").append(text1).append(text2).append(text3).append("...").toString());
         }
         return result;
+    }
+
+    @Test
+    public void insertBlogger() {
+        Blogger blogger = new Blogger();
+        blogger.setAuthor("吃顿好的");
+        blogger.setRealName("沈克野");
+        blogger.setGender("男");
+        blogger.setAge(25);
+        blogger.setProfession("公务员");
+        blogger.setTelephone("15550779134");
+        blogger.setEmail("3123476563@qq.com");
+        blogger.setIntroduction("好好学习，天天向上");
+        blogger.setHeadPortrait("headPortrait/songning.svg");
+        blogger.setUsername("shenkeye");
+        blogger.setUpdateTime(new Date());
+        bloggerRepository.save(blogger);
+    }
+
+    @Test
+    public void insertPersonalInfo() {
+        PersonalInformation personalInformation = new PersonalInformation();
+        personalInformation.setAuthor("");
+        personalInformation.setInfoType("");
+        personalInformation.setMechanism("");
+        personalInformation.setPosition("");
+        personalInformation.setIntroduction("");
+        personalInformation.setStartTime(new Date());
+        personalInformation.setEndTime(new Date());
     }
 }

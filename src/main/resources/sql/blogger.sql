@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-09-27 17:26:07
+Date: 2019-09-29 17:15:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,4 +40,7 @@ CREATE TABLE `blogger` (
 -- ----------------------------
 -- Records of blogger
 -- ----------------------------
-INSERT INTO `blogger` VALUES ('40281a816d1df0d7016d1df231680000', '35', 'songning', '1457065856@qq.com', '男', 'static/headPortrait.svg', '从警8年他硕果累累，先后荣立个人一等功1次，二等功1次，三等功3次，嘉奖2次，2006年被评为“百姓心中好交警”，2007年被评为青年执法标兵，2008年被评为奥运交通安保标兵和“微笑北京交警之星”，2009年又荣获了首都“五一”劳动奖章,受邀参加市委政法委“学习实践科学发展观巡讲团”和北京市公安局“平凡颂”演讲报告会。孟昆玉在平凡的岗位上，做出了不平凡的业绩', '程序员', '宁宁', '15850682190', '2019-09-11 09:31:15', 'test');
+INSERT INTO `blogger` VALUES ('40281a816d1df0d7016d1df231680000', '25', '重零开始', '1457065857@qq.com', '男', 'headPortrait/songning.svg', '好好学习，天天向上', '程序员', '宋宁', '15850682191', '2019-09-11 09:31:15', 'songning');
+INSERT INTO `blogger` VALUES ('40281a816d7c3670016d7c368c180000', '24', 'zhou', '1345768943@qq.com', '男', 'headPortrait/songning.svg', '好好学习，天天向上', '程序员', '郝周', '14550983281', '2019-09-29 16:50:13', 'haozhou');
+INSERT INTO `blogger` VALUES ('40281a816d7c382b016d7c3847a80000', '24', 'cest mom seul', '1325776923@qq.com', '男', 'headPortrait/songning.svg', '好好学习，天天向上', '程序员', '施杰', '15850982182', '2019-09-29 16:52:06', 'shijie');
+INSERT INTO `blogger` VALUES ('40281a816d7c39a6016d7c39c7840000', '25', '吃顿好的', '3123476563@qq.com', '男', 'headPortrait/songning.svg', '好好学习，天天向上', '公务员', '沈克野', '15550779134', '2019-09-29 16:53:44', 'shenkeye');
