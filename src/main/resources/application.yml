@@ -4,6 +4,8 @@ spring:
     url: jdbc:mysql://localhost:3306/simple_blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true&failOverReadOnly=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   redis:
     database: 1
     host: localhost

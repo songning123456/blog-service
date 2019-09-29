@@ -1,11 +1,7 @@
 package com.simple.blog.async;
 
-import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
-import com.simple.blog.repository.BloggerRepository;
-import com.simple.blog.util.ClassConvertUtil;
-import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.RandomUtil;
 import org.jsoup.Jsoup;

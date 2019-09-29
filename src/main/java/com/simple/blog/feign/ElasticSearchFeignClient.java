@@ -2,8 +2,10 @@ package com.simple.blog.feign;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.StatisticVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -59,5 +61,14 @@ public interface ElasticSearchFeignClient {
      */
     @RequestMapping(value = "/es/blog/queryHighlightArticle")
     CommonDTO<BlogDTO> esQueryHighlightArticle(CommonVO<BlogVO> commonVO);
+
+    /**
+     * 获取统计结果
+     *
+     * @param commonVO
+     * @return
+     */
+    @RequestMapping(value = "/es/statistic/get")
+    CommonDTO<StatisticDTO> esStatistic(CommonVO<StatisticVO> commonVO);
 
 }

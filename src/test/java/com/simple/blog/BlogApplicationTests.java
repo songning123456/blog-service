@@ -35,9 +35,6 @@ public class BlogApplicationTests {
     private BlogRepository blogRepository;
 
     @Autowired
-    private EsBlogRepository esBlogRepository;
-
-    @Autowired
     private LabelGroupRepository labelGroupRepository;
 
     @Autowired
@@ -118,64 +115,6 @@ public class BlogApplicationTests {
     }
 
     /**
-     * 盗窃文章
-     *
-     * @throws Exception
-     */
-    @Test
-    public void theftArticle() throws Exception {
-        String url = "https://tech.meituan.com/";
-        List<String> labels = Arrays.asList("WebSocket", "Vuex", "Chrome", "jQuery", "正则表达式", "HTTP", "MySQL", "ECMAScript 6", "Git", "HTML", "设计模式", "代码规范", "图片资源", "Linux", "机器学习", "Android", "iOS", "Java", "JavaScript");
-        String random = RandomUtil.getRandom(2, 18);
-        // 爬虫美团
-        Document document = Jsoup.connect(url + "/page/" + random + ".html").get();
-        List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
-        for (int j = 0; j < articleUrls.size(); j++) {
-            Document doc = Jsoup.connect(articleUrls.get(Integer.parseInt(random))).get();
-            String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
-            String readTimes = RandomUtil.getRandom(1, 1000);
-            String content = doc.getElementsByClass("post-content").html();
-            String author = "songning";
-            String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
-            Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
-            final String[] summary = new String[1];
-            doc.getElementsByClass("post-content").get(0).getElementsByClass("content").get(0).getElementsByTag("p").forEach(item -> {
-                if (!StringUtils.isEmpty(item.html())) {
-                    summary[0] = item.html();
-                }
-            });
-            EsBlog esBlog = EsBlog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            esBlogRepository.save(esBlog);
-        }
-    }
-
-    @Test
-    public void theftBlog() throws Exception {
-        String url = "https://www.boke.la/wenzhang/";
-        List<String> labels = Arrays.asList("WebSocket", "Vuex", "Chrome", "jQuery", "正则表达式", "HTTP", "MySQL", "ECMAScript 6", "Git", "HTML", "设计模式", "代码规范", "图片资源", "Linux", "机器学习", "Android", "iOS", "Java", "JavaScript");
-        String random = RandomUtil.getRandom(2, 35);
-        Document document = Jsoup.connect(url + random + "/").get();
-        List<String> articleUrls = document.getElementsByClass("news").get(0).getElementsByTag("li").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
-        for (String articleUrl : articleUrls) {
-            Document doc = Jsoup.connect(articleUrl).get();
-            String title = doc.getElementsByClass("zwtit2").get(0).getElementsByTag("h3").html();
-            String readTimes = RandomUtil.getRandom(1, 1000);
-            String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
-            final String[] summary = new String[1];
-            doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").forEach(item -> {
-                if (!StringUtils.isEmpty(item.html())) {
-                    summary[0] = item.html();
-                }
-            });
-            String content = doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").html();
-            String author = "songning";
-            Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
-            EsBlog esBlog = EsBlog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-            esBlogRepository.save(esBlog);
-        }
-    }
-
-    /**
      * 汉语拼音转换
      *
      * @throws Exception
@@ -217,11 +156,6 @@ public class BlogApplicationTests {
             }
         });
         log.info("两次查询比较结果: {}", record);
-    }
-
-    @Test
-    public void deleteAll() {
-        esBlogRepository.deleteAll();
     }
 
     @Test

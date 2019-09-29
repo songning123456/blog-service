@@ -6,7 +6,6 @@ import com.simple.blog.feign.ElasticSearchFeignClient;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
-import io.searchbox.client.JestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
