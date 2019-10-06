@@ -4,10 +4,7 @@ import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blogger;
 import com.simple.blog.entity.PersonalInformation;
-import com.simple.blog.repository.BlogRepository;
-import com.simple.blog.repository.BloggerRepository;
-import com.simple.blog.repository.LabelGroupRepository;
-import com.simple.blog.repository.SystemConfigRepository;
+import com.simple.blog.repository.*;
 import com.simple.blog.util.*;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -47,6 +44,8 @@ public class BlogApplicationTests {
 
     @Autowired
     private SystemConfigRepository systemConfigRepository;
+    @Autowired
+    private PersonalInformationRepository personalInformationRepository;
 
     @Test
     public void contextLoads() {
@@ -227,13 +226,18 @@ public class BlogApplicationTests {
 
     @Test
     public void insertPersonalInfo() {
-        PersonalInformation personalInformation = new PersonalInformation();
-        personalInformation.setAuthor("");
-        personalInformation.setInfoType("");
-        personalInformation.setMechanism("");
-        personalInformation.setPosition("");
-        personalInformation.setIntroduction("");
-        personalInformation.setStartTime(new Date());
-        personalInformation.setEndTime(new Date());
+        List<PersonalInformation> list = new ArrayList<>();
+        for (int i = 0; i <= 5; i++) {
+            PersonalInformation personalInformation = new PersonalInformation();
+            personalInformation.setAuthor("");
+            personalInformation.setInfoType("");
+            personalInformation.setMechanism("");
+            personalInformation.setPosition("");
+            personalInformation.setIntroduction("");
+            personalInformation.setStartTime(new Date());
+            personalInformation.setEndTime(new Date());
+            list.add(personalInformation);
+        }
+        personalInformationRepository.saveAll(list);
     }
 }
