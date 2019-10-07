@@ -6,6 +6,7 @@ import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.feign.ElasticSearchFeignClient;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.SystemConfigRepository;
+import com.simple.blog.service.RedisService;
 import com.simple.blog.service.StatisticService;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
@@ -31,11 +32,14 @@ public class StatisticServiceImpl implements StatisticService {
     private ElasticSearchFeignClient elasticSearchFeignClient;
     @Autowired
     private SystemConfigRepository systemConfigRepository;
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public CommonDTO<StatisticDTO> getStatisticResult(CommonVO<StatisticVO> commonVO) {
         CommonDTO<StatisticDTO> commonDTO = new CommonDTO<>();
-        String dataBase = systemConfigRepository.findConfigValueByConfigKeyNative("dataBase");
+        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String dataBase = systemConfigRepository.findConfigValueByUsernameAndConfigKeyNative(username, "dataBase");
         if (CommonConstant.DATABASE_ES.equals(dataBase)) {
             // es 服务
             commonDTO = elasticSearchFeignClient.esStatistic(commonVO);

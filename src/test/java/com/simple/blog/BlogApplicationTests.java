@@ -4,6 +4,7 @@ import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blogger;
 import com.simple.blog.entity.PersonalInformation;
+import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.*;
 import com.simple.blog.util.*;
 import lombok.extern.slf4j.Slf4j;
@@ -239,5 +240,18 @@ public class BlogApplicationTests {
             list.add(personalInformation);
         }
         personalInformationRepository.saveAll(list);
+    }
+
+    @Test
+    public void insertSystemConfig() {
+        List<String> list = Arrays.asList("songning", "shenkeye", "shijie", "haozhou");
+        list.forEach(username -> {
+            SystemConfig systemConfig = new SystemConfig();
+            systemConfig.setUsername(username);
+            systemConfig.setConfigKey("dataBase");
+            systemConfig.setConfigValue("MYSQL");
+            systemConfig.setValueDescription("动态切换数据源");
+            systemConfigRepository.save(systemConfig);
+        });
     }
 }
