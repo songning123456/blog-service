@@ -40,10 +40,11 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         Integer pageRecordNum = commonVO.getPageRecordNum();
         String configKey = commonVO.getCondition().getConfigKey();
         String configValue = commonVO.getCondition().getConfigValue();
+        String valueDescription = commonVO.getCondition().getValueDescription();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
         Sort sort = new Sort(Sort.Direction.ASC, "config_key");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
-        Page<SystemConfig> systemConfigPage = systemConfigRepository.findByUsernameAndConfigKeyAndConfigValueNative(username, configKey, configValue, pageable);
+        Page<SystemConfig> systemConfigPage = systemConfigRepository.findByUsernameAndConfigKeyAndConfigValueAndValueDescriptionNative(username, configKey, configValue, valueDescription, pageable);
         List<SystemConfig> systemConfigList = systemConfigPage.getContent();
         List<SystemConfigDTO> target = new ArrayList<>();
         ClassConvertUtil.populateList(systemConfigList, target, SystemConfigDTO.class);

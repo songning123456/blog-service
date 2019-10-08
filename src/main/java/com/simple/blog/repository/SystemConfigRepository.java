@@ -26,8 +26,8 @@ public interface SystemConfigRepository extends JpaRepository<SystemConfig, Stri
     @Query(value = "select config_value from system_config where username = ?1 and config_key = ?2", nativeQuery = true)
     String findConfigValueByUsernameAndConfigKeyNative(String username, String configKey);
 
-    @Query(value = "select * from system_config where username = ?1 and config_key like %?2% and config_value like %?3%", nativeQuery = true)
-    Page<SystemConfig> findByUsernameAndConfigKeyAndConfigValueNative(String username, String configKey, String configValue, Pageable pageable);
+    @Query(value = "select * from system_config where username = ?1 and config_key like %?2% and config_value like %?3% and value_description like %?4%", nativeQuery = true)
+    Page<SystemConfig> findByUsernameAndConfigKeyAndConfigValueAndValueDescriptionNative(String username, String configKey, String configValue, String valueDescription, Pageable pageable);
 
     @Transactional
     @Modifying
