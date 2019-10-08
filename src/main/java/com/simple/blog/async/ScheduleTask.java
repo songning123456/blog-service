@@ -28,6 +28,41 @@ import java.util.stream.Collectors;
 @EnableScheduling
 public class ScheduleTask {
 
+    private  List<String> labels = Arrays.asList(
+            "前端", "后端", "JavaScript", "GitHub", "架构",
+            "代码规范", "面试", "算法", "Android", "CSS",
+            "程序员", "Vue.js", "Java", "Node.js", "数据库",
+            "设计模式", "设计", "前端框架", "HTML", "开源",
+            "产品", "Linux", "React.js", "Git", "Python",
+            "IOS", "人工智能", "微信小程序", "Webpack", "全栈",
+            "微信", "ECMAScript 6", "MYSQL", "HTTP", "Google",
+            "正则表达式", "机器学习", "黑客", "Jquery", "响应式设计",
+            "APP", "创业", "Chrome", "Nginx", "编程语言",
+            "命令行", "Doctor", "Redis", "产品经理", "Android Studio",
+            "Angular.js", "Mac", "React Native", "BootStrap", "Apple",
+            "图片资源", "Photoshop", "PHP", "API", "Sublime Text",
+            "设计师", "数据挖掘", "操作系统", "阿里巴巴", "MongoDB",
+            "gradle", "Material Design", "数据可视化", "安全", "招聘",
+            "Go", "Swift", "Vuex", "MVVM", "RxJava",
+            "Xcode", "敏捷开发", "运维", "Markdown", "动效",
+            "字体", "腾讯", "Objective-C", "云计算", "Spring",
+            "运营", "物联网", "Canvas", "深度学习", "Icon",
+            "爬虫", "C++", "虚拟现实", "HTTPS", "Debug",
+            "Eclipse", "电子书", "Ubuntu", "Sketch", "翻译",
+            "NPM", "微服务", "JSON", "测试", "配色",
+            "Ajax", "DOM", "C", "源码", "Facebook",
+            "VIM", "SCSS", "稀土", "TypeScript", "Apache",
+            "游戏", "Redux", "maven", "Kotlin", "Visual Studio Code",
+            "负载均衡", "SVG", "Windows", "SEC", "区域链",
+            "支付宝", "函数式编程", "Gulp", "增强现实", "Microsoft",
+            "SQLite", "Flutter", "浏览器", "Express", "Unity 3D",
+            "SQL", "远程工作", "Firefox", "APK", "Atom",
+            "Promise", "Webkit", "IntelliJ IDEA", "Hadoop", "Spring boot",
+            "嵌入式", "JVM", "机器人", "编译器", "神经网络",
+            "响应式编程", "投资", "Django", "科幻", "百度",
+            "比特币", "单元测试", "flexbox", "Java EE"
+    );
+
     @Autowired
     private BlogRepository blogRepository;
 
@@ -45,7 +80,6 @@ public class ScheduleTask {
     private void theftMeituan() throws Exception {
         String url = "https://tech.meituan.com/";
         List<String> authors = Arrays.asList("吃顿好的", "cest mom seul", "zhou", "重零开始");
-        List<String> labels = Arrays.asList("WebSocket", "Vuex", "Chrome", "jQuery", "正则表达式", "HTTP", "MySQL", "ECMAScript 6", "Git", "HTML", "设计模式", "代码规范", "图片资源", "Linux", "机器学习", "Android", "iOS", "Java", "JavaScript");
         String random = RandomUtil.getRandom(2, 18);
         // 爬虫美团
         Document document = Jsoup.connect(url + "/page/" + random + ".html").get();
@@ -72,7 +106,6 @@ public class ScheduleTask {
     private void theftBoke() throws Exception {
         String url = "https://www.boke.la/wenzhang/";
         List<String> authors = Arrays.asList("吃顿好的", "cest mom seul", "zhou", "重零开始");
-        List<String> labels = Arrays.asList("WebSocket", "Vuex", "Chrome", "jQuery", "正则表达式", "HTTP", "MySQL", "ECMAScript 6", "Git", "HTML", "设计模式", "代码规范", "图片资源", "Linux", "机器学习", "Android", "iOS", "Java", "JavaScript");
         String random = RandomUtil.getRandom(2, 35);
         Document document = Jsoup.connect(url + random + "/").get();
         List<String> articleUrls = document.getElementsByClass("news").get(0).getElementsByTag("li").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());

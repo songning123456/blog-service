@@ -10,8 +10,7 @@ public class CommonConstant {
      * redis缓存目录
      */
     public static final String REDIS_CACHE = "RedisCache:";
-    public static final String LABEL_GROUP = "LabelGroup:";
-    public static final String LABEL_RELATION = "LabelRelation:";
+    public static final String LABEL_CONFIG = "LabelConfig:";
     public static final String SYSTEM_CONFIG = "SystemConfig:";
     public static final String LOGIN_INFO = "login:";
 
