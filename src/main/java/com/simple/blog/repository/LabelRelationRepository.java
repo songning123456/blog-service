@@ -14,6 +14,6 @@ import java.util.List;
 @Repository
 public interface LabelRelationRepository extends JpaRepository<LabelRelation, String> {
 
-    @Query(value = "select label_name from label_relation where username = ?1 and attention = 1 order by label_name asc", nativeQuery = true)
-    List<String> findLabelNameByUsernameAndSelectedNative(String username);
+    @Query(value = "select label_name from label_relation where username = ?1 and attention = ?2 order by label_name asc", nativeQuery = true)
+    List<String> findLabelNameByUsernameAndSelectedNative(String username, Integer attention);
 }

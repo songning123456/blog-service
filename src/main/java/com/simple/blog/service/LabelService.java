@@ -2,6 +2,7 @@ package com.simple.blog.service;
 
 
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelConfigDTO;
 import com.simple.blog.dto.LabelRelationDTO;
 
 /**
@@ -10,4 +11,6 @@ import com.simple.blog.dto.LabelRelationDTO;
  */
 public interface LabelService {
     CommonDTO<LabelRelationDTO> getSelectedLabel();
+
+    CommonDTO<LabelConfigDTO> getAllLabel();
 }

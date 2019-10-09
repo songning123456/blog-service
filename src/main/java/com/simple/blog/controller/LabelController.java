@@ -2,6 +2,7 @@ package com.simple.blog.controller;
 
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelConfigDTO;
 import com.simple.blog.dto.LabelRelationDTO;
 import com.simple.blog.service.LabelService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,13 @@ public class LabelController {
     @ControllerAspectAnnotation(description = "获取用户关注的标签")
     public CommonDTO<LabelRelationDTO> getSelectedLabels() {
         CommonDTO<LabelRelationDTO> commonDTO = labelService.getSelectedLabel();
+        return commonDTO;
+    }
+
+    @GetMapping("/all")
+    @ControllerAspectAnnotation(description = "获取所有的标签")
+    public CommonDTO<LabelConfigDTO> getAllLabels() {
+        CommonDTO<LabelConfigDTO> commonDTO = labelService.getAllLabel();
         return commonDTO;
     }
 }
