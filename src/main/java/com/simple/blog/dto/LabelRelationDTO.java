@@ -14,7 +14,5 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class LabelRelationDTO {
-    private String labelGroupName;
-
     private String labelName;
 }

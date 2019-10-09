@@ -26,7 +26,7 @@ public class LabelRelation {
     @Column(name = "username", columnDefinition = "VARCHAR(60) NOT NULL COMMENT '用户名'")
     private String username;
 
-    @Column(name = "labelName", columnDefinition = "VARCHAR(50)  NOT NULL UNIQUE COMMENT '标签名'")
+    @Column(name = "labelName", columnDefinition = "VARCHAR(50)  NOT NULL COMMENT '标签名'")
     private String labelName;
 
     @Column(name = "attention", columnDefinition = "INT NOT NULL DEFAULT 0 COMMENT '是否关注'")
