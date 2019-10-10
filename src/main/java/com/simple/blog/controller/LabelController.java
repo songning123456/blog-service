@@ -7,6 +7,7 @@ import com.simple.blog.dto.LabelRelationDTO;
 import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelConfigVO;
 import com.simple.blog.vo.LabelStatisticVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class LabelController {
         return commonDTO;
     }
 
-    @GetMapping("/all")
+    @PostMapping("/all")
     @ControllerAspectAnnotation(description = "获取所有的标签")
-    public CommonDTO<LabelConfigDTO> getAllLabels() {
-        CommonDTO<LabelConfigDTO> commonDTO = labelService.getAllLabel();
+    public CommonDTO<LabelConfigDTO> getAllLabels(@RequestBody CommonVO<LabelConfigVO> vo) {
+        CommonDTO<LabelConfigDTO> commonDTO = labelService.getAllLabel(vo);
         return commonDTO;
     }
 

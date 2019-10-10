@@ -6,6 +6,7 @@ import com.simple.blog.dto.LabelConfigDTO;
 import com.simple.blog.dto.LabelRelationDTO;
 import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelConfigVO;
 import com.simple.blog.vo.LabelStatisticVO;
 
 /**
@@ -15,7 +16,7 @@ import com.simple.blog.vo.LabelStatisticVO;
 public interface LabelService {
     CommonDTO<LabelRelationDTO> getSelectedLabel();
 
-    CommonDTO<LabelConfigDTO> getAllLabel();
+    CommonDTO<LabelConfigDTO> getAllLabel(CommonVO<LabelConfigVO> vo);
 
     CommonDTO<LabelStatisticDTO> statisticLabel(CommonVO<LabelStatisticVO> commonVO);
 

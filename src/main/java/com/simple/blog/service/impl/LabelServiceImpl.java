@@ -16,6 +16,7 @@ import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.JsonUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelConfigVO;
 import com.simple.blog.vo.LabelStatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,21 +66,12 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelConfigDTO> getAllLabel() {
+    public CommonDTO<LabelConfigDTO> getAllLabel(CommonVO<LabelConfigVO> vo) {
         CommonDTO<LabelConfigDTO> commonDTO = new CommonDTO<>();
+        String labelName = vo.getCondition().getLabelName();
         List<LabelConfigDTO> list = new ArrayList<>();
-        Map<String, String> labelConfigs = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_CONFIG);
-        if (labelConfigs.isEmpty()) {
-            List<LabelConfig> configList = labelConfigRepository.findAll();
-            ClassConvertUtil.populateList(configList, list, LabelConfigDTO.class);
-            configList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_CONFIG + item.getLabelName(), JsonUtil.convertObject2String(item)));
-        } else {
-            labelConfigs.forEach((key, value) -> {
-                LabelConfig labelConfig = JsonUtil.convertString2Object(value, LabelConfig.class);
-                LabelConfigDTO labelConfigDTO = LabelConfigDTO.builder().labelName(labelConfig.getLabelName()).labelPhoto(labelConfig.getLabelPhoto()).build();
-                list.add(labelConfigDTO);
-            });
-        }
+        List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelName);
+        ClassConvertUtil.populateList(configList, list, LabelConfigDTO.class);
         commonDTO.setData(list);
         commonDTO.setTotal((long) list.size());
         return commonDTO;
