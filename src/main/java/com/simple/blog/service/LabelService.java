@@ -18,4 +18,6 @@ public interface LabelService {
     CommonDTO<LabelConfigDTO> getAllLabel();
 
     CommonDTO<LabelStatisticDTO> statisticLabel(CommonVO<LabelStatisticVO> commonVO);
+
+    CommonDTO<LabelStatisticDTO> updateAttention(CommonVO<LabelStatisticVO> commonVO);
 }

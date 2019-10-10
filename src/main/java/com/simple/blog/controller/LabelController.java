@@ -44,4 +44,11 @@ public class LabelController {
         CommonDTO<LabelStatisticDTO> commonDTO = labelService.statisticLabel(vo);
         return commonDTO;
     }
+
+    @PostMapping("/updateAttention")
+    @ControllerAspectAnnotation(description = "更新关注状态")
+    public CommonDTO<LabelStatisticDTO> updateAttentions(@RequestBody CommonVO<LabelStatisticVO> commonVO) {
+        CommonDTO<LabelStatisticDTO> commonDTO = labelService.updateAttention(commonVO);
+        return commonDTO;
+    }
 }

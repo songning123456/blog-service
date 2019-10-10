@@ -11,4 +11,6 @@ import lombok.Data;
 public class LabelStatisticVO {
 
     private String labelName;
+
+    private Integer attention;
 }
