@@ -64,4 +64,6 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
 
     @Query(value = "select count(*) as yAxis, author as xAxis from blog where update_time >= ?1 and update_time <= ?2 group by author", nativeQuery = true)
     List<Map<String, Object>> statisticAuthor(String startTime, String endTime);
+
+    Long countAllByKinds(String kinds);
 }

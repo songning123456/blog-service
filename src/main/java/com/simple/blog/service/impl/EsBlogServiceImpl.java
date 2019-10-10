@@ -2,10 +2,12 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.feign.ElasticSearchFeignClient;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelStatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,17 @@ public class EsBlogServiceImpl implements BlogService {
     public CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO) {
         CommonDTO<BlogDTO> commonDTO = elasticSearchFeignClient.esQueryHighlightArticle(commonVO);
         return commonDTO;
+    }
+
+    @Override
+    public Long statisticLabel(CommonVO<LabelStatisticVO> vo) {
+        String labelName = vo.getCondition().getLabelName();
+        CommonVO<LabelStatisticVO> commonVO = new CommonVO<>();
+        LabelStatisticVO labelStatisticVO = new LabelStatisticVO();
+        labelStatisticVO.setLabelName(labelName);
+        commonVO.setCondition(labelStatisticVO);
+        CommonDTO<LabelStatisticDTO> commonDTO = elasticSearchFeignClient.statisticArticleByKinds(commonVO);
+        Long articleTotal = (long) commonDTO.getDataExt().get("articleTotal");
+        return articleTotal;
     }
 }

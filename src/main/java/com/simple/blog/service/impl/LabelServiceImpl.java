@@ -4,19 +4,22 @@ import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LabelConfigDTO;
 import com.simple.blog.dto.LabelRelationDTO;
+import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.entity.LabelConfig;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.JsonUtil;
+import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelStatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @Author songning
@@ -31,6 +34,8 @@ public class LabelServiceImpl implements LabelService {
     private LabelRelationRepository labelRelationRepository;
     @Autowired
     private LabelConfigRepository labelConfigRepository;
+    @Autowired
+    private DataBaseUtil dataBaseUtil;
 
     @Override
     public CommonDTO<LabelRelationDTO> getSelectedLabel() {
@@ -73,6 +78,22 @@ public class LabelServiceImpl implements LabelService {
         }
         commonDTO.setData(list);
         commonDTO.setTotal((long) list.size());
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<LabelStatisticDTO> statisticLabel(CommonVO<LabelStatisticVO> vo) {
+        CommonDTO<LabelStatisticDTO> commonDTO = new CommonDTO<>();
+        String labelName = vo.getCondition().getLabelName();
+        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        Map<String, Object> countMap = labelRelationRepository.countAttentionNative(labelName);
+        Long attentionTotal = ((BigDecimal) countMap.get("total")).longValue();
+        Long articleTotal = dataBaseUtil.getDataBase().statisticLabel(vo);
+        Map<String, Object> attentionMap = labelRelationRepository.findAttentionByUsernameAndLabelNameNative(username, labelName);
+        Integer isAttention = (int) attentionMap.get("attention");
+        LabelStatisticDTO labelStatisticDTO = LabelStatisticDTO.builder().articleTotal(articleTotal).isAttention(isAttention).attentionTotal(attentionTotal).build();
+        commonDTO.setData(Collections.singletonList(labelStatisticDTO));
+        commonDTO.setTotal(1L);
         return commonDTO;
     }
 

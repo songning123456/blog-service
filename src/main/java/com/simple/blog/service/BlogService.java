@@ -2,8 +2,10 @@ package com.simple.blog.service;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelStatisticVO;
 
 /**
  * @author sn
@@ -48,4 +50,6 @@ public interface BlogService {
      * @return
      */
     CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO);
+
+    Long statisticLabel(CommonVO<LabelStatisticVO> vo);
 }

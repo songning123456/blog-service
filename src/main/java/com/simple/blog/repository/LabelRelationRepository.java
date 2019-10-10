@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author songning
@@ -16,4 +17,10 @@ public interface LabelRelationRepository extends JpaRepository<LabelRelation, St
 
     @Query(value = "select label_name from label_relation where username = ?1 and attention = ?2 order by label_name asc", nativeQuery = true)
     List<String> findLabelNameByUsernameAndSelectedNative(String username, Integer attention);
+
+    @Query(value = "select sum(attention) as total from label_relation where label_name = ?1", nativeQuery = true)
+    Map<String, Object> countAttentionNative(String labelName);
+
+    @Query(value = "select attention from label_relation where username = ?1 and label_name = ?2", nativeQuery = true)
+    Map<String, Object> findAttentionByUsernameAndLabelNameNative(String username, String labelName);
 }

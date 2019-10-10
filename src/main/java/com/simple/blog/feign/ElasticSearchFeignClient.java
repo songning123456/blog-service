@@ -2,9 +2,11 @@ package com.simple.blog.feign;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelStatisticVO;
 import com.simple.blog.vo.StatisticVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,5 +72,14 @@ public interface ElasticSearchFeignClient {
      */
     @RequestMapping(value = "/es/statistic/get")
     CommonDTO<StatisticDTO> esStatistic(CommonVO<StatisticVO> commonVO);
+
+    /**
+     * todo 根据种类统计文章数量(es-server 未完成)
+     *
+     * @param commonVO
+     * @return
+     */
+    @RequestMapping(value = "/es/statistic/article/kinds")
+    CommonDTO<LabelStatisticDTO> statisticArticleByKinds(CommonVO<LabelStatisticVO> commonVO);
 
 }

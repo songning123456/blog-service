@@ -32,10 +32,10 @@ public class DataBaseUtil {
     public BlogService getDataBase() {
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
         String dataBase = systemConfigRepository.findConfigValueByUsernameAndConfigKeyNative(username, "dataBase");
-        if (CommonConstant.DATABASE_MYSQL.equals(dataBase)) {
-            return mysqlBlogService;
-        } else {
+        if (CommonConstant.DATABASE_ES.equals(dataBase)) {
             return esBlogService;
+        } else {
+            return mysqlBlogService;
         }
     }
 }
