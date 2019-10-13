@@ -2,11 +2,11 @@ package com.simple.blog.feign;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.dto.LabelStatisticDTO;
+import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
-import com.simple.blog.vo.LabelStatisticVO;
+import com.simple.blog.vo.LabelVO;
 import com.simple.blog.vo.StatisticVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,6 +80,6 @@ public interface ElasticSearchFeignClient {
      * @return
      */
     @RequestMapping(value = "/es/statistic/article/kinds")
-    CommonDTO<LabelStatisticDTO> statisticArticleByKinds(CommonVO<LabelStatisticVO> commonVO);
+    CommonDTO<LabelDTO> statisticArticleByKinds(CommonVO<LabelVO> commonVO);
 
 }

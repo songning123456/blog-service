@@ -3,13 +3,11 @@ package com.simple.blog.vo;
 import lombok.Data;
 
 /**
- * @author songning
- * @date 2019/10/10
- * description
+ * @author: songning
+ * @date: 2019/10/13 18:39
  */
 @Data
-public class LabelStatisticVO {
-
+public class LabelVO {
     private String labelName;
 
     private Integer attention;

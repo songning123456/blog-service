@@ -2,11 +2,8 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.dto.LabelConfigDTO;
-import com.simple.blog.dto.LabelRelationDTO;
-import com.simple.blog.dto.LabelStatisticDTO;
+import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.entity.LabelConfig;
-import com.simple.blog.entity.LabelRelation;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
@@ -14,10 +11,8 @@ import com.simple.blog.service.RedisService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.JsonUtil;
-import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
-import com.simple.blog.vo.LabelConfigVO;
-import com.simple.blog.vo.LabelStatisticVO;
+import com.simple.blog.vo.LabelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,21 +38,21 @@ public class LabelServiceImpl implements LabelService {
     private final Object object = new Object();
 
     @Override
-    public CommonDTO<LabelRelationDTO> getSelectedLabel() {
-        CommonDTO<LabelRelationDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<LabelDTO> getSelectedLabel() {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
-        Map<String, String> labelRelationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.LABEL_RELATION, username);
+        Map<String, String> labelRelationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.PERSON_ATTENTION_LABEL, username);
         List<String> labelNames;
         if (labelRelationMap.isEmpty()) {
             labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + username, JsonUtil.convertObject2String(labelNames));
+            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
         } else {
-            String labelRelations = labelRelationMap.get(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + username);
+            String labelRelations = labelRelationMap.get(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
             labelNames = JsonUtil.convertString2Object(labelRelations, List.class);
         }
-        List<LabelRelationDTO> list = new ArrayList<>();
+        List<LabelDTO> list = new ArrayList<>();
         labelNames.forEach(labelName -> {
-            LabelRelationDTO labelRelationDTO = LabelRelationDTO.builder().labelName(labelName).build();
+            LabelDTO labelRelationDTO = LabelDTO.builder().labelName(labelName).build();
             list.add(labelRelationDTO);
         });
         commonDTO.setData(list);
@@ -66,20 +61,36 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelConfigDTO> getAllLabel(CommonVO<LabelConfigVO> vo) {
-        CommonDTO<LabelConfigDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo) {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = vo.getCondition().getLabelName();
-        List<LabelConfigDTO> list = new ArrayList<>();
+        List<LabelDTO> list = new ArrayList<>();
+        LabelDTO labelDTO = null;
+        // 根据 labelNam 模糊查询相关结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelName);
-        ClassConvertUtil.populateList(configList, list, LabelConfigDTO.class);
+        // 获取 此用户名下的关注标签
+        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String attentionLabel = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        List attentionList = JsonUtil.convertString2Object(attentionLabel, List.class);
+        // 获取所有标签
+        Map<String, String> allLabel = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        for (LabelConfig labelConfig : configList) {
+            labelDTO = JsonUtil.convertString2Object(allLabel.get(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName()), LabelDTO.class);
+            if (attentionList.contains(labelConfig.getLabelName())) {
+                labelDTO.setIsAttention(1);
+            } else {
+                labelDTO.setIsAttention(0);
+            }
+            list.add(labelDTO);
+        }
         commonDTO.setData(list);
         commonDTO.setTotal((long) list.size());
         return commonDTO;
     }
 
     @Override
-    public CommonDTO<LabelStatisticDTO> statisticLabel(CommonVO<LabelStatisticVO> vo) {
-        CommonDTO<LabelStatisticDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<LabelDTO> statisticLabel(CommonVO<LabelVO> vo) {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = vo.getCondition().getLabelName();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
         // 统计关注数
@@ -89,15 +100,15 @@ public class LabelServiceImpl implements LabelService {
         Long articleTotal = dataBaseUtil.getDataBase().statisticLabel(vo);
         Map<String, Object> attentionMap = labelRelationRepository.findAttentionByUsernameAndLabelNameNative(username, labelName);
         Integer isAttention = (int) attentionMap.get("attention");
-        LabelStatisticDTO labelStatisticDTO = LabelStatisticDTO.builder().articleTotal(articleTotal).isAttention(isAttention).attentionTotal(attentionTotal).build();
-        commonDTO.setData(Collections.singletonList(labelStatisticDTO));
+        LabelDTO labelDTO = LabelDTO.builder().numOfArticle(articleTotal).isAttention(isAttention).numOfAttention(attentionTotal).build();
+        commonDTO.setData(Collections.singletonList(labelDTO));
         commonDTO.setTotal(1L);
         return commonDTO;
     }
 
     @Override
-    public CommonDTO<LabelStatisticDTO> updateAttention(CommonVO<LabelStatisticVO> commonVO) {
-        CommonDTO<LabelStatisticDTO> commonDTO = new CommonDTO<>();
+    public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
@@ -107,7 +118,7 @@ public class LabelServiceImpl implements LabelService {
             if (isSuccess == 1) {
                 // 修改redis缓存中关注的标签
                 List<String> labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_RELATION + username, JsonUtil.convertObject2String(labelNames));
+                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
             }
         }
         // 统计关注数
@@ -116,8 +127,8 @@ public class LabelServiceImpl implements LabelService {
         // 是否已关注
         Map<String, Object> attentionMap = labelRelationRepository.findAttentionByUsernameAndLabelNameNative(username, labelName);
         Integer isAttention = (int) attentionMap.get("attention");
-        LabelStatisticDTO labelStatisticDTO = LabelStatisticDTO.builder().attentionTotal(attentionTotal).isAttention(isAttention).build();
-        commonDTO.setData(Collections.singletonList(labelStatisticDTO));
+        LabelDTO labelDTO = LabelDTO.builder().numOfAttention(attentionTotal).isAttention(isAttention).build();
+        commonDTO.setData(Collections.singletonList(labelDTO));
         commonDTO.setTotal(1L);
         return commonDTO;
     }

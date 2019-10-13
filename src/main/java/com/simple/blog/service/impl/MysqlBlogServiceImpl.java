@@ -2,14 +2,13 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.dto.LabelStatisticDTO;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.service.BlogService;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
-import com.simple.blog.vo.LabelStatisticVO;
+import com.simple.blog.vo.LabelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -126,7 +125,7 @@ public class MysqlBlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Long statisticLabel(CommonVO<LabelStatisticVO> vo) {
+    public Long statisticLabel(CommonVO<LabelVO> vo) {
         String labelName = vo.getCondition().getLabelName();
         Long articleTotal = blogRepository.countAllByKinds(labelName);
         return articleTotal;
