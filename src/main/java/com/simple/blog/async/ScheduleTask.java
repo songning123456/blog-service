@@ -63,6 +63,12 @@ public class ScheduleTask {
         this.theftBoke();
     }
 
+//    @Scheduled(cron = "0/60 * *  * * ?")
+//    public void theftArticle() throws Exception {
+//        this.theftMeituan();
+//        this.theftBoke();
+//    }
+
     private void theftMeituan() throws Exception {
         String url = "https://tech.meituan.com/";
         String random = RandomUtil.getRandom(2, 18);
