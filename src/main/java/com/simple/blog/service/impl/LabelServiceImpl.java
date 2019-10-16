@@ -66,7 +66,7 @@ public class LabelServiceImpl implements LabelService {
         String labelName = vo.getCondition().getLabelName();
         List<LabelDTO> list = new ArrayList<>();
         LabelDTO labelDTO = null;
-        // 根据 labelNam 模糊查询相关结果
+        // 根据 labelName 模糊查询相关结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelName);
         // 获取 此用户名下的关注标签
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
@@ -108,7 +108,6 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) {
-        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
@@ -119,18 +118,19 @@ public class LabelServiceImpl implements LabelService {
                 // 修改redis缓存中关注的标签
                 List<String> labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
                 redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+                // 修改全部标签的此标签的关注度
+                String labelObj = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
+                LabelDTO labelDTO = JsonUtil.convertString2Object(labelObj, LabelDTO.class);
+                labelDTO.setIsAttention(attention);
+                if (attention == 1) {
+                    labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
+                } else {
+                    labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() - 1);
+                }
+                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
             }
         }
-        // 统计关注数
-        Map<String, Object> countMap = labelRelationRepository.countAttentionNative(labelName);
-        Long attentionTotal = ((BigDecimal) countMap.get("total")).longValue();
-        // 是否已关注
-        Map<String, Object> attentionMap = labelRelationRepository.findAttentionByUsernameAndLabelNameNative(username, labelName);
-        Integer isAttention = (int) attentionMap.get("attention");
-        LabelDTO labelDTO = LabelDTO.builder().numOfAttention(attentionTotal).isAttention(isAttention).build();
-        commonDTO.setData(Collections.singletonList(labelDTO));
-        commonDTO.setTotal(1L);
-        return commonDTO;
+        return new CommonDTO<>();
     }
 
 }
