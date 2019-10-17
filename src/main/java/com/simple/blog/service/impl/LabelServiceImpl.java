@@ -108,6 +108,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
@@ -130,7 +131,16 @@ public class LabelServiceImpl implements LabelService {
                 redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
             }
         }
-        return new CommonDTO<>();
+        // 重新 查询 并返回结果
+        Map<String, String> allLabels = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        List<LabelDTO> list = new ArrayList<>();
+        for (Map.Entry<String, String> entry : allLabels.entrySet()) {
+            LabelDTO dto = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
+            list.add(dto);
+        }
+        commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
+        return commonDTO;
     }
 
 }
