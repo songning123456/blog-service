@@ -8,7 +8,6 @@ import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
-import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
@@ -41,18 +40,15 @@ public class LabelServiceImpl implements LabelService {
     public CommonDTO<LabelDTO> getSelectedLabel() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
-        Map<String, String> labelRelationMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.PERSON_ATTENTION_LABEL, username);
-        List<String> labelNames;
-        if (labelRelationMap.isEmpty()) {
+        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        List labelNames = JsonUtil.convertString2Object(person, List.class);
+        if (labelNames.isEmpty()) {
             labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
             redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
-        } else {
-            String labelRelations = labelRelationMap.get(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
-            labelNames = JsonUtil.convertString2Object(labelRelations, List.class);
         }
         List<LabelDTO> list = new ArrayList<>();
         labelNames.forEach(labelName -> {
-            LabelDTO labelRelationDTO = LabelDTO.builder().labelName(labelName).build();
+            LabelDTO labelRelationDTO = LabelDTO.builder().labelName(String.valueOf(labelName)).build();
             list.add(labelRelationDTO);
         });
         commonDTO.setData(list);
@@ -65,9 +61,14 @@ public class LabelServiceImpl implements LabelService {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = vo.getCondition().getLabelName();
         List<LabelDTO> list = new ArrayList<>();
-        LabelDTO labelDTO = null;
+        LabelDTO labelDTO;
         // 根据 labelName 模糊查询相关结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelName);
+        configList.sort((o1, o2) -> {
+            String labelName1 = o1.getLabelName();
+            String labelName2 = o2.getLabelName();
+            return labelName1.compareTo(labelName2);
+        });
         // 获取 此用户名下的关注标签
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
         String attentionLabel = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
@@ -81,6 +82,7 @@ public class LabelServiceImpl implements LabelService {
             } else {
                 labelDTO.setIsAttention(0);
             }
+            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName(), JsonUtil.convertObject2String(labelDTO));
             list.add(labelDTO);
         }
         commonDTO.setData(list);
@@ -122,10 +124,11 @@ public class LabelServiceImpl implements LabelService {
                 // 修改全部标签的此标签的关注度
                 String labelObj = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
                 LabelDTO labelDTO = JsonUtil.convertString2Object(labelObj, LabelDTO.class);
-                labelDTO.setIsAttention(attention);
                 if (attention == 1) {
+                    labelDTO.setIsAttention(1);
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
                 } else {
+                    labelDTO.setIsAttention(0);
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() - 1);
                 }
                 redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));

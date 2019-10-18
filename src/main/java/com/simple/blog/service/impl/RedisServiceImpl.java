@@ -2,13 +2,12 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.StringUtil;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author songning
@@ -28,10 +27,16 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Map<String, String> getValues(String... name) {
-        Map<String, String> map = new HashMap<>(16);
+        Map<String, String> map = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String c1 = o1.split(":")[o1.split(":").length - 1];
+                String c2 = o2.split(":")[o2.split(":").length - 1];
+                return c1.compareTo(c2);
+            }
+        });
         Set<String> sets = stringRedisTemplate.keys(StringUtil.getString(name) + "*");
-        for (String set : sets) {
-            String key = set;
+        for (String key : Objects.requireNonNull(sets)) {
             if (key.indexOf("~keys") > 0) {
                 continue;
             }
