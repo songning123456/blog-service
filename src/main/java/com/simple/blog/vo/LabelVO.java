@@ -10,5 +10,7 @@ import lombok.Data;
 public class LabelVO {
     private String labelName;
 
+    private String labelFuzzyName;
+
     private Integer attention;
 }

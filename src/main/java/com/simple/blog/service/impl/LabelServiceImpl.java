@@ -66,11 +66,11 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo) {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
-        String labelName = vo.getCondition().getLabelName();
+        String labelFuzzyName = vo.getCondition().getLabelFuzzyName();
         List<LabelDTO> list = new ArrayList<>();
         LabelDTO labelDTO;
         // 根据 labelName 模糊查询相关结果
-        List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelName);
+        List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelFuzzyName);
         configList.sort((o1, o2) -> {
             String labelName1 = o1.getLabelName();
             String labelName2 = o2.getLabelName();
@@ -120,6 +120,7 @@ public class LabelServiceImpl implements LabelService {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
+        String labelFuzzyName = commonVO.getCondition().getLabelFuzzyName();
         String username = httpServletRequestUtil.getUsername();
         synchronized (object) {
             // 更新关注状态
@@ -142,12 +143,18 @@ public class LabelServiceImpl implements LabelService {
             }
         }
         // 重新 查询 并返回结果
+        List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelFuzzyName);
         Map<String, String> allLabels = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
         List<LabelDTO> list = new ArrayList<>();
-        for (Map.Entry<String, String> entry : allLabels.entrySet()) {
-            LabelDTO dto = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
+        configList.forEach(config -> {
+            LabelDTO dto = JsonUtil.convertString2Object(allLabels.get(config.getLabelName()), LabelDTO.class);
             list.add(dto);
-        }
+        });
+        list.sort((o1, o2) -> {
+            String labelName1 = o1.getLabelName();
+            String labelName2 = o2.getLabelName();
+            return labelName1.compareTo(labelName2);
+        });
         commonDTO.setData(list);
         commonDTO.setTotal((long) list.size());
         return commonDTO;

@@ -9,6 +9,7 @@ import com.simple.blog.service.RedisService;
 import com.simple.blog.service.SystemConfigService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
+import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.SystemConfigVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,9 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         String configValue = commonVO.getCondition().getConfigValue();
         String valueDescription = commonVO.getCondition().getValueDescription();
         String username = httpServletRequestUtil.getUsername();
+        SystemConfig systemConfig = SystemConfig.builder().configKey(configKey).configValue(configValue).username(username).valueDescription(valueDescription).build();
         systemConfigRepository.updateSystemConfig(username, configKey, configValue, valueDescription);
+        redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + configKey, JsonUtil.convertObject2String(systemConfig));
         return new CommonDTO<>();
     }
 }
