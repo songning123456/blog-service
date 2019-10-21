@@ -8,6 +8,7 @@ import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.service.SystemConfigService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.SystemConfigVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class SystemConfigServiceImpl implements SystemConfigService {
 
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public CommonDTO<SystemConfigDTO> getSystemConfig(CommonVO<SystemConfigVO> commonVO) {
@@ -41,7 +44,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         String configKey = commonVO.getCondition().getConfigKey();
         String configValue = commonVO.getCondition().getConfigValue();
         String valueDescription = commonVO.getCondition().getValueDescription();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         Sort sort = new Sort(Sort.Direction.ASC, "config_key");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
         Page<SystemConfig> systemConfigPage = systemConfigRepository.findByUsernameAndConfigKeyAndConfigValueAndValueDescriptionNative(username, configKey, configValue, valueDescription, pageable);
@@ -58,7 +61,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         String configKey = commonVO.getCondition().getConfigKey();
         String configValue = commonVO.getCondition().getConfigValue();
         String valueDescription = commonVO.getCondition().getValueDescription();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         systemConfigRepository.updateSystemConfig(username, configKey, configValue, valueDescription);
         return new CommonDTO<>();
     }

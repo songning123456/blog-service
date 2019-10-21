@@ -19,18 +19,15 @@ public class DataBaseUtil {
 
     @Autowired
     private MysqlBlogServiceImpl mysqlBlogService;
-
     @Autowired
     private EsBlogServiceImpl esBlogService;
-
     @Autowired
     private SystemConfigRepository systemConfigRepository;
-
     @Autowired
-    private RedisService redisService;
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     public BlogService getDataBase() {
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         String dataBase = systemConfigRepository.findConfigValueByUsernameAndConfigKeyNative(username, "dataBase");
         if (CommonConstant.DATABASE_ES.equals(dataBase)) {
             return esBlogService;

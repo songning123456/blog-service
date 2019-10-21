@@ -9,12 +9,15 @@ import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.DataBaseUtil;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LabelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -33,18 +36,22 @@ public class LabelServiceImpl implements LabelService {
     private LabelConfigRepository labelConfigRepository;
     @Autowired
     private DataBaseUtil dataBaseUtil;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     private final Object object = new Object();
 
     @Override
     public CommonDTO<LabelDTO> getSelectedLabel() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
-        List labelNames = JsonUtil.convertString2Object(person, List.class);
-        if (labelNames.isEmpty()) {
+        List labelNames;
+        if (StringUtils.isEmpty(person)) {
             labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
             redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+        } else {
+            labelNames = JsonUtil.convertString2Object(person, List.class);
         }
         List<LabelDTO> list = new ArrayList<>();
         labelNames.forEach(labelName -> {
@@ -70,7 +77,7 @@ public class LabelServiceImpl implements LabelService {
             return labelName1.compareTo(labelName2);
         });
         // 获取 此用户名下的关注标签
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         String attentionLabel = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
         List attentionList = JsonUtil.convertString2Object(attentionLabel, List.class);
         // 获取所有标签
@@ -94,7 +101,7 @@ public class LabelServiceImpl implements LabelService {
     public CommonDTO<LabelDTO> statisticLabel(CommonVO<LabelVO> vo) {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = vo.getCondition().getLabelName();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         // 统计关注数
         Map<String, Object> countMap = labelRelationRepository.countAttentionNative(labelName);
         Long attentionTotal = ((BigDecimal) countMap.get("total")).longValue();
@@ -113,7 +120,7 @@ public class LabelServiceImpl implements LabelService {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         synchronized (object) {
             // 更新关注状态
             Integer isSuccess = labelRelationRepository.updateByUsernameAndLabelNameAndAttentionNative(username, labelName, attention);

@@ -8,6 +8,7 @@ import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.service.StatisticService;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.StatisticVO;
@@ -33,12 +34,12 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     private SystemConfigRepository systemConfigRepository;
     @Autowired
-    private RedisService redisService;
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public CommonDTO<StatisticDTO> getStatisticResult(CommonVO<StatisticVO> commonVO) {
         CommonDTO<StatisticDTO> commonDTO = new CommonDTO<>();
-        String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + "username");
+        String username = httpServletRequestUtil.getUsername();
         String dataBase = systemConfigRepository.findConfigValueByUsernameAndConfigKeyNative(username, "dataBase");
         if (CommonConstant.DATABASE_ES.equals(dataBase)) {
             // es 服务

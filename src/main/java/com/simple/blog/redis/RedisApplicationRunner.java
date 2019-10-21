@@ -62,10 +62,10 @@ public class RedisApplicationRunner implements ApplicationRunner {
             this.cacheLabel(labelConfigList);
         }
         if (systemConfigMap.isEmpty()) {
-            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getConfigKey(), JsonUtil.convertObject2String(item)));
+            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), JsonUtil.convertObject2String(item)));
         } else {
             redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
-            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getConfigKey(), JsonUtil.convertObject2String(item)));
+            systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), JsonUtil.convertObject2String(item)));
         }
         log.info("^^^^^缓存redis成功^^^^^");
     }
