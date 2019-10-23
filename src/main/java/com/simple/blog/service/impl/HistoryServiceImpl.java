@@ -47,9 +47,9 @@ public class HistoryServiceImpl implements HistoryService {
             String articleId = commonVO.getCondition().getArticleId();
             String username = httpServletRequestUtil.getUsername();
             Map<String, Object> map = blogRepository.findByIdNative(articleId);
-            title = title + " —— " + map.get("title");
+            title = CssStyleUtil.spans(title, " ", String.valueOf(map.get("title")));
             String time = DateUtil.dateToStr(new Date(), CommonConstant.DEFAULT_DATETIME_PATTERN);
-            String description = CssStyleUtil.getBoldAndItalicFont(username) + " 提交于 " + CssStyleUtil.getBoldAndItalicFont(time);
+            String description = CssStyleUtil.boldAndItalicFont(username) + " 提交于 " + CssStyleUtil.boldAndItalicFont(time);
             History history = History.builder().title(title).articleId(articleId).username(username).time(time).description(description).build();
             historyRepository.save(history);
         }

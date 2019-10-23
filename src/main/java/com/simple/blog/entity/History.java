@@ -27,7 +27,7 @@ public class History {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "title", columnDefinition = "VARCHAR(25) NOT NULL COMMENT '标题'")
+    @Column(name = "title", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '标题'")
     private String title;
 
     @Column(name = "username", columnDefinition = "VARCHAR(60) NOT NULL COMMENT '用户名'")

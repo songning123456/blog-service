@@ -7,9 +7,19 @@ package com.simple.blog.util;
  */
 public class CssStyleUtil {
 
-    public static String getBoldAndItalicFont(String text) {
-        String cssFont = "<span style='font-style:italic;font-weight:bold'>";
+    public static String boldAndItalicFont(String text) {
+        String cssStart = "<span style='font-style:italic;font-weight:bold'>";
         String cssEnd = "</span>";
-        return cssFont + text + cssEnd;
+        return cssStart + text + cssEnd;
+    }
+
+    public static String spans(String... texts) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String cssStart = "<span>";
+        String cssEnd = "</span>";
+        for (String text : texts) {
+            stringBuilder.append(cssStart).append(text).append(cssEnd);
+        }
+        return stringBuilder.toString();
     }
 }
