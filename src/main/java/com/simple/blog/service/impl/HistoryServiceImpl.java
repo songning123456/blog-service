@@ -43,16 +43,20 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public CommonDTO<HistoryDTO> insertHistory(CommonVO<HistoryVO> commonVO) {
         String title = commonVO.getCondition().getTitle();
+        String username = httpServletRequestUtil.getUsername();
+        String time = DateUtil.dateToStr(new Date(), CommonConstant.DEFAULT_DATETIME_PATTERN);
+        String description = CssStyleUtil.boldAndItalicFont(username) + " 提交于 " + CssStyleUtil.boldAndItalicFont(time);
+        History history;
         if (CommonConstant.READ_ARTICLE.equals(title)) {
             String articleId = commonVO.getCondition().getArticleId();
-            String username = httpServletRequestUtil.getUsername();
             Map<String, Object> map = blogRepository.findByIdNative(articleId);
             title = CssStyleUtil.spans(title, " ", String.valueOf(map.get("title")));
-            String time = DateUtil.dateToStr(new Date(), CommonConstant.DEFAULT_DATETIME_PATTERN);
-            String description = CssStyleUtil.boldAndItalicFont(username) + " 提交于 " + CssStyleUtil.boldAndItalicFont(time);
-            History history = History.builder().title(title).articleId(articleId).username(username).time(time).description(description).build();
-            historyRepository.save(history);
+            history = History.builder().title(title).articleId(articleId).username(username).time(time).description(description).build();
+        } else {
+            title = CssStyleUtil.spans(title);
+            history = History.builder().title(title).username(username).time(time).description(description).build();
         }
+        historyRepository.save(history);
         return new CommonDTO<>();
     }
 

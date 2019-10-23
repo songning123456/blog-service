@@ -43,4 +43,6 @@ public class CommonConstant {
      * 保存的历史记录类型
      */
     public static final String READ_ARTICLE = "阅读文章";
+    public static final String SIMPLE_CLOCK = "休眠时钟";
+    public static final String SIMPLE_MAP = "定位地图";
 }
