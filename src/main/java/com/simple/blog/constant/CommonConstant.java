@@ -38,4 +38,9 @@ public class CommonConstant {
      */
     public static final String DATABASE_ES = "ES";
     public static final String DATABASE_MYSQL = "MYSQL";
+
+    /**
+     * 保存的历史记录类型
+     */
+    public static final String READ_ARTICLE = "阅读文章";
 }
