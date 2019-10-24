@@ -47,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 此处的角色不需要 ROLE_ 前缀,实现UserDetailsService设置角色时需要 ROLE_ 前缀
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
-                .antMatchers("/hello","/login","/loginInfo","/logoutSuccess")
+                .antMatchers("/users/exist", "/hello","/login","/loginInfo","/logoutSuccess")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
