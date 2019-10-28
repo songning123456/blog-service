@@ -1,7 +1,9 @@
 package com.simple.blog.service.impl;
 
+import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.UsersDTO;
+import com.simple.blog.entity.Users;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.UsersService;
 import com.simple.blog.vo.CommonVO;
@@ -37,5 +39,16 @@ public class UsersServiceImpl implements UsersService {
         commonDTO.setData(Collections.singletonList(usersDTO));
         commonDTO.setTotal(1L);
         return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<UsersDTO> saveUser(CommonVO<UsersVO> commonVO) {
+        String username = commonVO.getCondition().getUsername();
+        String password = commonVO.getCondition().getPassword();
+        // 默认所有注册的用户权限都为 user
+        String role = CommonConstant.LOGIN_USER;
+        Users users = Users.builder().username(username).password(password).role(role).build();
+        usersRepository.save(users);
+        return new CommonDTO<>();
     }
 }

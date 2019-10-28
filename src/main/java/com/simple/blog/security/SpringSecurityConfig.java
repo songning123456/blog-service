@@ -36,7 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         /** JWT拦截器*/
         JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
         /** 将JWT拦截器添加到UsernamePasswordAuthenticationFilter之前*/
-        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.formLogin()
                 .loginPage("/loginInfo")
@@ -47,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 此处的角色不需要 ROLE_ 前缀,实现UserDetailsService设置角色时需要 ROLE_ 前缀
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
-                .antMatchers("/users/exist", "/hello","/login","/loginInfo","/logoutSuccess")
+                .antMatchers("/image/save", "/users/exist","/users/save", "/hello", "/login", "/loginInfo", "/logoutSuccess")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

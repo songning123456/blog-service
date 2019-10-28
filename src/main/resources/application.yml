@@ -36,3 +36,5 @@ server:
 
 blog:
   es.url: http://localhost:8074/
+  image:
+    path: simple-blog

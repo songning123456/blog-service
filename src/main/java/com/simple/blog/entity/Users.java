@@ -1,6 +1,6 @@
 package com.simple.blog.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -9,6 +9,9 @@ import javax.persistence.*;
  * @date 2019/9/18
  * description
  */
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @Entity
 @Table(name = "Users")
