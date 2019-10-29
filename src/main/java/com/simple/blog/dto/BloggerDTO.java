@@ -26,7 +26,7 @@ public class BloggerDTO {
 
     private String email;
 
-    private String introduction;
+    private String motto;
 
     private Date updateTime;
 

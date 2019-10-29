@@ -26,7 +26,7 @@ public class BloggerVO {
 
     private String email;
 
-    private String introduction;
+    private String motto;
 
     private String headPortrait;
 

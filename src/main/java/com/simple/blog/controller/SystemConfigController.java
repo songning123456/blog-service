@@ -39,4 +39,11 @@ public class SystemConfigController {
         CommonDTO<T> commonDTO = systemConfigService.updateSystemConfig(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/save")
+    @ControllerAspectAnnotation(description = "新增系统配置")
+    public <T> CommonDTO<T> saveSystemConfigs(@RequestBody CommonVO<SystemConfigVO> commonVO) {
+        CommonDTO<T> commonDTO = systemConfigService.saveSystemConfig(commonVO);
+        return commonDTO;
+    }
 }

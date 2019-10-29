@@ -13,5 +13,7 @@ public class SystemConfigVO {
 
     private String configValue;
 
+    private String username;
+
     private String valueDescription;
 }

@@ -10,6 +10,7 @@ import com.simple.blog.service.SystemConfigService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
+import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.SystemConfigVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: songning
@@ -66,6 +69,22 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         SystemConfig systemConfig = SystemConfig.builder().configKey(configKey).configValue(configValue).username(username).valueDescription(valueDescription).build();
         systemConfigRepository.updateSystemConfig(username, configKey, configValue, valueDescription);
         redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + configKey, JsonUtil.convertObject2String(systemConfig));
+        return new CommonDTO<>();
+    }
+
+    @Override
+    public <T> CommonDTO<T> saveSystemConfig(CommonVO<SystemConfigVO> commonVO) {
+        String username = commonVO.getCondition().getUsername();
+        List<Map<String, Object>> mapList = systemConfigRepository.findDistinctNative();
+        for (Map<String, Object> map : mapList) {
+            try {
+                SystemConfig systemConfig = (SystemConfig) MapConvertEntityUtil.mapToEntity(SystemConfig.class, map);
+                systemConfig.setUsername(username);
+                systemConfigRepository.save(systemConfig);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return new CommonDTO<>();
     }
 }

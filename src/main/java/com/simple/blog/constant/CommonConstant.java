@@ -14,6 +14,7 @@ public class CommonConstant {
     public static final String PERSON_ATTENTION_LABEL = "PersonAttentionLabel:";
     public static final String SYSTEM_CONFIG = "SystemConfig:";
     public static final String LOGIN_INFO = "login:";
+    public static final String LABEL_CONFIG = "LabelConfig:";
 
     /**
      * elasticsearch 索引名

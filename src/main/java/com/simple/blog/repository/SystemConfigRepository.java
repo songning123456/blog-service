@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author songning
  * @create 2019/8/14 8:21
@@ -33,4 +36,7 @@ public interface SystemConfigRepository extends JpaRepository<SystemConfig, Stri
     @Modifying
     @Query(value = "update system_config set config_key = ?2, config_value = ?3, value_description = ?4 where username = ?1", nativeQuery = true)
     void updateSystemConfig(String username, String configKey, String configValue, String valueDescription);
+
+    @Query(value = "select distinct (config_key) as configKey,config_value as configValue, value_description as valueDescription from system_config", nativeQuery = true)
+    List<Map<String, Object>> findDistinctNative();
 }

@@ -14,4 +14,6 @@ public interface SystemConfigService {
     CommonDTO<SystemConfigDTO> getSystemConfig(CommonVO<SystemConfigVO> commonVO);
 
     <T> CommonDTO<T> updateSystemConfig(CommonVO<SystemConfigVO> commonVO);
+
+    <T> CommonDTO<T> saveSystemConfig(CommonVO<SystemConfigVO> commonVO);
 }

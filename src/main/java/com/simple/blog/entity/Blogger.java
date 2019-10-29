@@ -45,8 +45,8 @@ public class Blogger {
     @Column(name = "email", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '邮箱'")
     private String email;
 
-    @Column(name = "introduction", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '介绍'")
-    private String introduction;
+    @Column(name = "motto", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '座右铭'")
+    private String motto;
 
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
     private Date updateTime;

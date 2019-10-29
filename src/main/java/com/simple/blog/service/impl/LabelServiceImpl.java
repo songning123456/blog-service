@@ -4,10 +4,12 @@ import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.entity.LabelConfig;
+import com.simple.blog.entity.LabelRelation;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
+import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
@@ -160,4 +162,36 @@ public class LabelServiceImpl implements LabelService {
         return commonDTO;
     }
 
+    @Override
+    public CommonDTO<LabelDTO> saveLabelRelation(CommonVO<List<LabelVO>> commonVO) {
+        List<LabelVO> src = commonVO.getCondition();
+        for (LabelVO labelVO : src) {
+            String labelName = labelVO.getLabelName();
+            String username = labelVO.getUsername();
+            Integer attention = labelVO.getAttention();
+            LabelRelation labelRelation = LabelRelation.builder().labelName(labelName).username(username).attention(attention).build();
+            labelRelationRepository.save(labelRelation);
+        }
+        return new CommonDTO<>();
+    }
+
+    @Override
+    public CommonDTO<LabelDTO> getAllLabelConfig() {
+        CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
+        Map<String, String> result = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_CONFIG);
+        List<LabelDTO> list = new ArrayList<>();
+        if (result.isEmpty()) {
+            List<LabelConfig> labelConfigList = labelConfigRepository.findAll();
+            ClassConvertUtil.populateList(labelConfigList, list, LabelDTO.class);
+        } else {
+            LabelDTO labelDTO = null;
+            for (Map.Entry<String, String> entry : result.entrySet()) {
+                labelDTO = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
+                list.add(labelDTO);
+            }
+        }
+        commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
+        return commonDTO;
+    }
 }

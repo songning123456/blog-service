@@ -237,7 +237,7 @@ public class BlogApplicationTests {
         blogger.setProfession("公务员");
         blogger.setTelephone("15550779134");
         blogger.setEmail("3123476563@qq.com");
-        blogger.setIntroduction("好好学习，天天向上");
+        blogger.setMotto("好好学习，天天向上");
         blogger.setHeadPortrait("headPortrait/songning.svg");
         blogger.setUsername("shenkeye");
         blogger.setUpdateTime(new Date());
