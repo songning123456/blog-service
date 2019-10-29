@@ -170,7 +170,15 @@ public class LabelServiceImpl implements LabelService {
             String username = labelVO.getUsername();
             Integer attention = labelVO.getAttention();
             LabelRelation labelRelation = LabelRelation.builder().labelName(labelName).username(username).attention(attention).build();
-            labelRelationRepository.save(labelRelation);
+            synchronized (object) {
+                labelRelationRepository.save(labelRelation);
+                if (attention == 1) {
+                    String result = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
+                    LabelDTO labelDTO = JsonUtil.convertString2Object(result, LabelDTO.class);
+                    labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
+                    redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
+                }
+            }
         }
         return new CommonDTO<>();
     }
