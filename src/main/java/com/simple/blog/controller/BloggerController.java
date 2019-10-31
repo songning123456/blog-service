@@ -25,7 +25,7 @@ public class BloggerController {
     @Autowired
     private BloggerService bloggerService;
 
-    @PostMapping("/insert")
+    @PostMapping("/save")
     @ControllerAspectAnnotation(description = "插入登陆作者信息")
     public CommonDTO<BloggerDTO> insertBlogger(@RequestBody CommonVO<BloggerVO> commonVO) {
         bloggerService.saveBlogger(commonVO);

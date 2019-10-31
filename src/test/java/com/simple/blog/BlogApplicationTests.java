@@ -40,6 +40,8 @@ public class BlogApplicationTests {
     @Autowired
     private SystemConfigRepository systemConfigRepository;
     @Autowired
+    private UsersRepository usersRepository;
+    @Autowired
     private PersonalInformationRepository personalInformationRepository;
     @Autowired
     private LabelConfigRepository labelConfigRepository;
@@ -105,6 +107,16 @@ public class BlogApplicationTests {
         FileUtil.appendDataToFile(target, fileName);
         long fileLength = FileUtil.getFileSize(new File(fileName));
         System.out.println(fileLength);
+    }
+
+    @Test
+    public void insertUsers() {
+        Users songning = Users.builder().username("songning").password("123456").role("ADMIN").build();
+        Users haozhou = Users.builder().username("haozhou").password("123456").role("USER").build();
+        Users shijie = Users.builder().username("shijie").password("123456").role("USER").build();
+        Users shenkeye = Users.builder().username("shenkeye").password("123456").role("USER").build();
+        List<Users> usersList = Arrays.asList(songning, haozhou, shenkeye, shijie);
+        usersRepository.saveAll(usersList);
     }
 
     /**
