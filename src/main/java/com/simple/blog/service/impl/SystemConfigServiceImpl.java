@@ -71,20 +71,4 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + configKey, JsonUtil.convertObject2String(systemConfig));
         return new CommonDTO<>();
     }
-
-    @Override
-    public <T> CommonDTO<T> saveSystemConfig(CommonVO<SystemConfigVO> commonVO) {
-        String username = commonVO.getCondition().getUsername();
-        List<Map<String, Object>> mapList = systemConfigRepository.findDistinctNative();
-        for (Map<String, Object> map : mapList) {
-            try {
-                SystemConfig systemConfig = (SystemConfig) MapConvertEntityUtil.mapToEntity(SystemConfig.class, map);
-                systemConfig.setUsername(username);
-                systemConfigRepository.save(systemConfig);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return new CommonDTO<>();
-    }
 }

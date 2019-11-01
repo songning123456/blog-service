@@ -40,15 +40,4 @@ public class UsersServiceImpl implements UsersService {
         commonDTO.setTotal(1L);
         return commonDTO;
     }
-
-    @Override
-    public CommonDTO<UsersDTO> saveUser(CommonVO<UsersVO> commonVO) {
-        String username = commonVO.getCondition().getUsername();
-        String password = commonVO.getCondition().getPassword();
-        // 默认所有注册的用户权限都为 user
-        String role = CommonConstant.LOGIN_USER;
-        Users users = Users.builder().username(username).password(password).role(role).build();
-        usersRepository.save(users);
-        return new CommonDTO<>();
-    }
 }

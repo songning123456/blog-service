@@ -12,13 +12,6 @@ import com.simple.blog.vo.CommonVO;
 public interface BloggerService {
 
     /**
-     * 插入登陆作者信息
-     *
-     * @param commonVO
-     */
-    void saveBlogger(CommonVO<BloggerVO> commonVO);
-
-    /**
      * 获取登陆信息
      *
      * @param commonVO

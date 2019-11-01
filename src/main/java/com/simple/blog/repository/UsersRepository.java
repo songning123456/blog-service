@@ -26,9 +26,12 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     /**
      * 根据用户名查询密码
+     *
      * @param username
      * @return
      */
     @Query(value = "select password,role from users where username = :username", nativeQuery = true)
     Map<String, Object> findPasswordAndRoleByNameNative(@Param("username") String username);
+
+    void deleteAllByUsername(String username);
 }

@@ -52,13 +52,6 @@ public class LabelController {
         return commonDTO;
     }
 
-    @PostMapping("/saveLabelRelation")
-    @ControllerAspectAnnotation(description = "注册信息时插入对应关系")
-    public CommonDTO<LabelDTO> saveLabelRelations(@RequestBody CommonVO<List<LabelVO>> commonVO) {
-        CommonDTO<LabelDTO> commonDTO = labelService.saveLabelRelation(commonVO);
-        return commonDTO;
-    }
-
     @GetMapping("/getLabelConfig")
     @ControllerAspectAnnotation(description = "注册时,获取所有标签")
     public CommonDTO<LabelDTO> getAllLabelConfigs() {

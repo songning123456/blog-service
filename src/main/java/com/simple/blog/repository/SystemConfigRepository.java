@@ -39,4 +39,6 @@ public interface SystemConfigRepository extends JpaRepository<SystemConfig, Stri
 
     @Query(value = "select distinct (config_key) as configKey,config_value as configValue, value_description as valueDescription from system_config", nativeQuery = true)
     List<Map<String, Object>> findDistinctNative();
+
+    void deleteAllByUsername(String username);
 }

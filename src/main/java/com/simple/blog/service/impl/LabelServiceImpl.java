@@ -163,27 +163,6 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelDTO> saveLabelRelation(CommonVO<List<LabelVO>> commonVO) {
-        List<LabelVO> src = commonVO.getCondition();
-        for (LabelVO labelVO : src) {
-            String labelName = labelVO.getLabelName();
-            String username = labelVO.getUsername();
-            Integer attention = labelVO.getAttention();
-            LabelRelation labelRelation = LabelRelation.builder().labelName(labelName).username(username).attention(attention).build();
-            synchronized (object) {
-                labelRelationRepository.save(labelRelation);
-                if (attention == 1) {
-                    String result = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
-                    LabelDTO labelDTO = JsonUtil.convertString2Object(result, LabelDTO.class);
-                    labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
-                    redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
-                }
-            }
-        }
-        return new CommonDTO<>();
-    }
-
-    @Override
     public CommonDTO<LabelDTO> getAllLabelConfig() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         Map<String, String> result = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_CONFIG);

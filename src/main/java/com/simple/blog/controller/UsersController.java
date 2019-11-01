@@ -30,11 +30,4 @@ public class UsersController {
         CommonDTO<UsersDTO> commonDTO = usersService.isExist(commonVO);
         return commonDTO;
     }
-
-    @PostMapping("/save")
-    @ControllerAspectAnnotation(description = "保存用户")
-    public CommonDTO<UsersDTO> saveUsers(@RequestBody CommonVO<UsersVO> commonVO) {
-        CommonDTO<UsersDTO> commonDTO = usersService.saveUser(commonVO);
-        return commonDTO;
-    }
 }

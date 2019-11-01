@@ -1,12 +1,11 @@
 package com.simple.blog.controller;
 
 import com.simple.blog.annotation.ControllerAspectAnnotation;
-import com.simple.blog.dto.BloggerDTO;
 import com.simple.blog.dto.CommonDTO;
-import com.simple.blog.entity.Blogger;
-import com.simple.blog.service.BloggerService;
-import com.simple.blog.vo.BloggerVO;
+import com.simple.blog.dto.RegisterDTO;
+import com.simple.blog.service.RegisterService;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.RegisterVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,20 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author sn
+ * @author songning
+ * @date 2019/11/1
+ * description
  */
 @RestController
 @Slf4j
-@RequestMapping(value = "/blogger")
-public class BloggerController {
+@RequestMapping(value = "/register")
+public class RegisterController {
 
     @Autowired
-    private BloggerService bloggerService;
+    private RegisterService registerService;
 
-    @PostMapping("/getBlogger")
-    @ControllerAspectAnnotation(description = "获取登陆信息")
-    public CommonDTO<BloggerDTO> getBloggerInfo(@RequestBody CommonVO<BloggerVO> commonVO) {
-        CommonDTO<BloggerDTO> commonDTO = bloggerService.getBlogger(commonVO);
+    @PostMapping("/all")
+    @ControllerAspectAnnotation(description = "注册users, system-config, blogger, labelRelation表")
+    public CommonDTO<RegisterDTO> registerAll(@RequestBody CommonVO<RegisterVO> commonVO) {
+        CommonDTO<RegisterDTO> commonDTO = registerService.registerAll(commonVO);
         return commonDTO;
     }
 }

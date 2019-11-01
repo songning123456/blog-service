@@ -28,15 +28,6 @@ public class BloggerServiceImpl implements BloggerService {
     private BloggerRepository bloggerRepository;
 
     @Override
-    public void saveBlogger(CommonVO<BloggerVO> commonVO) {
-        BloggerVO bloggerVO = commonVO.getCondition();
-        Blogger blogger = new Blogger();
-        ClassConvertUtil.populate(bloggerVO, blogger);
-        blogger.setUpdateTime(new Date());
-        bloggerRepository.save(blogger);
-    }
-
-    @Override
     public CommonDTO<BloggerDTO> getBlogger(CommonVO<BloggerVO> commonVO) {
         CommonDTO<BloggerDTO> commonDTO = new CommonDTO<>();
         String author = commonVO.getCondition().getAuthor();

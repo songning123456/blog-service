@@ -13,6 +13,4 @@ import com.simple.blog.vo.UsersVO;
 public interface UsersService {
 
     CommonDTO<UsersDTO> isExist(CommonVO<UsersVO> commonVO);
-
-    CommonDTO<UsersDTO> saveUser(CommonVO<UsersVO> commonVO);
 }

@@ -21,7 +21,5 @@ public interface LabelService {
 
     CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO);
 
-    CommonDTO<LabelDTO> saveLabelRelation(CommonVO<List<LabelVO>> commonVO);
-
     CommonDTO<LabelDTO> getAllLabelConfig();
 }
