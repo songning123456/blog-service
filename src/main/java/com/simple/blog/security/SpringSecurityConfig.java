@@ -47,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 此处的角色不需要 ROLE_ 前缀,实现UserDetailsService设置角色时需要 ROLE_ 前缀
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
-                .antMatchers("/label/saveLabelRelation","/label/getLabelConfig","/blogger/save","/systemConfig/save", "/image/save", "/users/exist", "/users/save", "/hello", "/login", "/loginInfo", "/logoutSuccess")
+                .antMatchers("/image/original", "/label/saveLabelRelation", "/label/getLabelConfig", "/blogger/save", "/systemConfig/save", "/image/save", "/users/exist", "/users/save", "/hello", "/login", "/loginInfo", "/logoutSuccess")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -31,7 +32,7 @@ public class ImageServiceImpl implements ImageService {
     public CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile) {
         CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
         String imageFile = System.getProperty("user.home") + File.separator + path;
-        String imageName = UUID.randomUUID() + ".jpg";
+        String imageName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         String imageSrc = imageFile + File.separator + imageName;
         try {
             InputStream inputStream = multipartFile.getInputStream();
