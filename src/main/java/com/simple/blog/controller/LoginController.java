@@ -18,16 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class LoginController {
 
-    /**
-     * 无需登陆
-     *
-     * @return
-     */
-    @GetMapping("/hello")
-    public String main() {
-        return "hello";
-    }
-
     @RequestMapping("/loginInfo")
     @ControllerAspectAnnotation(description = "未登陆时的情况")
     public <T> CommonDTO<T> loginInfo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
@@ -36,19 +26,6 @@ public class LoginController {
         commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
         httpServletResponse.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
         return commonDTO;
-    }
-
-    /**
-     * /test1 和 /test2 需要登录后才能访问
-     */
-    @GetMapping("/test1")
-    public String test1() {
-        return "test1";
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        return "test2";
     }
 
     /**

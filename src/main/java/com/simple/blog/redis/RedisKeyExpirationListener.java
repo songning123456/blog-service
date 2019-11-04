@@ -1,6 +1,5 @@
 package com.simple.blog.redis;
 
-import com.simple.blog.constant.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.KeyExpirationEventMessageListener;
@@ -31,10 +30,5 @@ public class RedisKeyExpirationListener extends KeyExpirationEventMessageListene
         // 用户做自己的业务处理即可,注意message.toString()可以获取失效的key
         String expiredKey = message.toString();
         String[] expires = expiredKey.split(":");
-        // 目前只有token 过期
-        if ("RedisCache".equals(expires[0]) && "login".equals(expires[1])) {
-            String token = expires[2];
-            log.info(token);
-        }
     }
 }
