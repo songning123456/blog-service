@@ -91,7 +91,6 @@ public class LabelServiceImpl implements LabelService {
             } else {
                 labelDTO.setIsAttention(0);
             }
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName(), JsonUtil.convertObject2String(labelDTO));
             list.add(labelDTO);
         }
         commonDTO.setData(list);
@@ -135,10 +134,8 @@ public class LabelServiceImpl implements LabelService {
                 String labelObj = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
                 LabelDTO labelDTO = JsonUtil.convertString2Object(labelObj, LabelDTO.class);
                 if (attention == 1) {
-                    labelDTO.setIsAttention(1);
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
                 } else {
-                    labelDTO.setIsAttention(0);
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() - 1);
                 }
                 redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
@@ -147,9 +144,16 @@ public class LabelServiceImpl implements LabelService {
         // 重新 查询 并返回结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelFuzzyName);
         Map<String, String> allLabels = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        String personalLabels = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        List personalList = JsonUtil.convertString2Object(personalLabels, List.class);
         List<LabelDTO> list = new ArrayList<>();
         configList.forEach(config -> {
             LabelDTO dto = JsonUtil.convertString2Object(allLabels.get(config.getLabelName()), LabelDTO.class);
+            if (personalList.contains(dto.getLabelName())) {
+                dto.setIsAttention(1);
+            } else {
+                dto.setIsAttention(0);
+            }
             list.add(dto);
         });
         list.sort((o1, o2) -> {
