@@ -28,12 +28,12 @@ import java.util.stream.Collectors;
 @EnableScheduling
 public class ScheduleTask {
 
-    private List<String> authors = Arrays.asList("吃顿好的", "cest mom seul", "zhou", "重零开始");
+    private List<String> authors = Arrays.asList("吃顿好的", "cest mom seul", "zhou", "重零开始", "安静的猫");
 
-    private  List<String> labels = Arrays.asList(
+    private List<String> labels = Arrays.asList(
             "前端", "后端", "JavaScript", "GitHub", "架构", "代码规范", "面试", "算法", "Android", "CSS",
             "程序员", "Vue.js", "Java", "Node.js", "数据库", "设计模式", "设计", "前端框架", "HTML", "开源",
-            "产品", "Linux", "React.js", "Git", "Python","比特币", "单元测试", "flexbox", "Java EE",
+            "产品", "Linux", "React.js", "Git", "Python", "比特币", "单元测试", "flexbox", "Java EE",
             "IOS", "人工智能", "微信小程序", "Webpack", "全栈", "微信", "ECMAScript 6", "MYSQL", "HTTP", "Google",
             "正则表达式", "机器学习", "黑客", "Jquery", "响应式设计", "APP", "创业", "Chrome", "Nginx", "编程语言",
             "命令行", "Doctor", "Redis", "产品经理", "Android Studio", "Angular.js", "Mac", "React Native", "BootStrap", "Apple",
@@ -80,7 +80,7 @@ public class ScheduleTask {
             String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
             String readTimes = RandomUtil.getRandom(1, 1000);
             String content = doc.getElementsByClass("post-content").html();
-            String author = authors.get(Integer.parseInt(RandomUtil.getRandom(0, 3)));
+            String author = authors.get(Integer.parseInt(RandomUtil.getRandom(0, 4)));
             String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
             Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
             final String[] summary = new String[1];
@@ -111,7 +111,7 @@ public class ScheduleTask {
                 }
             });
             String content = doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").html();
-            String author = authors.get(Integer.parseInt(RandomUtil.getRandom(0, 3)));
+            String author = authors.get(Integer.parseInt(RandomUtil.getRandom(0, 4)));
             Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
             Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
             blogRepository.save(blog);
