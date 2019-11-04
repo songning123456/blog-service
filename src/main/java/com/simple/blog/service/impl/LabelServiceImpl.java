@@ -1,10 +1,10 @@
 package com.simple.blog.service.impl;
 
 import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.entity.LabelConfig;
-import com.simple.blog.entity.LabelRelation;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.LabelService;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -47,6 +46,11 @@ public class LabelServiceImpl implements LabelService {
     public CommonDTO<LabelDTO> getSelectedLabel() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
         List labelNames;
         if (StringUtils.isEmpty(person)) {
@@ -80,6 +84,11 @@ public class LabelServiceImpl implements LabelService {
         });
         // 获取 此用户名下的关注标签
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         String attentionLabel = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
         List attentionList = JsonUtil.convertString2Object(attentionLabel, List.class);
         // 获取所有标签
@@ -103,6 +112,11 @@ public class LabelServiceImpl implements LabelService {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = vo.getCondition().getLabelName();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         // 统计关注数
         Map<String, Object> countMap = labelRelationRepository.countAttentionNative(labelName);
         Long attentionTotal = ((BigDecimal) countMap.get("total")).longValue();
@@ -123,6 +137,11 @@ public class LabelServiceImpl implements LabelService {
         Integer attention = commonVO.getCondition().getAttention();
         String labelFuzzyName = commonVO.getCondition().getLabelFuzzyName();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         synchronized (object) {
             // 更新关注状态
             Integer isSuccess = labelRelationRepository.updateByUsernameAndLabelNameAndAttentionNative(username, labelName, attention);

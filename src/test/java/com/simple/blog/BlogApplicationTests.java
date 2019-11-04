@@ -17,12 +17,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -47,6 +49,8 @@ public class BlogApplicationTests {
     private LabelConfigRepository labelConfigRepository;
     @Autowired
     private LabelRelationRepository labelRelationRepository;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     private List<String> usernames = Arrays.asList("shenkeye", "shijie", "haozhou", "songning");
 
@@ -309,5 +313,15 @@ public class BlogApplicationTests {
                 labelRelationRepository.save(labelRelation);
             });
         });
+    }
+
+    @Test
+    public void testRedisSetTimeout() throws InterruptedException {
+        stringRedisTemplate.opsForValue().set("timeOutKey", "timeOut", 5, TimeUnit.SECONDS);
+        String timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
+        System.out.println("通过set(K key, V value, long timeout, TimeUnit unit)方法设置过期时间，过期之前获取的数据:" + timeOutValue);
+        Thread.sleep(5 * 1000);
+        timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
+        System.out.print(",等待10s过后，获取的值:" + timeOutValue);
     }
 }

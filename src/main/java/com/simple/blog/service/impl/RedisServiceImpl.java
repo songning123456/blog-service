@@ -2,12 +2,12 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.StringUtil;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author songning
@@ -54,5 +54,10 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public void setValue(String key, String value) {
         stringRedisTemplate.opsForValue().set(key, value);
+    }
+
+    @Override
+    public void setExpireValue(String key, String value, long timeout) {
+        stringRedisTemplate.opsForValue().set(key, value, timeout, TimeUnit.SECONDS);
     }
 }

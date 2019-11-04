@@ -16,4 +16,5 @@ public interface RedisService {
 
     void setValue(String key, String value);
 
+    void setExpireValue(String key,String value, long timeout);
 }

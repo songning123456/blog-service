@@ -1,19 +1,19 @@
 package com.simple.blog.service.impl;
 
 import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.StatisticDTO;
 import com.simple.blog.feign.ElasticSearchFeignClient;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.SystemConfigRepository;
-import com.simple.blog.service.RedisService;
 import com.simple.blog.service.StatisticService;
 import com.simple.blog.util.HttpServletRequestUtil;
-import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,11 @@ public class StatisticServiceImpl implements StatisticService {
     public CommonDTO<StatisticDTO> getStatisticResult(CommonVO<StatisticVO> commonVO) {
         CommonDTO<StatisticDTO> commonDTO = new CommonDTO<>();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         String dataBase = systemConfigRepository.findConfigValueByUsernameAndConfigKeyNative(username, "dataBase");
         if (CommonConstant.DATABASE_ES.equals(dataBase)) {
             // es 服务

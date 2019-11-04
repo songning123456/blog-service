@@ -46,7 +46,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         // 将 key:token value:username 缓存到redis,方便后续接口根据token直接获取username
         String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + token);
         if (StringUtils.isEmpty(username)) {
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + token, authentication.getName());
+            redisService.setExpireValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + token, authentication.getName(), 60 * 6024 * 15);
         }
         Map<String, Object> tokenInfo = new HashMap<>(2);
         tokenInfo.put("Authorization", token);

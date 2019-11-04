@@ -1,6 +1,7 @@
 package com.simple.blog.service.impl;
 
 import com.simple.blog.constant.CommonConstant;
+import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.HistoryDTO;
 import com.simple.blog.entity.History;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,8 +44,14 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public CommonDTO<HistoryDTO> insertHistory(CommonVO<HistoryVO> commonVO) {
+        CommonDTO<HistoryDTO> commonDTO = new CommonDTO<>();
         String title = commonVO.getCondition().getTitle();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         String time = DateUtil.dateToStr(new Date(), CommonConstant.DEFAULT_DATETIME_PATTERN);
         String description = CssStyleUtil.boldAndItalicFont(username) + " 提交于 " + CssStyleUtil.boldAndItalicFont(time);
         History history;
@@ -57,7 +65,7 @@ public class HistoryServiceImpl implements HistoryService {
             history = History.builder().title(title).username(username).time(time).description(description).build();
         }
         historyRepository.save(history);
-        return new CommonDTO<>();
+        return commonDTO;
     }
 
     @Override
@@ -66,6 +74,11 @@ public class HistoryServiceImpl implements HistoryService {
         Integer recordStartNo = commonVO.getRecordStartNo();
         Integer pageRecordNum = commonVO.getPageRecordNum();
         String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
         Sort sort = new Sort(Sort.Direction.DESC, "time");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
         Page<History> historyPage = historyRepository.findHistoryNative(username, pageable);

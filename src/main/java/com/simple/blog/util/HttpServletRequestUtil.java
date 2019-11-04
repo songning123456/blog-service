@@ -21,14 +21,13 @@ public class HttpServletRequestUtil {
     private RedisService redisService;
 
     public String getUsername() {
+        String username = "";
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes != null) {
             HttpServletRequest request = attributes.getRequest();
             String token = request.getHeader("Authorization");
-            String username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + token);
-            return username;
-        } else {
-            return "none";
+            username = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.LOGIN_INFO + token);
         }
+        return username;
     }
 }
