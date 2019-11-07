@@ -82,7 +82,10 @@ public class RedisApplicationRunner implements ApplicationRunner {
         for (LabelConfig labelConfig : labelConfigList) {
             // 统计关注数
             countMap = labelRelationRepository.countAttentionNative(labelConfig.getLabelName());
-            Long numOfAttention = ((BigDecimal) countMap.get("total")).longValue();
+            long numOfAttention = 0L;
+            if (!countMap.isEmpty() && countMap.get("total") != null) {
+                numOfAttention = ((BigDecimal) countMap.get("total")).longValue();
+            }
             // 统计文章总数
             labelVO.setLabelName(labelConfig.getLabelName());
             commonVO.setCondition(labelVO);
