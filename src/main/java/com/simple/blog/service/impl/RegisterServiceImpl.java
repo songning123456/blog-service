@@ -121,6 +121,12 @@ public class RegisterServiceImpl implements RegisterService {
                 commonDTO.setMessage("注册blogger失败");
             }
         } catch (Exception e) {
+            synchronized (object) {
+                labelRelationRepository.deleteAllByUsername(username);
+                systemConfigRepository.deleteAllByUsername(username);
+                usersRepository.deleteAllByUsername(username);
+                bloggerRepository.deleteAllByUsername(username);
+            }
             commonDTO.setStatus(500);
             commonDTO.setMessage("注册users失败");
         }

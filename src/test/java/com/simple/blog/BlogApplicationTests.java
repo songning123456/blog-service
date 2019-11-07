@@ -54,6 +54,8 @@ public class BlogApplicationTests {
 
     private List<String> usernames = Arrays.asList("shenkeye", "shijie", "haozhou", "songning");
 
+    private List<String> authors = Arrays.asList("安静的猫", "凌晨三点半");
+
     private List<String> labels = Arrays.asList(
             "前端", "后端", "JavaScript", "GitHub", "架构", "代码规范", "面试", "算法", "Android", "CSS",
             "程序员", "Vue.js", "Java", "Node.js", "数据库", "设计模式", "设计", "前端框架", "HTML", "开源",
@@ -328,5 +330,87 @@ public class BlogApplicationTests {
     @Test
     public void testLog() {
         log.info("测试日志是否生效");
+    }
+
+    @Test
+    public void insertMeituan() throws Exception {
+        String url = "https://tech.meituan.com/";
+//        String random = RandomUtil.getRandom(2, 18);
+        // 爬虫美团
+        for (int k = 11; k <= 19; k++) {
+            Document document = Jsoup.connect(url + "/page/" + k + ".html").get();
+            List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
+            for (int j = 0; j < articleUrls.size(); j++) {
+                Document doc = Jsoup.connect(articleUrls.get(j)).get();
+                String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String content = doc.getElementsByClass("post-content").html();
+                String author = authors.get(1);
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
+                final String[] summary = new String[1];
+                doc.getElementsByClass("post-content").get(0).getElementsByClass("content").get(0).getElementsByTag("p").forEach(item -> {
+                    if (!StringUtils.isEmpty(item.html()) && StringUtils.isEmpty(summary[0])) {
+                        summary[0] = item.html();
+                    }
+                });
+                Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+//                blogRepository.save(blog);
+            }
+        }
+    }
+
+    @Test
+    public void insertBoke() throws Exception {
+        String url = "https://www.boke.la/wenzhang/";
+//        String random = RandomUtil.getRandom(2, 35);
+        for (int k = 18; k <= 35; k++) {
+            Document document = Jsoup.connect(url + k + "/").get();
+            List<String> articleUrls = document.getElementsByClass("news").get(0).getElementsByTag("li").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
+            for (String articleUrl : articleUrls) {
+                Document doc = Jsoup.connect(articleUrl).get();
+                String title = doc.getElementsByClass("zwtit2").get(0).getElementsByTag("h3").html();
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                final String[] summary = new String[1];
+                doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").forEach(item -> {
+                    if (!StringUtils.isEmpty(item.html()) && StringUtils.isEmpty(summary[0])) {
+                        summary[0] = item.html();
+                    }
+                });
+                String content = doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").html();
+                String author = authors.get(1);
+                Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
+                Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+//                blogRepository.save(blog);
+            }
+        }
+    }
+
+    @Test
+    public void insertJuejin() throws Exception {
+        List<String> head = Arrays.asList("recommended");
+        List<String> tail = Arrays.asList("?sort=popular", "?sort=newest", "?sort=three_days_hottest");
+        String url = "https://juejin.im/welcome/";
+        List<String> authors = blogRepository.getAllAuthorNative();
+        String random = RandomUtil.getRandom(0, authors.size() - 1);
+        Document document = Jsoup.connect(url + head.get(0) + tail.get(0)).get();
+        Thread.sleep(5000);
+        List<String> articleUrls = document.getElementsByClass("title-row").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
+        for (int j = 0; j < articleUrls.size(); j++) {
+            Document doc = Jsoup.connect(articleUrls.get(j)).get();
+            String title = doc.getElementsByClass("article-title").get(0).html();
+            Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
+            if ((int) totalMap.get("total") == 0) {
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String content = doc.getElementsByClass("article-content").get(0).html();
+                String author = authors.get(Integer.parseInt(random));
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
+                String summary = content.substring(0, content.length() / 4);
+                Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+//                blogRepository.save(blog);
+            }
+        }
     }
 }

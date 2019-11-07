@@ -57,11 +57,11 @@ public class ScheduleTask {
      *
      * @throws Exception
      */
-    @Scheduled(cron = "0 0 1 * * *")
-    public void theftArticle() throws Exception {
-        this.theftMeituan();
-        this.theftBoke();
-    }
+//    @Scheduled(cron = "0 0 1 * * *")
+//    public void theftArticle() throws Exception {
+//        this.theftMeituan();
+//        this.theftBoke();
+//    }
 
 //    @Scheduled(cron = "0/60 * *  * * ?")
 //    public void theftArticle() throws Exception {

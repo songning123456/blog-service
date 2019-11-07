@@ -66,4 +66,10 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
     List<Map<String, Object>> statisticAuthor(String startTime, String endTime);
 
     Long countAllByKinds(String kinds);
+
+    @Query(value = "select count(*) as total from blog where title = ?1", nativeQuery = true)
+    Map<String, Object> countArticleByTitleNative(String title);
+
+    @Query(value = "select distinct(author) from simple_blog.blog", nativeQuery = true)
+    List<String> getAllAuthorNative();
 }
