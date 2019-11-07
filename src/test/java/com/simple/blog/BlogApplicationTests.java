@@ -94,23 +94,23 @@ public class BlogApplicationTests {
      */
     @Test
     public void outputTxt() {
-        List<String> target = new ArrayList<>();
-        List<Map<String, Object>> src = blogRepository.getAllAuthorAndTitle();
-        src.forEach(item -> {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (Map.Entry<String, Object> entry : item.entrySet()) {
-                if (stringBuilder.length() == 0) {
-                    stringBuilder.append("{'").append(entry.getKey()).append("':'").append(entry.getValue()).append("',");
-                } else {
-                    stringBuilder.append("'").append(entry.getKey()).append("':'").append(entry.getValue()).append("'},");
-                }
-            }
-            target.add(stringBuilder.toString());
-        });
-        String fileName = "D:\\haiyan-data/blogData.txt";
-        FileUtil.appendDataToFile(target, fileName);
-        long fileLength = FileUtil.getFileSize(new File(fileName));
-        System.out.println(fileLength);
+//        List<String> target = new ArrayList<>();
+//        List<Map<String, Object>> src = blogRepository.getAllAuthorAndTitle();
+//        src.forEach(item -> {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for (Map.Entry<String, Object> entry : item.entrySet()) {
+//                if (stringBuilder.length() == 0) {
+//                    stringBuilder.append("{'").append(entry.getKey()).append("':'").append(entry.getValue()).append("',");
+//                } else {
+//                    stringBuilder.append("'").append(entry.getKey()).append("':'").append(entry.getValue()).append("'},");
+//                }
+//            }
+//            target.add(stringBuilder.toString());
+//        });
+//        String fileName = "D:\\haiyan-data/blogData.txt";
+//        FileUtil.appendDataToFile(target, fileName);
+//        long fileLength = FileUtil.getFileSize(new File(fileName));
+//        System.out.println(fileLength);
     }
 
     @Test
@@ -120,7 +120,7 @@ public class BlogApplicationTests {
         Users shijie = Users.builder().username("shijie").password("123456").role("USER").build();
         Users shenkeye = Users.builder().username("shenkeye").password("123456").role("USER").build();
         List<Users> usersList = Arrays.asList(songning, haozhou, shenkeye, shijie);
-        usersRepository.saveAll(usersList);
+//        usersRepository.saveAll(usersList);
     }
 
     /**
@@ -257,7 +257,7 @@ public class BlogApplicationTests {
         blogger.setHeadPortrait("headPortrait/songning.svg");
         blogger.setUsername("shenkeye");
         blogger.setUpdateTime(new Date());
-        bloggerRepository.save(blogger);
+//        bloggerRepository.save(blogger);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class BlogApplicationTests {
             personalInformation.setEndTime(new Date());
             list.add(personalInformation);
         }
-        personalInformationRepository.saveAll(list);
+//        personalInformationRepository.saveAll(list);
     }
 
     @Test
@@ -286,7 +286,7 @@ public class BlogApplicationTests {
             systemConfig.setConfigKey("dataBase");
             systemConfig.setConfigValue("MYSQL");
             systemConfig.setValueDescription("动态切换数据源");
-            systemConfigRepository.save(systemConfig);
+//            systemConfigRepository.save(systemConfig);
         });
     }
 
@@ -296,7 +296,7 @@ public class BlogApplicationTests {
             LabelConfig labelConfig = new LabelConfig();
             labelConfig.setLabelName(label);
             labelConfig.setLabelPhoto("");
-            labelConfigRepository.save(labelConfig);
+//            labelConfigRepository.save(labelConfig);
         });
     }
 
@@ -310,18 +310,23 @@ public class BlogApplicationTests {
                 labelRelation.setLabelName(label);
                 Integer attention = Integer.parseInt(RandomUtil.getRandom(0, 1));
                 labelRelation.setAttention(attention);
-                labelRelationRepository.save(labelRelation);
+//                labelRelationRepository.save(labelRelation);
             });
         });
     }
 
     @Test
     public void testRedisSetTimeout() throws InterruptedException {
-        stringRedisTemplate.opsForValue().set("timeOutKey", "timeOut", 5, TimeUnit.SECONDS);
-        String timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
-        System.out.println("通过set(K key, V value, long timeout, TimeUnit unit)方法设置过期时间，过期之前获取的数据:" + timeOutValue);
-        Thread.sleep(5 * 1000);
-        timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
-        System.out.print(",等待10s过后，获取的值:" + timeOutValue);
+//        stringRedisTemplate.opsForValue().set("timeOutKey", "timeOut", 5, TimeUnit.SECONDS);
+//        String timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
+//        System.out.println("通过set(K key, V value, long timeout, TimeUnit unit)方法设置过期时间，过期之前获取的数据:" + timeOutValue);
+//        Thread.sleep(5 * 1000);
+//        timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
+//        System.out.print(",等待10s过后，获取的值:" + timeOutValue);
+    }
+
+    @Test
+    public void testLog() {
+        log.info("测试日志是否生效");
     }
 }

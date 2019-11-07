@@ -9,8 +9,8 @@ spring:
     allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   redis:
     database: 1
-    host: localhost
-    #    host: 122.51.193.191
+#    host: localhost
+    host: redis_container
     port: 6379
     password:
     jedis:
@@ -40,3 +40,11 @@ blog:
   es.url: http://localhost:8074/
   image:
     path: simple-blog
+
+logging:
+  level:
+    # 全局等级
+    root: warn
+    com:
+      simple: info
+  file:  log/simple-blog.log
