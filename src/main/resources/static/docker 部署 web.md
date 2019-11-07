@@ -117,6 +117,30 @@
   
 * 浏览器访问 http://服务器ip:8070/#/
 
+### 重新部署
+* 重新部署blog-server
+  ```
+  * rm -rf blog-0.0.1-SNAPSHOT.jar
+  * maven clean install
+  * rz blog-0.0.1-SNAPSHOT.jar
+  * docker stop blog-server_container
+  * docker rm container_id
+  * 构建镜像，启动容器(镜像版本号依次增加)
+  ```
+* 重新部署blog-front 
+  
+  ```
+  * rm -rf dist.tar.gz
+  * rm -rf dist
+  * npm run build
+  * tar -zcvf dist.tar.gz dist
+  * rz dist.tar.gz
+  * tar -zxvf dist.tar.gz
+  * docker stop blog-server_container
+  * docker rm container_id
+  * 构建镜像，启动容器(镜像版本号依次增加)
+  ```
+
 ### 常用命令
 * docker ps //正在运行的docker容器
 * docker ps -a //所有docker容器

@@ -92,6 +92,10 @@ public class RegisterServiceImpl implements RegisterService {
                                 }
                             }
                         }
+                        // 注册成功时，刷新SystemConfig缓存
+                        List<SystemConfig> systemConfigList = systemConfigRepository.findAll();
+                        redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
+                        systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), JsonUtil.convertObject2String(item)));
                     } catch (Exception e) {
                         synchronized (object) {
                             labelRelationRepository.deleteAllByUsername(username);
