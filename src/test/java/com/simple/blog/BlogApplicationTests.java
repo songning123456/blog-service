@@ -1,5 +1,8 @@
 package com.simple.blog;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.*;
@@ -11,6 +14,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
@@ -74,6 +78,17 @@ public class BlogApplicationTests {
             "Promise", "Webkit", "IntelliJ IDEA", "Hadoop", "Spring boot", "嵌入式", "JVM", "机器人", "编译器", "神经网络",
             "响应式编程", "投资", "Django", "科幻", "百度", "比特币", "单元测试", "flexbox", "Java EE"
     );
+
+    // 请求超时时间，30秒
+    public static final int TIME_OUT = 30 * 1000;
+    // 模拟浏览器请求头信息
+    public static Map<String, String> headers = new HashMap<>();
+
+    static {
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 5.1; zh-CN) AppleWebKit/535.12 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/535.12");
+        headers.put("Accept", "text/html");
+        headers.put("Accept-Language", "zh-CN,zh");
+    }
 
     @Test
     public void contextLoads() {
@@ -410,6 +425,41 @@ public class BlogApplicationTests {
                 String summary = content.substring(0, content.length() / 4);
                 Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
 //                blogRepository.save(blog);
+            }
+        }
+    }
+
+    @Test
+    public void theftTouTiao() throws Exception {
+        List<String> authors = blogRepository.getAllAuthorNative();
+        String random = RandomUtil.getRandom(0, authors.size() - 1);
+//        String html = FileUtil.readToString("D:\\simple-blog\\今日头条.html");
+//        Document doc = Jsoup.parse(html);
+        Document doc = Jsoup.connect("https://www.csdn.net/").userAgent("Mozilla/5.0 (Windows NT 5.1; zh-CN) AppleWebKit/535.12 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/535.12").get();
+        List<String> articleUrls = doc.getElementsByClass("title-box").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
+        for (int i = 0; i < articleUrls.size(); i++) {
+            Document articleDoc;
+            try {
+                articleDoc = HttpUtil.getHtmlPageResponseAsDocument(articleUrls.get(i));
+            } catch (Exception e) {
+                log.error("访问头条失败： " + e.getMessage());
+                continue;
+            }
+            String articleInfoHtml = articleDoc.body().getElementsByTag("script").get(3).html();
+            JSONObject articleObject = JSON.parseObject("{"
+                    + articleInfoHtml.substring(33, articleInfoHtml.length() - 12)
+                    .replace(".slice(6, -6).replace(/<br \\/>/ig, '')", "")
+                    .replace(".slice(6, -6)", "").replace("\\", "\\\\")
+                    .replace("\\\\\"", "\\\"") + "}");
+            String title = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("articleInfo").getString("title")).replace("\\\\", "\\");
+            Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
+            if ((int) totalMap.get("total") == 0) {
+                String author = authors.get(Integer.parseInt(random));
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
+                String content = StringEscapeUtils.unescapeEcmaScript(StringEscapeUtils.unescapeHtml4(articleInfoHtml.substring(articleInfoHtml.indexOf("content") + 10, articleInfoHtml.lastIndexOf(".slice(6, -6),") - 1))).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
+                String summary = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("shareInfo").getString("abstract").replace("\\\\", "\\")).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
             }
         }
     }

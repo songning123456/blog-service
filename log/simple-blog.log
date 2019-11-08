@@ -1,176 +1,238 @@
-2019-11-07 11:15:49.435  INFO 9876 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 11:15:56.729  WARN 9876 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 11:16:02.427  WARN 9876 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'redisKeyExpirationListener' defined in file [D:\simple-blog\blog-service\target\classes\com\simple\blog\redis\RedisKeyExpirationListener.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-2019-11-07 11:16:03.592 ERROR 9876 --- [main] o.s.boot.SpringApplication               : Application run failed
+2019-11-08 10:08:08.470  INFO 20280 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:08:14.878  WARN 20280 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:08:20.950  WARN 20280 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:08:20.958  WARN 20280 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:08:20.979  WARN 20280 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:08:21.610  WARN 20280 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:08:21.859  WARN 20280 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:08:24.678  INFO 20280 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 21.257 seconds (JVM running for 23.926)
+2019-11-08 10:09:44.058  WARN 20280 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m29s475ms491碌s12ns).
+2019-11-08 10:11:31.625  WARN 20280 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m47s566ms579碌s210ns).
+2019-11-08 10:11:31.715 ERROR 20280 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'redisKeyExpirationListener' defined in file [D:\simple-blog\blog-service\target\classes\com\simple\blog\redis\RedisKeyExpirationListener.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:845) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.listener.KeyspaceEventMessageListener.init(KeyspaceEventMessageListener.java:85) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.listener.KeyspaceEventMessageListener.afterPropertiesSet(KeyspaceEventMessageListener.java:137) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	... 39 common frames omitted
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
 Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:235) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
 	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 46 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: redis_container/127.0.0.1:6379
-	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_172]
-	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[na:1.8.0_172]
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:670) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:617) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:534) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:906) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
-Caused by: java.net.ConnectException: Connection refused: no further information
-	... 12 common frames omitted
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
 
-2019-11-07 11:16:03.595 ERROR 9876 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@3754a4bf] to prepare test instance [com.simple.blog.BlogApplicationTests@6a7fc4c1]
+2019-11-08 10:12:22.121  INFO 6364 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:12:26.460  WARN 6364 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:12:31.192  WARN 6364 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:12:31.200  WARN 6364 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:12:31.211  WARN 6364 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:12:31.697  WARN 6364 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:12:31.917  WARN 6364 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:12:33.980  INFO 6364 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.121 seconds (JVM running for 16.7)
+2019-11-08 10:19:59.228  WARN 6364 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m32s994ms588碌s246ns).
+2019-11-08 10:19:59.338 ERROR 6364 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
 
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
-	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'redisKeyExpirationListener' defined in file [D:\simple-blog\blog-service\target\classes\com\simple\blog\redis\RedisKeyExpirationListener.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:845) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	... 24 common frames omitted
-Caused by: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.listener.KeyspaceEventMessageListener.init(KeyspaceEventMessageListener.java:85) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.listener.KeyspaceEventMessageListener.afterPropertiesSet(KeyspaceEventMessageListener.java:137) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	... 39 common frames omitted
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:59) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
 Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:235) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
 	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 46 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: redis_container/127.0.0.1:6379
-	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_172]
-	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[na:1.8.0_172]
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:670) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:617) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:534) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496) ~[netty-transport-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:906) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.36.Final.jar:4.1.36.Final]
-	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
-Caused by: java.net.ConnectException: Connection refused: no further information
-	... 12 common frames omitted
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
 
-2019-11-07 11:17:56.859  INFO 17412 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 11:18:00.841  WARN 17412 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 11:18:06.768  WARN 17412 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 11:18:06.782  WARN 17412 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:18:06.810  WARN 17412 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:18:07.677  WARN 17412 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 11:18:08.014  WARN 17412 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 11:18:10.338  INFO 17412 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.272 seconds (JVM running for 19.062)
-2019-11-07 11:18:11.065 ERROR 17412 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+2019-11-08 10:20:32.047  INFO 17300 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:20:36.614  WARN 17300 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:20:42.267  WARN 17300 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:20:42.275  WARN 17300 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:20:42.288  WARN 17300 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:20:42.871  WARN 17300 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:20:43.103  WARN 17300 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:20:45.611  INFO 17300 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.142 seconds (JVM running for 18.902)
+2019-11-08 10:23:52.133  WARN 17300 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m15s802ms510碌s482ns).
+2019-11-08 10:23:52.235 ERROR 17300 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 10:25:16.020  INFO 6160 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:25:20.203  WARN 6160 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:25:25.676  WARN 6160 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:25:25.684  WARN 6160 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:25:25.694  WARN 6160 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:25:26.180  WARN 6160 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:25:26.419  WARN 6160 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:25:28.710  INFO 6160 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.957 seconds (JVM running for 18.333)
+2019-11-08 10:26:12.529  WARN 6160 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s540ms284碌s833ns).
+2019-11-08 10:26:12.633 ERROR 6160 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 10:26:33.897  INFO 23808 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:26:38.099  WARN 23808 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:26:42.861  WARN 23808 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:26:42.869  WARN 23808 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:26:42.880  WARN 23808 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:26:43.396  WARN 23808 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:26:43.602  WARN 23808 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:26:45.697  INFO 23808 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.124 seconds (JVM running for 16.736)
+2019-11-08 10:28:22.339  WARN 23808 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s555ms483碌s476ns).
+2019-11-08 10:28:22.414 ERROR 23808 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
 
 org.springframework.data.redis.RedisSystemException: Redis command interrupted; nested exception is io.lettuce.core.RedisCommandInterruptedException: Command interrupted
 	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:62) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
@@ -178,16 +240,19 @@ org.springframework.data.redis.RedisSystemException: Redis command interrupted; 
 	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceKeyCommands.convertLettuceAccessException(LettuceKeyCommands.java:817) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceKeyCommands.keys(LettuceKeyCommands.java:229) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.DefaultedRedisConnection.keys(DefaultedRedisConnection.java:97) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.DefaultStringRedisConnection.keys(DefaultStringRedisConnection.java:630) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.lambda$keys$13(RedisTemplate.java:883) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.convertLettuceAccessException(LettuceStringCommands.java:799) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.get(LettuceStringCommands.java:68) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.get(DefaultedRedisConnection.java:253) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultStringRedisConnection.get(DefaultStringRedisConnection.java:377) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations$1.inRedis(DefaultValueOperations.java:57) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations$ValueDeserializingRedisCallback.doInRedis(AbstractOperations.java:59) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
 	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.keys(RedisTemplate.java:883) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at com.simple.blog.service.impl.RedisServiceImpl.getValues(RedisServiceImpl.java:38) ~[classes/:na]
-	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:57) ~[classes/:na]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.get(DefaultValueOperations.java:53) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.getValue(RedisServiceImpl.java:51) ~[classes/:na]
+	at com.simple.blog.service.impl.RedisServiceImpl.getValues(RedisServiceImpl.java:43) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:56) ~[classes/:na]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
@@ -206,264 +271,25 @@ Caused by: io.lettuce.core.RedisCommandInterruptedException: Command interrupted
 	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:112) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at com.sun.proxy.$Proxy159.keys(Unknown Source) ~[na:na]
-	at org.springframework.data.redis.connection.lettuce.LettuceKeyCommands.keys(LettuceKeyCommands.java:227) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 21 common frames omitted
+	at com.sun.proxy.$Proxy157.get(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.get(LettuceStringCommands.java:66) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 24 common frames omitted
 Caused by: java.lang.InterruptedException: null
 	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
 	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1915) ~[na:1.8.0_172]
 	at io.lettuce.core.protocol.AsyncCommand.await(AsyncCommand.java:83) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	... 26 common frames omitted
-
-2019-11-07 11:19:06.233  INFO 7992 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 11:19:10.073  WARN 7992 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 11:19:16.111  WARN 7992 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 11:19:16.126  WARN 7992 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:19:16.139  WARN 7992 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:19:16.765  WARN 7992 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 11:19:17.030  WARN 7992 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 11:19:19.072  INFO 7992 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.005 seconds (JVM running for 17.537)
-2019-11-07 11:19:19.398 ERROR 7992 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
-
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.keys(RedisTemplate.java:883) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at com.simple.blog.service.impl.RedisServiceImpl.getValues(RedisServiceImpl.java:38) ~[classes/:na]
-	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:56) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
-	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 24 common frames omitted
-Caused by: java.lang.InterruptedException: null
-	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
-	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
-	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	... 29 common frames omitted
 
-2019-11-07 11:19:42.255  INFO 20836 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
-2019-11-07 11:19:46.058  WARN 20836 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 11:19:48.769  WARN 20836 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 11:19:48.773  WARN 20836 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:19:48.779  WARN 20836 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:19:48.977  WARN 20836 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 11:19:49.082  WARN 20836 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 11:19:50.671  INFO 20836 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 11.592 seconds (JVM running for 12.757)
-2019-11-07 11:20:05.421  INFO 20836 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 11:20:48.412  INFO 7940 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 11:20:52.216  WARN 7940 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 11:20:56.942  WARN 7940 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 11:20:56.950  WARN 7940 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:20:56.962  WARN 7940 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 11:20:57.543  WARN 7940 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 11:20:57.780  WARN 7940 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 11:21:00.100  INFO 7940 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 14.888 seconds (JVM running for 16.745)
-2019-11-07 11:21:00.710 ERROR 7940 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
-
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.keys(RedisTemplate.java:883) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at com.simple.blog.service.impl.RedisServiceImpl.getValues(RedisServiceImpl.java:38) ~[classes/:na]
-	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:56) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
-	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 24 common frames omitted
-Caused by: java.lang.InterruptedException: null
-	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
-	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
-	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	... 29 common frames omitted
-
-2019-11-07 13:07:22.484  WARN 20836 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m36s479ms934碌s354ns).
-2019-11-07 14:41:11.841  INFO 20836 --- [http-nio-8072-exec-3] c.s.b.s.JwtAuthenticationTokenFilter     : --------->null
-2019-11-07 14:41:11.979  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : =====start=====
-2019-11-07 14:41:11.980  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : annotation description: 鑾峰彇鏍囩
-2019-11-07 14:41:11.981  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : URL: http://localhost:8072/users/exist
-2019-11-07 14:41:11.981  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : HTTP Method: POST
-2019-11-07 14:41:11.981  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : Class Method: com.simple.blog.controller.UsersController.judgeIsExist
-2019-11-07 14:41:11.981  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : IP: 0:0:0:0:0:0:0:1
-2019-11-07 14:41:11.982  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : Request Args: CommonVO(recordStartNo=null, pageRecordNum=null, condition=UsersVO(username=fengying123456, password=null))
-2019-11-07 14:41:12.010  INFO 20836 --- [http-nio-8072-exec-3] com.simple.blog.aop.ControllerAspectAop  : =====End=====
-2019-11-07 14:41:18.240  INFO 20836 --- [http-nio-8072-exec-5] c.s.b.s.JwtAuthenticationTokenFilter     : --------->null
-2019-11-07 14:41:18.241  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : =====start=====
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : annotation description: 鑾峰彇鏍囩
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : URL: http://localhost:8072/users/exist
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : HTTP Method: POST
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : Class Method: com.simple.blog.controller.UsersController.judgeIsExist
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : IP: 0:0:0:0:0:0:0:1
-2019-11-07 14:41:18.242  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : Request Args: CommonVO(recordStartNo=null, pageRecordNum=null, condition=UsersVO(username=fengying123456, password=null))
-2019-11-07 14:41:18.244  INFO 20836 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : =====End=====
-2019-11-07 14:57:46.273  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 14:57:49.971  WARN 14996 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 14:57:55.451  WARN 14996 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 14:57:55.458  WARN 14996 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 14:57:55.468  WARN 14996 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 14:57:55.952  WARN 14996 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 14:57:56.125  WARN 14996 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 14:57:58.446  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.155 seconds (JVM running for 16.375)
-2019-11-07 14:57:58.568  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : hua2
-2019-11-07 14:57:58.571  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : 测试日志是否生效
-2019-11-07 14:57:59.282  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : 查询结果是否排序一致: false
-2019-11-07 14:57:59.283  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : 两次查询比较结果: [7292920b290e4e329a7ebbf65ff68e8b, c7eeac3f678f4c7d9e24df8676dd46e6, c7eeac3f678f4c7d9e24df8676dd46e6, 01e1f716c27d4451b8de187bab940d74, 01e1f716c27d4451b8de187bab940d74, f6a63b9cb1794b698627e63105894af4, b32fd36720b3445da98499118b97bd69, 1608d223275e453a8562d776861c264f, 1608d223275e453a8562d776861c264f, 99eb703680fd49a19456652232f34ab9, 7fc88bb77f674478a56dd9ca046e2975]
-2019-11-07 14:57:59.321  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : 驼峰转下划线命名: create_time
-2019-11-07 14:57:59.323  INFO 14996 --- [main] com.simple.blog.BlogApplicationTests     : 下划线转驼峰: createTime
-2019-11-07 14:57:59.691 ERROR 14996 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
-
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
-	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
-	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
-	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
-	... 25 common frames omitted
-Caused by: java.lang.InterruptedException: null
-	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
-	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
-	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
-	... 30 common frames omitted
-
-2019-11-07 16:39:59.368  INFO 22244 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
-2019-11-07 16:40:02.490  WARN 22244 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 16:40:05.446  WARN 22244 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 16:40:05.450  WARN 22244 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:40:05.456  WARN 22244 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:40:05.666  WARN 22244 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:40:05.841  WARN 22244 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 16:40:07.402  INFO 22244 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 11.277 seconds (JVM running for 12.225)
-2019-11-07 16:40:11.883  INFO 22244 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 16:40:22.987  INFO 10428 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 16:40:27.011  WARN 10428 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 16:40:32.270  WARN 10428 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 16:40:32.278  WARN 10428 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:40:32.287  WARN 10428 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:40:33.007  WARN 10428 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:40:33.338  WARN 10428 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 16:40:35.907  INFO 10428 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.126 seconds (JVM running for 17.948)
-2019-11-07 16:40:40.333  INFO 10428 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 16:42:38.147  INFO 7380 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 16:42:42.685  WARN 7380 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 16:42:47.954  WARN 7380 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 16:42:47.961  WARN 7380 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:42:47.970  WARN 7380 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:42:48.513  WARN 7380 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:42:48.712  WARN 7380 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 16:42:50.883  INFO 7380 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.486 seconds (JVM running for 18.346)
-2019-11-07 16:42:55.246  INFO 7380 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 16:54:04.916  INFO 15992 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 16:54:09.022  WARN 15992 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 16:54:14.844  WARN 15992 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 16:54:14.852  WARN 15992 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:54:14.862  WARN 15992 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:54:15.506  WARN 15992 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:54:15.896  WARN 15992 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 16:54:18.193  INFO 15992 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.591 seconds (JVM running for 18.334)
-2019-11-07 16:54:22.983  INFO 15992 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 16:59:11.997  INFO 14544 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 16:59:16.527  WARN 14544 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 16:59:21.658  WARN 14544 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 16:59:21.665  WARN 14544 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:59:21.673  WARN 14544 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 16:59:22.300  WARN 14544 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:59:22.502  WARN 14544 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 16:59:24.663  INFO 14544 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.112 seconds (JVM running for 18.126)
-2019-11-07 16:59:29.384  INFO 14544 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 18:20:31.905  WARN 22244 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m28s746ms464碌s828ns).
-2019-11-07 18:47:24.044  INFO 9504 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 18:47:30.937  WARN 9504 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 18:47:35.742  WARN 9504 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 18:47:35.750  WARN 9504 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:47:35.760  WARN 9504 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:47:36.265  WARN 9504 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 18:47:36.481  WARN 9504 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 18:47:38.743  INFO 9504 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 18.204 seconds (JVM running for 20.145)
-2019-11-07 18:48:16.950 ERROR 9504 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+2019-11-08 10:28:58.840  INFO 10720 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:29:03.745  WARN 10720 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:29:08.774  WARN 10720 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:29:08.783  WARN 10720 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:29:08.800  WARN 10720 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:29:09.542  WARN 10720 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:29:09.911  WARN 10720 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:29:12.231  INFO 10720 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.754 seconds (JVM running for 18.88)
+2019-11-08 10:31:26.827  WARN 10720 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m53s43ms618碌s241ns).
+2019-11-08 10:31:26.912 ERROR 10720 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
 
 org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
@@ -510,16 +336,104 @@ Caused by: java.lang.InterruptedException: null
 	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	... 31 common frames omitted
 
-2019-11-07 18:55:17.178  INFO 2456 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 18:55:21.378  WARN 2456 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 18:55:26.839  WARN 2456 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 18:55:26.846  WARN 2456 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:55:26.856  WARN 2456 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:55:27.388  WARN 2456 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 18:55:27.609  WARN 2456 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 18:55:29.800  INFO 2456 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.782 seconds (JVM running for 17.52)
-2019-11-07 18:57:56.895  WARN 2456 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m24s152ms155碌s297ns).
-2019-11-07 18:57:58.346 ERROR 2456 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+2019-11-08 10:33:04.906  INFO 19352 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:33:09.311  WARN 19352 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:33:14.214  WARN 19352 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:33:14.222  WARN 19352 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:33:14.234  WARN 19352 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:33:14.891  WARN 19352 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:33:15.163  WARN 19352 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:33:17.406  INFO 19352 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.906 seconds (JVM running for 17.489)
+2019-11-08 10:33:57.605  INFO 19352 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
+2019-11-08 10:33:58.547  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:34:07.248 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:34:07.789 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:35:43.638  WARN 19352 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m28s107ms818碌s334ns).
+2019-11-08 10:36:26.385  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:36:26.836 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:26.863 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:35.539  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:36:35.909 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:35.921 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:41.788  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:1037] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.789  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:1053] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.796  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4403] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.797  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4419] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.797  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4565] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.797  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4581] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.798  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5232] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.799  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5248] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.800  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5412] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.803  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5428] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.806  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6428] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.810  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6436] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.811  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6745] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.827  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:13005] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.827  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:13021] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.849  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:31086] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:36:41.863  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:53900] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.875  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:61902] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:41.890  WARN 19352 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:71530] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:36:42.041  WARN 19352 --- [main] c.g.h.javascript.host.css.CSSStyleSheet  : Unhandled CSS condition type 'PREFIX_ATTRIBUTE_CONDITION'. Accepting it silently.
+2019-11-08 10:36:42.052 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[https://s3.pstatp.com/toutiao/resource/wenda/wenda_web/static/js/lib/jquery-3.1.1.js] line=[1] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:42.319 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.156308d9c155541c42e9.js] line=[7] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:42.329 ERROR 19352 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.156308d9c155541c42e9.js] line=[15] lineSource=[null] lineOffset=[0]
+2019-11-08 10:36:42.480  WARN 19352 --- [main] c.g.h.javascript.host.dom.Document       : Nothing done for execCommand(styleWithCSS, ...) (feature not implemented)
+2019-11-08 10:36:43.058  WARN 19352 --- [main] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'text/javascript'.
+2019-11-08 10:42:27.344  INFO 15884 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:42:32.737  WARN 15884 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:42:40.594  WARN 15884 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:42:40.604  WARN 15884 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:42:40.618  WARN 15884 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:42:41.439  WARN 15884 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:42:41.713  WARN 15884 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:42:44.358  INFO 15884 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 20.359 seconds (JVM running for 22.004)
+2019-11-08 10:42:47.993  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:42:48.862 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:42:48.990 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:43:42.267  WARN 15884 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m9s798ms63碌s835ns).
+2019-11-08 10:50:53.657  WARN 15884 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m11s390ms217碌s197ns).
+2019-11-08 10:50:56.790  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:50:57.417 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:50:57.431 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:02.656  INFO 15884 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
+2019-11-08 10:51:06.141  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.b6ded31d7cf385f22017652a39280c0a.css' [1:50768] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:51:06.517 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:06.530 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.3155b5934ef2c30c73fc.js] line=[25] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:14.655  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:1037] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.656  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:1053] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.658  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4403] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.658  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4419] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.658  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4565] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.658  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:4581] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.659  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5232] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.659  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5248] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.659  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5412] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.660  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:5428] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.660  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6428] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.660  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6436] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.661  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:6745] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.665  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:13005] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.666  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:13021] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.676  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:31086] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 10:51:14.687  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:53900] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.693  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:61902] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.700  WARN 15884 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3a.pstatp.com/toutiao/static/css/page/index_node/index.ab1a58321e8291bc16708a0a7d30604a.css' [5:71530] Error in declaration. '*' is not allowed as first char of a property.
+2019-11-08 10:51:14.869  WARN 15884 --- [main] c.g.h.javascript.host.css.CSSStyleSheet  : Unhandled CSS condition type 'PREFIX_ATTRIBUTE_CONDITION'. Accepting it silently.
+2019-11-08 10:51:14.907 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[https://s3.pstatp.com/toutiao/resource/wenda/wenda_web/static/js/lib/jquery-3.1.1.js] line=[1] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:15.252 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.156308d9c155541c42e9.js] line=[7] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:15.267 ERROR 15884 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3.pstatp.com/toutiao/static/js/vendor.156308d9c155541c42e9.js] line=[15] lineSource=[null] lineOffset=[0]
+2019-11-08 10:51:15.428  WARN 15884 --- [main] c.g.h.javascript.host.dom.Document       : Nothing done for execCommand(styleWithCSS, ...) (feature not implemented)
+2019-11-08 10:51:15.871  WARN 15884 --- [main] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'text/javascript'.
+2019-11-08 10:56:50.366  INFO 9872 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:56:55.063  WARN 9872 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:57:00.626  WARN 9872 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:57:00.634  WARN 9872 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:57:00.646  WARN 9872 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:57:01.216  WARN 9872 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:57:01.480  WARN 9872 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:57:03.860  INFO 9872 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.864 seconds (JVM running for 18.564)
+2019-11-08 10:57:15.679 ERROR 9872 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
 
 org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
 	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
@@ -566,28 +480,446 @@ Caused by: java.lang.InterruptedException: null
 	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
 	... 31 common frames omitted
 
-2019-11-07 18:58:43.345  INFO 7552 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 18:58:47.446  WARN 7552 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 18:58:52.029  WARN 7552 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 18:58:52.038  WARN 7552 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:58:52.048  WARN 7552 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 18:58:52.538  WARN 7552 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 18:58:52.761  WARN 7552 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 18:58:54.910  INFO 7552 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 14.853 seconds (JVM running for 16.686)
-2019-11-07 18:59:49.016  INFO 7552 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缂撳瓨redis鎴愬姛^^^^^
-2019-11-07 19:09:20.745  WARN 7552 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m52s590ms608碌s48ns).
-2019-11-07 19:17:28.386  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
-2019-11-07 19:17:31.940  WARN 24044 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2019-11-07 19:17:36.033  WARN 24044 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
-2019-11-07 19:17:36.041  WARN 24044 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 19:17:36.075  WARN 24044 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2019-11-07 19:17:36.553  WARN 24044 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 19:17:36.778  WARN 24044 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2019-11-07 19:17:38.878  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 13.599 seconds (JVM running for 14.661)
-2019-11-07 19:17:38.991  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : hua2
-2019-11-07 19:17:38.998  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : 测试日志是否生效
-2019-11-07 19:17:39.712  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : 查询结果是否排序一致: false
-2019-11-07 19:17:39.716  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : 两次查询比较结果: [7292920b290e4e329a7ebbf65ff68e8b, c7eeac3f678f4c7d9e24df8676dd46e6, c7eeac3f678f4c7d9e24df8676dd46e6, 01e1f716c27d4451b8de187bab940d74, 01e1f716c27d4451b8de187bab940d74, f6a63b9cb1794b698627e63105894af4, b32fd36720b3445da98499118b97bd69, 1608d223275e453a8562d776861c264f, 1608d223275e453a8562d776861c264f, 99eb703680fd49a19456652232f34ab9, 7fc88bb77f674478a56dd9ca046e2975]
-2019-11-07 19:17:52.334  INFO 24044 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
-2019-11-07 19:18:39.356  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : 驼峰转下划线命名: create_time
-2019-11-07 19:18:39.356  INFO 24044 --- [main] com.simple.blog.BlogApplicationTests     : 下划线转驼峰: createTime
+2019-11-08 10:58:36.047  INFO 11144 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 10:58:40.611  WARN 11144 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 10:58:45.891  WARN 11144 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 10:58:45.904  WARN 11144 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:58:45.916  WARN 11144 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 10:58:46.686  WARN 11144 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 10:58:47.020  WARN 11144 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 10:58:49.467  INFO 11144 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.921 seconds (JVM running for 18.671)
+2019-11-08 11:00:53.351  WARN 11144 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m13s1ms795碌s906ns).
+2019-11-08 11:00:53.443 ERROR 11144 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 11:04:19.095  INFO 18460 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 11:04:23.419  WARN 18460 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 11:04:28.385  WARN 18460 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 11:04:28.392  WARN 18460 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:04:28.400  WARN 18460 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:04:28.898  WARN 18460 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 11:04:29.099  WARN 18460 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 11:04:31.176  INFO 18460 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.551 seconds (JVM running for 17.097)
+2019-11-08 11:05:10.041  WARN 18460 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s807ms162碌s49ns).
+2019-11-08 11:06:42.786  WARN 18460 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m32s744ms710碌s687ns).
+2019-11-08 11:06:44.346 ERROR 18460 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 11:13:12.621  INFO 736 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 11:13:17.276  WARN 736 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 11:13:23.258  WARN 736 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 11:13:23.266  WARN 736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:13:23.320  WARN 736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:13:24.236  WARN 736 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 11:13:24.663  WARN 736 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 11:13:27.266  INFO 736 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.9 seconds (JVM running for 19.571)
+2019-11-08 11:14:17.413 ERROR 736 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 11:16:04.524  INFO 13864 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 11:16:08.795  WARN 13864 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 11:16:13.922  WARN 13864 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 11:16:13.929  WARN 13864 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:16:13.940  WARN 13864 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:16:14.428  WARN 13864 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 11:16:14.643  WARN 13864 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 11:16:16.766  INFO 13864 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.545 seconds (JVM running for 17.249)
+2019-11-08 11:17:21.619 ERROR 13864 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 11:21:06.399  INFO 19076 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 11:21:11.557  WARN 19076 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 11:21:17.318  WARN 19076 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 11:21:17.327  WARN 19076 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:21:17.338  WARN 19076 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:21:17.993  WARN 19076 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 11:21:18.221  WARN 19076 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 11:21:20.794  INFO 19076 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 18.43 seconds (JVM running for 20.585)
+2019-11-08 11:22:06.153  WARN 19076 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s872ms502碌s724ns).
+2019-11-08 11:22:06.164 ERROR 19076 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.dao.QueryTimeoutException: Redis command timed out; nested exception is io.lettuce.core.RedisCommandTimeoutException: Command timed out after 5 second(s)
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:70) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.convertLettuceAccessException(LettuceStringCommands.java:799) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:148) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.set(DefaultedRedisConnection.java:274) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultStringRedisConnection.set(DefaultStringRedisConnection.java:946) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations$3.inRedis(DefaultValueOperations.java:240) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations$ValueDeserializingRedisCallback.doInRedis(AbstractOperations.java:59) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 5 second(s)
+	at io.lettuce.core.ExceptionFactory.createTimeoutException(ExceptionFactory.java:51) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:114) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at com.sun.proxy.$Proxy157.set(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:146) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 24 common frames omitted
+
+2019-11-08 11:28:14.031  INFO 24400 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 11:28:20.289  WARN 24400 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 11:28:29.371  WARN 24400 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 11:28:29.383  WARN 24400 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:28:29.393  WARN 24400 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 11:28:30.119  WARN 24400 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 11:28:30.649  WARN 24400 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 11:28:33.219  INFO 24400 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 22.646 seconds (JVM running for 24.599)
+2019-11-08 11:29:06.098 ERROR 24400 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 13:08:39.806  INFO 20112 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 13:08:44.387  WARN 20112 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 13:08:51.238  WARN 20112 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 13:08:51.247  WARN 20112 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 13:08:51.260  WARN 20112 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 13:08:51.742  WARN 20112 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 13:08:51.969  WARN 20112 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 13:08:54.290  INFO 20112 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.756 seconds (JVM running for 19.363)
+2019-11-08 13:15:06.819  WARN 20112 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m22s703ms109碌s798ns).
+2019-11-08 13:15:11.048  WARN 20112 --- [main] c.g.htmlunit.DefaultCssErrorHandler      : CSS error: 'https://s3b.pstatp.com/toutiao/static/css/page/index_node/index.7a90ccbc7dffea0273089d87cd425fa5.css' [1:45928] Error in expression. (Invalid token " ". Was expecting one of: <NUMBER>, "inherit", <IDENT>, <STRING>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <UNICODE_RANGE>, <URI>, <FUNCTION>, "progid:".)
+2019-11-08 13:15:13.024 ERROR 20112 --- [main] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[Property 0 not found.] sourceName=[https://s3b.pstatp.com/toutiao/static/js/vendor.883eadba7fd4a1ab16d5.js] line=[94] lineSource=[null] lineOffset=[0]
+2019-11-08 13:15:13.167 ERROR 20112 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-08 13:20:20.999  INFO 12764 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-08 13:20:25.113  WARN 12764 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-08 13:20:30.147  WARN 12764 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-08 13:20:30.155  WARN 12764 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 13:20:30.165  WARN 12764 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-08 13:20:30.682  WARN 12764 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 13:20:30.897  WARN 12764 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-08 13:20:33.265  INFO 12764 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.215 seconds (JVM running for 17.958)
+2019-11-08 13:21:08.712 ERROR 12764 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
