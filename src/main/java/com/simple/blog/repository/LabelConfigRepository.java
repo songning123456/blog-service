@@ -17,4 +17,7 @@ public interface LabelConfigRepository extends JpaRepository<LabelConfig, String
 
     @Query(value = "select * from label_config where label_name like %?1% order By label_name asc", nativeQuery = true)
     List<LabelConfig> findAllByLabelNameLikeNative(String labelName);
+
+    @Query(value = "select label_name from label_config", nativeQuery = true)
+    List<String> findAllLabelNameNative();
 }

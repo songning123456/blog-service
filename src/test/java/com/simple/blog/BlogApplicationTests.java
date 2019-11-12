@@ -3,6 +3,10 @@ package com.simple.blog;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.*;
@@ -26,6 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -435,12 +440,30 @@ public class BlogApplicationTests {
         String random = RandomUtil.getRandom(0, authors.size() - 1);
 //        String html = FileUtil.readToString("D:\\simple-blog\\今日头条.html");
 //        Document doc = Jsoup.parse(html);
-        Document doc = Jsoup.connect("https://www.csdn.net/").userAgent("Mozilla/5.0 (Windows NT 5.1; zh-CN) AppleWebKit/535.12 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/535.12").get();
+//        Document doc = Jsoup.connect("https://www.toutiao.com").userAgent("Mozilla/5.0 (Windows NT 5.1; zh-CN) AppleWebKit/535.12 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/535.12").get();
+        WebClient webClient = new WebClient(BrowserVersion.CHROME);
+        webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setActiveXNative(false);
+        webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setTimeout(10000);
+        HtmlPage rootPage = null;
+        Document doc;
+        try {
+            rootPage = webClient.getPage("https://www.toutiao.com/ch/news_hot/");
+            webClient.waitForBackgroundJavaScript(10000);
+            String htmlString = rootPage.asXml();
+            doc = Jsoup.parse(htmlString);
+        } finally {
+            webClient.close();
+        }
         List<String> articleUrls = doc.getElementsByClass("title-box").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
-        for (int i = 0; i < articleUrls.size(); i++) {
+        for (String articleUrl : articleUrls) {
             Document articleDoc;
             try {
-                articleDoc = HttpUtil.getHtmlPageResponseAsDocument(articleUrls.get(i));
+                articleDoc = HttpUtil.getHtmlPageResponseAsDocument(articleUrl);
             } catch (Exception e) {
                 log.error("访问头条失败： " + e.getMessage());
                 continue;
@@ -453,7 +476,7 @@ public class BlogApplicationTests {
                     .replace("\\\\\"", "\\\"") + "}");
             String title = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("articleInfo").getString("title")).replace("\\\\", "\\");
             Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
-            if ((int) totalMap.get("total") == 0) {
+            if (totalMap.get("total").equals(new BigInteger("0"))) {
                 String author = authors.get(Integer.parseInt(random));
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
