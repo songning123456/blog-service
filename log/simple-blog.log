@@ -1033,3 +1033,25 @@ java.lang.InterruptedException: null
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_172]
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_172]
 
+2019-11-12 16:43:45.219  INFO 22068 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-12 16:43:49.625  WARN 22068 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-12 16:43:55.106  WARN 22068 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-12 16:43:55.114  WARN 22068 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-12 16:43:55.127  WARN 22068 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-12 16:43:55.741  WARN 22068 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-12 16:43:55.948  WARN 22068 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-12 16:43:58.487  INFO 22068 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.04 seconds (JVM running for 19.185)
+2019-11-12 16:44:14.108  INFO 22068 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-12 16:45:03.140 ERROR 22068 --- [JS executor for com.gargoylesoftware.htmlunit.WebClient@e08853d] c.g.h.j.b.JavaScriptJobManagerImpl       : Job run failed with unexpected RuntimeException: null
+
+java.lang.IllegalStateException: null
+	at net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.getTopCallScope(ScriptRuntime.java:3527) ~[htmlunit-core-js-2.33.jar:na]
+	at net.sourceforge.htmlunit.corejs.javascript.BoundFunction.call(BoundFunction.java:52) ~[htmlunit-core-js-2.33.jar:na]
+	at com.gargoylesoftware.htmlunit.javascript.host.Promise$3.run(Promise.java:381) ~[htmlunit-2.33.jar:2.33]
+	at com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerImpl.runSingleJob(JavaScriptJobManagerImpl.java:424) ~[htmlunit-2.33.jar:2.33]
+	at com.gargoylesoftware.htmlunit.javascript.background.DefaultJavaScriptExecutor.run(DefaultJavaScriptExecutor.java:144) [htmlunit-2.33.jar:2.33]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_172]
+
+2019-11-12 16:45:04.471  WARN 22068 --- [JS executor for com.gargoylesoftware.htmlunit.WebClient@e08853d] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'text/javascript'.
+2019-11-12 16:46:10.728  WARN 22068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m21s363ms545µs731ns).
+2019-11-12 16:48:15.067  WARN 22068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m4s339ms303µs259ns).

@@ -10,6 +10,7 @@ import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.util.DateUtil;
+import com.simple.blog.util.HttpUtil;
 import com.simple.blog.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
@@ -78,12 +79,12 @@ public class CrawlerArticle {
         String random = RandomUtil.getRandom(0, authors.size() - 1);
         for (Map.Entry<String, String> entry : toutiaoUrls.entrySet()) {
             log.info("~~~开始拉取今日头条 {} 新闻:~~~", entry.getKey());
-            html = getHtmlFromUrl(entry.getValue(), true);
+            html = HttpUtil.getHtmlFromUrl(entry.getValue(), true);
             Document contentHtml;
             Blog blog;
             for (Element a : html.select("a[href~=/group/.*]:not(.comment)")) {
                 String href = "https://www.toutiao.com" + a.attr("href");
-                contentHtml = getHtmlFromUrl(href, true);
+                contentHtml = HttpUtil.getHtmlFromUrl(href, true);
                 String articleInfoHtml = contentHtml.body().getElementsByTag("script").get(3).html();
                 JSONObject articleObject = JSON.parseObject("{" + articleInfoHtml.substring(33, articleInfoHtml.length() - 12).replace(".slice(6, -6).replace(/<br \\/>/ig, '')", "").replace(".slice(6, -6)", "").replace("\\", "\\\\").replace("\\\\\"", "\\\"") + "}");
                 String title = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("articleInfo").getString("title")).replace("\\\\", "\\");
@@ -100,37 +101,5 @@ public class CrawlerArticle {
                 }
             }
         }
-    }
-
-    private Document getHtmlFromUrl(String url, boolean useHtmlUnit) {
-        Document html = null;
-        if (useHtmlUnit) {
-            WebClient webClient = new WebClient(BrowserVersion.CHROME);
-            webClient.getOptions().setJavaScriptEnabled(true);
-            webClient.getOptions().setCssEnabled(false);
-            webClient.getOptions().setActiveXNative(false);
-            webClient.getOptions().setCssEnabled(false);
-            webClient.getOptions().setThrowExceptionOnScriptError(false);
-            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-            webClient.getOptions().setTimeout(10000);
-            HtmlPage rootPage;
-            try {
-                rootPage = webClient.getPage(url);
-                webClient.waitForBackgroundJavaScript(10000);
-                String htmlString = rootPage.asXml();
-                html = Jsoup.parse(htmlString);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                webClient.close();
-            }
-        } else {
-            try {
-                html = Jsoup.connect(url).userAgent("Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)").get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return html;
     }
 }

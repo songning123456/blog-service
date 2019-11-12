@@ -414,7 +414,7 @@ public class BlogApplicationTests {
         String url = "https://juejin.im/welcome/";
         List<String> authors = blogRepository.getAllAuthorNative();
         String random = RandomUtil.getRandom(0, authors.size() - 1);
-        Document document = Jsoup.connect(url + head.get(0) + tail.get(0)).get();
+        Document document = HttpUtil.getHtmlFromUrl(url + head.get(0) + tail.get(0), true);
         Thread.sleep(5000);
         List<String> articleUrls = document.getElementsByClass("title-row").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
         for (int j = 0; j < articleUrls.size(); j++) {
