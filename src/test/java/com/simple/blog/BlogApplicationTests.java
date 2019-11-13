@@ -544,7 +544,7 @@ public class BlogApplicationTests {
                     String content = contentHtml.getElementById("endText").html();
                     String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
                     blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
-                    blogRepository.save(blog);
+//                    blogRepository.save(blog);
                 }
             }
         }
