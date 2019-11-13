@@ -23,6 +23,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -543,6 +544,39 @@ public class BlogApplicationTests {
                 if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
                     String content = contentHtml.getElementById("endText").html();
                     String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+//                    blogRepository.save(blog);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void theftPhoenix() {
+        Document html;
+        List<String> authors = blogRepository.getAllAuthorNative();
+        List<String> labels = labelConfigRepository.findAllLabelNameNative();
+        String random = RandomUtil.getRandom(0, authors.size() - 1);
+        log.info("~~~开始拉取网易新闻:~~~");
+        html = HttpUtil.getHtmlFromUrl("http://www.ifeng.com/", false);
+        Document contentHtml;
+        Blog blog;
+        Elements elements = html.getElementById("newsList").getElementsByTag("li");
+        for (Element element : elements) {
+            String title = element.getElementsByTag("a").get(element.getElementsByTag("a").size() - 1).html();
+            String href = element.getElementsByTag("a").get(element.getElementsByTag("a").size() - 1).attr("href");
+            Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
+            if (totalMap.get("total").equals(new BigInteger("0"))) {
+                String author = authors.get(Integer.parseInt(random));
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                Date updateTime = new Date();
+                contentHtml = HttpUtil.getHtmlFromUrl(href, false);
+                int start = contentHtml.html().indexOf("contentList") + 22;
+                int end = contentHtml.html().indexOf("currentPage") - 18;
+                if (start < end) {
+                    String content = contentHtml.html().substring(start, end);
+                    String summary = content.substring(0, content.length() / 4);
                     blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
 //                    blogRepository.save(blog);
                 }
