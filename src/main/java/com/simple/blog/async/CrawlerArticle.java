@@ -2,19 +2,14 @@ package com.simple.blog.async;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.common.collect.ImmutableMap;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
 import com.simple.blog.repository.LabelConfigRepository;
-import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.HttpUtil;
 import com.simple.blog.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -67,11 +61,14 @@ public class CrawlerArticle {
             .put("历史", "https://www.toutiao.com/ch/news_history/")
             .put("美食", "https://www.toutiao.com/ch/news_food/").build();
 
-    @Scheduled(cron = "0 0/30 * * * ?")
-    public void theftArticle() throws Exception {
-        this.theftToutiao();
+    @Scheduled(cron = "0 0/10 * * * ?")
+    public void theftArticle() {
+        this.theftNetSimple();
     }
 
+    /**
+     * 暂时有问题...
+     */
     private void theftToutiao() {
         Document html;
         List<String> authors = blogRepository.getAllAuthorNative();
@@ -86,17 +83,48 @@ public class CrawlerArticle {
                 String href = "https://www.toutiao.com" + a.attr("href");
                 contentHtml = HttpUtil.getHtmlFromUrl(href, true);
                 String articleInfoHtml = contentHtml.body().getElementsByTag("script").get(3).html();
-                JSONObject articleObject = JSON.parseObject("{" + articleInfoHtml.substring(33, articleInfoHtml.length() - 12).replace(".slice(6, -6).replace(/<br \\/>/ig, '')", "").replace(".slice(6, -6)", "").replace("\\", "\\\\").replace("\\\\\"", "\\\"") + "}");
-                String title = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("articleInfo").getString("title")).replace("\\\\", "\\");
-                Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
-                if (totalMap.get("total").equals(new BigInteger("0"))) {
-                    String author = authors.get(Integer.parseInt(random));
-                    Integer readTimes = Integer.parseInt(RandomUtil.getRandom(1, 1000));
-                    String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
-                    Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
-                    String content = StringEscapeUtils.unescapeEcmaScript(StringEscapeUtils.unescapeHtml4(articleInfoHtml.substring(articleInfoHtml.indexOf("content") + 10, articleInfoHtml.lastIndexOf(".slice(6, -6),") - 1))).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                    String summary = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("shareInfo").getString("abstract").replace("\\\\", "\\")).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                    blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                if (articleInfoHtml.length() > 45) {
+                    JSONObject articleObject = JSON.parseObject("{" + articleInfoHtml.substring(33, articleInfoHtml.length() - 12).replace(".slice(6, -6).replace(/<br \\/>/ig, '')", "").replace(".slice(6, -6)", "").replace("\\", "\\\\").replace("\\\\\"", "\\\"") + "}");
+                    String title = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("articleInfo").getString("title")).replace("\\\\", "\\");
+                    Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
+                    if (totalMap.get("total").equals(new BigInteger("0"))) {
+                        String author = authors.get(Integer.parseInt(random));
+                        Integer readTimes = Integer.parseInt(RandomUtil.getRandom(1, 1000));
+                        String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                        Date updateTime = new Date();
+                        String content = StringEscapeUtils.unescapeEcmaScript(StringEscapeUtils.unescapeHtml4(articleInfoHtml.substring(articleInfoHtml.indexOf("content") + 10, articleInfoHtml.lastIndexOf(".slice(6, -6),") - 1))).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
+                        String summary = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("shareInfo").getString("abstract").replace("\\\\", "\\")).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
+                        blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                        blogRepository.save(blog);
+                    }
+                }
+            }
+        }
+    }
+
+    private void theftNetSimple() {
+        Document html;
+        List<String> authors = blogRepository.getAllAuthorNative();
+        List<String> labels = labelConfigRepository.findAllLabelNameNative();
+        String random = RandomUtil.getRandom(0, authors.size() - 1);
+        log.info("~~~开始拉取网易新闻:~~~");
+        html = HttpUtil.getHtmlFromUrl("http://news.163.com/latest/", true);
+        Document contentHtml;
+        Blog blog;
+        for (int i = 0; i < html.getElementById("instantPanel").getElementsByTag("li").size(); i++) {
+            String href = html.getElementById("instantPanel").getElementsByTag("li").get(i).getElementsByTag("a").get(1).attr("href");
+            String title = html.getElementById("instantPanel").getElementsByTag("li").get(i).getElementsByTag("a").get(1).html();
+            Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
+            if (totalMap.get("total").equals(new BigInteger("0"))) {
+                String author = authors.get(Integer.parseInt(random));
+                String readTimes = RandomUtil.getRandom(1, 1000);
+                String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
+                Date updateTime = new Date();
+                contentHtml = HttpUtil.getHtmlFromUrl(href, false);
+                if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
+                    String content = contentHtml.getElementById("endText").html();
+                    String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
                     blogRepository.save(blog);
                 }
             }

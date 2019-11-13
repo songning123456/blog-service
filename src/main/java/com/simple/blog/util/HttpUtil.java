@@ -169,7 +169,7 @@ public class HttpUtil {
             HtmlPage rootPage;
             try {
                 rootPage = webClient.getPage(url);
-                webClient.waitForBackgroundJavaScript(10000);
+                webClient.waitForBackgroundJavaScript(30000);
                 String htmlString = rootPage.asXml();
                 html = Jsoup.parse(htmlString);
             } catch (Exception e) {
