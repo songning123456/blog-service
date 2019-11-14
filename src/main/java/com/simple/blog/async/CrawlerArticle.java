@@ -138,7 +138,7 @@ public class CrawlerArticle {
         List<String> authors = blogRepository.getAllAuthorNative();
         List<String> labels = labelConfigRepository.findAllLabelNameNative();
         String random = RandomUtil.getRandom(0, authors.size() - 1);
-        log.info("~~~开始拉取网易新闻:~~~");
+        log.info("~~~开始拉取凤凰新闻:~~~");
         html = HttpUtil.getHtmlFromUrl("http://www.ifeng.com/", false);
         Document contentHtml;
         Blog blog;
