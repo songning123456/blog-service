@@ -26,6 +26,7 @@
   -v $PWD/mysql-data:/var/lib/mysql 
   -e MYSQL_ROOT_PASSWORD=123456 mysql:latest
   ```
+* `docker exec mysql mysql -uroot -p123456 -e 'create database simple_blog;'` // mysql创建数据库
 
 ### docker-redis开发环境安装
 * `docker pull redis` //拉取redis镜像
