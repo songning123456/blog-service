@@ -230,4 +230,16 @@ public class FileUtil {
         //写入数据
         fileOutStream.write(data);
     }
+
+    /**
+     * 获取项目路径
+     *
+     * @return
+     * @throws IOException
+     */
+    public static String getProjectPath() throws IOException {
+        File file = new File("");
+        String filePath = file.getCanonicalPath();
+        return filePath;
+    }
 }

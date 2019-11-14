@@ -1,5 +1,7 @@
 package com.simple.blog.util;
 
+import java.util.Random;
+
 /**
  * @Author songning
  * @create 2019/7/31 14:24
@@ -34,5 +36,20 @@ public class StringUtil {
         } else {
             return strings[strings.length - 1];
         }
+    }
+
+    /**
+     * 获取指定位数的随机数字字符串
+     *
+     * @param bit
+     * @return
+     */
+    public static String getRandomNumString(int bit) {
+        Random random = new Random();
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < bit; i++) {
+            s.append(random.nextInt(9));
+        }
+        return s.toString();
     }
 }

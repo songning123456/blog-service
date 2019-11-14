@@ -27,6 +27,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -46,6 +47,11 @@ import java.util.stream.Collectors;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BlogApplicationTests {
+
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
 
     @Autowired
     private BlogRepository blogRepository;
@@ -581,6 +587,31 @@ public class BlogApplicationTests {
 //                    blogRepository.save(blog);
                 }
             }
+        }
+    }
+
+    @Test
+    public void testFlyway() throws Exception {
+        List<String> mysqls = new ArrayList<>();
+//        String labelConfig = "simple_blog:label_config:LabelConfig";
+//        mysqls.add(labelConfig);
+        String blogger = "simple_blog:blogger:Blogger";
+        mysqls.add(blogger);
+        String labelRelation = "simple_blog:label_relation:LabelRelation";
+        mysqls.add(labelRelation);
+        String systemConfig = "simple_blog:system_config:SystemConfig";
+        mysqls.add(systemConfig);
+        String users = "simple_blog:users:Users";
+        mysqls.add(users);
+        for (String mysql : mysqls) {
+            String databaseName = mysql.split(":")[0];
+            String tableName = mysql.split(":")[1];
+            String tableClassName = mysql.split(":")[2];
+            String now = DateUtil.dateToStr(new Date(), CommonConstant.FLYWAY_SQL_DATETIME_PATTERN);
+            String path = FileUtil.getProjectPath() + "\\src\\main\\resources\\db\\migration\\" + "V" + now + StringUtil.getRandomNumString(2) + "__" + tableClassName;
+            String command = "mysqldump -h localhost -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
+            String result = CommandUtil.execute(command);
+            System.out.println(result);
         }
     }
 }
