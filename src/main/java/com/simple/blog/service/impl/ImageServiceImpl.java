@@ -31,7 +31,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile) {
         CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
-        String imageFile = System.getProperty("user.home") + File.separator + path;
+        String imageFile = System.getProperty("user.home") + File.separator + "avatar" + File.separator + path;
         String imageName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         String imageSrc = imageFile + File.separator + imageName;
         try {
