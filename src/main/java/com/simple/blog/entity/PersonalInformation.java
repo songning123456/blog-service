@@ -48,4 +48,6 @@ public class PersonalInformation {
     @Column(name = "endTime", columnDefinition = "DATETIME NOT NULL COMMENT '结束时间'")
     private Date endTime;
 
+    @Column(name = "userId", columnDefinition = "VARCHAR(60) COMMENT '用户ID'")
+    private String userId;
 }

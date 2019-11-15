@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.BloggerRepository;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.util.HttpUtil;
 import com.simple.blog.util.RandomUtil;
@@ -41,6 +42,8 @@ public class CrawlerArticle {
     private BlogRepository blogRepository;
     @Autowired
     private LabelConfigRepository labelConfigRepository;
+    @Autowired
+    private BloggerRepository bloggerRepository;
 
 
     private Map<String, String> toutiaoUrls = ImmutableMap.<String, String>builder()
@@ -106,9 +109,8 @@ public class CrawlerArticle {
 
     private void theftNetSimple() {
         Document html;
-        List<String> authors = blogRepository.getAllAuthorNative();
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
         List<String> labels = labelConfigRepository.findAllLabelNameNative();
-        String random = RandomUtil.getRandom(0, authors.size() - 1);
         log.info("~~~开始拉取网易新闻:~~~");
         html = HttpUtil.getHtmlFromUrl("http://news.163.com/latest/", true);
         Document contentHtml;
@@ -118,7 +120,9 @@ public class CrawlerArticle {
             String title = html.getElementById("instantPanel").getElementsByTag("li").get(i).getElementsByTag("a").get(1).html();
             Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
             if (totalMap.get("total").equals(new BigInteger("0"))) {
-                String author = authors.get(Integer.parseInt(random));
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = new Date();
@@ -126,7 +130,7 @@ public class CrawlerArticle {
                 if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
                     String content = contentHtml.getElementById("endText").html();
                     String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
                     blogRepository.save(blog);
                 }
             }
@@ -135,10 +139,9 @@ public class CrawlerArticle {
 
     private void theftPhoenix() {
         Document html;
-        List<String> authors = blogRepository.getAllAuthorNative();
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
         List<String> labels = labelConfigRepository.findAllLabelNameNative();
-        String random = RandomUtil.getRandom(0, authors.size() - 1);
-        log.info("~~~开始拉取凤凰新闻:~~~");
+        log.info("~~~开始拉取网易新闻:~~~");
         html = HttpUtil.getHtmlFromUrl("http://www.ifeng.com/", false);
         Document contentHtml;
         Blog blog;
@@ -148,7 +151,9 @@ public class CrawlerArticle {
             String href = element.getElementsByTag("a").get(element.getElementsByTag("a").size() - 1).attr("href");
             Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
             if (totalMap.get("total").equals(new BigInteger("0"))) {
-                String author = authors.get(Integer.parseInt(random));
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = new Date();
@@ -158,7 +163,7 @@ public class CrawlerArticle {
                 if (start < end) {
                     String content = contentHtml.html().substring(start, end);
                     String summary = content.substring(0, content.length() / 4);
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
                     blogRepository.save(blog);
                 }
             }

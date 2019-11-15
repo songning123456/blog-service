@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL,
+  `id` varchar(32) NOT NULL,
   `password` varchar(60) NOT NULL COMMENT '密码',
-  `username` varchar(60) NOT NULL COMMENT '用户名',
   `role` varchar(20) NOT NULL COMMENT '权限',
+  `username` varchar(60) NOT NULL COMMENT '用户名',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,7 +38,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'123456','songning','ADMIN'),(3,'123456','haozhou','USER'),(4,'123456','shenkeye','USER'),(5,'123456','shijie','USER'),(32,'fengying123456','fengying123456','USER');
+INSERT INTO `users` VALUES ('40281a816e6de78f016e6de7b0370000','123456','ADMIN','songning'),('40281a816e6de78f016e6de7b04d0001','123456','USER','haozhou'),('40281a816e6de78f016e6de7b04d0002','123456','USER','shenkeye'),('40281a816e6de78f016e6de7b04d0003','123456','USER','shijie');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-14 19:53:25
+-- Dump completed on 2019-11-15 16:47:33

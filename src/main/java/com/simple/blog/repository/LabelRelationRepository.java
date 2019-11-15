@@ -31,5 +31,7 @@ public interface LabelRelationRepository extends JpaRepository<LabelRelation, St
     @Query(value = "update label_relation set attention = ?3 where username = ?1 and label_name = ?2", nativeQuery = true)
     Integer updateByUsernameAndLabelNameAndAttentionNative(String username, String labelName, Integer attention);
 
+    @Transactional
+    @Modifying
     void deleteAllByUsername(String username);
 }

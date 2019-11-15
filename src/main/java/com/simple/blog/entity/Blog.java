@@ -45,4 +45,7 @@ public class Blog {
 
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")
     private Date updateTime;
+
+    @Column(name = "userId", columnDefinition = "VARCHAR(60) COMMENT '用户ID'")
+    private String userId;
 }

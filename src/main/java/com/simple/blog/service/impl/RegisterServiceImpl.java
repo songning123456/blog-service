@@ -61,11 +61,13 @@ public class RegisterServiceImpl implements RegisterService {
             ClassConvertUtil.populate(registerVO, users);
             users.setRole(CommonConstant.LOGIN_USER);
             usersRepository.save(users);
+            String userId = usersRepository.findUserIdByNameNative(username);
             try {
                 // 注册 blogger
                 Blogger blogger = new Blogger();
                 ClassConvertUtil.populate(registerVO, blogger);
                 blogger.setUpdateTime(new Date());
+                blogger.setUserId(userId);
                 bloggerRepository.save(blogger);
                 try {
                     // 注册 system-config

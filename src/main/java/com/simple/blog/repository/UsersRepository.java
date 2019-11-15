@@ -2,8 +2,10 @@ package com.simple.blog.repository;
 
 import com.simple.blog.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.Map;
  * @date 2019/9/24
  * description
  */
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, String> {
 
     /**
      * 根据用户名获取所有相关记录(按理有且只有一条)
@@ -24,6 +26,9 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "select username from users where username = :username", nativeQuery = true)
     String findUsernameByNameNative(@Param("username") String username);
 
+    @Query(value = "select id from users where username = :username", nativeQuery = true)
+    String findUserIdByNameNative(@Param("username") String username);
+
     /**
      * 根据用户名查询密码
      *
@@ -33,5 +38,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "select password,role from users where username = :username", nativeQuery = true)
     Map<String, Object> findPasswordAndRoleByNameNative(@Param("username") String username);
 
+    @Transactional
+    @Modifying
     void deleteAllByUsername(String username);
 }

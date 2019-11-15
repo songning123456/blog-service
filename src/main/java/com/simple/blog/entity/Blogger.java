@@ -24,7 +24,7 @@ public class Blogger {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "author", columnDefinition = "VARCHAR(64) NOT NULL UNIQUE COMMENT '作者'")
+    @Column(name = "author", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '作者'")
     private String author;
 
     @Column(name = "realName", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '真实姓名'")
@@ -56,4 +56,7 @@ public class Blogger {
 
     @Column(name = "username", columnDefinition = "VARCHAR(60) NOT NULL UNIQUE COMMENT '用户名'")
     private String username;
+
+    @Column(name = "userId", columnDefinition = "VARCHAR(60) COMMENT '用户ID'")
+    private String userId;
 }

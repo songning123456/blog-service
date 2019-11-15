@@ -70,10 +70,6 @@ public class BlogApplicationTests {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    private List<String> usernames = Arrays.asList("shenkeye", "shijie", "haozhou", "songning");
-
-    private List<String> authors = Arrays.asList("安静的猫", "凌晨三点半");
-
     private Map<String, String> toutiaoUrls = ImmutableMap.<String, String>builder()
             .put("热点", "https://www.toutiao.com/ch/news_hot/")
             .put("科技", "https://www.toutiao.com/ch/news_tech/")
@@ -170,7 +166,7 @@ public class BlogApplicationTests {
         Users shijie = Users.builder().username("shijie").password("123456").role("USER").build();
         Users shenkeye = Users.builder().username("shenkeye").password("123456").role("USER").build();
         List<Users> usersList = Arrays.asList(songning, haozhou, shenkeye, shijie);
-//        usersRepository.saveAll(usersList);
+        usersRepository.saveAll(usersList);
     }
 
     /**
@@ -313,18 +309,24 @@ public class BlogApplicationTests {
     @Test
     public void insertPersonalInfo() {
         List<PersonalInformation> list = new ArrayList<>();
-        for (int i = 0; i <= 5; i++) {
-            PersonalInformation personalInformation = new PersonalInformation();
-            personalInformation.setAuthor("");
-            personalInformation.setInfoType("");
-            personalInformation.setMechanism("");
-            personalInformation.setPosition("");
-            personalInformation.setIntroduction("");
-            personalInformation.setStartTime(new Date());
-            personalInformation.setEndTime(new Date());
-            list.add(personalInformation);
-        }
-//        personalInformationRepository.saveAll(list);
+        PersonalInformation personalInformation1 = PersonalInformation.builder().author("安静的猫").infoType("教育经历").mechanism("南京工程学院").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。").startTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2018-07-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation1);
+        PersonalInformation personalInformation2 = PersonalInformation.builder().author("安静的猫").infoType("教育经历").mechanism("龙岗中学").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .startTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation2);
+        PersonalInformation personalInformation3 = PersonalInformation.builder().author("安静的猫").infoType("教育经历").mechanism("大纵湖初级中学").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .startTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2008-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation3);
+        PersonalInformation personalInformation4 = PersonalInformation.builder().author("安静的猫").infoType("工作经历").mechanism("阿里巴巴有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation4);
+        PersonalInformation personalInformation5 = PersonalInformation.builder().author("安静的猫").infoType("工作经历").mechanism("腾讯科技有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation5);
+        PersonalInformation personalInformation6 = PersonalInformation.builder().author("安静的猫").infoType("工作经历").mechanism("时光剪影有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        list.add(personalInformation6);
+        personalInformationRepository.saveAll(list);
     }
 
     @Test
@@ -353,16 +355,16 @@ public class BlogApplicationTests {
     @Test
     public void insertLabelRelation() {
         Set<String> sets = new HashSet<>(labels);
-        usernames.forEach(username -> {
+        /*usernames.forEach(username -> {
             sets.forEach(label -> {
                 LabelRelation labelRelation = new LabelRelation();
                 labelRelation.setUsername(username);
                 labelRelation.setLabelName(label);
                 Integer attention = Integer.parseInt(RandomUtil.getRandom(0, 1));
                 labelRelation.setAttention(attention);
-//                labelRelationRepository.save(labelRelation);
+                labelRelationRepository.save(labelRelation);
             });
-        });
+        });*/
     }
 
     @Test
@@ -383,9 +385,9 @@ public class BlogApplicationTests {
     @Test
     public void insertMeituan() throws Exception {
         String url = "https://tech.meituan.com/";
-//        String random = RandomUtil.getRandom(2, 18);
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
         // 爬虫美团
-        for (int k = 11; k <= 19; k++) {
+        for (int k = 2; k <= 19; k++) {
             Document document = Jsoup.connect(url + "/page/" + k + ".html").get();
             List<String> articleUrls = document.getElementsByClass("post-title").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
             for (int j = 0; j < articleUrls.size(); j++) {
@@ -393,7 +395,9 @@ public class BlogApplicationTests {
                 String title = doc.getElementsByClass("post-title").get(0).getElementsByTag("a").html();
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String content = doc.getElementsByClass("post-content").html();
-                String author = authors.get(1);
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
                 final String[] summary = new String[1];
@@ -402,8 +406,8 @@ public class BlogApplicationTests {
                         summary[0] = item.html();
                     }
                 });
-                Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
-//                blogRepository.save(blog);
+                Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
+                blogRepository.save(blog);
             }
         }
     }
@@ -411,8 +415,8 @@ public class BlogApplicationTests {
     @Test
     public void insertBoke() throws Exception {
         String url = "https://www.boke.la/wenzhang/";
-//        String random = RandomUtil.getRandom(2, 35);
-        for (int k = 18; k <= 35; k++) {
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
+        for (int k = 56; k <= 87; k++) {
             Document document = Jsoup.connect(url + k + "/").get();
             List<String> articleUrls = document.getElementsByClass("news").get(0).getElementsByTag("li").stream().map(o -> o.getElementsByTag("a").get(0).attr("href")).collect(Collectors.toList());
             for (String articleUrl : articleUrls) {
@@ -427,9 +431,11 @@ public class BlogApplicationTests {
                     }
                 });
                 String content = doc.getElementsByClass("zhengwen").get(0).getElementsByTag("p").html();
-                String author = authors.get(1);
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
-                Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+                Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
 //                blogRepository.save(blog);
             }
         }
@@ -530,9 +536,8 @@ public class BlogApplicationTests {
     @Test
     public void theftNetEasy() {
         Document html;
-        List<String> authors = blogRepository.getAllAuthorNative();
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
         List<String> labels = labelConfigRepository.findAllLabelNameNative();
-        String random = RandomUtil.getRandom(0, authors.size() - 1);
         log.info("~~~开始拉取网易新闻:~~~");
         html = HttpUtil.getHtmlFromUrl("http://news.163.com/latest/", true);
         Document contentHtml;
@@ -542,7 +547,9 @@ public class BlogApplicationTests {
             String title = html.getElementById("instantPanel").getElementsByTag("li").get(i).getElementsByTag("a").get(1).html();
             Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
             if (totalMap.get("total").equals(new BigInteger("0"))) {
-                String author = authors.get(Integer.parseInt(random));
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = new Date();
@@ -550,7 +557,7 @@ public class BlogApplicationTests {
                 if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
                     String content = contentHtml.getElementById("endText").html();
                     String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
 //                    blogRepository.save(blog);
                 }
             }
@@ -560,9 +567,8 @@ public class BlogApplicationTests {
     @Test
     public void theftPhoenix() {
         Document html;
-        List<String> authors = blogRepository.getAllAuthorNative();
+        List<Map<String, Object>> authorIds = bloggerRepository.findAllAuthorAndUserIdNative();
         List<String> labels = labelConfigRepository.findAllLabelNameNative();
-        String random = RandomUtil.getRandom(0, authors.size() - 1);
         log.info("~~~开始拉取网易新闻:~~~");
         html = HttpUtil.getHtmlFromUrl("http://www.ifeng.com/", false);
         Document contentHtml;
@@ -573,7 +579,9 @@ public class BlogApplicationTests {
             String href = element.getElementsByTag("a").get(element.getElementsByTag("a").size() - 1).attr("href");
             Map<String, Object> totalMap = blogRepository.countArticleByTitleNative(title);
             if (totalMap.get("total").equals(new BigInteger("0"))) {
-                String author = authors.get(Integer.parseInt(random));
+                Map<String, Object> randomMap = authorIds.get(Integer.parseInt(RandomUtil.getRandom(0, authorIds.size() - 1)));
+                String author = randomMap.get("author").toString();
+                String userId = randomMap.get("userId").toString();
                 String readTimes = RandomUtil.getRandom(1, 1000);
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = new Date();
@@ -583,7 +591,7 @@ public class BlogApplicationTests {
                 if (start < end) {
                     String content = contentHtml.html().substring(start, end);
                     String summary = content.substring(0, content.length() / 4);
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
 //                    blogRepository.save(blog);
                 }
             }
@@ -610,7 +618,7 @@ public class BlogApplicationTests {
             String now = DateUtil.dateToStr(new Date(), CommonConstant.FLYWAY_SQL_DATETIME_PATTERN);
             String path = FileUtil.getProjectPath() + "\\src\\main\\resources\\db\\migration\\" + "V" + now + StringUtil.getRandomNumString(2) + "__" + tableClassName;
             String command = "mysqldump -h localhost -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
-            // String result = CommandUtil.execute(command);
+             String result = CommandUtil.execute(command);
         }
     }
 }
