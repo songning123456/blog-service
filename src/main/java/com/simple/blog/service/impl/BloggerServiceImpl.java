@@ -30,12 +30,12 @@ public class BloggerServiceImpl implements BloggerService {
     @Override
     public CommonDTO<BloggerDTO> getBlogger(CommonVO<BloggerVO> commonVO) {
         CommonDTO<BloggerDTO> commonDTO = new CommonDTO<>();
-        String author = commonVO.getCondition().getAuthor();
+        String userId = commonVO.getCondition().getUserId();
         String username = commonVO.getCondition().getUsername();
         List<Map<String, Object>> list;
-        if (!StringUtils.isEmpty(author)) {
+        if (!StringUtils.isEmpty(userId)) {
             // 其他用户 根据 作者 来查询 作者信息
-            list = bloggerRepository.findByAuthorNative(author);
+            list = bloggerRepository.findByUserIdNative(userId);
         } else {
             // 登陆时根据用户名 查询 个人信息
             list = bloggerRepository.findByUsernameNative(username);

@@ -31,4 +31,6 @@ public class BloggerVO {
     private String headPortrait;
 
     private String username;
+
+    private String userId;
 }

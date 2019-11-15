@@ -22,12 +22,12 @@ public interface PersonalInformationRepository extends JpaRepository<PersonalInf
     List<PersonalInformation> findByAuthorAndInfoType(String author, String infoType);
 
     /**
-     * @param author
+     * @param userId
      * @return
      */
-    @Query(value = "select distinct(info_type) from personal_information where author = ?1", nativeQuery = true)
-    List<String> findInfoTypeByInfoOwnerNative(String author);
+    @Query(value = "select distinct(info_type) from personal_information where user_id = ?1", nativeQuery = true)
+    List<String> findInfoTypeByInfoOwnerNative(String userId);
 
-    @Query(value = "select author, mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where author = ?1 and info_type=?2", nativeQuery = true)
-    List<Map<String, Object>> findByAuthorAndInfoTypeNative(String author, String infoType);
+    @Query(value = "select author, mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where user_id = ?1 and info_type=?2", nativeQuery = true)
+    List<Map<String, Object>> findByUserIdAndInfoTypeNative(String userId, String infoType);
 }

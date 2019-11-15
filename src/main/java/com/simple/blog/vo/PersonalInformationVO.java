@@ -22,4 +22,6 @@ public class PersonalInformationVO {
     private String startTime;
 
     private String endTime;
+
+    private String userId;
 }

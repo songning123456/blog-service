@@ -49,12 +49,12 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     @Override
     public CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
-        String author = commonVO.getCondition().getAuthor();
-        List<String> types = personalInformationRepository.findInfoTypeByInfoOwnerNative(author);
+        String userId = commonVO.getCondition().getUserId();
+        List<String> types = personalInformationRepository.findInfoTypeByInfoOwnerNative(userId);
         List<PersonalInformationDTO> result = new ArrayList<>();
         types.forEach(type -> {
             PersonalInformationDTO personalInformationDTO = new PersonalInformationDTO();
-            List<Map<String, Object>> personalInformations = personalInformationRepository.findByAuthorAndInfoTypeNative(author, type);
+            List<Map<String, Object>> personalInformations = personalInformationRepository.findByUserIdAndInfoTypeNative(userId, type);
             List<Map<String, Object>> single = new ArrayList<>();
             personalInformations.forEach(item -> {
                 Map<String, Object> map = new HashMap<>(10);

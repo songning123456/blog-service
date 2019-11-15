@@ -17,11 +17,11 @@ import java.util.Map;
 public interface BloggerRepository extends JpaRepository<Blogger, String> {
 
     /**
-     * @param author
+     * @param userId
      * @return
      */
-    @Query(value = "select author, real_name as realName, age, email, gender, head_portrait as headPortrait, motto,profession,telephone from blogger where author = ?1", nativeQuery = true)
-    List<Map<String, Object>> findByAuthorNative(String author);
+    @Query(value = "select author, real_name as realName, age, email, gender, head_portrait as headPortrait, motto,profession,telephone from blogger where user_id = ?1", nativeQuery = true)
+    List<Map<String, Object>> findByUserIdNative(String userId);
 
     @Query(value = "select author, real_name as realName, age, email, gender, head_portrait as headPortrait, motto,profession,telephone from blogger where username = ?1", nativeQuery = true)
     List<Map<String, Object>> findByUsernameNative(String username);

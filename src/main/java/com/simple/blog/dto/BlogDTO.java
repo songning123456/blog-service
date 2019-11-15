@@ -30,4 +30,6 @@ public class BlogDTO {
     private Date updateTime;
 
     private List<String> searchResult;
+
+    private String userId;
 }
