@@ -601,14 +601,28 @@ public class BlogApplicationTests {
     @Test
     public void testFlyway() throws Exception {
         List<String> mysqls = new ArrayList<>();
-        String labelConfig = "simple_blog:label_config:LabelConfig";
-        mysqls.add(labelConfig);
+        // Blog
+        String blog = "simple_blog:blog:Blog";
+        mysqls.add(blog);
+        // Blogger
         String blogger = "simple_blog:blogger:Blogger";
         mysqls.add(blogger);
+        // History
+        String history = "simple_blog:history:History";
+        mysqls.add(history);
+        // LabelConfig
+        String labelConfig = "simple_blog:label_config:LabelConfig";
+        mysqls.add(labelConfig);
+        // LabelRelation
         String labelRelation = "simple_blog:label_relation:LabelRelation";
         mysqls.add(labelRelation);
+        // PersonalInformation
+        String personalInfo = "simple_blog:personal_information:PersonalInformation";
+        mysqls.add(personalInfo);
+        // SystemConfig
         String systemConfig = "simple_blog:system_config:SystemConfig";
         mysqls.add(systemConfig);
+        // Users
         String users = "simple_blog:users:Users";
         mysqls.add(users);
         for (String mysql : mysqls) {
@@ -617,8 +631,8 @@ public class BlogApplicationTests {
             String tableClassName = mysql.split(":")[2];
             String now = DateUtil.dateToStr(new Date(), CommonConstant.FLYWAY_SQL_DATETIME_PATTERN);
             String path = FileUtil.getProjectPath() + "\\src\\main\\resources\\db\\migration\\" + "V" + now + StringUtil.getRandomNumString(2) + "__" + tableClassName;
-            String command = "mysqldump -h localhost -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
-             String result = CommandUtil.execute(command);
+            String command = "mysqldump -h 122.51.193.191 -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
+            String result = CommandUtil.execute(command);
         }
     }
 }

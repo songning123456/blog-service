@@ -18454,3 +18454,635 @@ Caused by: java.lang.InterruptedException: null
 2019-11-15 17:15:10.706  INFO 15636 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : IP: 0:0:0:0:0:0:0:1
 2019-11-15 17:15:10.706  INFO 15636 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : Request Args: CommonVO(recordStartNo=null, pageRecordNum=null, condition=PersonalInformationVO(id=null, author=null, infoType=null, mechanism=null, position=null, introduction=null, startTime=null, endTime=null, userId=40281a816e6e147e016e6e173acb0000))
 2019-11-15 17:15:10.753  INFO 15636 --- [http-nio-8072-exec-5] com.simple.blog.aop.ControllerAspectAop  : =====End=====
+2019-11-15 17:20:00.030  INFO 15636 --- [scheduling-1] com.simple.blog.async.CrawlerArticle     : ~~~开始拉取网易新闻:~~~
+2019-11-15 17:20:01.212  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'application/x-javascript'.
+2019-11-15 17:20:01.238  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'application/x-javascript'.
+2019-11-15 17:20:01.258  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'application/x-javascript'.
+2019-11-15 17:20:01.286 ERROR 15636 --- [scheduling-1] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '> li' error: Invalid selectors: > li).] sourceName=[http://static.ws.126.net/cnews/js/ntes_jslib_1.x.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-15 17:20:01.299 ERROR 15636 --- [scheduling-1] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '> li' error: Invalid selectors: > li).] sourceName=[http://static.ws.126.net/cnews/js/ntes_jslib_1.x.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-15 17:20:01.370  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'application/x-javascript'.
+2019-11-15 17:20:01.416 ERROR 15636 --- [scheduling-1] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '> li' error: Invalid selectors: > li).] sourceName=[http://static.ws.126.net/cnews/js/ntes_jslib_1.x.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-15 17:20:01.752 ERROR 15636 --- [scheduling-1] c.g.h.javascript.StrictErrorReporter     : runtimeError: message=[An invalid or illegal selector was specified (selector: '> div.bar_pages > a' error: Invalid selectors: > div.bar_pages > a).] sourceName=[http://static.ws.126.net/cnews/js/ntes_jslib_1.x.js] line=[14] lineSource=[null] lineOffset=[0]
+2019-11-15 17:20:01.791  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Obsolete content type encountered: 'application/x-javascript'.
+2019-11-15 17:20:01.876  WARN 15636 --- [scheduling-1] c.g.htmlunit.IncorrectnessListenerImpl   : Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://analytics.163.com/ntes?_nacc=news&_nvid=ba39ce11bbb6657eae8ccc0a39fe059c&_nvtm=0&_nvsf=1&_nvfi=1&_nlag=en-us&_nlmf=1573809322&_nres=1024x768&_nscd=24-bit&_nstm=0&_nurl=http%3A//news.163.com/latest/&_ntit=%u6700%u65B0%u6EDA%u52A8%u65B0%u95FB_%u7F51%u6613%u65B0%u95FB%u4E2D%u5FC3&_nref=&_nfla=&_nssn=&_nxkey=96018260.92696&_end1', but got 'text/plain'.
+2019-11-15 17:20:33.731  INFO 15636 --- [scheduling-1] com.simple.blog.async.CrawlerArticle     : ~~~开始拉取网易新闻:~~~
+2019-11-15 17:38:54.245  INFO 23848 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:38:58.740  WARN 23848 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:39:22.868  INFO 19172 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:39:27.409  WARN 19172 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:39:32.903  WARN 19172 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:39:32.911  WARN 19172 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:39:32.920  WARN 19172 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:39:33.475  WARN 19172 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:39:33.750  WARN 19172 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:39:35.979  INFO 19172 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 16.497 seconds (JVM running for 18.404)
+2019-11-15 17:39:40.115 ERROR 19172 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1106) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:866) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:341) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to redis_container:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:231) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:204) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at java.util.Optional.orElseGet(Optional.java:267) ~[na:1.8.0_172]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:113) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 26 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1895) ~[na:1.8.0_172]
+	at io.lettuce.core.DefaultConnectionFuture.get(DefaultConnectionFuture.java:68) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:228) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 31 common frames omitted
+
+2019-11-15 17:41:32.133  INFO 20384 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:41:36.814  WARN 20384 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:41:44.899  WARN 20384 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:41:44.910  WARN 20384 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:41:44.921  WARN 20384 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:41:45.993  WARN 20384 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:41:46.500  WARN 20384 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:41:49.398  INFO 20384 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 20.506 seconds (JVM running for 22.218)
+2019-11-15 17:41:55.573  INFO 20384 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 17:43:22.877  INFO 18312 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 17:43:25.968  WARN 18312 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:43:28.831  WARN 18312 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:43:28.836  WARN 18312 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:43:28.841  WARN 18312 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:43:29.034  WARN 18312 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:43:29.140  WARN 18312 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:43:30.739  INFO 18312 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 11.116 seconds (JVM running for 12.083)
+2019-11-15 17:43:36.332  INFO 18312 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 17:44:13.023  INFO 20612 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:44:17.495  WARN 20612 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:44:23.220  WARN 20612 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:44:23.228  WARN 20612 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:44:23.248  WARN 20612 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:44:24.245  WARN 20612 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:44:24.804  WARN 20612 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:44:26.984  INFO 20612 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 17.226 seconds (JVM running for 19.234)
+2019-11-15 17:44:30.702 ERROR 20612 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisSystemException: Redis command interrupted; nested exception is io.lettuce.core.RedisCommandInterruptedException: Command interrupted
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:62) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.convertLettuceAccessException(LettuceStringCommands.java:799) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:148) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.set(DefaultedRedisConnection.java:274) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultStringRedisConnection.set(DefaultStringRedisConnection.java:946) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations$3.inRedis(DefaultValueOperations.java:240) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations$ValueDeserializingRedisCallback.doInRedis(AbstractOperations.java:59) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisCommandInterruptedException: Command interrupted
+	at io.lettuce.core.protocol.AsyncCommand.await(AsyncCommand.java:87) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:112) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at com.sun.proxy.$Proxy159.set(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:146) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1915) ~[na:1.8.0_172]
+	at io.lettuce.core.protocol.AsyncCommand.await(AsyncCommand.java:83) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 29 common frames omitted
+
+2019-11-15 17:47:33.005  INFO 11520 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:47:36.735  WARN 11520 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:47:41.217  WARN 11520 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:47:41.225  WARN 11520 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:47:41.236  WARN 11520 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:47:41.722  WARN 11520 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:47:41.957  WARN 11520 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:47:44.322  INFO 11520 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 14.644 seconds (JVM running for 16.336)
+2019-11-15 17:47:49.739  INFO 11520 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 17:51:05.346  INFO 13468 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 17:51:07.922  WARN 13468 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: No value provided for placeholder expressions: ${path_location}, ${path}.  Check your configuration!
+2019-11-15 17:51:07.957 ERROR 13468 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: No value provided for placeholder expressions: ${path_location}, ${path}.  Check your configuration!
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at com.simple.blog.BlogApplication.main(BlogApplication.java:19) [classes/:na]
+Caused by: org.flywaydb.core.api.FlywayException: No value provided for placeholder expressions: ${path_location}, ${path}.  Check your configuration!
+	at org.flywaydb.core.internal.placeholder.DefaultPlaceholderReplacer.checkForUnmatchedPlaceholderExpression(DefaultPlaceholderReplacer.java:101) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.placeholder.DefaultPlaceholderReplacer.replacePlaceholders(DefaultPlaceholderReplacer.java:79) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.line.PlaceholderReplacingLine.<init>(PlaceholderReplacingLine.java:25) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.SqlScript.extractStatements(SqlScript.java:108) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.SqlScript.<init>(SqlScript.java:86) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationResolver.addMigrations(SqlMigrationResolver.java:140) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationResolver.resolveMigrations(SqlMigrationResolver.java:100) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationResolver.resolveMigrations(SqlMigrationResolver.java:47) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.CompositeMigrationResolver.collectMigrations(CompositeMigrationResolver.java:136) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.CompositeMigrationResolver.doFindAvailableMigrations(CompositeMigrationResolver.java:118) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.CompositeMigrationResolver.resolveMigrations(CompositeMigrationResolver.java:104) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.CompositeMigrationResolver.resolveMigrations(CompositeMigrationResolver.java:46) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.info.MigrationInfoServiceImpl.refresh(MigrationInfoServiceImpl.java:133) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbValidate$2.call(DbValidate.java:138) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbValidate$2.call(DbValidate.java:126) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbValidate.validate(DbValidate.java:126) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1476) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:85) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1364) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 18 common frames omitted
+
+2019-11-15 17:52:49.385  INFO 4436 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 17:52:53.345  WARN 4436 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.14.193514
+2019-11-15 17:52:53.376 ERROR 4436 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.14.193514
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at com.simple.blog.BlogApplication.main(BlogApplication.java:19) [classes/:na]
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.14.193514
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1482) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:85) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1364) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 18 common frames omitted
+
+2019-11-15 17:53:44.303  INFO 7712 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 17:53:49.157  WARN 7712 --- [main] o.f.core.internal.command.DbMigrate      : outOfOrder mode is active. Migration of schema `simple_blog` may not be reproducible.
+2019-11-15 17:53:55.457  WARN 7712 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:53:58.424  WARN 7712 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:53:58.428  WARN 7712 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:53:58.433  WARN 7712 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:53:58.623  WARN 7712 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:53:58.728  WARN 7712 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:54:00.312  INFO 7712 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 19.085 seconds (JVM running for 20.064)
+2019-11-15 17:54:03.618  INFO 7712 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 17:56:00.765  INFO 23864 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:56:06.186  WARN 23864 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+2019-11-15 17:56:06.216 ERROR 23864 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1482) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:85) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1364) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 41 common frames omitted
+
+2019-11-15 17:56:06.218 ERROR 23864 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@12d2ce03] to prepare test instance [com.simple.blog.BlogApplicationTests@608b35fa]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 24 common frames omitted
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1482) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:85) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1364) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 41 common frames omitted
+
+2019-11-15 17:56:46.920  INFO 18408 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:56:50.629  WARN 18408 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 17:56:54.994  WARN 18408 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 17:56:55.001  WARN 18408 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:56:55.011  WARN 18408 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 17:56:55.486  WARN 18408 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 17:56:55.680  WARN 18408 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 17:56:57.675  INFO 18408 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 13.894 seconds (JVM running for 15.661)
+2019-11-15 17:57:00.904 ERROR 18408 --- [task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void com.simple.blog.redis.RedisApplicationRunner.run(org.springframework.boot.ApplicationArguments)
+
+org.springframework.data.redis.RedisSystemException: Redis command interrupted; nested exception is io.lettuce.core.RedisCommandInterruptedException: Command interrupted
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:62) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.convertLettuceAccessException(LettuceStringCommands.java:799) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:148) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.set(DefaultedRedisConnection.java:274) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.connection.DefaultStringRedisConnection.set(DefaultStringRedisConnection.java:946) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations$3.inRedis(DefaultValueOperations.java:240) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations$ValueDeserializingRedisCallback.doInRedis(AbstractOperations.java:59) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.set(DefaultValueOperations.java:236) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.simple.blog.service.impl.RedisServiceImpl.setValue(RedisServiceImpl.java:56) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.cacheLabel(RedisApplicationRunner.java:95) ~[classes/:na]
+	at com.simple.blog.redis.RedisApplicationRunner.run(RedisApplicationRunner.java:62) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) ~[na:1.8.0_172]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_172]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_172]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_172]
+Caused by: io.lettuce.core.RedisCommandInterruptedException: Command interrupted
+	at io.lettuce.core.protocol.AsyncCommand.await(AsyncCommand.java:87) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:112) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	at com.sun.proxy.$Proxy159.set(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceStringCommands.set(LettuceStringCommands.java:146) ~[spring-data-redis-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.InterruptedException: null
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347) ~[na:1.8.0_172]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1915) ~[na:1.8.0_172]
+	at io.lettuce.core.protocol.AsyncCommand.await(AsyncCommand.java:83) ~[lettuce-core-5.1.7.RELEASE.jar:na]
+	... 29 common frames omitted
+
+2019-11-15 17:57:38.600  INFO 16556 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 17:57:42.513  WARN 16556 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+2019-11-15 17:57:42.546 ERROR 16556 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at com.simple.blog.BlogApplication.main(BlogApplication.java:19) [classes/:na]
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected applied migration not resolved locally: 2019.11.15.164700
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1482) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:85) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1364) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 18 common frames omitted
+
+2019-11-15 17:59:06.481  INFO 9308 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 17:59:08.837  WARN 9308 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+2019-11-15 17:59:08.852 ERROR 9308 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:627) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:456) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:622) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 44 common frames omitted
+Caused by: java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.util.Assert.state(Assert.java:94) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.checkLocationExists(FlywayAutoConfiguration.java:184) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.flyway(FlywayAutoConfiguration.java:149) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e.CGLIB$flyway$0(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e$$FastClassBySpringCGLIB$$c3faf466.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:363) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e.flyway(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 45 common frames omitted
+
+2019-11-15 17:59:08.855 ERROR 9308 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@12d2ce03] to prepare test instance [com.simple.blog.BlogApplicationTests@7282af25]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:627) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:456) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 24 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:622) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 44 common frames omitted
+Caused by: java.lang.IllegalStateException: Cannot find migrations location in: [classpath:db/migration] (please add migrations or check your Flyway configuration)
+	at org.springframework.util.Assert.state(Assert.java:94) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.checkLocationExists(FlywayAutoConfiguration.java:184) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.flyway(FlywayAutoConfiguration.java:149) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e.CGLIB$flyway$0(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e$$FastClassBySpringCGLIB$$c3faf466.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:363) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration$$EnhancerBySpringCGLIB$$9a5a9a9e.flyway(<generated>) ~[spring-boot-autoconfigure-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_172]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_172]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_172]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_172]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 45 common frames omitted
+
+2019-11-15 18:00:07.853  INFO 19804 --- [main] com.simple.blog.BlogApplicationTests     : No active profile set, falling back to default profiles: default
+2019-11-15 18:00:12.058  WARN 19804 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 18:00:17.683  WARN 19804 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 18:00:17.690  WARN 19804 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:00:17.700  WARN 19804 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:00:18.206  WARN 19804 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 18:00:18.397  WARN 19804 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 18:00:20.494  INFO 19804 --- [main] com.simple.blog.BlogApplicationTests     : Started BlogApplicationTests in 15.665 seconds (JVM running for 17.473)
+2019-11-15 18:00:21.011  INFO 19804 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 18:03:00.344  INFO 9576 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 18:03:04.864  WARN 9576 --- [main] o.f.core.internal.command.DbMigrate      : outOfOrder mode is active. Migration of schema `simple_blog` may not be reproducible.
+2019-11-15 18:03:11.576  WARN 9576 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 18:03:14.487  WARN 9576 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 18:03:14.491  WARN 9576 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:03:14.495  WARN 9576 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:03:14.679  WARN 9576 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 18:03:14.782  WARN 9576 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 18:03:16.363  INFO 9576 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 19.113 seconds (JVM running for 20.194)
+2019-11-15 18:03:19.219  INFO 9576 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
+2019-11-15 18:08:26.382  INFO 22404 --- [main] com.simple.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-11-15 18:08:30.301  WARN 22404 --- [main] o.f.core.internal.command.DbMigrate      : outOfOrder mode is active. Migration of schema `simple_blog` may not be reproducible.
+2019-11-15 18:08:30.990  WARN 22404 --- [main] org.hibernate.id.UUIDHexGenerator        : HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-11-15 18:08:33.622  WARN 22404 --- [main] o.s.c.n.a.ArchaiusAutoConfiguration      : No spring.application.name found, defaulting to 'application'
+2019-11-15 18:08:33.626  WARN 22404 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:08:33.631  WARN 22404 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-11-15 18:08:33.817  WARN 22404 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-15 18:08:33.924  WARN 22404 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-11-15 18:08:35.526  INFO 22404 --- [main] com.simple.blog.BlogApplication          : Started BlogApplication in 12.241 seconds (JVM running for 13.147)
+2019-11-15 18:08:38.516  INFO 22404 --- [task-1] c.s.blog.redis.RedisApplicationRunner    : ^^^^^缓存redis成功^^^^^
