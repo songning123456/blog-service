@@ -46,7 +46,12 @@ public class HistoryServiceImpl implements HistoryService {
     public CommonDTO<HistoryDTO> insertHistory(CommonVO<HistoryVO> commonVO) {
         CommonDTO<HistoryDTO> commonDTO = new CommonDTO<>();
         String title = commonVO.getCondition().getTitle();
-        String username = httpServletRequestUtil.getUsername();
+        String username;
+        if (StringUtils.isEmpty(commonVO.getCondition().getUsername())) {
+            username = httpServletRequestUtil.getUsername();
+        } else {
+            username = commonVO.getCondition().getUsername();
+        }
         if (StringUtils.isEmpty(username)) {
             commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
             commonDTO.setMessage("token无效,请重新登陆");

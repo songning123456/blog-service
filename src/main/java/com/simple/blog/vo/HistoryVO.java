@@ -15,4 +15,6 @@ public class HistoryVO {
     private String articleId;
 
     private String description;
+
+    private String username;
 }

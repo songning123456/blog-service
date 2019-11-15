@@ -593,8 +593,8 @@ public class BlogApplicationTests {
     @Test
     public void testFlyway() throws Exception {
         List<String> mysqls = new ArrayList<>();
-//        String labelConfig = "simple_blog:label_config:LabelConfig";
-//        mysqls.add(labelConfig);
+        String labelConfig = "simple_blog:label_config:LabelConfig";
+        mysqls.add(labelConfig);
         String blogger = "simple_blog:blogger:Blogger";
         mysqls.add(blogger);
         String labelRelation = "simple_blog:label_relation:LabelRelation";
@@ -610,8 +610,7 @@ public class BlogApplicationTests {
             String now = DateUtil.dateToStr(new Date(), CommonConstant.FLYWAY_SQL_DATETIME_PATTERN);
             String path = FileUtil.getProjectPath() + "\\src\\main\\resources\\db\\migration\\" + "V" + now + StringUtil.getRandomNumString(2) + "__" + tableClassName;
             String command = "mysqldump -h localhost -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
-            String result = CommandUtil.execute(command);
-            System.out.println(result);
+            // String result = CommandUtil.execute(command);
         }
     }
 }

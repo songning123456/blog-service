@@ -160,8 +160,4 @@ INSERT INTO simple_blog.label_config VALUES ('40281a816dab2aba016dab2b3e47009c',
 INSERT INTO simple_blog.label_config VALUES ('40281a816dab2aba016dab2b3e61009d', 'flexbox', 'static/labelImg/noPicture.svg');
 INSERT INTO simple_blog.label_config VALUES ('40281a816dab2aba016dab2b3e79009e', 'Java EE', 'static/labelImg/noPicture.svg');
 
-truncate simple_blog.users;
-truncate simple_blog.system_config;
-truncate simple_blog.label_relation;
-truncate simple_blog.blogger;
 INSERT INTO simple_blog.system_config VALUES ('40281a816c8d8219016c8d8234280000', 'dataBase', 'MYSQL','test', '动态切换数据源');

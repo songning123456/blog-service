@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        String[] noLoginUrls = new String[]{"/history/insert", "/register/all", "/image/original", "/label/getLabelConfig", "/image/save", "/users/exist", "/login", "/loginInfo", "/logoutSuccess"};
         /** JWT拦截器*/
         JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
         /** 将JWT拦截器添加到UsernamePasswordAuthenticationFilter之前*/
@@ -47,7 +48,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 此处的角色不需要 ROLE_ 前缀,实现UserDetailsService设置角色时需要 ROLE_ 前缀
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
-                .antMatchers("/register/all", "/image/original", "/label/getLabelConfig", "/image/save", "/users/exist", "/login", "/loginInfo", "/logoutSuccess")
+                .antMatchers(noLoginUrls)
                 .permitAll()
                 .anyRequest()
                 .authenticated();
