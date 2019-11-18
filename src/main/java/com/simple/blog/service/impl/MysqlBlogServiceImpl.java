@@ -115,8 +115,9 @@ public class MysqlBlogServiceImpl implements BlogService {
             String author = (String) item.get("author");
             Date updateTime = (Date) item.get("updateTime");
             String txt = (String) item.get("content");
+            String userId = (String) item.get("userId");
             List<String> searchResult = this.matchPattern(txt, content);
-            BlogDTO blogDTO = BlogDTO.builder().id(id).title(title).author(author).updateTime(updateTime).content(txt).searchResult(searchResult).build();
+            BlogDTO blogDTO = BlogDTO.builder().id(id).title(title).author(author).updateTime(updateTime).content(txt).searchResult(searchResult).userId(userId).build();
             blogDTOS.add(blogDTO);
         });
         commonDTO.setData(blogDTOS);
