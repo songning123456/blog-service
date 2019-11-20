@@ -18,4 +18,6 @@ public interface BloggerService {
      * @return
      */
     CommonDTO<BloggerDTO> getBlogger(CommonVO<BloggerVO> commonVO);
+
+    CommonDTO<BloggerDTO> updateBlogger(CommonVO<BloggerVO> commonVO);
 }

@@ -4,6 +4,7 @@ import com.simple.blog.entity.Blogger;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,4 +33,11 @@ public interface BloggerRepository extends JpaRepository<Blogger, String> {
 
     @Query(value = "select distinct(user_id) as userId,author from blogger", nativeQuery = true)
     List<Map<String, Object>> findAllAuthorAndUserIdNative();
+
+    @Modifying
+    @Transactional
+    @Query(value = "update blogger set author=:#{#entity.author}, real_name=:#{#entity.realName}, gender=:#{#entity.gender}," +
+            "age=:#{#entity.age}, profession=:#{#entity.profession},telephone=:#{#entity.telephone},email=:#{#entity.email}," +
+            "motto=:#{#entity.motto},head_portrait=:#{#entity.headPortrait} where username=:#{#entity.username}", nativeQuery = true)
+    void updateNative(@Param("entity") Blogger blogger);
 }

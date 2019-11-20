@@ -31,4 +31,11 @@ public class BloggerController {
         CommonDTO<BloggerDTO> commonDTO = bloggerService.getBlogger(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/update")
+    @ControllerAspectAnnotation(description = "修改个人信息")
+    public CommonDTO<BloggerDTO> updateBloggers(@RequestBody CommonVO<BloggerVO> commonVO) {
+        CommonDTO<BloggerDTO> commonDTO = bloggerService.updateBlogger(commonVO);
+        return commonDTO;
+    }
 }
