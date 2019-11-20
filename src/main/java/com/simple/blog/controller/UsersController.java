@@ -30,4 +30,11 @@ public class UsersController {
         CommonDTO<UsersDTO> commonDTO = usersService.isExist(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/modify")
+    @ControllerAspectAnnotation(description = "修改用户密码")
+    public CommonDTO<UsersDTO> modifyPasswords(@RequestBody CommonVO<UsersVO> commonVO) {
+        CommonDTO<UsersDTO> commonDTO = usersService.modifyPassword(commonVO);
+        return commonDTO;
+    }
 }

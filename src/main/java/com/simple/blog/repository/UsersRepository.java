@@ -41,4 +41,9 @@ public interface UsersRepository extends JpaRepository<Users, String> {
     @Transactional
     @Modifying
     void deleteAllByUsername(String username);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update users set password = ?2 where username = ?1", nativeQuery = true)
+    void updatePasswordNative(String username, String password);
 }

@@ -13,4 +13,6 @@ public class UsersVO {
     private String username;
 
     private String password;
+
+    private String oldPassword;
 }

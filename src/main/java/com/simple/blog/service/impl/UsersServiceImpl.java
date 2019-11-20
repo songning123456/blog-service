@@ -6,6 +6,7 @@ import com.simple.blog.dto.UsersDTO;
 import com.simple.blog.entity.Users;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.UsersService;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * @author songning
@@ -24,6 +26,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public CommonDTO<UsersDTO> isExist(CommonVO<UsersVO> commonVO) {
@@ -38,6 +42,22 @@ public class UsersServiceImpl implements UsersService {
         }
         commonDTO.setData(Collections.singletonList(usersDTO));
         commonDTO.setTotal(1L);
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<UsersDTO> modifyPassword(CommonVO<UsersVO> commonVO) {
+        CommonDTO<UsersDTO> commonDTO = new CommonDTO<>();
+        String oldPassword = commonVO.getCondition().getOldPassword();
+        String password = commonVO.getCondition().getPassword();
+        String username = httpServletRequestUtil.getUsername();
+        Map<String, Object> db = usersRepository.findPasswordAndRoleByNameNative(username);
+        if (db.get("password").toString().equals(oldPassword)) {
+            usersRepository.updatePasswordNative(username, password);
+        } else {
+            commonDTO.setStatus(300);
+            commonDTO.setMessage("原始密码错误");
+        }
         return commonDTO;
     }
 }
