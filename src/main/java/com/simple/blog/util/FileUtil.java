@@ -232,6 +232,16 @@ public class FileUtil {
     }
 
     /**
+     * e.g: C:\Users\songning\simple-blog\avatar\b0f3446e-ba9f-4d41-9611-e83ce677626d.png
+     *
+     * @param filename 路径 + 文件名
+     */
+    public static void deleteImage(String filename) {
+        File file = new File(filename);
+        file.delete();
+    }
+
+    /**
      * 获取项目路径
      *
      * @return

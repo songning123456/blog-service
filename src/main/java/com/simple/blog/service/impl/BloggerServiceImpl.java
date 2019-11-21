@@ -6,6 +6,7 @@ import com.simple.blog.entity.Blogger;
 import com.simple.blog.repository.BloggerRepository;
 import com.simple.blog.service.BloggerService;
 import com.simple.blog.util.ClassConvertUtil;
+import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BloggerVO;
@@ -64,6 +65,11 @@ public class BloggerServiceImpl implements BloggerService {
         ClassConvertUtil.populate(commonVO.getCondition(), blogger);
         blogger.setUsername(username);
         blogger.setUpdateTime(new Date());
+        if (!StringUtils.isEmpty(commonVO.getCondition().getHeadPortrait())) {
+            // 如果是更新头像， 删除旧的头像
+            String oldAvatar = bloggerRepository.findHeadPortraitNative(username);
+            FileUtil.deleteImage(oldAvatar);
+        }
         // 更新
         bloggerRepository.updateNative(blogger);
         // 再次查询并返回

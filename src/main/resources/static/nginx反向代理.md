@@ -16,3 +16,5 @@
       }
    }
 ```
+
+`systemctl restart nginx.service` // 修改配置文件后重启nginx

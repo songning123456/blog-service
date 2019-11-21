@@ -52,6 +52,8 @@ public class BlogApplicationTests {
     private String username;
     @Value("${spring.datasource.password}")
     private String password;
+    @Value("${blog.image.path}")
+    private String path;
 
     @Autowired
     private BlogRepository blogRepository;
@@ -633,6 +635,22 @@ public class BlogApplicationTests {
             String path = FileUtil.getProjectPath() + "\\src\\main\\resources\\db\\migration\\" + "V" + now + StringUtil.getRandomNumString(2) + "__" + tableClassName;
             String command = "mysqldump -h 122.51.193.191 -u" + username + " -p" + password + " --databases " + databaseName + " --tables " + tableName + " -r " + path + ".sql";
             String result = CommandUtil.execute(command);
+        }
+    }
+
+    @Test
+    public void deleteImages() {
+        List<Blogger> bloggers = bloggerRepository.findAll();
+        List<String> avatars = bloggers.stream().map(Blogger::getHeadPortrait).collect(Collectors.toList());
+        String imagePath = System.getProperty("user.home") + File.separator + path + File.separator + "avatar";
+        File file = new File(imagePath);
+        String[] files = file.list();
+        for (String filename : files) {
+            String name = imagePath + File.separator + filename;
+            if (!avatars.contains(name)) {
+                File delete = new File(name);
+                delete.delete();
+            }
         }
     }
 }

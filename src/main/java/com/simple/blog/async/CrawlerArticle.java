@@ -67,8 +67,13 @@ public class CrawlerArticle {
 
     @Scheduled(cron = "0 0/20 * * * ?")
     public void theftArticle() {
-        this.theftNetSimple();
-        this.theftPhoenix();
+        try {
+            this.theftNetSimple();
+            this.theftPhoenix();
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
     }
 
     /**
