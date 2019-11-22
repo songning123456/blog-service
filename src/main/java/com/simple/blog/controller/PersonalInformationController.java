@@ -46,4 +46,11 @@ public class PersonalInformationController {
         CommonDTO<PersonalInformationDTO> commonDTO = personalInformationService.getMyInfo(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/update")
+    @ControllerAspectAnnotation(description = "更改个人信息")
+    public CommonDTO<PersonalInformationDTO> updateMyInfos(@RequestBody CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = personalInformationService.updateMyInfo(commonVO);
+        return commonDTO;
+    }
 }

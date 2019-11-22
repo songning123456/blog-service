@@ -29,4 +29,6 @@ public interface PersonalInformationService {
     CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO);
 
     CommonDTO<PersonalInformationDTO> getMyInfo(CommonVO<PersonalInformationVO> commonVO);
+
+    CommonDTO<PersonalInformationDTO> updateMyInfo(CommonVO<PersonalInformationVO> commonVO);
 }

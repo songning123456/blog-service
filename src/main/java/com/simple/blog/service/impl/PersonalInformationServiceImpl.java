@@ -5,6 +5,7 @@ import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.PersonalInformationDTO;
 import com.simple.blog.entity.PersonalInformation;
 import com.simple.blog.repository.PersonalInformationRepository;
+import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.PersonalInformationService;
 import com.simple.blog.util.DateUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
@@ -31,6 +32,9 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
 
     @Autowired
     private HttpServletRequestUtil httpServletRequestUtil;
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     @Override
     public <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO) {
@@ -85,6 +89,31 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     public CommonDTO<PersonalInformationDTO> getMyInfo(CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
         String username = httpServletRequestUtil.getUsername();
+        List<Map<String, Object>> infos = personalInformationRepository.findByUsernameNative(username);
+        PersonalInformationDTO dto;
+        List<PersonalInformationDTO> result = new ArrayList<>();
+        for (Map<String, Object> info : infos) {
+            try {
+                dto = (PersonalInformationDTO) MapConvertEntityUtil.mapToEntity(PersonalInformationDTO.class, info);
+                result.add(dto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        commonDTO.setData(result);
+        commonDTO.setTotal((long) result.size());
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<PersonalInformationDTO> updateMyInfo(CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
+        PersonalInformationVO vo = commonVO.getCondition();
+        String username = httpServletRequestUtil.getUsername();
+        Timestamp startTimeStamp = DateUtil.strToSqlDate(vo.getStartTime(), CommonConstant.YEAR_DATETIME_PATTERN);
+        Timestamp endTimeStamp = DateUtil.strToSqlDate(vo.getEndTime(), CommonConstant.YEAR_DATETIME_PATTERN);
+        PersonalInformation personalInformation = PersonalInformation.builder().infoType(vo.getInfoType()).startTime(startTimeStamp).endTime(endTimeStamp).introduction(vo.getIntroduction()).mechanism(vo.getMechanism()).username(username).position(vo.getPosition()).build();
+        personalInformationRepository.updateNative(personalInformation);
         List<Map<String, Object>> infos = personalInformationRepository.findByUsernameNative(username);
         PersonalInformationDTO dto;
         List<PersonalInformationDTO> result = new ArrayList<>();
