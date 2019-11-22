@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author  songning on 2019/8/25 3:29 PM
+ * @author songning on 2019/8/25 3:29 PM
  */
 @RestController
 @Slf4j
@@ -34,9 +34,16 @@ public class PersonalInformationController {
     }
 
     @PostMapping("/getPersonalInfo")
-    @ControllerAspectAnnotation(description = "获取个人信息")
+    @ControllerAspectAnnotation(description = "其他人获取作者信息")
     public CommonDTO<PersonalInformationDTO> acquirePersonalInfo(@RequestBody CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = personalInformationService.getPersonalInfo(commonVO);
+        return commonDTO;
+    }
+
+    @PostMapping("/getMyInfo")
+    @ControllerAspectAnnotation(description = "获取个人信息")
+    public CommonDTO<PersonalInformationDTO> getMyInfos(@RequestBody CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = personalInformationService.getMyInfo(commonVO);
         return commonDTO;
     }
 }

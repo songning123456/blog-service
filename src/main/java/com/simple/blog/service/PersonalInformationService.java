@@ -21,10 +21,12 @@ public interface PersonalInformationService {
     <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO);
 
     /**
-     * 获取个人信息
+     * 他人获取作者信息
      *
      * @param commonVO
      * @return
      */
     CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO);
+
+    CommonDTO<PersonalInformationDTO> getMyInfo(CommonVO<PersonalInformationVO> commonVO);
 }

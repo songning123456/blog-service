@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +16,21 @@ import java.util.List;
 @Data
 @Builder
 public class PersonalInformationDTO {
+    // 以json格式返回
     private String type;
 
     private List info;
+
+    // 数据库字段返回
+    private String infoType;
+
+    private Date startTime;
+
+    private Date endTime;
+
+    private String mechanism;
+
+    private String introduction;
+
+    private String position;
 }

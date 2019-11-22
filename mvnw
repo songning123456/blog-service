@@ -19,7 +19,7 @@
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
-# Maven2 Start Up Batch docker-jenkins_script
+# Maven2 Start Up Batch docker-jenkins_script.md
 #
 # Required ENV vars:
 # ------------------

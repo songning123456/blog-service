@@ -50,4 +50,7 @@ public class PersonalInformation {
 
     @Column(name = "userId", columnDefinition = "VARCHAR(60) COMMENT '用户ID'")
     private String userId;
+
+    @Column(name = "username", columnDefinition = "VARCHAR(60) NOT NULL COMMENT '用户名'")
+    private String username;
 }

@@ -7,6 +7,8 @@ import com.simple.blog.entity.PersonalInformation;
 import com.simple.blog.repository.PersonalInformationRepository;
 import com.simple.blog.service.PersonalInformationService;
 import com.simple.blog.util.DateUtil;
+import com.simple.blog.util.HttpServletRequestUtil;
+import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.PersonalInformationVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
 
     @Autowired
     private PersonalInformationRepository personalInformationRepository;
+
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO) {
@@ -73,6 +78,26 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
         });
         commonDTO.setData(result);
         commonDTO.setTotal((long) types.size());
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<PersonalInformationDTO> getMyInfo(CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        List<Map<String, Object>> infos = personalInformationRepository.findByUsernameNative(username);
+        PersonalInformationDTO dto;
+        List<PersonalInformationDTO> result = new ArrayList<>();
+        for (Map<String, Object> info : infos) {
+            try {
+                dto = (PersonalInformationDTO) MapConvertEntityUtil.mapToEntity(PersonalInformationDTO.class, info);
+                result.add(dto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        commonDTO.setData(result);
+        commonDTO.setTotal((long) result.size());
         return commonDTO;
     }
 }

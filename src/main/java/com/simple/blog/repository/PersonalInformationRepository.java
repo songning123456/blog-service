@@ -30,4 +30,7 @@ public interface PersonalInformationRepository extends JpaRepository<PersonalInf
 
     @Query(value = "select author, mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where user_id = ?1 and info_type=?2", nativeQuery = true)
     List<Map<String, Object>> findByUserIdAndInfoTypeNative(String userId, String infoType);
+
+    @Query(value = "select author, mechanism, position,info_type as infoType, start_time as startTime, end_time  as endTime, introduction from personal_information where username = ?1", nativeQuery = true)
+    List<Map<String, Object>> findByUsernameNative(String username);
 }
