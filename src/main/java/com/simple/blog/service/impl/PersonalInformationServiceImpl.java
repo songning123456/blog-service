@@ -56,6 +56,26 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     }
 
     @Override
+    public CommonDTO<PersonalInformationDTO> addMyInfo(CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
+        PersonalInformationVO vo = commonVO.getCondition();
+        String username = httpServletRequestUtil.getUsername();
+        String userId = usersRepository.findUserIdByNameNative(username);
+        String author = vo.getAuthor();
+        String infoType = vo.getInfoType();
+        String mechanism = vo.getMechanism();
+        String position = vo.getPosition();
+        String introduction = vo.getIntroduction();
+        String startTime = vo.getStartTime();
+        String endTime = vo.getEndTime();
+        Timestamp startTimeStamp = DateUtil.strToSqlDate(startTime, CommonConstant.YEAR_DATETIME_PATTERN);
+        Timestamp endTimeStamp = DateUtil.strToSqlDate(endTime, CommonConstant.YEAR_DATETIME_PATTERN);
+        PersonalInformation personalInformation = PersonalInformation.builder().username(username).userId(userId).author(author).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
+        personalInformationRepository.save(personalInformation);
+        return commonDTO;
+    }
+
+    @Override
     public CommonDTO<PersonalInformationDTO> getPersonalInfo(CommonVO<PersonalInformationVO> commonVO) {
         CommonDTO<PersonalInformationDTO> commonDTO = new CommonDTO<>();
         String userId = commonVO.getCondition().getUserId();
@@ -112,7 +132,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
         String username = httpServletRequestUtil.getUsername();
         Timestamp startTimeStamp = DateUtil.strToSqlDate(vo.getStartTime(), CommonConstant.YEAR_DATETIME_PATTERN);
         Timestamp endTimeStamp = DateUtil.strToSqlDate(vo.getEndTime(), CommonConstant.YEAR_DATETIME_PATTERN);
-        PersonalInformation personalInformation = PersonalInformation.builder().infoType(vo.getInfoType()).startTime(startTimeStamp).endTime(endTimeStamp).introduction(vo.getIntroduction()).mechanism(vo.getMechanism()).username(username).position(vo.getPosition()).build();
+        PersonalInformation personalInformation = PersonalInformation.builder().id(vo.getInfoId()).infoType(vo.getInfoType()).startTime(startTimeStamp).endTime(endTimeStamp).introduction(vo.getIntroduction()).mechanism(vo.getMechanism()).username(username).position(vo.getPosition()).build();
         personalInformationRepository.updateNative(personalInformation);
         List<Map<String, Object>> infos = personalInformationRepository.findByUsernameNative(username);
         PersonalInformationDTO dto;

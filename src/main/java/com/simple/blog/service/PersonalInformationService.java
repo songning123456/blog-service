@@ -21,6 +21,14 @@ public interface PersonalInformationService {
     <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO);
 
     /**
+     * 插入单条个人信息
+     *
+     * @param commonVO
+     * @return
+     */
+    CommonDTO<PersonalInformationDTO> addMyInfo(CommonVO<PersonalInformationVO> commonVO);
+
+    /**
      * 他人获取作者信息
      *
      * @param commonVO

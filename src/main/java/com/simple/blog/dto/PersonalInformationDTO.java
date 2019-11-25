@@ -22,6 +22,8 @@ public class PersonalInformationDTO {
     private List info;
 
     // 数据库字段返回
+    private String infoId;
+
     private String infoType;
 
     private Date startTime;

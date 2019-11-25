@@ -71,6 +71,8 @@ public class BlogApplicationTests {
     private LabelRelationRepository labelRelationRepository;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     private Map<String, String> toutiaoUrls = ImmutableMap.<String, String>builder()
             .put("热点", "https://www.toutiao.com/ch/news_hot/")
@@ -311,24 +313,27 @@ public class BlogApplicationTests {
     @Test
     public void insertPersonalInfo() {
         List<PersonalInformation> list = new ArrayList<>();
-        PersonalInformation personalInformation1 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("教育经历").mechanism("南京工程学院").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。").startTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2018-07-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+        String username = "songning123456";
+        String userId = usersRepository.findUserIdByNameNative(username);
+        PersonalInformation personalInformation1 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("教育经历").mechanism("南京工程学院").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2018-07-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation1);
         PersonalInformation personalInformation2 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("教育经历").mechanism("龙岗中学").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
-                .startTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2014-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation2);
         PersonalInformation personalInformation3 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("教育经历").mechanism("大纵湖初级中学").position("学生").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
-                .startTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2008-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2008-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2011-09-01", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation3);
         PersonalInformation personalInformation4 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("工作经历").mechanism("阿里巴巴有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
-                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation4);
         PersonalInformation personalInformation5 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("工作经历").mechanism("腾讯科技有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
-                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2019-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-10-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation5);
         PersonalInformation personalInformation6 = PersonalInformation.builder().userId("40281a816e6e147e016e6e173acb0000").author("凌晨").infoType("工作经历").mechanism("时光剪影有限公司").position("职工").introduction("1985年发行首张个人专辑《只知道此刻爱你》 [16]  。1990年凭借专辑《可不可以》在歌坛获得关注 [17]  。1994年获得十大劲歌金曲最受欢迎男歌星奖。1995年在央视春晚上演唱歌曲《忘情水》 [18]  。2000年被《吉尼斯世界纪录大全》评为“获奖最多的香港男歌手” [19]  。2004年第六次获得十大劲歌金曲最受欢迎男歌星奖。2016年参与填词的歌曲《原谅我》正式发行 [20]  。")
-                .startTime(DateUtil.strToDate("2018-09-02", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-08-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
+                .username(username).userId(userId).startTime(DateUtil.strToDate("2019-11-06", CommonConstant.YEAR_DATETIME_PATTERN)).endTime(DateUtil.strToDate("2019-11-25", CommonConstant.YEAR_DATETIME_PATTERN)).build();
         list.add(personalInformation6);
-//        personalInformationRepository.saveAll(list);
+        personalInformationRepository.saveAll(list);
     }
 
     @Test

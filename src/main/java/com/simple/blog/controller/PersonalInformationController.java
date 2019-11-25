@@ -33,6 +33,13 @@ public class PersonalInformationController {
         return commonDTO;
     }
 
+    @PostMapping("/add")
+    @ControllerAspectAnnotation(description = "添加个人信息")
+    public CommonDTO<PersonalInformationDTO> addMyInfos(@RequestBody CommonVO<PersonalInformationVO> commonVO) {
+        CommonDTO<PersonalInformationDTO> commonDTO = personalInformationService.addMyInfo(commonVO);
+        return commonDTO;
+    }
+
     @PostMapping("/getPersonalInfo")
     @ControllerAspectAnnotation(description = "其他人获取作者信息")
     public CommonDTO<PersonalInformationDTO> acquirePersonalInfo(@RequestBody CommonVO<PersonalInformationVO> commonVO) {

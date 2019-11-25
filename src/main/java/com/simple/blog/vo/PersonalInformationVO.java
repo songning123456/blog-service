@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class PersonalInformationVO {
-    private String id;
+    private String infoId;
 
     private String author;
 
