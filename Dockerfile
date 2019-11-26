@@ -3,5 +3,4 @@
  EXPOSE 8072
  CMD ["java", "-jar", "/blog-server/simple-blog-server.jar"]
  ENV LANG en_US.UTF-8
- RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
- RUN /bin/echo -e "ZONE="Asia/Shanghai"\nUTC=false\nRTC=false" > /etc/localtime
+ RUN echo "Asia/Shanghai" > /etc/timezone
