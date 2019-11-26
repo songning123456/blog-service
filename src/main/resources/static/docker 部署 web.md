@@ -79,6 +79,7 @@
   --link mysql_container:localhost 
   --link redis_container
   -v $PWD/blog-server-tomcat/webapps:/usr/local/tomcat/webapps
+  -v /usr/share/fonts:/usr/share/fonts
   blog-server_image:0.1
   ```
 * 注意事项
