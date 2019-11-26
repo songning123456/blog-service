@@ -62,6 +62,7 @@
     EXPOSE 8072
     #执行命令 java -jar simple-blog-server.jar
     CMD ["java", "-jar", "/blog-server/simple-blog-server.jar"] 
+    RUN echo "Asia/Shanghai" > /etc/timezone
   ```
 * 构建镜像
 `docker build -t blog-server_image:0.1 -f dockerfile-blog-server .`
@@ -113,6 +114,7 @@
   ```
   docker run --name blog-front_container 
   -d -p 8070:80
+  -v /etc/localtime:/etc/localtime
   --link blog-server_container
   blog-front_image:0.1
   ```

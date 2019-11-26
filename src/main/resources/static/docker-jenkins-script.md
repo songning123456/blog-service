@@ -42,7 +42,7 @@
  docker rm blog-server_container
  docker rmi blog-server_image
  docker build -t blog-server_image .
- docker run --name blog-server_container -d -p 8072:8072 --link mysql_container:localhost --link redis_container blog-server_image
+ docker run --name blog-server_container -d -p 8072:8072 -v /etc/localtime:/etc/localtime --link mysql_container:localhost --link redis_container blog-server_image
 ```
 
 ### jenkins shell 执行脚本 blog-front
