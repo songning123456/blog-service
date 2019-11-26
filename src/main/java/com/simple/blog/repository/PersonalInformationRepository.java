@@ -18,23 +18,16 @@ import java.util.Map;
 public interface PersonalInformationRepository extends JpaRepository<PersonalInformation, String> {
 
     /**
-     * @param
-     * @param author
-     * @return
-     */
-    List<PersonalInformation> findByAuthorAndInfoType(String author, String infoType);
-
-    /**
      * @param userId
      * @return
      */
     @Query(value = "select distinct(info_type) from personal_information where user_id = ?1", nativeQuery = true)
     List<String> findInfoTypeByInfoOwnerNative(String userId);
 
-    @Query(value = "select author, mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where user_id = ?1 and info_type=?2", nativeQuery = true)
+    @Query(value = "select mechanism, position, start_time as startTime, end_time  as endTime, introduction from personal_information where user_id = ?1 and info_type=?2", nativeQuery = true)
     List<Map<String, Object>> findByUserIdAndInfoTypeNative(String userId, String infoType);
 
-    @Query(value = "select id as infoId, author, mechanism, position,info_type as infoType, start_time as startTime, end_time  as endTime, introduction from personal_information where username = ?1 order by start_time", nativeQuery = true)
+    @Query(value = "select id as infoId, mechanism, position,info_type as infoType, start_time as startTime, end_time  as endTime, introduction from personal_information where username = ?1 order by start_time", nativeQuery = true)
     List<Map<String, Object>> findByUsernameNative(String username);
 
     @Modifying

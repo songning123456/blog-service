@@ -9,8 +9,6 @@ import lombok.Data;
 public class PersonalInformationVO {
     private String infoId;
 
-    private String author;
-
     private String infoType;
 
     private String mechanism;

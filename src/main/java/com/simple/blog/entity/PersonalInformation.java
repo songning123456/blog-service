@@ -24,9 +24,6 @@ public class PersonalInformation {
     @Column(length = 32)
     private String id;
 
-    @Column(name = "author", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '作者'")
-    private String author;
-
     @Column(name = "infoType", columnDefinition = "VARCHAR(50) NOT NULL COMMENT '信息类型'")
     private String infoType;
 

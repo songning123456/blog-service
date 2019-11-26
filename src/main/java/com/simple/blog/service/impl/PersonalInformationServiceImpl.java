@@ -40,7 +40,6 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     public <T> CommonDTO<T> savePersonalInfo(CommonVO<List<PersonalInformationVO>> commonVO) {
         List<PersonalInformationVO> list = commonVO.getCondition();
         list.forEach(item -> {
-            String author = item.getAuthor();
             String infoType = item.getInfoType();
             String mechanism = item.getMechanism();
             String position = item.getPosition();
@@ -49,7 +48,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
             String endTime = item.getEndTime();
             Timestamp startTimeStamp = DateUtil.strToSqlDate(startTime, CommonConstant.YEAR_DATETIME_PATTERN);
             Timestamp endTimeStamp = DateUtil.strToSqlDate(endTime, CommonConstant.YEAR_DATETIME_PATTERN);
-            PersonalInformation personalInformation = PersonalInformation.builder().author(author).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
+            PersonalInformation personalInformation = PersonalInformation.builder().infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
             personalInformationRepository.save(personalInformation);
         });
         return new CommonDTO<>();
@@ -61,7 +60,6 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
         PersonalInformationVO vo = commonVO.getCondition();
         String username = httpServletRequestUtil.getUsername();
         String userId = usersRepository.findUserIdByNameNative(username);
-        String author = vo.getAuthor();
         String infoType = vo.getInfoType();
         String mechanism = vo.getMechanism();
         String position = vo.getPosition();
@@ -70,7 +68,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
         String endTime = vo.getEndTime();
         Timestamp startTimeStamp = DateUtil.strToSqlDate(startTime, CommonConstant.YEAR_DATETIME_PATTERN);
         Timestamp endTimeStamp = DateUtil.strToSqlDate(endTime, CommonConstant.YEAR_DATETIME_PATTERN);
-        PersonalInformation personalInformation = PersonalInformation.builder().username(username).userId(userId).author(author).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
+        PersonalInformation personalInformation = PersonalInformation.builder().username(username).userId(userId).infoType(infoType).mechanism(mechanism).position(position).introduction(introduction).startTime(startTimeStamp).endTime(endTimeStamp).build();
         personalInformationRepository.save(personalInformation);
         return commonDTO;
     }
