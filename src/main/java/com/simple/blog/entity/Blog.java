@@ -28,9 +28,6 @@ public class Blog {
     @Column(name = "title", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '标题'")
     private String title;
 
-    @Column(name = "summary", columnDefinition = "TEXT  NOT NULL COMMENT '摘要'")
-    private String summary;
-
     @Column(name = "readTimes", columnDefinition = "INT NOT NULL default 0 COMMENT '阅读次数'")
     private Integer readTimes;
 

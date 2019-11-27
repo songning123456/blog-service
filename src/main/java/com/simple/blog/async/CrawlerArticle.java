@@ -103,8 +103,7 @@ public class CrawlerArticle {
                         String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                         Date updateTime = new Date();
                         String content = StringEscapeUtils.unescapeEcmaScript(StringEscapeUtils.unescapeHtml4(articleInfoHtml.substring(articleInfoHtml.indexOf("content") + 10, articleInfoHtml.lastIndexOf(".slice(6, -6),") - 1))).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                        String summary = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("shareInfo").getString("abstract").replace("\\\\", "\\")).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                        blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                        blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).build();
                         blogRepository.save(blog);
                     }
                 }
@@ -134,8 +133,7 @@ public class CrawlerArticle {
                 contentHtml = HttpUtil.getHtmlFromUrl(href, false);
                 if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
                     String content = contentHtml.getElementById("endText").html();
-                    String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).userId(userId).build();
                     blogRepository.save(blog);
                 }
             }
@@ -167,8 +165,7 @@ public class CrawlerArticle {
                 int end = contentHtml.html().indexOf("currentPage") - 18;
                 if (start < end) {
                     String content = contentHtml.html().substring(start, end);
-                    String summary = content.substring(0, content.length() / 4);
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).userId(userId).build();
                     blogRepository.save(blog);
                 }
             }

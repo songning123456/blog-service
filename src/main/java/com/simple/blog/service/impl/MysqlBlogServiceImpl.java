@@ -33,11 +33,10 @@ public class MysqlBlogServiceImpl implements BlogService {
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
         String title = commonVO.getCondition().getTitle();
         String content = commonVO.getCondition().getContent();
-        String summary = commonVO.getCondition().getSummary();
         String kinds = commonVO.getCondition().getKinds();
         Integer readTimes = commonVO.getCondition().getReadTimes();
         String author = commonVO.getCondition().getAuthor();
-        Blog blog = Blog.builder().title(title).kinds(kinds).summary(summary).author(author).content(content).updateTime(new Date()).readTimes(readTimes).build();
+        Blog blog = Blog.builder().title(title).kinds(kinds).author(author).content(content).updateTime(new Date()).readTimes(readTimes).build();
         blogRepository.save(blog);
         return new CommonDTO<>();
     }

@@ -407,13 +407,7 @@ public class BlogApplicationTests {
                 String userId = randomMap.get("userId").toString();
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
-                final String[] summary = new String[1];
-                doc.getElementsByClass("post-content").get(0).getElementsByClass("content").get(0).getElementsByTag("p").forEach(item -> {
-                    if (!StringUtils.isEmpty(item.html()) && StringUtils.isEmpty(summary[0])) {
-                        summary[0] = item.html();
-                    }
-                });
-                Blog blog = Blog.builder().title(title).content(content).summary(summary[0]).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
+                Blog blog = Blog.builder().title(title).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
                 blogRepository.save(blog);
             }
         }
@@ -442,7 +436,7 @@ public class BlogApplicationTests {
                 String author = randomMap.get("author").toString();
                 String userId = randomMap.get("userId").toString();
                 Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 12)));
-                Blog blog = Blog.builder().title(title).summary(summary[0]).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
+                Blog blog = Blog.builder().title(title).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).userId(userId).build();
 //                blogRepository.save(blog);
             }
         }
@@ -467,8 +461,7 @@ public class BlogApplicationTests {
                 String author = authors.get(Integer.parseInt(random));
                 String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                 Date updateTime = DateUtil.getBeforeByCurrentTime(Integer.parseInt(RandomUtil.getRandom(1, 23)));
-                String summary = content.substring(0, content.length() / 4);
-                Blog blog = Blog.builder().title(title).content(content).summary(summary).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
+                Blog blog = Blog.builder().title(title).content(content).readTimes(Integer.parseInt(readTimes)).kinds(kinds).author(author).updateTime(updateTime).build();
 //                blogRepository.save(blog);
             }
         }
@@ -532,8 +525,7 @@ public class BlogApplicationTests {
                     String kinds = labels.get(Integer.parseInt(RandomUtil.getRandom(0, labels.size() - 1)));
                     Date updateTime = new Date();
                     String content = StringEscapeUtils.unescapeEcmaScript(StringEscapeUtils.unescapeHtml4(articleInfoHtml.substring(articleInfoHtml.indexOf("content") + 10, articleInfoHtml.lastIndexOf(".slice(6, -6),") - 1))).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                    String summary = StringEscapeUtils.unescapeHtml4(articleObject.getJSONObject("shareInfo").getString("abstract").replace("\\\\", "\\")).replaceAll("&gt;", ">").replaceAll("&lt;", "<");
-                    blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).summary(summary).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(readTimes).kinds(kinds).updateTime(updateTime).content(content).build();
 //                        blogRepository.save(blog);
                 }
             }
@@ -563,8 +555,7 @@ public class BlogApplicationTests {
                 contentHtml = HttpUtil.getHtmlFromUrl(href, false);
                 if (contentHtml.getElementById("endText") != null && contentHtml.getElementById("epContentLeft") != null && contentHtml.getElementById("epContentLeft").getElementsByTag("h1") != null) {
                     String content = contentHtml.getElementById("endText").html();
-                    String summary = contentHtml.getElementById("epContentLeft").getElementsByTag("h1").get(0).html();
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).userId(userId).build();
 //                    blogRepository.save(blog);
                 }
             }
@@ -597,8 +588,7 @@ public class BlogApplicationTests {
                 int end = contentHtml.html().indexOf("currentPage") - 18;
                 if (start < end) {
                     String content = contentHtml.html().substring(start, end);
-                    String summary = content.substring(0, content.length() / 4);
-                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).summary(summary).userId(userId).build();
+                    blog = Blog.builder().author(author).title(title).readTimes(Integer.parseInt(readTimes)).kinds(kinds).updateTime(updateTime).content(content).userId(userId).build();
 //                    blogRepository.save(blog);
                 }
             }

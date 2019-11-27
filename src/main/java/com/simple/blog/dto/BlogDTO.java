@@ -17,8 +17,6 @@ public class BlogDTO {
 
     private String title;
 
-    private String summary;
-
     private Integer readTimes;
 
     private String kinds;
