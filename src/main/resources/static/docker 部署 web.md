@@ -79,7 +79,8 @@
   -d -p 8072:8072
   --link mysql_container:localhost 
   --link redis_container
-  -v $PWD/blog-server-tomcat/webapps:/usr/local/tomcat/webapps
+  -v /etc/localtime:/etc/localtime
+  -v /root/simple-blog/blog-server-tomcat/images:/root/simple-blog/avatar
   -v /usr/share/fonts:/usr/share/fonts
   blog-server_image:0.1
   ```
