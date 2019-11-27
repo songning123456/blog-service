@@ -3,3 +3,4 @@
  EXPOSE 8072
  CMD ["java", "-jar", "/blog-server/simple-blog-server.jar"]
  RUN echo "Asia/Shanghai" > /etc/timezone
+ ENV LANG C.UTF-8
