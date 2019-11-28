@@ -229,6 +229,8 @@ public class FileUtil {
         FileOutputStream fileOutStream = new FileOutputStream(imageFile);
         //写入数据
         fileOutStream.write(data);
+        outStream.close();
+        fileOutStream.close();
     }
 
     /**

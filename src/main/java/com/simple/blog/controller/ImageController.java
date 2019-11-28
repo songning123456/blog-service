@@ -4,6 +4,8 @@ import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.ImageDTO;
 import com.simple.blog.service.ImageService;
+import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.ImageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +30,15 @@ public class ImageController {
 
     @PostMapping("/save")
     @ControllerAspectAnnotation(description = "把上传的图片保存")
-    public CommonDTO<ImageDTO> saveImages(@RequestParam("file") MultipartFile multipartFile) {
-        CommonDTO<ImageDTO> commonDTO = imageService.saveImage(multipartFile);
+    public CommonDTO<ImageDTO> saveImages(@RequestParam("file") MultipartFile multipartFile, @RequestParam("dir") String dir) {
+        CommonDTO<ImageDTO> commonDTO = imageService.saveImage(multipartFile, dir);
+        return commonDTO;
+    }
+
+    @PostMapping("/delete")
+    @ControllerAspectAnnotation(description = "删除指定位置图片")
+    public <T> CommonDTO<T> deleteImages(@RequestBody CommonVO<ImageVO> commonVO) {
+        CommonDTO<T> commonDTO = imageService.deleteImage(commonVO);
         return commonDTO;
     }
 

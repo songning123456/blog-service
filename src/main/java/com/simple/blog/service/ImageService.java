@@ -2,6 +2,8 @@ package com.simple.blog.service;
 
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.ImageDTO;
+import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.ImageVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -15,5 +17,7 @@ public interface ImageService {
      *
      * @return
      */
-    CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile);
+    CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile, String dir);
+
+    <T> CommonDTO<T> deleteImage(CommonVO<ImageVO> commonVO);
 }

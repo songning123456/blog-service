@@ -4,6 +4,9 @@ import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.ImageDTO;
 import com.simple.blog.service.ImageService;
 import com.simple.blog.util.FileUtil;
+import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.ImageVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,9 +32,12 @@ public class ImageServiceImpl implements ImageService {
     private String path;
 
     @Override
-    public CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile) {
+    public CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile, String dir) {
         CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
-        String imageFile = System.getProperty("user.home") + File.separator + path + File.separator + "avatar";
+        if (StringUtils.isEmpty(dir)) {
+            dir = "other";
+        }
+        String imageFile = System.getProperty("user.home") + File.separator + path + File.separator + dir;
         String imageName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         String imageSrc = imageFile + File.separator + imageName;
         try {
@@ -45,6 +51,36 @@ public class ImageServiceImpl implements ImageService {
         ImageDTO imageDTO = ImageDTO.builder().imageSrc(imageSrc).build();
         commonDTO.setData(Collections.singletonList(imageDTO));
         commonDTO.setTotal(1L);
+        return commonDTO;
+    }
+
+    @Override
+    public <T> CommonDTO<T> deleteImage(CommonVO<ImageVO> commonVO) {
+        CommonDTO<T> commonDTO = new CommonDTO<>();
+        String imageName = commonVO.getCondition().getImageName();
+        String imagePath = System.getProperty("user.home") + File.separator + path + File.separator + "avatar";
+        String filename = imagePath + File.separator + imageName;
+        File file = new File(filename);
+        if (file.exists()) {
+            boolean result = file.delete();
+            if (!result) {
+                try {
+                    throw new Exception("删除失败");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    commonDTO.setStatus(300);
+                    commonDTO.setMessage("删除失败");
+                }
+            }
+        } else {
+            try {
+                throw new Exception("文件不存在");
+            } catch (Exception e) {
+                e.printStackTrace();
+                commonDTO.setStatus(300);
+                commonDTO.setMessage("文件不存在");
+            }
+        }
         return commonDTO;
     }
 }
