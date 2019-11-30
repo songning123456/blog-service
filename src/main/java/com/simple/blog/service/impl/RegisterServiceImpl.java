@@ -14,7 +14,6 @@ import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.service.RegisterService;
-import com.simple.blog.service.UsersService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.JsonUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
@@ -23,7 +22,6 @@ import com.simple.blog.vo.LabelVO;
 import com.simple.blog.vo.RegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;

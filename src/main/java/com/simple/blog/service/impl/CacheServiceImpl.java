@@ -10,12 +10,14 @@ import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.CacheService;
 import com.simple.blog.service.RedisService;
 import com.simple.blog.util.DataBaseUtil;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LabelVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,6 +41,8 @@ public class CacheServiceImpl implements CacheService {
     private DataBaseUtil dataBaseUtil;
     @Autowired
     private LabelRelationRepository labelRelationRepository;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public void refreshSystemConfig() {
@@ -62,6 +66,34 @@ public class CacheServiceImpl implements CacheService {
         }
         this.cacheLabel(labelConfigList);
         log.info("~~~刷新LabelConfig缓存~~~");
+    }
+
+    @Override
+    public List getPersonAttentionLabelCache() throws Exception{
+        String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            throw new Exception("token无效,请重新登陆");
+        }
+        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        List labelNames;
+        if (StringUtils.isEmpty(person)) {
+            labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
+            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+        } else {
+            labelNames = JsonUtil.convertString2Object(person, List.class);
+        }
+        return labelNames;
+    }
+
+    @Override
+    public Map<String, String> getLabelConfigCache() {
+        Map<String, String> labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        if (labelConfigMap.isEmpty()) {
+            List<LabelConfig> labelConfigList = labelConfigRepository.findAll();
+            this.cacheLabel(labelConfigList);
+            labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        }
+        return labelConfigMap;
     }
 
     /**

@@ -13,13 +13,13 @@ import java.util.List;
  * @create 2019/7/31 18:01
  */
 public interface LabelService {
-    CommonDTO<LabelDTO> getSelectedLabel();
+    CommonDTO<LabelDTO> getSelectedLabel() throws Exception ;
 
-    CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo);
+    CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo) throws Exception;
 
     CommonDTO<LabelDTO> statisticLabel(CommonVO<LabelVO> commonVO);
 
-    CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO);
+    CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO)  throws Exception;
 
     CommonDTO<LabelDTO> getAllLabelConfig();
 }

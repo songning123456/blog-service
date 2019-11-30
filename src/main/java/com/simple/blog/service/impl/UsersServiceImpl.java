@@ -1,9 +1,7 @@
 package com.simple.blog.service.impl;
 
-import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.UsersDTO;
-import com.simple.blog.entity.Users;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.UsersService;
 import com.simple.blog.util.HttpServletRequestUtil;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
