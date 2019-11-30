@@ -15,4 +15,6 @@ public interface UsersService {
     CommonDTO<UsersDTO> isExist(CommonVO<UsersVO> commonVO);
 
     CommonDTO<UsersDTO> modifyPassword(CommonVO<UsersVO> commonVO);
+
+    CommonDTO<UsersDTO> getPermission(CommonVO<UsersVO> commonVO);
 }

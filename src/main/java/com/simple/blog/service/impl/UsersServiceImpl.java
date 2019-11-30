@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
@@ -58,6 +59,17 @@ public class UsersServiceImpl implements UsersService {
             commonDTO.setStatus(300);
             commonDTO.setMessage("原始密码错误");
         }
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<UsersDTO> getPermission(CommonVO<UsersVO> commonVO) {
+        CommonDTO<UsersDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        String permission = usersRepository.getPermissionByUsername(username);
+        UsersDTO usersDTO = UsersDTO.builder().permission(permission).build();
+        commonDTO.setData(Collections.singletonList(usersDTO));
+        commonDTO.setTotal(1L);
         return commonDTO;
     }
 }
