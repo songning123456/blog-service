@@ -12,4 +12,6 @@ public class CacheVO {
     private Boolean systemConfig;
 
     private Boolean labelConfig;
+
+    private Boolean personalAttentionLabel;
 }

@@ -10,14 +10,16 @@ import java.util.Map;
 public interface CacheService {
 
     /**
-     * 刷新 SystemConfig 缓存
-     */
-    void refreshSystemConfig();
-
-    /**
      * 刷新LabelConfig 缓存
      */
     void refreshLabelConfig();
+
+    /**
+     * 刷新 SystemConfig 缓存
+     */
+    void refreshSystemConfig(String username);
+
+    void refreshPersonAttentionLabel(String username);
 
     /**
      * 获取 personAttentionLabelCache缓存
@@ -31,4 +33,6 @@ public interface CacheService {
      * @return
      */
     Map<String, String> getLabelConfigCache();
+
+    Map<String, String> getSystemConfigCache() throws Exception;
 }

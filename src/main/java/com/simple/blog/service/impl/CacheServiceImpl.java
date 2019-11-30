@@ -45,18 +45,6 @@ public class CacheServiceImpl implements CacheService {
     private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
-    public void refreshSystemConfig() {
-        List<SystemConfig> systemConfigList;
-        systemConfigList = systemConfigRepository.findAll();
-        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
-        if (!systemConfigMap.isEmpty()) {
-            redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
-        }
-        systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), JsonUtil.convertObject2String(item)));
-        log.info("~~~刷新SystemConfig缓存~~~");
-    }
-
-    @Override
     public void refreshLabelConfig() {
         List<LabelConfig> labelConfigList;
         labelConfigList = labelConfigRepository.findAll();
@@ -66,6 +54,30 @@ public class CacheServiceImpl implements CacheService {
         }
         this.cacheLabel(labelConfigList);
         log.info("~~~刷新LabelConfig缓存~~~");
+    }
+
+    @Override
+    public void refreshSystemConfig(String username){
+        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+        if (!systemConfigMap.isEmpty()) {
+            redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG, username);
+        }
+        List<SystemConfig> systemConfigList = systemConfigRepository.getSystemConfigByUsername(username);
+        for (SystemConfig systemConfig: systemConfigList) {
+            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), JsonUtil.convertObject2String(systemConfig));
+        }
+        log.info("~~~user:刷新SystemConfig缓存~~~");
+    }
+
+    @Override
+    public void refreshPersonAttentionLabel(String username) {
+        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        if (!StringUtils.isEmpty(person)) {
+            redisService.deleteValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        }
+        List labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
+        redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+        log.info("~~~user:刷新PersonAttentionLabel缓存~~~");
     }
 
     @Override
@@ -94,6 +106,23 @@ public class CacheServiceImpl implements CacheService {
             labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
         }
         return labelConfigMap;
+    }
+
+    @Override
+    public Map<String, String> getSystemConfigCache() throws Exception{
+        String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            throw new Exception("token无效,请重新登陆");
+        }
+        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+        if (systemConfigMap.isEmpty()) {
+            List<SystemConfig> systemConfigList = systemConfigRepository.getSystemConfigByUsername(username);
+            for (SystemConfig systemConfig: systemConfigList) {
+                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), JsonUtil.convertObject2String(systemConfig));
+            }
+            systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+        }
+        return systemConfigMap;
     }
 
     /**

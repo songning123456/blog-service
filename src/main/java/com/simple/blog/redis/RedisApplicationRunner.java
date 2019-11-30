@@ -22,7 +22,6 @@ public class RedisApplicationRunner implements ApplicationRunner {
     @Override
     @Async
     public void run(ApplicationArguments arguments) {
-        cacheService.refreshSystemConfig();
         cacheService.refreshLabelConfig();
         log.info("^^^^^缓存redis成功^^^^^");
     }

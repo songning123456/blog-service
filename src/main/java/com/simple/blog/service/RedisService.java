@@ -10,6 +10,8 @@ public interface RedisService {
 
     void deleteValues(String... name);
 
+    void deleteValue(String ... name);
+
     Map<String, String> getValues(String... name);
 
     String getValue(String key);

@@ -1,6 +1,7 @@
 package com.simple.blog.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simple.blog.service.AsyncService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,9 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private AsyncService asyncService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
@@ -40,6 +44,12 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         tokenInfo.put("Authorization", token);
         // 同 CommonDTO 中的status
         tokenInfo.put("status", 200);
+        try {
+            asyncService.refreshPersonalCache(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("刷新个人缓存失败");
+        }
         //将token信息写入
         httpServletResponse.getWriter().write(objectMapper.writeValueAsString(tokenInfo));
     }

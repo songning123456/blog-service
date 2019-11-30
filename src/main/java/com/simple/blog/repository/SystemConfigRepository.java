@@ -43,4 +43,6 @@ public interface SystemConfigRepository extends JpaRepository<SystemConfig, Stri
     @Transactional
     @Modifying
     void deleteAllByUsername(String username);
+
+    List<SystemConfig> getSystemConfigByUsername(String username);
 }
