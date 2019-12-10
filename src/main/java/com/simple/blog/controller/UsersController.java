@@ -37,4 +37,11 @@ public class UsersController {
         CommonDTO<UsersDTO> commonDTO = usersService.modifyPassword(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/getPermission")
+    @ControllerAspectAnnotation(description = "获取权限")
+    public CommonDTO<UsersDTO> getPermissions(@RequestBody CommonVO<UsersVO> commonVO) {
+        CommonDTO<UsersDTO> commonDTO = usersService.getPermission(commonVO);
+        return commonDTO;
+    }
 }

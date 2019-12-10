@@ -17,4 +17,6 @@ import lombok.NoArgsConstructor;
 public class UsersDTO {
 
     private Boolean isExist;
+
+    private String permission;
 }

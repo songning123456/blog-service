@@ -2,7 +2,6 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.repository.UsersRepository;
-import com.simple.blog.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

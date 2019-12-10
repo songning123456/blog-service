@@ -7,9 +7,9 @@ import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.entity.LabelConfig;
 import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
+import com.simple.blog.service.CacheService;
 import com.simple.blog.service.LabelService;
 import com.simple.blog.service.RedisService;
-import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
@@ -39,26 +39,15 @@ public class LabelServiceImpl implements LabelService {
     private DataBaseUtil dataBaseUtil;
     @Autowired
     private HttpServletRequestUtil httpServletRequestUtil;
+    @Autowired
+    private CacheService cacheService;
 
     private final Object object = new Object();
 
     @Override
-    public CommonDTO<LabelDTO> getSelectedLabel() {
+    public CommonDTO<LabelDTO> getSelectedLabel() throws Exception {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
-        String username = httpServletRequestUtil.getUsername();
-        if (StringUtils.isEmpty(username)) {
-            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
-            commonDTO.setMessage("token无效,请重新登陆");
-            return commonDTO;
-        }
-        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
-        List labelNames;
-        if (StringUtils.isEmpty(person)) {
-            labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
-        } else {
-            labelNames = JsonUtil.convertString2Object(person, List.class);
-        }
+        List labelNames = cacheService.getPersonAttentionLabelCache();
         List<LabelDTO> list = new ArrayList<>();
         labelNames.forEach(labelName -> {
             LabelDTO labelRelationDTO = LabelDTO.builder().labelName(String.valueOf(labelName)).build();
@@ -70,7 +59,7 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo) {
+    public CommonDTO<LabelDTO> getAllLabel(CommonVO<LabelVO> vo) throws Exception {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelFuzzyName = vo.getCondition().getLabelFuzzyName();
         List<LabelDTO> list = new ArrayList<>();
@@ -82,17 +71,9 @@ public class LabelServiceImpl implements LabelService {
             String labelName2 = o2.getLabelName();
             return labelName1.compareTo(labelName2);
         });
-        // 获取 此用户名下的关注标签
-        String username = httpServletRequestUtil.getUsername();
-        if (StringUtils.isEmpty(username)) {
-            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
-            commonDTO.setMessage("token无效,请重新登陆");
-            return commonDTO;
-        }
-        String attentionLabel = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
-        List attentionList = JsonUtil.convertString2Object(attentionLabel, List.class);
+        List attentionList = cacheService.getPersonAttentionLabelCache();
         // 获取所有标签
-        Map<String, String> allLabel = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+        Map<String, String> allLabel = cacheService.getLabelConfigCache();
         for (LabelConfig labelConfig : configList) {
             labelDTO = JsonUtil.convertString2Object(allLabel.get(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName()), LabelDTO.class);
             if (attentionList.contains(labelConfig.getLabelName())) {
@@ -131,7 +112,7 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) {
+    public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) throws Exception{
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
@@ -162,9 +143,8 @@ public class LabelServiceImpl implements LabelService {
         }
         // 重新 查询 并返回结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelFuzzyName);
-        Map<String, String> allLabels = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
-        String personalLabels = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
-        List personalList = JsonUtil.convertString2Object(personalLabels, List.class);
+        Map<String, String> allLabels = cacheService.getLabelConfigCache();
+        List personalList = cacheService.getPersonAttentionLabelCache();
         List<LabelDTO> list = new ArrayList<>();
         configList.forEach(config -> {
             LabelDTO dto = JsonUtil.convertString2Object(allLabels.get(config.getLabelName()), LabelDTO.class);
@@ -188,17 +168,12 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public CommonDTO<LabelDTO> getAllLabelConfig() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
-        Map<String, String> result = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.LABEL_CONFIG);
+        Map<String, String> result = cacheService.getLabelConfigCache();
         List<LabelDTO> list = new ArrayList<>();
-        if (result.isEmpty()) {
-            List<LabelConfig> labelConfigList = labelConfigRepository.findAll();
-            ClassConvertUtil.populateList(labelConfigList, list, LabelDTO.class);
-        } else {
-            LabelDTO labelDTO = null;
-            for (Map.Entry<String, String> entry : result.entrySet()) {
-                labelDTO = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
-                list.add(labelDTO);
-            }
+        LabelDTO labelDTO;
+        for (Map.Entry<String, String> entry : result.entrySet()) {
+            labelDTO = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
+            list.add(labelDTO);
         }
         commonDTO.setData(list);
         commonDTO.setTotal((long) list.size());

@@ -26,6 +26,11 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public void deleteValue(String ... name) {
+        stringRedisTemplate.delete(StringUtil.getString(name));
+    }
+
+    @Override
     public Map<String, String> getValues(String... name) {
         Map<String, String> map = new TreeMap<>(new Comparator<String>() {
             @Override

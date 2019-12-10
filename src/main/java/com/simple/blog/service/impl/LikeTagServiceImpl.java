@@ -2,10 +2,8 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.LikeTagDTO;
-import com.simple.blog.entity.LikeTag;
 import com.simple.blog.repository.LikeTagRepository;
 import com.simple.blog.service.LikeTagService;
-import com.simple.blog.util.StringUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LikeTagVO;
 import org.springframework.beans.factory.annotation.Autowired;

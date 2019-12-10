@@ -46,4 +46,7 @@ public interface UsersRepository extends JpaRepository<Users, String> {
     @Transactional
     @Query(value = "update users set password = ?2 where username = ?1", nativeQuery = true)
     void updatePasswordNative(String username, String password);
+
+    @Query(value = "select role as permission from users where username = ?1", nativeQuery = true)
+    String getPermissionByUsername(String username);
 }

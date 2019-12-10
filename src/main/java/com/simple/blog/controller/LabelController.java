@@ -26,14 +26,14 @@ public class LabelController {
 
     @GetMapping("/querySelected")
     @ControllerAspectAnnotation(description = "获取用户关注的标签")
-    public CommonDTO<LabelDTO> getSelectedLabels() {
+    public CommonDTO<LabelDTO> getSelectedLabels() throws Exception{
         CommonDTO<LabelDTO> commonDTO = labelService.getSelectedLabel();
         return commonDTO;
     }
 
     @PostMapping("/all")
     @ControllerAspectAnnotation(description = "获取所有的标签")
-    public CommonDTO<LabelDTO> getAllLabels(@RequestBody CommonVO<LabelVO> vo) {
+    public CommonDTO<LabelDTO> getAllLabels(@RequestBody CommonVO<LabelVO> vo) throws Exception {
         CommonDTO<LabelDTO> commonDTO = labelService.getAllLabel(vo);
         return commonDTO;
     }
@@ -47,7 +47,7 @@ public class LabelController {
 
     @PostMapping("/updateAttention")
     @ControllerAspectAnnotation(description = "更新关注状态")
-    public CommonDTO<LabelDTO> updateAttentions(@RequestBody CommonVO<LabelVO> commonVO) {
+    public CommonDTO<LabelDTO> updateAttentions(@RequestBody CommonVO<LabelVO> commonVO)  throws Exception {
         CommonDTO<LabelDTO> commonDTO = labelService.updateAttention(commonVO);
         return commonDTO;
     }

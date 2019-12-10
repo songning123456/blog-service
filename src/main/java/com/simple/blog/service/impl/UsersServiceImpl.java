@@ -1,9 +1,7 @@
 package com.simple.blog.service.impl;
 
-import com.simple.blog.constant.CommonConstant;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.UsersDTO;
-import com.simple.blog.entity.Users;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.UsersService;
 import com.simple.blog.util.HttpServletRequestUtil;
@@ -58,6 +56,17 @@ public class UsersServiceImpl implements UsersService {
             commonDTO.setStatus(300);
             commonDTO.setMessage("原始密码错误");
         }
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<UsersDTO> getPermission(CommonVO<UsersVO> commonVO) {
+        CommonDTO<UsersDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        String permission = usersRepository.getPermissionByUsername(username);
+        UsersDTO usersDTO = UsersDTO.builder().permission(permission).build();
+        commonDTO.setData(Collections.singletonList(usersDTO));
+        commonDTO.setTotal(1L);
         return commonDTO;
     }
 }
