@@ -648,4 +648,28 @@ public class BlogApplicationTests {
             }
         }
     }
+
+    @Test
+    public void deleteSpecifiedFile() {
+//        String src = "C:\\Users\\songning\\HAIYANimage\\temp";
+//        String src = "C:\\Users\\songning\\HAIYANimage\\zip";
+        String src = "C:\\Users\\songning\\HAIYANexcel";
+        File srcFile = new File(src);
+        if (srcFile.exists()) {
+            File[] files = srcFile.listFiles();
+            for (File file : files) {
+                long currentTime = System.currentTimeMillis();
+                long fileTime = file.lastModified();
+                long compareTime = currentTime - fileTime;
+//                boolean compare = (compareTime / (1000 * 60 * 60 * 24)) > 1; // 1day
+                boolean compare = compareTime > 1000 * 60; // 60s
+                if (compare) {
+                    boolean result = file.delete();
+                    if (result) {
+                        System.out.println("删除文件 " + file.getName() + " 成功");
+                    }
+                }
+            }
+        }
+    }
 }
