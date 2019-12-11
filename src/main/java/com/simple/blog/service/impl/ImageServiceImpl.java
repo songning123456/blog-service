@@ -4,6 +4,7 @@ import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.ImageDTO;
 import com.simple.blog.entity.Image;
 import com.simple.blog.repository.ImageRepository;
+import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.ImageService;
 import com.simple.blog.util.FileUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
@@ -34,6 +35,8 @@ public class ImageServiceImpl implements ImageService {
     private HttpServletRequestUtil httpServletRequestUtil;
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private UsersRepository usersRepository;
     private final Object object = new Object();
 
     @Override
@@ -50,9 +53,10 @@ public class ImageServiceImpl implements ImageService {
     public CommonDTO<ImageDTO> operateAlbum(MultipartFile multipartFile, String dir) {
         CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
         String username = httpServletRequestUtil.getUsername();
+        String userId = usersRepository.findUserIdByNameNative(username);
         synchronized (object) {
             String imageSrc = this.savePicture(multipartFile, dir);
-            Image image = Image.builder().imageSrc(imageSrc).username(username).build();
+            Image image = Image.builder().imageSrc(imageSrc).username(username).userId(userId).build();
             imageRepository.save(image);
         }
         List<String> images = imageRepository.findImageSrcByUsernameNative(username);
