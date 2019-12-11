@@ -2,11 +2,15 @@ package com.simple.blog.service.impl;
 
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.ImageDTO;
+import com.simple.blog.entity.Image;
+import com.simple.blog.repository.ImageRepository;
 import com.simple.blog.service.ImageService;
 import com.simple.blog.util.FileUtil;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.ImageVO;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,9 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author songning
@@ -28,27 +30,64 @@ public class ImageServiceImpl implements ImageService {
 
     @Value("${blog.image.path}")
     private String path;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
+    @Autowired
+    private ImageRepository imageRepository;
+    private final Object object = new Object();
 
     @Override
     public CommonDTO<ImageDTO> saveImage(MultipartFile multipartFile, String dir) {
         CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
-        if (StringUtils.isEmpty(dir)) {
-            dir = "other";
-        }
-        String imageFile = System.getProperty("user.home") + File.separator + path + File.separator + dir;
-        String imageName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
-        String imageSrc = imageFile + File.separator + imageName;
-        try {
-            InputStream inputStream = multipartFile.getInputStream();
-            if (FileUtil.mkDirs(imageFile)) {
-                FileUtil.streamToImage(imageSrc, inputStream);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String imageSrc = this.savePicture(multipartFile, dir);
         ImageDTO imageDTO = ImageDTO.builder().imageSrc(imageSrc).build();
         commonDTO.setData(Collections.singletonList(imageDTO));
         commonDTO.setTotal(1L);
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<ImageDTO> operateAlbum(MultipartFile multipartFile, String dir) {
+        CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        synchronized (object) {
+            String imageSrc = this.savePicture(multipartFile, dir);
+            Image image = Image.builder().imageSrc(imageSrc).username(username).build();
+            imageRepository.save(image);
+        }
+        List<String> images = imageRepository.findImageSrcByUsernameNative(username);
+        List<ImageDTO> list = new ArrayList<>();
+        ImageDTO imageDTO;
+        for (String src : images) {
+            imageDTO = ImageDTO.builder().imageSrc(src).build();
+            list.add(imageDTO);
+        }
+        commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<ImageDTO> getAlbum(CommonVO<ImageVO> commonVO) {
+        CommonDTO<ImageDTO> commonDTO = new CommonDTO<>();
+        List<String> images;
+        // 获取个人相册
+        if (StringUtils.isEmpty(commonVO.getCondition().getUserId())) {
+            String username = httpServletRequestUtil.getUsername();
+            images = imageRepository.findImageSrcByUsernameNative(username);
+        } else {
+            // 查看作者信息时，获取的他人相册
+            String userId = commonVO.getCondition().getUserId();
+            images = imageRepository.findImageSrcByUserIdNative(userId);
+        }
+        List<ImageDTO> list = new ArrayList<>();
+        ImageDTO imageDTO;
+        for (String src : images) {
+            imageDTO = ImageDTO.builder().imageSrc(src).build();
+            list.add(imageDTO);
+        }
+        commonDTO.setData(list);
+        commonDTO.setTotal((long) list.size());
         return commonDTO;
     }
 
@@ -80,5 +119,28 @@ public class ImageServiceImpl implements ImageService {
             }
         }
         return commonDTO;
+    }
+
+    private String savePicture(MultipartFile multipartFile, String dir) {
+        if (StringUtils.isEmpty(dir)) {
+            dir = "other";
+        }
+        String imageFile = System.getProperty("user.home") + File.separator + path + File.separator + dir;
+        // 目前 主要三处 注册/修改信息 -> avatar; 写文章 -> article; 相册 -> album;(头像信息不需要username,当时还未注册)
+        if (!"avatar".equals(dir)) {
+            String username = httpServletRequestUtil.getUsername();
+            imageFile = imageFile + File.separator + username;
+        }
+        String imageName = UUID.randomUUID() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+        String imageSrc = imageFile + File.separator + imageName;
+        try {
+            InputStream inputStream = multipartFile.getInputStream();
+            if (FileUtil.mkDirs(imageFile)) {
+                FileUtil.streamToImage(imageSrc, inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imageSrc;
     }
 }

@@ -10,5 +10,7 @@ import lombok.Data;
 @Data
 public class ImageVO {
 
+    private String userId;
+
     private String imageName;
 }
