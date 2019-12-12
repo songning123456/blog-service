@@ -12,5 +12,7 @@ public class ImageVO {
 
     private String userId;
 
+    private String dir;
+
     private String imageName;
 }

@@ -99,7 +99,12 @@ public class ImageServiceImpl implements ImageService {
     public <T> CommonDTO<T> deleteImage(CommonVO<ImageVO> commonVO) {
         CommonDTO<T> commonDTO = new CommonDTO<>();
         String imageName = commonVO.getCondition().getImageName();
-        String imagePath = System.getProperty("user.home") + File.separator + path + File.separator + "avatar";
+        String dir = commonVO.getCondition().getDir();
+        String imagePath = System.getProperty("user.home") + File.separator + path + File.separator + dir;
+        if (!"avatar".equals(dir)) {
+            String username = httpServletRequestUtil.getUsername();
+            imagePath = imagePath + File.separator + username;
+        }
         String filename = imagePath + File.separator + imageName;
         File file = new File(filename);
         if (file.exists()) {
