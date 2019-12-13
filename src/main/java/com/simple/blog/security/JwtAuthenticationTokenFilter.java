@@ -21,7 +21,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         //获取JWT
         String authHeader = request.getHeader("Authorization");
-        log.info("--------->"+authHeader);
         if (authHeader != null) {
             JwtUtil.tokenParser(authHeader);
         }
