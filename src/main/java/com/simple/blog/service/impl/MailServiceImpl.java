@@ -29,14 +29,16 @@ public class MailServiceImpl implements MailService {
     private void sendMimeMail(CommonVO<MailVO> commonVO) throws MessagingException {
         MailVO mailVO = commonVO.getCondition();
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setHost("smtp.163.com");
+        String[] temps = mailVO.getSender().split("@");
+        String host = "smtp." + temps[temps.length - 1];
+        javaMailSender.setHost(host);
         javaMailSender.setUsername(mailVO.getSender());
-        javaMailSender.setPassword("772805406sn123");
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(javaMailSender.createMimeMessage());
+        javaMailSender.setPassword(mailVO.getPassword());
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(javaMailSender.createMimeMessage(), true, "UTF-8");
         mimeMessageHelper.setFrom(mailVO.getSender());
         mimeMessageHelper.setTo(mailVO.getRecipient().split(","));
         mimeMessageHelper.setSubject(mailVO.getSubject());
-        mimeMessageHelper.setText(mailVO.getContent());
+        mimeMessageHelper.setText(mailVO.getContent(), true);
         // 抄送
         if (!StringUtils.isEmpty(mailVO.getCc())) {
             mimeMessageHelper.setCc(mailVO.getCc().split(","));
@@ -52,10 +54,7 @@ public class MailServiceImpl implements MailService {
             }
         }
         // 发送时间
-        if (StringUtils.isEmpty(mailVO.getSentDate())) {
-            mailVO.setSentDate(new Date());
-            mimeMessageHelper.setSentDate(mailVO.getSentDate());
-        }
+        mimeMessageHelper.setSentDate(new Date());
         //正式发送邮件
         javaMailSender.send(mimeMessageHelper.getMimeMessage());
 

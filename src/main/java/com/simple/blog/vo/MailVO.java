@@ -33,11 +33,6 @@ public class MailVO {
     private String content;
 
     /**
-     * 发送时间
-     */
-    private Date sentDate;
-
-    /**
      * 抄送（多个邮箱则用逗号","隔开）
      */
     private String cc;
@@ -46,6 +41,11 @@ public class MailVO {
      * 密送（多个邮箱则用逗号","隔开）
      */
     private String bcc;
+
+    /**
+     * 授权码
+     */
+    private String password;
 
     /**
      * 邮件附件
