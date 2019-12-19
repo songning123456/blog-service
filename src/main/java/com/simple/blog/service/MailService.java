@@ -1,5 +1,7 @@
 package com.simple.blog.service;
 
+import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.MailDTO;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.MailVO;
 
@@ -12,5 +14,7 @@ public interface MailService {
      * @param commonVO
      * @throws Exception
      */
-    void sendMail(CommonVO<MailVO> commonVO) throws Exception;
+    CommonDTO<MailDTO> sendMail(CommonVO<MailVO> commonVO) throws Exception;
+
+    CommonDTO<MailDTO> saveDraft(CommonVO<MailVO> commonVO);
 }

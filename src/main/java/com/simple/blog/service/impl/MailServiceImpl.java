@@ -1,9 +1,15 @@
 package com.simple.blog.service.impl;
 
+import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.MailDTO;
+import com.simple.blog.entity.Mail;
+import com.simple.blog.repository.MailRepository;
 import com.simple.blog.service.MailService;
+import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.MailVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -20,13 +26,34 @@ import java.util.Date;
 @Service
 public class MailServiceImpl implements MailService {
 
+    @Autowired
+    private MailRepository mailRepository;
+
     @Override
-    public void sendMail(CommonVO<MailVO> commonVO) throws Exception {
+    public CommonDTO<MailDTO> sendMail(CommonVO<MailVO> commonVO) throws Exception {
         checkMail(commonVO.getCondition());
-        sendMimeMail(commonVO);
+        return sendMimeMail(commonVO);
     }
 
-    private void sendMimeMail(CommonVO<MailVO> commonVO) throws MessagingException {
+    @Override
+    public CommonDTO<MailDTO> saveDraft(CommonVO<MailVO> commonVO) {
+        CommonDTO<MailDTO> commonDTO = new CommonDTO<>();
+        MailVO mailVO = commonVO.getCondition();
+        Mail mail = new Mail();
+        ClassConvertUtil.populate(mailVO, mail);
+        mail.setSentDate(new Date());
+        mail.setStatus("草稿");
+        try {
+            mailRepository.save(mail);
+        } catch (Exception e) {
+            commonDTO.setStatus(500);
+            return commonDTO;
+        }
+        return commonDTO;
+    }
+
+    private CommonDTO<MailDTO> sendMimeMail(CommonVO<MailVO> commonVO) throws MessagingException {
+        CommonDTO<MailDTO> commonDTO = new CommonDTO<>();
         MailVO mailVO = commonVO.getCondition();
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         String[] temps = mailVO.getSender().split("@");
@@ -53,11 +80,21 @@ public class MailServiceImpl implements MailService {
                 mimeMessageHelper.addAttachment(multipartFile.getOriginalFilename(), multipartFile);
             }
         }
+        Date date = new Date();
         // 发送时间
-        mimeMessageHelper.setSentDate(new Date());
+        mimeMessageHelper.setSentDate(date);
+        Mail mail = Mail.builder().sender(mailVO.getSender()).password(mailVO.getPassword()).bcc(mailVO.getBcc()).cc(mailVO.getCc()).content(mailVO.getContent()).recipient(mailVO.getRecipient()).sentDate(date).status("已发送").subject(mailVO.getSubject()).build();
         //正式发送邮件
-        javaMailSender.send(mimeMessageHelper.getMimeMessage());
-
+        try {
+            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (Exception e) {
+            commonDTO.setStatus(500);
+            commonDTO.setMessage("邮件发送失败");
+            log.error("邮件发送失败!!!");
+            return commonDTO;
+        }
+        mailRepository.save(mail);
+        return new CommonDTO<>();
     }
 
     private void checkMail(MailVO mailVO) throws Exception {
@@ -71,14 +108,4 @@ public class MailServiceImpl implements MailService {
             throw new Exception("邮件内容不能为空");
         }
     }
-
-    /**
-     * 保存邮件
-     *
-     * @param mailVO
-     */
-    private void saveMail(MailVO mailVO) {
-
-    }
-
 }
