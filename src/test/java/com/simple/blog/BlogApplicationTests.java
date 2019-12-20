@@ -672,4 +672,14 @@ public class BlogApplicationTests {
             }
         }
     }
+
+    /**
+     * 测试redis 缓存穿透
+     */
+    @Test
+    public void testRedis() {
+        List<String> list = new ArrayList<>();
+        String result = JsonUtil.convertObject2String(list);
+        System.out.println(list);
+    }
 }
