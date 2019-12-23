@@ -2,6 +2,7 @@ package com.simple.blog.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -10,17 +11,22 @@ import com.simple.blog.constant.HttpStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author songning
@@ -45,19 +51,25 @@ public class HttpUtil {
      */
     public static String doGet(String url) {
         String result = "";
-        //获取httpclient对象
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        //获取get请求对象
-        HttpGet httpGet = new HttpGet(url);
         try {
-            //发起请求
-            HttpResponse response = httpClient.execute(httpGet);
-            //获取响应中的数据
-            HttpEntity entity = response.getEntity();
-            //把entity转换成字符串
-            result = EntityUtils.toString(entity, "utf-8");
+            CloseableHttpClient client = null;
+            CloseableHttpResponse response = null;
+            try {
+                HttpGet httpGet = new HttpGet(url);
+
+                client = HttpClients.createDefault();
+                response = client.execute(httpGet);
+                HttpEntity entity = response.getEntity();
+                result = EntityUtils.toString(entity);
+            } finally {
+                if (response != null) {
+                    response.close();
+                }
+                if (client != null) {
+                    client.close();
+                }
+            }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
@@ -75,23 +87,30 @@ public class HttpUtil {
      *
      * @throws Exception
      */
-    public static String doPost(String url, String param) {
+    public static String doPost(String url, Map<String, Object> data) {
         String result = "";
-        //获取httpclient对象
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        //获取请求对象
-        HttpPost httpPost = new HttpPost(url);
         try {
-            //把传入进来的结构树封装
-            httpPost.setEntity(new StringEntity(param, "utf-8"));
-            //执行一个post请求
-            HttpResponse response = httpClient.execute(httpPost);
-            //从响应获取数据
-            HttpEntity entity = response.getEntity();
-            //将httpEntity转换为string
-            result = EntityUtils.toString(entity, "utf-8");
+            CloseableHttpClient client = null;
+            CloseableHttpResponse response = null;
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+
+                HttpPost httpPost = new HttpPost(url);
+                httpPost.setHeader(HTTP.CONTENT_TYPE, "application/json");
+                httpPost.setEntity(new StringEntity(objectMapper.writeValueAsString(data), ContentType.create("text/json", "UTF-8")));
+                client = HttpClients.createDefault();
+                response = client.execute(httpPost);
+                HttpEntity entity = response.getEntity();
+                result = EntityUtils.toString(entity);
+            } finally {
+                if (response != null) {
+                    response.close();
+                }
+                if (client != null) {
+                    client.close();
+                }
+            }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

@@ -20,6 +20,12 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import org.apache.commons.text.StringEscapeUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -681,5 +687,33 @@ public class BlogApplicationTests {
         List<String> list = new ArrayList<>();
         String result = JsonUtil.convertObject2String(list);
         System.out.println(list);
+    }
+
+    @Test
+    public void testHttp() {
+        try {
+            CloseableHttpClient client = null;
+            CloseableHttpResponse response = null;
+            try {
+                String code = "9244428f2a3654bdec09";
+                String url = "https://github.com/login/oauth/access_token?client_id=b53228209ce0f034e769&client_secret=8b84be6298ffe9801b76bdb59d1c1f43afe11095&code=" + code;
+                HttpGet httpGet = new HttpGet(url);
+
+                client = HttpClients.createDefault();
+                response = client.execute(httpGet);
+                HttpEntity entity = response.getEntity();
+                String result = EntityUtils.toString(entity);
+                System.out.println(result);
+            } finally {
+                if (response != null) {
+                    response.close();
+                }
+                if (client != null) {
+                    client.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
