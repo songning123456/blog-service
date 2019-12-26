@@ -27,25 +27,25 @@ public class Blogger {
     @Column(name = "author", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '作者'")
     private String author;
 
-    @Column(name = "realName", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '真实姓名'")
+    @Column(name = "realName", columnDefinition = "VARCHAR(64) COMMENT '真实姓名'")
     private String realName;
 
-    @Column(name = "gender", columnDefinition = "VARCHAR(4) NOT NULL COMMENT '性别'")
+    @Column(name = "gender", columnDefinition = "VARCHAR(4) COMMENT '性别'")
     private String gender;
 
-    @Column(name = "age", columnDefinition = "INT NOT NULL COMMENT '年龄'")
+    @Column(name = "age", columnDefinition = "INT COMMENT '年龄'")
     private Integer age;
 
-    @Column(name = "profession", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '职业'")
+    @Column(name = "profession", columnDefinition = "VARCHAR(64) COMMENT '职业'")
     private String profession;
 
-    @Column(name = "telephone", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '电话'")
+    @Column(name = "telephone", columnDefinition = "VARCHAR(64) COMMENT '电话'")
     private String telephone;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(64) NOT NULL COMMENT '邮箱'")
+    @Column(name = "email", columnDefinition = "VARCHAR(64) COMMENT '邮箱'")
     private String email;
 
-    @Column(name = "motto", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '座右铭'")
+    @Column(name = "motto", columnDefinition = "VARCHAR(255) COMMENT '座右铭'")
     private String motto;
 
     @Column(name = "updateTime", columnDefinition = "DATETIME NOT NULL COMMENT '更新时间'")

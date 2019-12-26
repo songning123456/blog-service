@@ -2,15 +2,29 @@ package com.simple.blog.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simple.blog.dto.CommonDTO;
+import com.simple.blog.dto.LabelDTO;
 import com.simple.blog.dto.ThirdPartDTO;
+import com.simple.blog.entity.LabelRelation;
+import com.simple.blog.repository.LabelConfigRepository;
+import com.simple.blog.repository.LabelRelationRepository;
+import com.simple.blog.repository.UsersRepository;
+import com.simple.blog.service.LabelService;
+import com.simple.blog.service.RegisterService;
 import com.simple.blog.service.ThirdPartService;
 import com.simple.blog.util.HttpUtil;
+import com.simple.blog.util.RandomUtil;
 import com.simple.blog.vo.CommonVO;
+import com.simple.blog.vo.LabelVO;
+import com.simple.blog.vo.RegisterVO;
 import com.simple.blog.vo.ThirdPartVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,8 +35,26 @@ import java.util.Map;
 @Service
 public class ThirdPartServiceImpl implements ThirdPartService {
 
+    @Autowired
+    private RegisterService registerService;
+    @Autowired
+    private LabelConfigRepository labelConfigRepository;
+    @Autowired
+    private UsersRepository usersRepository;
+
     @Override
     public CommonDTO<ThirdPartDTO> getGitHub(CommonVO<ThirdPartVO> commonVO) {
+        CommonDTO<ThirdPartDTO> commonDTO = this.gitHub(commonVO);
+        Map<String, Object> dataExt = commonDTO.getDataExt();
+        String username = "gitHubUn" + dataExt.get("id");
+        String user = usersRepository.findUsernameByNameNative(username);
+        if (StringUtils.isEmpty(user)) {
+            register(dataExt);
+        }
+        return commonDTO;
+    }
+
+    private CommonDTO<ThirdPartDTO> gitHub(CommonVO<ThirdPartVO> commonVO) {
         CommonDTO<ThirdPartDTO> commonDTO = new CommonDTO<>();
         Map<String, Object> params = new HashMap<>(2);
         params.put("client_id", commonVO.getCondition().getClientId());
@@ -41,5 +73,35 @@ public class ThirdPartServiceImpl implements ThirdPartService {
         }
         commonDTO.setDataExt(result);
         return commonDTO;
+    }
+
+    private void register(Map<String, Object> dataExt) {
+        String author = String.valueOf(dataExt.get("login"));
+        String username = "gitHubUn" + dataExt.get("id");
+        String password = "gitHubPd" + dataExt.get("id");
+        String headPortrait = String.valueOf(dataExt.get("avatar_url"));
+        String email = String.valueOf(dataExt.get("email"));
+        String realName = String.valueOf(dataExt.get("name"));
+        List<String> labelSrc = labelConfigRepository.findAllLabelNameNative();
+        List<LabelVO> labelTarget = new ArrayList<>();
+        LabelVO labelVO;
+        for (String labelName : labelSrc) {
+            labelVO = new LabelVO();
+            String attention = RandomUtil.getRandom(0, 1);
+            labelVO.setLabelName(labelName);
+            labelVO.setAttention(Integer.parseInt(attention));
+            labelTarget.add(labelVO);
+        }
+        RegisterVO registerVO = new RegisterVO();
+        registerVO.setAuthor(author);
+        registerVO.setUsername(username);
+        registerVO.setPassword(password);
+        registerVO.setHeadPortrait(headPortrait);
+        registerVO.setEmail(email);
+        registerVO.setRealName(realName);
+        registerVO.setLabelVOS(labelTarget);
+        CommonVO<RegisterVO> cvo = new CommonVO<>();
+        cvo.setCondition(registerVO);
+        registerService.registerAll(cvo);
     }
 }
