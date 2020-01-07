@@ -18,9 +18,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,9 +58,23 @@ public class SystemConfigServiceImpl implements SystemConfigService {
             commonDTO.setMessage("token无效,请重新登陆");
             return commonDTO;
         }
-        Sort sort = new Sort(Sort.Direction.ASC, "config_key");
+        Sort sort = new Sort(Sort.Direction.ASC, "configKey");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
-        Page<SystemConfig> systemConfigPage = systemConfigRepository.findByUsernameAndConfigKeyAndConfigValueAndValueDescriptionNative(username, configKey, configValue, valueDescription, pageable);
+        Specification specification = (Specification) (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (!StringUtils.isEmpty(configKey)) {
+                predicateList.add(criteriaBuilder.like(root.get("configKey"), "%" + configKey + "%"));
+            }
+            if (!StringUtils.isEmpty(configValue)) {
+                predicateList.add(criteriaBuilder.like(root.get("configValue"), "%" + configValue + "%"));
+            }
+            if (!StringUtils.isEmpty(valueDescription)) {
+                predicateList.add(criteriaBuilder.like(root.get("valueDescription"), "%" + valueDescription + "%"));
+            }
+            predicateList.add(criteriaBuilder.equal(root.get("username"), username));
+            return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
+        };
+        Page<SystemConfig> systemConfigPage = systemConfigRepository.findAll(specification, pageable);
         List<SystemConfig> systemConfigList = systemConfigPage.getContent();
         List<SystemConfigDTO> target = new ArrayList<>();
         ClassConvertUtil.populateList(systemConfigList, target, SystemConfigDTO.class);
