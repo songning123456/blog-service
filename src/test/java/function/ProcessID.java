@@ -1,12 +1,12 @@
 package function;
 
-import sun.jvmstat.monitor.MonitoredHost;
+/*import sun.jvmstat.monitor.MonitoredHost;
 import sun.jvmstat.monitor.MonitoredVm;
 import sun.jvmstat.monitor.MonitoredVmUtil;
 import sun.jvmstat.monitor.VmIdentifier;
 
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Set;*/
 
 /**
  * @author songning
@@ -14,7 +14,7 @@ import java.util.Set;
  * description
  */
 public class ProcessID {
-    public static void main(String[] args) throws Exception {
+   /* public static void main(String[] args) throws Exception {
         // 获取监控主机
         MonitoredHost local = MonitoredHost.getMonitoredHost("localhost");
         // 取得所有在活动的虚拟机集合
@@ -26,5 +26,5 @@ public class ProcessID {
             String processname = MonitoredVmUtil.mainClass(vm, true);
             System.out.println(process + " ------> " + processname);
         }
-    }
+    }*/
 }
