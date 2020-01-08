@@ -32,7 +32,7 @@ public interface CacheService {
      * 获取labelConfig缓存
      * @return
      */
-    Map<String, String> getLabelConfigCache();
+    Map<String, Object> getLabelConfigCache();
 
-    Map<String, String> getSystemConfigCache() throws Exception;
+    Map<String, Object> getSystemConfigCache() throws Exception;
 }

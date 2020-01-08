@@ -9,7 +9,7 @@ import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.service.CacheService;
 import com.simple.blog.service.LabelService;
-import com.simple.blog.service.RedisService;
+import com.simple.blog.service.MemoryService;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.JsonUtil;
@@ -30,7 +30,7 @@ import java.util.*;
 public class LabelServiceImpl implements LabelService {
 
     @Autowired
-    private RedisService redisService;
+    private MemoryService memoryService;
     @Autowired
     private LabelRelationRepository labelRelationRepository;
     @Autowired
@@ -73,9 +73,9 @@ public class LabelServiceImpl implements LabelService {
         });
         List attentionList = cacheService.getPersonAttentionLabelCache();
         // 获取所有标签
-        Map<String, String> allLabel = cacheService.getLabelConfigCache();
+        Map<String, Object> allLabel = cacheService.getLabelConfigCache();
         for (LabelConfig labelConfig : configList) {
-            labelDTO = JsonUtil.convertString2Object(allLabel.get(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName()), LabelDTO.class);
+            labelDTO = (LabelDTO) allLabel.get(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName());
             if (attentionList.contains(labelConfig.getLabelName())) {
                 labelDTO.setIsAttention(1);
             } else {
@@ -112,7 +112,7 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) throws Exception{
+    public CommonDTO<LabelDTO> updateAttention(CommonVO<LabelVO> commonVO) throws Exception {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
         String labelName = commonVO.getCondition().getLabelName();
         Integer attention = commonVO.getCondition().getAttention();
@@ -127,27 +127,27 @@ public class LabelServiceImpl implements LabelService {
             // 更新关注状态
             Integer isSuccess = labelRelationRepository.updateByUsernameAndLabelNameAndAttentionNative(username, labelName, attention);
             if (isSuccess == 1) {
-                // 修改redis缓存中关注的标签
+                // 修改memory缓存中关注的标签
                 List<String> labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+                memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, labelNames);
                 // 修改全部标签的此标签的关注度
-                String labelObj = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
-                LabelDTO labelDTO = JsonUtil.convertString2Object(labelObj, LabelDTO.class);
+                Object labelObj = memoryService.getValue(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelName);
+                LabelDTO labelDTO = (LabelDTO) labelObj;
                 if (attention == 1) {
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
                 } else {
                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() - 1);
                 }
-                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
+                memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelName, labelDTO);
             }
         }
         // 重新 查询 并返回结果
         List<LabelConfig> configList = labelConfigRepository.findAllByLabelNameLikeNative(labelFuzzyName);
-        Map<String, String> allLabels = cacheService.getLabelConfigCache();
+        Map<String, Object> allLabels = cacheService.getLabelConfigCache();
         List personalList = cacheService.getPersonAttentionLabelCache();
         List<LabelDTO> list = new ArrayList<>();
         configList.forEach(config -> {
-            LabelDTO dto = JsonUtil.convertString2Object(allLabels.get(config.getLabelName()), LabelDTO.class);
+            LabelDTO dto = (LabelDTO) allLabels.get(config.getLabelName());
             if (personalList.contains(dto.getLabelName())) {
                 dto.setIsAttention(1);
             } else {
@@ -168,11 +168,11 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public CommonDTO<LabelDTO> getAllLabelConfig() {
         CommonDTO<LabelDTO> commonDTO = new CommonDTO<>();
-        Map<String, String> result = cacheService.getLabelConfigCache();
+        Map<String, Object> result = cacheService.getLabelConfigCache();
         List<LabelDTO> list = new ArrayList<>();
         LabelDTO labelDTO;
-        for (Map.Entry<String, String> entry : result.entrySet()) {
-            labelDTO = JsonUtil.convertString2Object(entry.getValue(), LabelDTO.class);
+        for (Map.Entry<String, Object> entry : result.entrySet()) {
+            labelDTO = (LabelDTO) entry.getValue();
             list.add(labelDTO);
         }
         commonDTO.setData(list);

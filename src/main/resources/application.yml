@@ -7,18 +7,6 @@ spring:
     password: 123456
   main:
     allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
-  redis:
-    database: 1
-    #    host: localhost
-    host: redis_container
-    port: 6379
-    password:
-    jedis:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
-    timeout: 5000
   jpa:
     hibernate:
       ddl-auto: update

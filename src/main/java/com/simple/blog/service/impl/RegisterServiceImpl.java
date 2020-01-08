@@ -12,7 +12,7 @@ import com.simple.blog.repository.BloggerRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.repository.UsersRepository;
-import com.simple.blog.service.RedisService;
+import com.simple.blog.service.MemoryService;
 import com.simple.blog.service.RegisterService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.JsonUtil;
@@ -44,7 +44,7 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private LabelRelationRepository labelRelationRepository;
     @Autowired
-    private RedisService redisService;
+    private MemoryService memoryService;
 
     private final Object object = new Object();
 
@@ -85,17 +85,17 @@ public class RegisterServiceImpl implements RegisterService {
                             synchronized (object) {
                                 labelRelationRepository.save(labelRelation);
                                 if (attention == 1) {
-                                    String result = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName);
-                                    LabelDTO labelDTO = JsonUtil.convertString2Object(result, LabelDTO.class);
+                                    Object result = memoryService.getValue(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelName);
+                                    LabelDTO labelDTO = (LabelDTO) result;
                                     labelDTO.setNumOfAttention(labelDTO.getNumOfAttention() + 1);
-                                    redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelName, JsonUtil.convertObject2String(labelDTO));
+                                    memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelName, labelDTO);
                                 }
                             }
                         }
                         // 注册成功时，刷新SystemConfig缓存
                         List<SystemConfig> systemConfigList = systemConfigRepository.findAll();
-                        redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG);
-                        systemConfigList.forEach(item -> redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), JsonUtil.convertObject2String(item)));
+                        memoryService.deleteValues(CommonConstant.MEMORY_CACHE, CommonConstant.SYSTEM_CONFIG);
+                        systemConfigList.forEach(item -> memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + item.getUsername() + ":" + item.getConfigKey(), item));
                     } catch (Exception e) {
                         synchronized (object) {
                             labelRelationRepository.deleteAllByUsername(username);

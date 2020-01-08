@@ -1,4 +1,4 @@
-package com.simple.blog.redis;
+package com.simple.blog.async;
 
 import com.simple.blog.service.CacheService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,12 +9,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author songning
- * @create 2019/7/31 13:24
+ * @author songning
+ * @date 2020/1/8
+ * description
  */
 @Slf4j
 @Component
-public class RedisApplicationRunner implements ApplicationRunner {
+public class MemoryApplicationRunner implements ApplicationRunner {
 
     @Autowired
     private CacheService cacheService;
@@ -23,6 +24,6 @@ public class RedisApplicationRunner implements ApplicationRunner {
     @Async
     public void run(ApplicationArguments arguments) {
         cacheService.refreshLabelConfig();
-        log.info("^^^^^缓存redis成功^^^^^");
+        log.info("^^^^^缓存memory成功^^^^^");
     }
 }

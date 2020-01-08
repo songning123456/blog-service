@@ -35,15 +35,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -75,8 +72,6 @@ public class BlogApplicationTests {
     private LabelConfigRepository labelConfigRepository;
     @Autowired
     private LabelRelationRepository labelRelationRepository;
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private HttpServletRequestUtil httpServletRequestUtil;
 
@@ -381,16 +376,6 @@ public class BlogApplicationTests {
     }
 
     @Test
-    public void testRedisSetTimeout() throws InterruptedException {
-//        stringRedisTemplate.opsForValue().set("timeOutKey", "timeOut", 5, TimeUnit.SECONDS);
-//        String timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
-//        System.out.println("通过set(K key, V value, long timeout, TimeUnit unit)方法设置过期时间，过期之前获取的数据:" + timeOutValue);
-//        Thread.sleep(5 * 1000);
-//        timeOutValue = stringRedisTemplate.opsForValue().get("timeOutKey") + "";
-//        System.out.print(",等待10s过后，获取的值:" + timeOutValue);
-    }
-
-    @Test
     public void testLog() {
         log.info("测试日志是否生效");
     }
@@ -677,16 +662,6 @@ public class BlogApplicationTests {
                 }
             }
         }
-    }
-
-    /**
-     * 测试redis 缓存穿透
-     */
-    @Test
-    public void testRedis() {
-        List<String> list = new ArrayList<>();
-        String result = JsonUtil.convertObject2String(list);
-        System.out.println(list);
     }
 
     @Test

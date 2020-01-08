@@ -6,11 +6,10 @@ import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.dto.SystemConfigDTO;
 import com.simple.blog.entity.SystemConfig;
 import com.simple.blog.repository.SystemConfigRepository;
-import com.simple.blog.service.RedisService;
+import com.simple.blog.service.MemoryService;
 import com.simple.blog.service.SystemConfigService;
 import com.simple.blog.util.ClassConvertUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
-import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.SystemConfigVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +36,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
     private SystemConfigRepository systemConfigRepository;
 
     @Autowired
-    private RedisService redisService;
+    private MemoryService memoryService;
     @Autowired
     private HttpServletRequestUtil httpServletRequestUtil;
 
@@ -97,7 +93,7 @@ public class SystemConfigServiceImpl implements SystemConfigService {
         }
         SystemConfig systemConfig = SystemConfig.builder().configKey(configKey).configValue(configValue).username(username).valueDescription(valueDescription).build();
         systemConfigRepository.updateSystemConfig(username, configKey, configValue, valueDescription);
-        redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + configKey, JsonUtil.convertObject2String(systemConfig));
+        memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + configKey, systemConfig);
         return new CommonDTO<>();
     }
 }

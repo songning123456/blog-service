@@ -7,20 +7,12 @@ package com.simple.blog.constant;
 public class CommonConstant {
 
     /**
-     * redis缓存目录
+     * memory缓存目录
      */
-    public static final String REDIS_CACHE = "RedisCache:";
+    public static final String MEMORY_CACHE = "MemoryCache:";
     public static final String ALL_LABEL = "AllLabel:";
     public static final String PERSON_ATTENTION_LABEL = "PersonAttentionLabel:";
     public static final String SYSTEM_CONFIG = "SystemConfig:";
-    public static final String LOGIN_INFO = "login:";
-    public static final String LABEL_CONFIG = "LabelConfig:";
-
-    /**
-     * elasticsearch 索引名
-     */
-    public static final String INDEX_NAME = "simple_blog";
-    public static final String TYPE_NAME = "es_blog";
 
     /**
      * 时间转换格式

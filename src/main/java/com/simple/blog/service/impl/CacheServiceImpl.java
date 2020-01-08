@@ -8,10 +8,9 @@ import com.simple.blog.repository.LabelConfigRepository;
 import com.simple.blog.repository.LabelRelationRepository;
 import com.simple.blog.repository.SystemConfigRepository;
 import com.simple.blog.service.CacheService;
-import com.simple.blog.service.RedisService;
+import com.simple.blog.service.MemoryService;
 import com.simple.blog.util.DataBaseUtil;
 import com.simple.blog.util.HttpServletRequestUtil;
-import com.simple.blog.util.JsonUtil;
 import com.simple.blog.vo.CommonVO;
 import com.simple.blog.vo.LabelVO;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class CacheServiceImpl implements CacheService {
     @Autowired
     private LabelConfigRepository labelConfigRepository;
     @Autowired
-    private RedisService redisService;
+    private MemoryService memoryService;
     @Autowired
     private DataBaseUtil dataBaseUtil;
     @Autowired
@@ -48,85 +47,85 @@ public class CacheServiceImpl implements CacheService {
     public void refreshLabelConfig() {
         List<LabelConfig> labelConfigList;
         labelConfigList = labelConfigRepository.findAll();
-        Map<String, String> labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE, CommonConstant.ALL_LABEL);
+        Map<String, Object> labelConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE, CommonConstant.ALL_LABEL);
         if (!labelConfigMap.isEmpty()) {
-            redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.ALL_LABEL);
+            memoryService.deleteValues(CommonConstant.MEMORY_CACHE, CommonConstant.ALL_LABEL);
         }
         this.cacheLabel(labelConfigList);
         log.info("~~~刷新LabelConfig缓存~~~");
     }
 
     @Override
-    public void refreshSystemConfig(String username){
-        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+    public void refreshSystemConfig(String username) {
+        Map<String, Object> systemConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username);
         if (!systemConfigMap.isEmpty()) {
-            redisService.deleteValues(CommonConstant.REDIS_CACHE, CommonConstant.SYSTEM_CONFIG, username);
+            memoryService.deleteValues(CommonConstant.MEMORY_CACHE, CommonConstant.SYSTEM_CONFIG, username);
         }
         List<SystemConfig> systemConfigList = systemConfigRepository.getSystemConfigByUsername(username);
-        for (SystemConfig systemConfig: systemConfigList) {
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), JsonUtil.convertObject2String(systemConfig));
+        for (SystemConfig systemConfig : systemConfigList) {
+            memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), systemConfig);
         }
         log.info("~~~user:刷新SystemConfig缓存~~~");
     }
 
     @Override
     public void refreshPersonAttentionLabel(String username) {
-        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        String person = memoryService.getValue(CommonConstant.MEMORY_CACHE, CommonConstant.PERSON_ATTENTION_LABEL, username).toString();
         if (!StringUtils.isEmpty(person)) {
-            redisService.deleteValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+            memoryService.deleteValue(CommonConstant.MEMORY_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
         }
         List labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-        redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+        memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, labelNames);
         log.info("~~~user:刷新PersonAttentionLabel缓存~~~");
     }
 
     @Override
-    public List getPersonAttentionLabelCache() throws Exception{
+    public List getPersonAttentionLabelCache() throws Exception {
         String username = httpServletRequestUtil.getUsername();
         if (StringUtils.isEmpty(username)) {
             throw new Exception("token无效,请重新登陆");
         }
-        String person = redisService.getValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
+        Object person = memoryService.getValue(CommonConstant.MEMORY_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username);
         List labelNames;
         if (StringUtils.isEmpty(person)) {
             labelNames = labelRelationRepository.findLabelNameByUsernameAndSelectedNative(username, 1);
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, JsonUtil.convertObject2String(labelNames));
+            memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.PERSON_ATTENTION_LABEL + username, labelNames);
         } else {
-            labelNames = JsonUtil.convertString2Object(person, List.class);
+            labelNames = (List) person;
         }
         return labelNames;
     }
 
     @Override
-    public Map<String, String> getLabelConfigCache() {
-        Map<String, String> labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+    public Map<String, Object> getLabelConfigCache() {
+        Map<String, Object> labelConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL);
         if (labelConfigMap.isEmpty()) {
             List<LabelConfig> labelConfigList = labelConfigRepository.findAll();
             this.cacheLabel(labelConfigList);
-            labelConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL);
+            labelConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL);
         }
         return labelConfigMap;
     }
 
     @Override
-    public Map<String, String> getSystemConfigCache() throws Exception{
+    public Map<String, Object> getSystemConfigCache() throws Exception {
         String username = httpServletRequestUtil.getUsername();
         if (StringUtils.isEmpty(username)) {
             throw new Exception("token无效,请重新登陆");
         }
-        Map<String, String> systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+        Map<String, Object> systemConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username);
         if (systemConfigMap.isEmpty()) {
             List<SystemConfig> systemConfigList = systemConfigRepository.getSystemConfigByUsername(username);
-            for (SystemConfig systemConfig: systemConfigList) {
-                redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), JsonUtil.convertObject2String(systemConfig));
+            for (SystemConfig systemConfig : systemConfigList) {
+                memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username + ":" + systemConfig.getConfigKey(), systemConfig);
             }
-            systemConfigMap = redisService.getValues(CommonConstant.REDIS_CACHE + CommonConstant.SYSTEM_CONFIG + username);
+            systemConfigMap = memoryService.getValues(CommonConstant.MEMORY_CACHE + CommonConstant.SYSTEM_CONFIG + username);
         }
         return systemConfigMap;
     }
 
     /**
-     * 缓存标签labelConfig到redis
+     * 缓存标签labelConfig到memory
      *
      * @param labelConfigList
      */
@@ -145,9 +144,9 @@ public class CacheServiceImpl implements CacheService {
             labelVO.setLabelName(labelConfig.getLabelName());
             commonVO.setCondition(labelVO);
             Long numOfArticle = dataBaseUtil.getDataBase().statisticLabel(commonVO);
-            // 缓存到redis
+            // 缓存到memory
             LabelDTO labelDTO = LabelDTO.builder().id(labelConfig.getId()).labelName(labelConfig.getLabelName()).labelPhoto(labelConfig.getLabelPhoto()).numOfArticle(numOfArticle).numOfAttention(numOfAttention).build();
-            redisService.setValue(CommonConstant.REDIS_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName(), JsonUtil.convertObject2String(labelDTO));
+            memoryService.setValue(CommonConstant.MEMORY_CACHE + CommonConstant.ALL_LABEL + labelConfig.getLabelName(), labelDTO);
         }
     }
 }
