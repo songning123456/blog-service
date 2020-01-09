@@ -18,6 +18,21 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class LoginController {
 
+    /**
+     * 无需登陆
+     *
+     * @return
+     */
+    @GetMapping("/hello")
+    public String main() {
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "hello";
+    }
+
     @RequestMapping("/loginInfo")
     @ControllerAspectAnnotation(description = "未登陆时的情况")
     public <T> CommonDTO<T> loginInfo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
