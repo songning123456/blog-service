@@ -38,6 +38,20 @@ public class BlogController {
         return commonDTO;
     }
 
+    @PostMapping("/queryByUser")
+    @ControllerAspectAnnotation(description = "根据作者查询-我写过的")
+    public CommonDTO<BlogDTO> queryByAuthors(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getByAuthor(commonVO);
+        return commonDTO;
+    }
+
+    @PostMapping("/queryByLove")
+    @ControllerAspectAnnotation(description = "根据我赞过的")
+    public CommonDTO<BlogDTO> queryByLoves(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getByLove(commonVO);
+        return commonDTO;
+    }
+
     @PostMapping("/queryContent")
     @ControllerAspectAnnotation(description = "查询文章内容")
     public CommonDTO<BlogDTO> queryContent(@RequestBody CommonVO<BlogVO> commonVO) {

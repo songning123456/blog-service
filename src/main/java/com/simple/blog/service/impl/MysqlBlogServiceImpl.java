@@ -1,10 +1,15 @@
 package com.simple.blog.service.impl;
 
+import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.BlogDTO;
 import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
+import com.simple.blog.entity.LikeTag;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.LikeTagRepository;
+import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.BlogService;
+import com.simple.blog.util.HttpServletRequestUtil;
 import com.simple.blog.util.MapConvertEntityUtil;
 import com.simple.blog.vo.BlogVO;
 import com.simple.blog.vo.CommonVO;
@@ -15,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -28,6 +34,12 @@ public class MysqlBlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private UsersRepository usersRepository;
+    @Autowired
+    private LikeTagRepository likeTagRepository;
+    @Autowired
+    private HttpServletRequestUtil httpServletRequestUtil;
 
     @Override
     public CommonDTO<BlogDTO> saveArticle(CommonVO<BlogVO> commonVO) {
@@ -50,6 +62,73 @@ public class MysqlBlogServiceImpl implements BlogService {
         Sort sort = new Sort(Sort.Direction.DESC, "update_time");
         Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
         Page<Map<String, Object>> blogPage = blogRepository.findAbstract(kinds, pageable);
+        List<Map<String, Object>> src = blogPage.getContent();
+        Long total = blogPage.getTotalElements();
+        List<BlogDTO> target = new ArrayList<>();
+        for (Map<String, Object> map : src) {
+            try {
+                BlogDTO blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, map);
+                target.add(blogDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        commonDTO.setData(target);
+        commonDTO.setTotal(total);
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<BlogDTO> getByAuthor(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
+        String userId = usersRepository.findUserIdByNameNative(username);
+        Integer recordStartNo = commonVO.getRecordStartNo();
+        Integer pageRecordNum = commonVO.getPageRecordNum();
+        Sort sort = new Sort(Sort.Direction.DESC, "update_time");
+        Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
+        Page<Map<String, Object>> blogPage = blogRepository.findByUserIdNative(userId, pageable);
+        List<Map<String, Object>> src = blogPage.getContent();
+        Long total = blogPage.getTotalElements();
+        List<BlogDTO> target = new ArrayList<>();
+        for (Map<String, Object> map : src) {
+            try {
+                BlogDTO blogDTO = (BlogDTO) MapConvertEntityUtil.mapToEntity(BlogDTO.class, map);
+                target.add(blogDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        commonDTO.setData(target);
+        commonDTO.setTotal(total);
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<BlogDTO> getByLove(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        String username = httpServletRequestUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            commonDTO.setStatus(HttpStatus.HTTP_UNAUTHORIZED);
+            commonDTO.setMessage("token无效,请重新登陆");
+            return commonDTO;
+        }
+        List<String> articleIds = likeTagRepository.getArticleIdByUserNameAndLoveNative(username);
+        if (articleIds.size() == 0) {
+            commonDTO.setStatus(HttpStatus.HTTP_INTERNAL_ERROR);
+            commonDTO.setMessage("您还未点赞过文章");
+            return commonDTO;
+        }
+        Integer recordStartNo = commonVO.getRecordStartNo();
+        Integer pageRecordNum = commonVO.getPageRecordNum();
+        Sort sort = new Sort(Sort.Direction.DESC, "update_time");
+        Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
+        Page<Map<String, Object>> blogPage = blogRepository.findByIdNative(articleIds, pageable);
         List<Map<String, Object>> src = blogPage.getContent();
         Long total = blogPage.getTotalElements();
         List<BlogDTO> target = new ArrayList<>();

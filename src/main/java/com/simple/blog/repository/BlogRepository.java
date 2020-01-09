@@ -30,6 +30,16 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
             countQuery = "select count(*) from blog where kinds = :kinds", nativeQuery = true)
     Page<Map<String, Object>> findAbstract(@Param("kinds") String kinds, Pageable pageable);
 
+    @Query(value = "select id, title, user_id as userId,read_times as readTimes, kinds, author, update_time as updateTime " +
+            "from blog where user_id = ?1 order by update_time desc",
+            countQuery = "select count(*) from blog where user_id = ?1", nativeQuery = true)
+    Page<Map<String, Object>> findByUserIdNative(String userId, Pageable pageable);
+
+    @Query(value = "select id, title, user_id as userId,read_times as readTimes, kinds, author, update_time as updateTime " +
+            "from blog where id in (?1) order by update_time desc",
+            countQuery = "select count(*) from blog where id in (?1)", nativeQuery = true)
+    Page<Map<String, Object>> findByIdNative(List<String> articleIds, Pageable pageable);
+
 
     /**
      * 查询文章详情

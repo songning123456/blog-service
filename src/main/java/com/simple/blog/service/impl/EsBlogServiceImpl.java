@@ -34,6 +34,18 @@ public class EsBlogServiceImpl implements BlogService {
     }
 
     @Override
+    public CommonDTO<BlogDTO> getByAuthor(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        return commonDTO;
+    }
+
+    @Override
+    public CommonDTO<BlogDTO> getByLove(CommonVO<BlogVO> commonVO) {
+        CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
+        return commonDTO;
+    }
+
+    @Override
     public CommonDTO<BlogDTO> getContent(CommonVO<BlogVO> commonVO) {
         CommonDTO<BlogDTO> commonDTO = elasticSearchFeignClient.esQueryContent(commonVO);
         return commonDTO;

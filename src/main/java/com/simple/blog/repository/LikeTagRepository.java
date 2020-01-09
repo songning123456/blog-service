@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,4 +45,7 @@ public interface LikeTagRepository extends JpaRepository<LikeTag, Long> {
     @Transactional
     @Query(value = "update like_tag set love = ?3 where username = ?1 and article_id = ?2", nativeQuery = true)
     void updateTagLikeByUsernameAndArticleIdNative(String username, String articleId, Integer love);
+
+    @Query(value = "select article_id from like_tag where username = ?1 and love = 1", nativeQuery = true)
+    List<String> getArticleIdByUserNameAndLoveNative(String username);
 }
