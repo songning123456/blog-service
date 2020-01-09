@@ -691,4 +691,10 @@ public class BlogApplicationTests {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testOutOfMemory() {
+        String result = HttpUtil.doGet("http://122.51.193.191:8072/hello");
+        System.out.println(result);
+    }
 }

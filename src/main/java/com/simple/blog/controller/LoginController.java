@@ -3,6 +3,7 @@ package com.simple.blog.controller;
 import com.simple.blog.annotation.ControllerAspectAnnotation;
 import com.simple.blog.constant.HttpStatus;
 import com.simple.blog.dto.CommonDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2019/9/24
  * description
  */
+@Slf4j
 @RestController
 public class LoginController {
 
@@ -27,6 +29,7 @@ public class LoginController {
     public String main() {
         try {
             Thread.sleep(20000);
+            log.info("^^^^^^hello^^^^^^");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

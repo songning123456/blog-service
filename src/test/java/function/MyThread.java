@@ -1,5 +1,7 @@
 package function;
 
+import com.simple.blog.util.HttpUtil;
+
 /**
  * @author songning
  * @date 2020/1/7
@@ -12,8 +14,9 @@ public class MyThread extends Thread {
     @Override
     public void run() {
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
+            String result = HttpUtil.doGet("http://122.51.193.191:8072/hello");
+            System.out.println(index+ " : " + result);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
