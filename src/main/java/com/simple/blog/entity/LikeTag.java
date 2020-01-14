@@ -24,6 +24,9 @@ public class LikeTag {
     @Column(name = "love", columnDefinition = "INT NOT NULL DEFAULT 0 COMMENT '是否点赞'")
     private Integer love;
 
+    @Column(name = "has_read", columnDefinition = "INT NOT NULL DEFAULT 0 COMMENT '是否已读'")
+    private Integer hasRead;
+
     @Column(name = "articleId", columnDefinition = "VARCHAR(60) NOT NULL COMMENT '文章ID'")
     private String articleId;
 }

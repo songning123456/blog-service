@@ -11,4 +11,6 @@ import lombok.Data;
 public class LikeTagDTO {
 
     private Integer love;
+
+    private Integer hasRead;
 }

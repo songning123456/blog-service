@@ -15,4 +15,6 @@ public class LikeTagVO {
     private String articleId;
 
     private Integer love;
+
+    private Integer hasRead;
 }
