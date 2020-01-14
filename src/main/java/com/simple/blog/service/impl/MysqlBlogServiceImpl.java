@@ -6,6 +6,7 @@ import com.simple.blog.dto.CommonDTO;
 import com.simple.blog.entity.Blog;
 import com.simple.blog.entity.LikeTag;
 import com.simple.blog.repository.BlogRepository;
+import com.simple.blog.repository.HistoryRepository;
 import com.simple.blog.repository.LikeTagRepository;
 import com.simple.blog.repository.UsersRepository;
 import com.simple.blog.service.BlogService;
@@ -38,6 +39,8 @@ public class MysqlBlogServiceImpl implements BlogService {
     private UsersRepository usersRepository;
     @Autowired
     private LikeTagRepository likeTagRepository;
+    @Autowired
+    private HistoryRepository historyRepository;
     @Autowired
     private HttpServletRequestUtil httpServletRequestUtil;
 
@@ -236,5 +239,17 @@ public class MysqlBlogServiceImpl implements BlogService {
             result.add(stringBuilder.append("...").append(text1).append(text2).append(text3).append("...").toString());
         }
         return result;
+    }
+
+    @Override
+    public <T> CommonDTO<T> deleteWrittenBlog(CommonVO<BlogVO> vo) {
+        CommonDTO<T> commonDTO = new CommonDTO<>();
+        String id = vo.getCondition().getId();
+        synchronized (this) {
+            blogRepository.deleteById(id);
+            historyRepository.deleteByArticleId(id);
+            likeTagRepository.deleteByArticleId(id);
+        }
+        return commonDTO;
     }
 }

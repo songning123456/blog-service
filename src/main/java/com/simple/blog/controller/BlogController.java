@@ -72,4 +72,11 @@ public class BlogController {
         CommonDTO<BlogDTO> commonDTO = dataBaseUtil.getDataBase().getHighlightArticle(commonVO);
         return commonDTO;
     }
+
+    @PostMapping("/delete")
+    @ControllerAspectAnnotation(description = "删除写过的文章")
+    public <T> CommonDTO<T> deleteWrittenBlogs(@RequestBody CommonVO<BlogVO> commonVO) {
+        CommonDTO<T> commonDTO = dataBaseUtil.getDataBase().deleteWrittenBlog(commonVO);
+        return commonDTO;
+    }
 }

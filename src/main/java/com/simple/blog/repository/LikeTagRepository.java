@@ -48,4 +48,8 @@ public interface LikeTagRepository extends JpaRepository<LikeTag, Long> {
 
     @Query(value = "select article_id from like_tag where username = ?1 and love = 1", nativeQuery = true)
     List<String> getArticleIdByUserNameAndLoveNative(String username);
+
+    @Modifying
+    @Transactional
+    void deleteByArticleId(String articleId);
 }

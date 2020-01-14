@@ -74,4 +74,10 @@ public class EsBlogServiceImpl implements BlogService {
         Long articleTotal = (long) commonDTO.getDataExt().get("articleTotal");
         return articleTotal;
     }
+
+    @Override
+    public <T> CommonDTO<T> deleteWrittenBlog(CommonVO<BlogVO> vo) {
+        CommonDTO<T> commonDTO = new CommonDTO<>();
+        return commonDTO;
+    }
 }

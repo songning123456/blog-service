@@ -67,4 +67,6 @@ public interface BlogService {
     CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO);
 
     Long statisticLabel(CommonVO<LabelVO> vo);
+
+    <T> CommonDTO<T> deleteWrittenBlog(CommonVO<BlogVO> vo);
 }

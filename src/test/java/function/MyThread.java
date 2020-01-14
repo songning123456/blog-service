@@ -14,7 +14,7 @@ public class MyThread extends Thread {
     @Override
     public void run() {
         try {
-            String result = HttpUtil.doGet("http://122.51.193.191:8072/hello");
+            String result = HttpUtil.doGet("http://122.51.193.191:8062/hello");
             System.out.println(index+ " : " + result);
         } catch (Exception e) {
             e.printStackTrace();
