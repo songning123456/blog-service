@@ -188,7 +188,11 @@ public class MysqlBlogServiceImpl implements BlogService {
     public CommonDTO<BlogDTO> getHighlightArticle(CommonVO<BlogVO> commonVO) {
         CommonDTO<BlogDTO> commonDTO = new CommonDTO<>();
         String content = commonVO.getCondition().getContent();
-        List<Map<String, Object>> list = blogRepository.findByLikeContentNative(content);
+        Integer recordStartNo = commonVO.getRecordStartNo();
+        Integer pageRecordNum = commonVO.getPageRecordNum();
+        Sort sort = new Sort(Sort.Direction.DESC, "update_time");
+        Pageable pageable = PageRequest.of(recordStartNo, pageRecordNum, sort);
+        List<Map<String, Object>> list = blogRepository.findByLikeContentNative(content, pageable);
         List<BlogDTO> blogDTOS = new ArrayList<>();
         list.forEach(item -> {
             String id = (String) item.get("id");

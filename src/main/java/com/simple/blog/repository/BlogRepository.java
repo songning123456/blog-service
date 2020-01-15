@@ -67,7 +67,7 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
     List<Map<String, Object>> getAllAuthorAndTitle();
 
     @Query(value = "select id, title, author, update_time as updateTime, content,user_id as userId from blog where content like %?1%", nativeQuery = true)
-    List<Map<String, Object>> findByLikeContentNative(String content);
+    List<Map<String, Object>> findByLikeContentNative(String content, Pageable pageable);
 
     @Query(value = "select count(*) as yAxis, kinds as xAxis from blog where update_time >= ?1 and update_time <= ?2 group by kinds", nativeQuery = true)
     List<Map<String, Object>> statisticKinds(String startTime, String endTime);
