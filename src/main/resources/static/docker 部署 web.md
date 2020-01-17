@@ -146,6 +146,11 @@
   * 构建镜像，启动容器(镜像版本号依次增加)
   ```
 
+### jenkins启动关闭重启命令
+* service jenkins start
+* service jenkins restart
+* service jenkins stop
+
 ### 常用命令
 * docker ps //正在运行的docker容器
 * docker ps -a //所有docker容器
