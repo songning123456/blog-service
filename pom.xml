@@ -64,7 +64,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.28</version>
+            <version>1.2.83</version>
         </dependency>
         <!--引入poi，解析workbook视图 https://www.cnblogs.com/liyafei/p/8146136.html-->
         <dependency>
